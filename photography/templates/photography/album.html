@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% with request.META.HTTP_HOST as httpHost %}
+{% with 'http://' as http %}
+{% with 'Dane Hillard Photography' as siteName %}
+{% with 'Ann Arbor wedding, nature, architecture, fashion, and portraiture photography.' as siteDescription %}
+<html>
+  <head>
+    <title>{{ album.title }} | Dane Hillard Photography</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/base.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}photography/js/jQuery/fancyBox/source/jquery.fancybox.css?v=2.1.3" media="screen" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/album.css" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="{{ siteDescription }}" />
+    <meta name="keywords" content="photography, Dane Hillard, Dane Hillard Photography, wedding, fashion, portraiture, architecture, Ann Arbor, Michigan" />
+
+    <meta name="fb:app_id" content="152446884139" />
+    <meta name="og:type" content="danehillard:album" />
+    <meta name="og:url" content="{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}" /> 
+    <meta name="og:title" content="{{ album.title }} | {{ siteName }}" />
+    <meta name="og:site_name" content="{{ siteName }}" />
+    <meta name="og:description" content="{{ siteDescription }}" />
+    <meta name="og:image" content="{{ http }}{{ httpHost }}{{ STATIC_URL }}photography/dhp.png" />
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}photography/js/jQuery/jquery.masonry.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}photography/js/jQuery/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}photography/js/jQuery/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
+  </head>
+  <body>
+    {% include 'photography/fb_sdk.html' %}
+    <h1>{{ album.title }}</h1>
+    <div id="frame">
+      {% for photograph in album.photograph_set.all %}
+      <a caption="{{ photograph.title }}" href="{{ photograph.thumbnail_medium.url }}" class="photo" rel="group" uuid="{{ photograph.uuid }}">
+        <img src="{{ photograph.thumbnail_small.url }}" />
+        <p class="exif">{{ photograph.exif }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
