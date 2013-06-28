@@ -59,15 +59,6 @@ class Photograph(models.Model):
   thumbnail_medium = models.ImageField(upload_to="images", blank=True, null=True)
   thumbnail_small = models.ImageField(upload_to="images", blank=True, null=True)
 
-  def exif(self):
-    im = PImage.open(os.path.join(MEDIA_ROOT, self.image.name))
-    exif = {}
-    info = im._getexif()
-    for tag, value in info.items():
-      decoded = PExif.TAGS.get(tag, tag)
-      exif[decoded] = value
-    return exif
-
   def save(self, *args, **kwargs):
     super(Photograph, self).save(*args, **kwargs)
     im = PImage.open(os.path.join(MEDIA_ROOT, self.image.name))

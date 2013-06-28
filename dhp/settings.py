@@ -1,5 +1,5 @@
-# Django settings for dhp project.
 import socket
+import os
 
 if socket.gethostname() == 'danehillard':
 
@@ -72,6 +72,8 @@ if socket.gethostname() == 'danehillard':
 
 # Additional locations of static files
   STATICFILES_DIRS = (
+    '/var/www/html/danehillard/common',
+    '/var/www/dhp/common_files',
       # Put strings here, like "/home/html/static" or "C:/www/django/static".
       # Always use forward slashes, even on Windows.
       # Don't forget to use absolute paths, not relative paths.
@@ -140,6 +142,7 @@ if socket.gethostname() == 'danehillard':
       # Uncomment the next line to enable admin documentation:
       # 'django.contrib.admindocs',
       'photography',
+      'home',
   )
 
 # A sample logging configuration. The only tangible logging
