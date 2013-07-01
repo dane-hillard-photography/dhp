@@ -1,0 +1,52 @@
+{% with request.META.HTTP_HOST as httpHost %}
+{% with 'http://' as http %}
+{% with 'Dane Hillard Photography' as siteName %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block meta %}<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />{% endblock meta %}
+    <meta name="fb:app_id" content="152446884139" />
+
+    {% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+    {% endblock css %}
+
+    {% block js %}{% endblock js %}
+    
+    {% block og %}
+
+    {% endblock og %}
+    <title>{% block title %}Home{% endblock %} | Dane Hillard Photography | Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography</title>
+  </head>
+  <body>
+    <div id="navigation">
+      {% block menu %}
+      <ul>
+        <li>
+          <a href="/">
+            <img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/home.svg" alt="Home" />
+          </a>
+          <ul>
+            <li>
+              <a href="/donate">
+                <img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/donate.svg" alt="Donate" />
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/photography"><img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/photography.svg" alt="Photography" /></a></li>
+        <li><a href="http://blog.danehillard.com"><img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/edit.svg" alt="Blog" /></a></li>
+      </ul>
+      {% endblock menu %}
+    </div>
+
+    <div id="content">
+      {% block content %}{% endblock content %}
+    </div>
+  </body>
+</html>
+
+{% endwith %}
+{% endwith %}
+{% endwith %}
