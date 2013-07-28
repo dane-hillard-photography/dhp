@@ -1,0 +1,67 @@
+{% extends "home/base.html" %}
+
+{% with 'images/icons/menu/' as menuIcons %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{{ STATIC_URL }}contact/css/contact.css" />
+{% endblock css %}
+
+{% block content %}
+<form action="/contact/" id="contact-form" method="post">{% csrf_token %}
+<table>
+  {{ form.as_table }}
+  <tr>
+    <td></td>
+    <td><input type="submit" value="Submit" /></td>
+  </tr>
+</table>
+</form>
+
+<div>
+  <p>You can also connect with me on the following sites:</p>
+  <div id="external-sites">
+    <ul>
+      <li class="external-site">
+        <a target="_blank" href="http://www.facebook.com/danehillard">
+          <img src="{{ STATIC_URL }}{{ menuIcons }}white/facebook.svg" alt="Facebook" />
+        </a>
+      </li>
+      <li class="external-site">
+        <a target="_blank" href="http://www.pinterest.com/daneah123">
+          <img src="{{ STATIC_URL }}{{ menuIcons }}white/pinterest.svg" alt="Pinterest" />
+        </a>
+      </li>
+      <li class="external-site">
+        <a target="_blank" href="http://www.twitter.com/littleleviathan">
+          <img src="{{ STATIC_URL }}{{ menuIcons }}white/twitter.svg" alt="Twitter" />
+        </a>
+      </li>
+      <li class="external-site">
+        <a target="_blank" href="http://www.linkedin.com/in/danehillard">
+          <img src="{{ STATIC_URL }}{{ menuIcons }}white/linkedin.svg" alt="LinkedIn" />
+        </a>
+      </li>
+      <li class="external-site">
+        <a target="_blank" href="http://www.youtube.com/daneah123">
+          <img src="{{ STATIC_URL }}{{ menuIcons }}white/youtube.svg" alt="YouTube" />
+        </a>
+      </li>
+      <li class="external-site">
+        <a target="_blank" href="http://stackoverflow.com/users/2077393/dane-hillard">
+          <img src="{{ STATIC_URL }}{{ menuIcons }}white/stackoverflow.svg" alt="stackoverflow" />
+        </a>
+      </li>
+      <li class="external-site">
+         <a target="_blank" href="http://www.github.com/daneah">
+          <img src="{{ STATIC_URL }}{{ menuIcons }}white/github.svg" alt="GitHub" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock content %}
+
+{% endwith %}
