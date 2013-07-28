@@ -1,50 +1,51 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-{% with request.META.HTTP_HOST as httpHost %}
-{% with 'http://' as http %}
-{% with 'Dane Hillard Photography' as siteName %}
-{% with 'Ann Arbor wedding, nature, architecture, fashion, and portraiture photography.' as siteDescription %}
-<html>
-  <head>
-    <title>{{ photograph.title }} | Dane Hillard Photography</title>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
+{% extends 'home/base.html' %}
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="description" content="{{ siteDescription }}" />
-    <meta name="keywords" content="photography, Dane Hillard, Dane Hillard Photography, wedding, fashion, portraiture, architecture, Ann Arbor, Michigan" />
+{% block title %}{{ photograph.title }}{% endblock title %}
 
-    <meta name="fb:app_id" content="152446884139" />
-    <meta name="og:type" content="danehillard:photograph" />
-    <meta name="og:url" content="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" /> 
-    <meta name="og:title" content="{{ photograph.title }} | {{ siteName }}" />
-    <meta name="og:site_name" content="{{ siteName }}" />
-    <meta name="og:description" content="{{ siteDescription }}" />
-    <meta name="og:image" content="{{ photograph.thumbnail_small.url }}" />
-  </head>
-  <body>
-    {% include 'photography/fb_sdk.html' %}
-    {% if photograph %}
-    <ul>
-      <div id="feature">
-        <img src="{{ photograph.thumbnail_medium.url }}" alt="{{ photograph.title }}" />
-        <div id="title">{{ photograph.title }}</div>
-        <div class="photo-like-button fb-like" data-href="http://{{ httpHost }}{{ photograph.image.url }}" 
-          data-send="false" data-layout="button_count" data-show-faces="true" data-colorscheme="dark">
-        </div>
-          <div class="photo-pin-button">
-            <a data-pin-config="beside" href="http://pinterest.com/pin/create/button/?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}&media={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.image.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}" data-pin-do="buttonPin">
-              <img src="http://assets.pinterest.com/images/pidgets/pin_it_button.png" />
-            </a>
-        </div>
-      </div>
-    </ul>
-    {% else %}
-    <p>No photograph found</p>
-    {% endif %}
-  </body>
-</html>
-{% endwith %}
-{% endwith %}
-{% endwith %}
-{% endwith %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
+{% endblock css %}
+
+{% block js %}
+<script>
+  window.onpopstate = function(event) {
+    if (event.state != null) {
+      if (event.state.location != null) {
+        window.location = event.state.location;
+      }
+    }
+  }
+</script>
+{% endblock js %}
+
+{% block og %}
+  <meta name="og:type" content="danehillard:photograph" />
+  <meta name="og:url" content="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" /> 
+  <meta name="og:title" content="{{ photograph.title }} | {{ siteName }}" />
+  <meta name="og:site_name" content="{{ siteName }}" />
+  <meta name="og:description" content="{{ siteDescription }}" />
+  <meta name="og:image" content="{{ photograph.thumbnail_small.url }}" />
+{% endblock og %}
+
+{% block content %}
+  {% include 'photography/fb_sdk.html' %}
+  <div id="feature">
+    <h1 id="title">{{ photograph.title }}</h1>
+    <img src="{{ photograph.thumbnail_medium.url }}" alt="{{ photograph.title }}" />
+    <div class="photo-like-button fb-like"
+      data-href="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" 
+      data-send="false" 
+      data-layout="button_count">
+    </div>
+    <div class="photo-pin-button">
+      <a href="//pinterest.com/pin/create/button/?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ request.get_full_path|urlencode:'' }}&media={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}%20%28danehillard.com%29"
+        data-pin-do="buttonPin" 
+        data-pin-config="none"
+        data-pin-hover="true">
+        <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
+      </a>
+    </div>
+  </div>
+  <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+{% endblock content %}

@@ -3,7 +3,10 @@ import os
 
 if socket.gethostname() == 'danehillard':
 
-  DEBUG = False
+  SETTINGS_PATH = os.path.realpath(os.path.dirname(__file__))
+  PROJECT_PATH = SETTINGS_PATH + '/../'
+
+  DEBUG = True
   TEMPLATE_DEBUG = DEBUG
 
   ADMINS = (
@@ -53,7 +56,7 @@ if socket.gethostname() == 'danehillard':
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-  MEDIA_ROOT = '/var/www/dhp/media'
+  MEDIA_ROOT = PROJECT_PATH + '/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -64,7 +67,7 @@ if socket.gethostname() == 'danehillard':
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-  STATIC_ROOT = '/var/www/dhp/static'
+  STATIC_ROOT = PROJECT_PATH + '/static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -72,8 +75,7 @@ if socket.gethostname() == 'danehillard':
 
 # Additional locations of static files
   STATICFILES_DIRS = (
-    '/var/www/html/danehillard/common',
-    '/var/www/dhp/common_files',
+    PROJECT_PATH  + '/common_files/',
       # Put strings here, like "/home/html/static" or "C:/www/django/static".
       # Always use forward slashes, even on Windows.
       # Don't forget to use absolute paths, not relative paths.
@@ -125,6 +127,7 @@ if socket.gethostname() == 'danehillard':
   WSGI_APPLICATION = 'dhp.wsgi.application'
 
   TEMPLATE_DIRS = (
+      PROJECT_PATH + '/templates/',
       # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
       # Always use forward slashes, even on Windows.
       # Don't forget to use absolute paths, not relative paths.
@@ -143,6 +146,9 @@ if socket.gethostname() == 'danehillard':
       # 'django.contrib.admindocs',
       'photography',
       'home',
+      'about',
+      'contact',
+      'music',
   )
 
 # A sample logging configuration. The only tangible logging

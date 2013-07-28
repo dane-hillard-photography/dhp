@@ -1,23 +1,29 @@
 {% with request.META.HTTP_HOST as httpHost %}
 {% with 'http://' as http %}
 {% with 'Dane Hillard Photography' as siteName %}
+{% with 'Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography' as siteDescription %}
+{% with 'images/icons/menu/' as menuIcons %}
 
 <!DOCTYPE html>
 <html>
   <head>
-    {% block meta %}<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />{% endblock meta %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="fb:app_id" content="152446884139" />
+    {% block meta %}
+    <meta name="description" content="Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography" />
+    <meta name="keywords" content="photography, photographer, wedding, portrait, portraiture, senior portraits, Dane, Hillard, Dane Hillard, Ann Arbor, Michigan, Ann Arbor Michigan, ASquared, A2, A Squared, southeast Michigan, event photography, wedding photography" />
+    {% endblock meta %}
 
     {% block css %}
+    <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,200" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
     {% endblock css %}
 
     {% block js %}{% endblock js %}
     
-    {% block og %}
+    {% block og %}{% endblock og %}
 
-    {% endblock og %}
-    <title>{% block title %}Home{% endblock %} | Dane Hillard Photography | Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography</title>
+    <title>{% block title %}Home{% endblock %} | Dane Hillard Photography</title>
   </head>
   <body>
     <div id="navigation">
@@ -25,28 +31,55 @@
       <ul>
         <li>
           <a href="/">
-            <img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/home.svg" alt="Home" />
+            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/home.svg" alt="Home" />
           </a>
-          <ul>
-            <li>
-              <a href="/donate">
-                <img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/donate.svg" alt="Donate" />
-              </a>
-            </li>
-          </ul>
         </li>
-        <li><a href="/photography"><img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/photography.svg" alt="Photography" /></a></li>
-        <li><a href="http://blog.danehillard.com"><img class="menu-icon" src="{{ STATIC_URL }}home/images/icons/menu/edit.svg" alt="Blog" /></a></li>
+        <li>
+          <a href="/photography">
+            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/photography.svg" alt="Photography" />
+          </a>
+        </li>
+        <li>
+          <a href="http://blog.danehillard.com">
+            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/blog.svg" alt="Blog" />
+          </a>
+        </li>
+        <li>
+          <a href="/music">
+            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/music.svg" alt="Music" />
+          </a>
+        </li>
+        <li>
+          <a href="/contact">
+            <img class="menu-icon" src="{{ STATIC_URL}}{{ menuIcons }}black/contact.svg" alt="Contact" />
+          </a>
+        </li>
+        <li>
+          <a href="/about">
+            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/about.svg" alt="About" />
+          </a>
+        </li>
       </ul>
       {% endblock menu %}
     </div>
 
     <div id="content">
-      {% block content %}{% endblock content %}
+      {% block content %}
+      <a href="/photography" title="Enter" />
+        <img src="{{ STATIC_URL }}images/logos/dhp.png" alt="DHP Logo" />
+      </a>
+      <h1>Dane Hillard Photography</h1>
+      <hr />
+      <p>
+        {{ siteDescription }}
+      </p>
+      {% endblock content %}
     </div>
   </body>
 </html>
 
+{% endwith %}
+{% endwith %}
 {% endwith %}
 {% endwith %}
 {% endwith %}

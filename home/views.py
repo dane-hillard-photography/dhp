@@ -1,7 +1,4 @@
 from django.views import generic
 
-class IndexView(generic.ListView):
-  template_name = 'home/index.html'
-
-  def get_queryset(self):
-    return None
+class IndexView(generic.TemplateView):
+  template_name = 'home/base.html'

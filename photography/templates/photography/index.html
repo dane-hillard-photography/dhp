@@ -1,10 +1,18 @@
 {% extends "home/base.html" %}
+
 {% block title %}Photography{% endblock title %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}photography/css/index.css" />
+{% endblock css %}
+
 {% block content %}
+  <h1>Albums</h1>
   {% if album_list %}
   <ul>
     {% for album in album_list %}
-    <li><a class="album" href="{% url 'photography:album' album.uuid %}">{{ album.title }}</a></li>
+    <li class="album"><a href="{% url 'photography:album' album.uuid %}">{{ album.title }}</a></li>
     {% endfor %}
   </ul>
   {% else %}

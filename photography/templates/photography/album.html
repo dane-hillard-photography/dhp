@@ -1,11 +1,11 @@
 {% extends "home/base.html" %}
-{% with 'Ann Arbor wedding, nature, architecture, fashion, and portraiture photography.' as siteDescription %}
 
 {% block title %}{{ album.title }}{% endblock %}
 
 {% block css %}
 {{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}home/js/jQuery/fancyBox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.css?v=2.1.5" />
+<link rel="stylesheet" href="{{ STATIC_URL }}js/jQuery/fancyBox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/album.css" />
 {% endblock css %}
 
@@ -24,22 +24,37 @@
 {% endblock og %}
 
 {% block js %}
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/jquery.masonry.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/jquery.blockUI.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}home/js/jQuery/fancyBox/source/jquery.fancybox.js?v=2.1.5"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
 {% endblock js %}
 {% block content %}
   {% include 'photography/fb_sdk.html' %}
   <h1 id="title">{{ album.title }}</h1>
-  <div id="frame">
+  <div id="frame" contains="{{ album.uuid }}">
     {% for photograph in album.photograph_set.all %}
-    <a caption="{{ photograph.title }}" href="{{ photograph.thumbnail_medium.url }}" class="photo" rel="group" uuid="{{ photograph.uuid }}">
-      <img src="{{ photograph.thumbnail_small.url }}" />
-    </a>
+    {% url 'photography:photo' photograph.uuid as photoUrl %}
+      <a class="photo" id="{{ photograph.uuid }}" rel="album" href="{{ photograph.thumbnail_large.url }}" data-title-id="title-for-{{ photograph.uuid }}">
+        <img src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}"/>
+      </a>
+      <div class="photo-title" id="title-for-{{ photograph.uuid }}">
+        <span>{{ photograph.title }}</span>
+        <a class="permalink" href="{{ photoUrl }}">
+          <img src="{{ STATIC_URL}}{{ menuIcons }}white/link.svg" />
+        </a>
+        <div class="photo-like-button fb-like" data-href="http://{{ httpHost }}{{ photoUrl }}" 
+          data-send="false" data-layout="button_count">
+        </div>
+        <div class="photo-pin-button">
+          <a href="//pinterest.com/pin/create/button/?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}&media={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}%20%28danehillard.com%29"
+            data-pin-do="buttonPin" 
+            data-pin-config="none"
+            data-pin-hover="true">
+            <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
+          </a>
+        </div>
+      </div>
     {% endfor %}
   </div>
 {% endblock content %}
-
-{% endwith %}
