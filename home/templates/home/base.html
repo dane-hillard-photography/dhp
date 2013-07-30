@@ -19,7 +19,9 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
     {% endblock css %}
 
-    {% block js %}{% endblock js %}
+    {% block js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/google_analytics_tracking.js"></script>
+    {% endblock js %}
     
     {% block og %}{% endblock og %}
 

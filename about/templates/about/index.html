@@ -1,7 +1,5 @@
 {% extends "home/base.html" %}
 
-{% with "1989-12-13" as birthDate %}
-
 {% block css %}
 {{ block.super }}
 <link rel="stylesheet" href="{{ STATIC_URL }}about/css/about.css" />
@@ -13,31 +11,36 @@
 <img id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait"/>
 <div id="bio">
   <p>
-    I am an American folk musician and digital photographer
-    located in Ann Arbor, Michigan. I grew up in northern lower Michigan
-    near the Sleeping Bear Dunes. This beautiful area has inspired my
-    musical style and photography and is apparent in the mood of the songs
-    and images I produce.
+    After graduating from the University of Michigan with a degree in computer 
+    engineering/mathematics, I've been living in Ann Arbor working as a software engineer.
+    I may qualify for <a target="_blank" href="http://questionablecontent.net/view.php?comic=1942">townie status</a> 
+    sooner than I wish to. By day I integrate data, software, and system architecture with the ultimate goal
+    of helping researchers <a target="_blank" href="http://www.oncomine.com">cure cancer</a>. By night I fight crime.
   </p>
   <p>
-    I am a University of Michigan alumnus and as such many of my
-    images are of the campus and its inhabitants. I provide portraiture
-    and fashion photography to students and alumni of the university as
-    well as larger services such as wedding and event photography.
+    I developed an interest in photography after my father purchased a DSLR. He'd had an old
+    Minolta 35mm film camera but it wasn't until this simpler, sleek technology touched my
+    hands that I was inspired to pick it up. I started using his camera more than he did and
+    was coerced into purchasing my own. I began with a Sony Alpha but I have been shooting
+    Nikon ever since a Christmas vacation theft debacle in 2009.
   </p>
   <p>
-    My other hobbies are myriad and include drawing, web design,
-    electrical circuits, board games, and ballroom dancing.
+    I particularly enjoy fashion and nature photography. Each provides an opportunity for me
+    to develop new relationships and gain insight into the ways of the world. I'm appreciative
+    of new outlooks and consider myself a continual learner. I consider wisdom and knowledge
+    two of the highest virtues; any who possess them have the tools to build
+    virtuosity throughout the rest of their lives.
   </p>
   <p>
-    It is my goal to serve people in Greater Detroit and far beyond with
-    distinctive, memorable images of them and the beautiful world they live in.
+    I'd like to thank you for coming to my site. I encourage you to browse my <a href="/photography">portfolio</a>
+    and <a href="/contact">contact</a> me with your questions, comments, and critiques.
   </p>
 </div>
+<hr />
+<h2>Résumé</h2>
 <p>
-  <a href="http://resume.linkedinlabs.com/j83am5nk0.pdf"><img class="menu-icon" src="{{ STATIC_URL }}images/icons/menu/black/download.svg" /></a>
-  Résumé
+  <a href="http://resume.linkedinlabs.com/j83am5nk0.pdf">
+    <img class="menu-icon" src="{{ STATIC_URL }}images/icons/menu/black/download.svg" />
+  </a>
 </p>
 {% endblock content %}
-
-{% endwith %}

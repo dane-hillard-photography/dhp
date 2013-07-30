@@ -15,7 +15,7 @@ class IndexView(generic.ListView):
   def get_queryset(self):
     return Album.objects.filter(
       published_date__lte=timezone.now(),
-      public=True)
+      public=True).order_by('sort_order')
 
 class PhotographView(generic.DetailView):
   template_name = 'photography/photograph.html'

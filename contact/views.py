@@ -25,9 +25,9 @@ class ContactFormView(FormView):
       'Thank you for contacting dHP!',
       form.cleaned_data.get('name') + """,
 <br /><br />
-I appreciate your message. You\'ll hear from me soon!
+Thank you for your message. If you requested further contact, you\'ll hear from me soon!
 <br /><br />
-Thanks,
+Regards,
 <br /><br />
 Dane Hillard<br />
 <a href="http://www.danehillard.com">dHP</a>

@@ -24,6 +24,7 @@
 {% endblock og %}
 
 {% block js %}
+{{ block.super }}
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
@@ -32,8 +33,10 @@
 {% block content %}
   {% include 'photography/fb_sdk.html' %}
   <h1 id="title">{{ album.title }}</h1>
+  <h2><a href="/photography" id="back-to-albums" title="All Albums">&laquo;</a></h2>
   <div id="frame" contains="{{ album.uuid }}">
-    {% for photograph in album.photograph_set.all %}
+    {% if album.photograph_set.all %}
+    {% for photograph in album.photograph_set.all|dictsortreversed:"published_date" %}
     {% url 'photography:photo' photograph.uuid as photoUrl %}
       <a class="photo" id="{{ photograph.uuid }}" rel="album" href="{{ photograph.thumbnail_large.url }}" data-title-id="title-for-{{ photograph.uuid }}">
         <img src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}"/>
@@ -56,5 +59,10 @@
         </div>
       </div>
     {% endfor %}
+    {% else %}
+      <p>
+        This album is currently empty. Come back soon!
+      </p>
+    {% endif %}
   </div>
 {% endblock content %}

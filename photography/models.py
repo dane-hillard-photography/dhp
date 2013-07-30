@@ -21,26 +21,36 @@ def get_file_path(instance, filename):
   return os.path.join(instance.directory, filename)
 
 class Album(models.Model):
+  class Meta:
+    ordering = ('title',)
+
   published_date = models.DateTimeField()
   title = models.CharField(max_length=255)
   public = models.BooleanField(default=True)
   uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
+  sort_order = models.IntegerField(blank=True)
 
   def __unicode__(self):
     return self.title
 
   def photos(self):
-    photoList = ['<a href="%s">%s</a>' % (photo.image.url, photo.title) for photo in self.photograph_set.all()]
+    photoList = ['<a href="%s">%s</a>' % (photo.thumbnail_medium.url, photo.title) for photo in self.photograph_set.all()]
     return ", ".join(photoList)
   photos.allow_tags = True
 
 class Tag(models.Model):
+  class Meta:
+    ordering = ('tag',)
+
   tag = models.CharField(max_length=255)
 
   def __unicode__(self):
     return self.tag
 
 class Photograph(models.Model):
+  class Meta:
+    ordering = ('published_date',)
+
   ORIENTATION_CHOICES = (
     ('P', 'Portrait'),
     ('L', 'Landscape'),

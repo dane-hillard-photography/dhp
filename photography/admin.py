@@ -5,7 +5,6 @@ from photography.models import Photograph, Album, Tag, Service
 
 class PhotographAlbumInline(admin.TabularInline):
   model = Photograph.albums.through
-  admin_order_field = 'title'
 
 class PhotographTagInline(admin.TabularInline):
   model = Photograph.tags.through
@@ -26,16 +25,14 @@ class PhotographAdmin(admin.ModelAdmin):
 
 class AlbumAdmin(admin.ModelAdmin):
   fieldsets = [
-    ('Album Information', {'fields': ['title']}),
+    ('Album Information', {'fields': ['title', 'sort_order']}),
     ('Publishing', {'fields': ['public', 'published_date']}),
   ]
-  list_display = ('title', 'photos', 'published_date', 'public', 'uuid')
+  list_display = ('title', 'sort_order', 'photos', 'published_date', 'public', 'uuid')
   date_hierarcy = 'published_date'
-  admin_order_field = 'title'
 
 class TagAdmin(admin.ModelAdmin):
-  admin_order_field = 'title'
-
+  pass
 
 class ServiceForm(forms.ModelForm):
   description = forms.CharField(widget=forms.Textarea)

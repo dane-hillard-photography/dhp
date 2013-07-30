@@ -7,18 +7,6 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
 {% endblock css %}
 
-{% block js %}
-<script>
-  window.onpopstate = function(event) {
-    if (event.state != null) {
-      if (event.state.location != null) {
-        window.location = event.state.location;
-      }
-    }
-  }
-</script>
-{% endblock js %}
-
 {% block og %}
   <meta name="og:type" content="danehillard:photograph" />
   <meta name="og:url" content="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" /> 
