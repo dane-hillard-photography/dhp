@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}contact/css/contact.css" />
 {% endblock css %}
 
+{% block og %}
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Contact | Dane Hillard Photography" />
+<meta property="og:url" content="http://www.danehillard.com/contact/" />
+<meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
+<meta property="og:description" content="{{ siteDescription }}" />
+{% endblock og %}
+
 {% block content %}
 <form action="/contact/" id="contact-form" method="post">{% csrf_token %}
 <table>

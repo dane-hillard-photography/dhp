@@ -23,7 +23,13 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/google_analytics_tracking.js"></script>
     {% endblock js %}
     
-    {% block og %}{% endblock og %}
+    {% block og %}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dane Hillard Photography" />
+    <meta property="og:url" content="http://www.danehillard.com" />
+    <meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
+    <meta property="og:description" content="{{ siteDescription }}" />
+    {% endblock og %}
 
     <title>{% block title %}Home{% endblock %} | Dane Hillard Photography</title>
   </head>

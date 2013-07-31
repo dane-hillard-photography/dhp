@@ -2,6 +2,15 @@
 
 {% block title %}Not Found{% endblock title %}
 
+{% block og %}
+<meta name="og:type" content="website" />
+<meta name="og:url" content="http://www.danehillard.com" /> 
+<meta name="og:title" content="Not Found | Dane Hillard Photography" />
+<meta name="og:site_name" content="Dane Hillard Photography" />
+<meta name="og:description" content="{{ siteDescription }}" />
+<meta name="og:image" content="{{ http }}{{ httpHost }}{{ STATIC_URL }}photography/dhp.png" />
+{% endblock og %}
+
 {% block content %}
 <p>
   Well, this is embarrassing. That resource couldn't be found on the server.

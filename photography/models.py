@@ -9,6 +9,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files import File
+from django.core.urlresolvers import reverse
+from django.db.models import F
 
 from dhp.settings import MEDIA_ROOT, MEDIA_URL
 
@@ -22,27 +24,46 @@ def get_file_path(instance, filename):
 
 class Album(models.Model):
   class Meta:
-    ordering = ('title',)
+    ordering = ('sort_order',)
 
   published_date = models.DateTimeField()
   title = models.CharField(max_length=255)
   public = models.BooleanField(default=True)
   uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
-  sort_order = models.IntegerField(blank=True)
+  sort_order = models.IntegerField(blank=True, null=True)
 
   def __unicode__(self):
     return self.title
 
   def photos(self):
-    photoList = ['<a href="%s">%s</a>' % (photo.thumbnail_medium.url, photo.title) for photo in self.photograph_set.all()]
+    photoList = ['<a href="%s">%s</a>' % (reverse('admin:photography_photograph_change', args=(photo.id,)), photo.title) for photo in self.photograph_set.all().reverse()]
     return ", ".join(photoList)
   photos.allow_tags = True
+
+  def get_absolute_url(self):
+    return reverse('photography:album', kwargs={'album_id': self.uuid})
+
+  def save(self, *args, **kwargs):
+    if (self.pk is not None):
+      current = Album.objects.get(pk=self.pk)
+      currentOrder = current.sort_order
+      newOrder = self.sort_order
+
+      if (currentOrder != newOrder):
+        Album.objects.filter(pk=self.pk).update(sort_order=None)
+
+        if (currentOrder < newOrder):
+          Album.objects.filter(sort_order__gt=currentOrder).filter(sort_order__lte=newOrder).update(sort_order=F('sort_order') - 1)
+        elif (currentOrder > newOrder):
+          Album.objects.filter(sort_order__lt=currentOrder).filter(sort_order__gte=newOrder).reverse().update(sort_order=F('sort_order') + 1)
+
+    super(Album, self).save(*args, **kwargs)
 
 class Tag(models.Model):
   class Meta:
     ordering = ('tag',)
 
-  tag = models.CharField(max_length=255)
+  tag = models.CharField(max_length=255, unique=True)
 
   def __unicode__(self):
     return self.tag
@@ -77,8 +98,11 @@ class Photograph(models.Model):
   thumbnail_small = models.ImageField(upload_to="images/small", blank=True, null=True)
   thumbnail_square = models.ImageField(upload_to="images/square", blank=True, null=True)
 
+  def get_absolute_url(self):
+    from django.core.urlresolvers import reverse
+    return reverse('photography:photo', kwargs={'photo_id': self.uuid})
+
   def save(self, *args, **kwargs):
-    super(Photograph, self).save(*args, **kwargs)
     im = PImage.open(os.path.join(MEDIA_ROOT, self.image.name))
     self.width, self.height = im.size
     ratioDivisor = self.height

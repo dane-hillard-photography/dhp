@@ -7,6 +7,14 @@
 
 {% block title %}About{% endblock title %}
 
+{% block og %}
+<meta property="og:type" content="website" />
+<meta property="og:title" content="About | Dane Hillard Photography" />
+<meta property="og:url" content="http://www.danehillard.com/about/" />
+<meta property="og:image" content="http://www.danehillard.com/static/images/DaneHillard.jpg" />
+<meta property="og:description" content="{{ siteDescription }}" />
+{% endblock og %}
+
 {% block content %}
 <img id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait"/>
 <div id="bio">

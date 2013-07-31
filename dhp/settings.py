@@ -6,7 +6,7 @@ if socket.gethostname() == 'danehillard':
   SETTINGS_PATH = os.path.realpath(os.path.dirname(__file__))
   PROJECT_PATH = SETTINGS_PATH + '/../'
 
-  DEBUG = True
+  DEBUG = False
   TEMPLATE_DEBUG = DEBUG
 
   ADMINS = (
@@ -29,7 +29,7 @@ if socket.gethostname() == 'danehillard':
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-  ALLOWED_HOSTS = ['django.danehillard.com']
+  ALLOWED_HOSTS = ['www.danehillard.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

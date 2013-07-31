@@ -33,7 +33,7 @@
 {% block content %}
   {% include 'photography/fb_sdk.html' %}
   <h1 id="title">{{ album.title }}</h1>
-  <h2><a href="/photography" id="back-to-albums" title="All Albums">&laquo;</a></h2>
+  <h2><a href="/photography" class="back-to-albums" title="All Albums">&laquo;</a></h2>
   <div id="frame" contains="{{ album.uuid }}">
     {% if album.photograph_set.all %}
     {% for photograph in album.photograph_set.all|dictsortreversed:"published_date" %}
@@ -59,6 +59,7 @@
         </div>
       </div>
     {% endfor %}
+  <h2><a href="/photography" class="back-to-albums" title="All Albums">&laquo;</a></h2>
     {% else %}
       <p>
         This album is currently empty. Come back soon!

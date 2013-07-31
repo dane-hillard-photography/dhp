@@ -2,6 +2,14 @@
 
 {% block title %}Music{% endblock title %}
 
+{% block og %}
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Music | Dane Hillard Photography" />
+<meta property="og:url" content="http://www.danehillard.com/music/" />
+<meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
+<meta property="og:description" content="{{ siteDescription }}" />
+{% endblock og %}
+
 {% block content %}
   <iframe
     class="youtube"
