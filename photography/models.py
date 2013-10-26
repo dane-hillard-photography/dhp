@@ -11,26 +11,31 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.db.models import F
+from django.db.models import Max
 
 from dhp.settings import MEDIA_ROOT, MEDIA_URL
 
 def generate_uuid():
   return str(uuid.uuid4())
 
+def max_sort_order():
+  return Album.objects.all().aggregate(Max('sort_order'))['sort_order__max'] + 1
+
 def get_file_path(instance, filename):
   ext = filename.split('.')[-1]
-  filename = "%s.%s" % (instance.uuid, ext)
-  return os.path.join(instance.directory, filename)
+  saveFilename = "%s.%s" % (instance.uuid, ext)
+  return os.path.join(instance.directory, saveFilename)
 
 class Album(models.Model):
   class Meta:
-    ordering = ('sort_order',)
+    ordering = ['sort_order',]
 
   published_date = models.DateTimeField()
   title = models.CharField(max_length=255)
   public = models.BooleanField(default=True)
   uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
-  sort_order = models.IntegerField(blank=True, null=True)
+  sort_order = models.IntegerField(blank=True, null=True, default=max_sort_order)
+  user = models.ForeignKey(User, blank=True, null=True)
 
   def __unicode__(self):
     return self.title
@@ -50,18 +55,27 @@ class Album(models.Model):
       newOrder = self.sort_order
 
       if (currentOrder != newOrder):
-        Album.objects.filter(pk=self.pk).update(sort_order=None)
+        existingAlbum = Album.objects.filter(sort_order=newOrder)
 
-        if (currentOrder < newOrder):
-          Album.objects.filter(sort_order__gt=currentOrder).filter(sort_order__lte=newOrder).update(sort_order=F('sort_order') - 1)
-        elif (currentOrder > newOrder):
-          Album.objects.filter(sort_order__lt=currentOrder).filter(sort_order__gte=newOrder).reverse().update(sort_order=F('sort_order') + 1)
+        if existingAlbum:
+          Album.objects.filter(pk=self.pk).update(sort_order=None)
+
+          if (currentOrder < newOrder):
+            albums = Album.objects.filter(sort_order__gt=currentOrder, sort_order__lte=newOrder)
+            for album in albums:
+              album.sort_order -= 1
+              super(Album, album).save()
+          elif (currentOrder > newOrder):
+            albums = Album.objects.filter(sort_order__lt=currentOrder, sort_order__gte=newOrder).reverse()
+            for album in albums:
+              album.sort_order += 1
+              super(Album, album).save()
 
     super(Album, self).save(*args, **kwargs)
 
 class Tag(models.Model):
   class Meta:
-    ordering = ('tag',)
+    ordering = ['tag',]
 
   tag = models.CharField(max_length=255, unique=True)
 
@@ -70,7 +84,7 @@ class Tag(models.Model):
 
 class Photograph(models.Model):
   class Meta:
-    ordering = ('published_date',)
+    ordering = ['-published_date',]
 
   ORIENTATION_CHOICES = (
     ('P', 'Portrait'),
@@ -103,6 +117,7 @@ class Photograph(models.Model):
     return reverse('photography:photo', kwargs={'photo_id': self.uuid})
 
   def save(self, *args, **kwargs):
+    super(Photograph, self).save(*args, **kwargs)
     im = PImage.open(os.path.join(MEDIA_ROOT, self.image.name))
     self.width, self.height = im.size
     ratioDivisor = self.height

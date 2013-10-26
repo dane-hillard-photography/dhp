@@ -2,6 +2,11 @@
 
 {% block title %}Photography{% endblock title %}
 
+{% block description %}
+The photography portfolio of Dane Hillard. This portfolio contains a variety of images including
+portraiture, architecture, nature, wedding, and event photography.
+{% endblock description %}
+
 {% block css %}
 {{ block.super }}
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/index.css" />
@@ -16,7 +21,7 @@
 {% endblock og %}
 
 {% block content %}
-  <h1>Albums</h1>
+  <h1>Portfolio</h1>
   {% if album_list %}
   <ul>
     {% for album in album_list %}
@@ -26,4 +31,7 @@
   {% else %}
   <p>No albums are available.</p>
   {% endif %}
+  <hr />
+  <h1>Photography Services</h1>
+  <p>Please <a href="{% url 'contact:contact' %}">contact me</a> for a quote on portraiture, events, and your other photography needs.</p>
 {% endblock content %}

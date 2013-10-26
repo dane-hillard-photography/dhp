@@ -2,6 +2,10 @@
 
 {% block title %}{{ album.title }}{% endblock %}
 
+{% block description %}
+{{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard.
+{% endblock description %}
+
 {% block css %}
 {{ block.super }}
 <link rel="stylesheet" href="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.css?v=2.1.5" />
@@ -9,18 +13,15 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/album.css" />
 {% endblock css %}
 
-{% block meta %}
-<meta name="description" content="{{ siteDescription }}" />
-<meta name="keywords" content="photography, Dane Hillard, Dane Hillard Photography, wedding, fashion, portraiture, architecture, Ann Arbor, Michigan" />
-{% endblock meta %}
-
 {% block og %}
 <meta name="og:type" content="danehillard:album" />
 <meta name="og:url" content="{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}" /> 
 <meta name="og:title" content="{{ album.title }} | {{ siteName }}" />
 <meta name="og:site_name" content="{{ siteName }}" />
-<meta name="og:description" content="{{ siteDescription }}" />
-<meta name="og:image" content="{{ http }}{{ httpHost }}{{ STATIC_URL }}photography/dhp.png" />
+<meta name="og:description" content="{{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard." />
+{% for photograph in album.photograph_set.all %}
+<meta name="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_large.url }}" />
+{% endfor %}
 {% endblock og %}
 
 {% block js %}
@@ -31,18 +32,19 @@
 <script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
 {% endblock js %}
 {% block content %}
-  {% include 'photography/fb_sdk.html' %}
+  {% include 'home/fb_sdk.html' %}
   <h1 id="title">{{ album.title }}</h1>
-  <h2><a href="/photography" class="back-to-albums" title="All Albums">&laquo;</a></h2>
-  <div id="frame" contains="{{ album.uuid }}">
+  <h2><a href="{% url 'photography:photography' %}" class="back-to-albums" title="Back to Portfolio">&laquo;</a></h2>
+  <div id="frame">
     {% if album.photograph_set.all %}
-    {% for photograph in album.photograph_set.all|dictsortreversed:"published_date" %}
+    {% for photograph in album.photograph_set.all %}
     {% url 'photography:photo' photograph.uuid as photoUrl %}
+    <div itemscope itemtype="http://schema.org/Product" class="photograph">
       <a class="photo" id="{{ photograph.uuid }}" rel="album" href="{{ photograph.thumbnail_large.url }}" data-title-id="title-for-{{ photograph.uuid }}">
-        <img src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}"/>
+        <img itemprop="image" src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}"/>
       </a>
       <div class="photo-title" id="title-for-{{ photograph.uuid }}">
-        <span>{{ photograph.title }}</span>
+        <span itemprop="name">{{ photograph.title }}</span>
         <a class="permalink" href="{{ photoUrl }}">
           <img src="{{ STATIC_URL}}{{ menuIcons }}white/link.svg" />
         </a>
@@ -52,14 +54,15 @@
         <div class="photo-pin-button">
           <a href="//pinterest.com/pin/create/button/?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}&media={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}%20%28danehillard.com%29"
             data-pin-do="buttonPin" 
-            data-pin-config="beside"
+            data-pin-config="none"
             data-pin-hover="true">
             <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
           </a>
         </div>
       </div>
+    </div>
     {% endfor %}
-  <h2><a href="/photography" class="back-to-albums" title="All Albums">&laquo;</a></h2>
+  <h2><a href="{% url 'photography:photography' %}" class="back-to-albums" title="Back to Portfolio">&laquo;</a></h2>
     {% else %}
       <p>
         This album is currently empty. Come back soon!

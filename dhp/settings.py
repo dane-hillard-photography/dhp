@@ -4,7 +4,7 @@ import os
 if socket.gethostname() == 'danehillard':
 
   SETTINGS_PATH = os.path.realpath(os.path.dirname(__file__))
-  PROJECT_PATH = SETTINGS_PATH + '/../'
+  PROJECT_PATH = os.path.realpath(SETTINGS_PATH + '/../')
 
   DEBUG = False
   TEMPLATE_DEBUG = DEBUG
@@ -27,6 +27,7 @@ if socket.gethostname() == 'danehillard':
       }
   }
 
+  LOGIN_REDIRECT_URL = "/"
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
   ALLOWED_HOSTS = ['www.danehillard.com']
@@ -117,7 +118,7 @@ if socket.gethostname() == 'danehillard':
       'django.contrib.auth.middleware.AuthenticationMiddleware',
       'django.contrib.messages.middleware.MessageMiddleware',
       # Uncomment the next line for simple clickjacking protection:
-      # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+      'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
   )
 
@@ -138,6 +139,7 @@ if socket.gethostname() == 'danehillard':
       'django.contrib.contenttypes',
       'django.contrib.sessions',
       'django.contrib.sites',
+      'django.contrib.sitemaps',
       'django.contrib.messages',
       'django.contrib.staticfiles',
       # Uncomment the next line to enable the admin:

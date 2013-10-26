@@ -2,6 +2,10 @@
 
 {% block title %}{{ photograph.title }}{% endblock title %}
 
+{% block description %}
+{{ photograph.title }} -- A photograph by Dane Hillard. Published: {{ photograph.published_date|date:"l, F jS, Y" }}
+{% endblock description %}
+
 {% block css %}
 {{ block.super }}
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
@@ -17,10 +21,10 @@
 {% endblock og %}
 
 {% block content %}
-  {% include 'photography/fb_sdk.html' %}
+  {% include 'home/fb_sdk.html' %}
   <div id="feature">
     <h1 id="title">{{ photograph.title }}</h1>
-    <img src="{{ photograph.thumbnail_medium.url }}" alt="{{ photograph.title }}" />
+    <img src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}" />
     <div class="photo-like-button fb-like"
       data-href="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" 
       data-send="false" 
@@ -29,7 +33,7 @@
     <div class="photo-pin-button">
       <a href="//pinterest.com/pin/create/button/?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ request.get_full_path|urlencode:'' }}&media={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}%20%28danehillard.com%29"
         data-pin-do="buttonPin" 
-        data-pin-config="none"
+        data-pin-config="beside"
         data-pin-hover="true">
         <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
       </a>

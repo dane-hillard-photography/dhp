@@ -1,26 +1,26 @@
 {% with request.META.HTTP_HOST as httpHost %}
 {% with 'http://' as http %}
 {% with 'Dane Hillard Photography' as siteName %}
-{% with 'Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography' as siteDescription %}
+{% with 'Wedding, Portrait, Fashion, Event, and Architecture Photography' as siteDescription %}
 {% with 'images/icons/menu/' as menuIcons %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="google-site-verification" content="Boc3cLhNPB4ArvuP60R9_XvNp2rm4MlRFq5Uz3dh3cg" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="fb:app_id" content="152446884139" />
-    {% block meta %}
-    <meta name="description" content="Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography" />
-    <meta name="keywords" content="photography, photographer, wedding, portrait, portraiture, senior portraits, Dane, Hillard, Dane Hillard, Ann Arbor, Michigan, Ann Arbor Michigan, ASquared, A2, A Squared, southeast Michigan, event photography, wedding photography" />
-    {% endblock meta %}
+    <meta name="description" content="{% block description %}Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography{% endblock description %}" />
+    <meta name="keywords" content="{% block keywords %}photography, photographer, wedding, portrait, portraiture, senior portraits, Dane, Hillard, Dane Hillard, Ann Arbor, Michigan, Ann Arbor Michigan, ASquared, A2, A Squared, southeast Michigan, event photography, wedding photography{% endblock keywords %}" />
 
     {% block css %}
     <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,200" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+    <link rel="stylesheet" href="{% get_static_prefix %}css/base.css" />
     {% endblock css %}
 
     {% block js %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/google_analytics_tracking.js"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}js/google_analytics_tracking.js"></script>
     {% endblock js %}
     
     {% block og %}
@@ -34,37 +34,38 @@
     <title>{% block title %}Home{% endblock %} | Dane Hillard Photography</title>
   </head>
   <body>
+    {% include 'home/fb_sdk.html' %}
     <div id="navigation">
       {% block menu %}
       <ul>
         <li>
-          <a href="/">
-            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/home.svg" alt="Home" />
+          <a href="{% url 'home:home' %}">
+            <img class="menu-icon" src="{% get_static_prefix %}{{ menuIcons }}black/home.svg" alt="Home" />
           </a>
         </li>
         <li>
-          <a href="/photography">
-            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/photography.svg" alt="Photography" />
+          <a href="{% url 'photography:photography' %}">
+            <img class="menu-icon" src="{% get_static_prefix %}{{ menuIcons }}black/photography.svg" alt="Photography" />
           </a>
         </li>
         <li>
           <a href="http://blog.danehillard.com">
-            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/blog.svg" alt="Blog" />
+            <img class="menu-icon" src="{% get_static_prefix %}{{ menuIcons }}black/blog.svg" alt="Blog" />
           </a>
         </li>
         <li>
-          <a href="/music">
-            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/music.svg" alt="Music" />
+          <a href="{% url 'music:music' %}">
+            <img class="menu-icon" src="{% get_static_prefix %}{{ menuIcons }}black/music.svg" alt="Music" />
           </a>
         </li>
         <li>
-          <a href="/contact">
-            <img class="menu-icon" src="{{ STATIC_URL}}{{ menuIcons }}black/contact.svg" alt="Contact" />
+          <a href="{% url 'contact:contact' %}">
+            <img class="menu-icon" src="{% get_static_prefix %}{{ menuIcons }}black/contact.svg" alt="Contact" />
           </a>
         </li>
         <li>
-          <a href="/about">
-            <img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}black/about.svg" alt="About" />
+          <a href="{% url 'about:about' %}">
+            <img class="menu-icon" src="{% get_static_prefix %}{{ menuIcons }}black/fingerprint.svg" alt="About" />
           </a>
         </li>
       </ul>
@@ -73,15 +74,32 @@
 
     <div id="content">
       {% block content %}
-      <a href="/photography" title="Enter" />
-        <img src="{{ STATIC_URL }}images/logos/dhp.png" alt="DHP Logo" />
-      </a>
-      <h1>Dane Hillard Photography</h1>
-      <hr />
-      <p>
-        {{ siteDescription }}
-      </p>
+      <div itemscope itemtype="http://schema.org/LocalBusiness">
+        <a href="{% url 'photography:photography' %}" title="Enter" />
+          <img itemprop="image" id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="DHP Logo" />
+        </a>
+        <h1 itemprop="name">Dane Hillard Photography</h1>
+        <hr />
+        <p itemprop="description">
+          {{ siteDescription }}
+        </p>
+        <p itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
+        <p>
+      </div>
+      <div class="fb-like" data-href="http://www.facebook.com/danehillard" data-width="200" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="false" data-send="false"></div>
       {% endblock content %}
+      <span id="admin-links">
+      {% if request.user.is_authenticated %}
+      <span id="user">{{ request.user.first_name }}</span>
+      <a id="logout" href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}">Logout</a>
+      {% if request.user.is_staff %}
+      | <a id="admin" href="{% url 'admin:index' %}">Administration</a>
+      {% endif %}
+      {% else %}
+      <a id="login" href="{% url 'django.contrib.auth.views.login' %}?next={% firstof request.path 'home:home' %}">Login</a>
+      {% endif %}
+      </span>
     </div>
   </body>
 </html>

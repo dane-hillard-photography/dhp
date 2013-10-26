@@ -7,10 +7,11 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 
+from photography.models import Photograph
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+class PhotographyTestCase(TestCase):
+  def setUp(self):
+    pass
+    
+  def test_always_works(self):
+    self.assertEqual(2, 1 + 1) 
