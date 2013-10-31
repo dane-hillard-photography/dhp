@@ -1,4 +1,5 @@
 {% extends "home/base.html" %}
+{% load static %}
 
 {% with 'images/icons/menu/' as menuIcons %}
 
@@ -22,6 +23,14 @@ Contact Dane Hillard Photography via email or through various other social chann
 {% endblock og %}
 
 {% block content %}
+<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
+<p class="call">
+  My goal is to provide clients with images that do more than capture faces. A portrait
+  should speak to its audience and reveal something about the subject. If you are
+  interested in setting up a portrait session or have any questions regarding me,
+  my equipment, or what a session with me might be like, please contact me using
+  the form below.
+</p>
 <form action="{% url 'contact:contact' %}" id="contact-form" method="post">{% csrf_token %}
 <table>
   {{ form.as_table }}

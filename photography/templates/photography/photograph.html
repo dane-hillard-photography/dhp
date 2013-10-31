@@ -1,10 +1,9 @@
 {% extends 'home/base.html' %}
+{% load static %}
 
 {% block title %}{{ photograph.title }}{% endblock title %}
 
-{% block description %}
-{{ photograph.title }} -- A photograph by Dane Hillard. Published: {{ photograph.published_date|date:"l, F jS, Y" }}
-{% endblock description %}
+{% block description %}{{ photograph.title }}{% if photograph.description %} -- {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} -- A photograph by Dane Hillard. Published: {{ photograph.published_date|date:"l, F jS, Y" }}{% endblock description %}
 
 {% block css %}
 {{ block.super }}
@@ -22,9 +21,10 @@
 
 {% block content %}
   {% include 'home/fb_sdk.html' %}
+  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
   <div id="feature">
     <h1 id="title">{{ photograph.title }}</h1>
-    <img src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}" />
+    <img src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %}" />
     <div class="photo-like-button fb-like"
       data-href="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" 
       data-send="false" 

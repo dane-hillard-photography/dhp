@@ -96,6 +96,7 @@ class Photograph(models.Model):
 
   published_date = models.DateTimeField()
   title = models.CharField(max_length=255)
+  description = models.TextField(blank=True, null=True)
   image = models.ImageField(upload_to=get_file_path)
   width = models.IntegerField(blank=True, null=True)
   height = models.IntegerField(blank=True, null=True)

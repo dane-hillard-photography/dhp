@@ -1,4 +1,5 @@
 {% extends "home/base.html" %}
+{% load static %}
 
 {% block title %}Photography{% endblock title %}
 
@@ -21,6 +22,7 @@ portraiture, architecture, nature, wedding, and event photography.
 {% endblock og %}
 
 {% block content %}
+  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
   <h1>Portfolio</h1>
   {% if album_list %}
   <ul>

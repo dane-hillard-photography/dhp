@@ -1,4 +1,5 @@
 {% extends "home/base.html" %}
+{% load static %}
 
 {% block title %}{{ album.title }}{% endblock %}
 
@@ -33,6 +34,7 @@
 {% endblock js %}
 {% block content %}
   {% include 'home/fb_sdk.html' %}
+  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
   <h1 id="title">{{ album.title }}</h1>
   <h2><a href="{% url 'photography:photography' %}" class="back-to-albums" title="Back to Portfolio">&laquo;</a></h2>
   <div id="frame">
@@ -41,11 +43,11 @@
     {% url 'photography:photo' photograph.uuid as photoUrl %}
     <div itemscope itemtype="http://schema.org/Product" class="photograph">
       <a class="photo" id="{{ photograph.uuid }}" rel="album" href="{{ photograph.thumbnail_large.url }}" data-title-id="title-for-{{ photograph.uuid }}">
-        <img itemprop="image" src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}"/>
+        <img itemprop="image" src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %}" />
       </a>
       <div class="photo-title" id="title-for-{{ photograph.uuid }}">
         <span itemprop="name">{{ photograph.title }}</span>
-        <a class="permalink" href="{{ photoUrl }}">
+        <a class="permalink" href="{{ photoUrl }}" title="Permalink">
           <img src="{{ STATIC_URL}}{{ menuIcons }}white/link.svg" />
         </a>
         <div class="photo-like-button fb-like" data-href="http://{{ httpHost }}{{ photoUrl }}" 

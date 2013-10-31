@@ -10,16 +10,21 @@ class PhotographTagInline(admin.TabularInline):
   model = Photograph.tags.through
 
 class PhotographAdmin(admin.ModelAdmin):
+  list_editable = ['title', 'description', 'public']
+
   fieldsets = [
-    ('Photograph Information', {'fields': ['title', 'image']}),
+    ('Photograph Information', {'fields': ['image', 'title', 'description']}),
     ('Publishing', {'fields': ['public', 'user', 'published_date']}),
   ]
   inlines = [PhotographAlbumInline, PhotographTagInline]
-  list_display = ('admin_thumbnail', 'title', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
+  list_display = ('admin_thumbnail', 'title', 'description', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
   date_hierarchy = 'published_date'
   search_fields = ['title']
+  save_on_top = True
 
 class AlbumAdmin(admin.ModelAdmin):
+  list_editable = ['title', 'sort_order', 'public']
+
   fieldsets = [
     ('Album Information', {'fields': ['title', 'sort_order']}),
     ('Publishing', {'fields': ['public', 'user', 'published_date']}),
@@ -28,7 +33,7 @@ class AlbumAdmin(admin.ModelAdmin):
   date_hierarcy = 'published_date'
 
 class TagAdmin(admin.ModelAdmin):
-  pass
+  list_editable = ['tag']
 
 class ServiceForm(forms.ModelForm):
   description = forms.CharField(widget=forms.Textarea)
