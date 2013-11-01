@@ -1,0 +1,200 @@
+body
+{
+  background: #cccccc;
+  color: #000000;
+  overflow-y: scroll;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 300;
+}
+
+p
+{
+  line-height: 32px;
+  font-size: 24px;
+}
+
+hr
+{
+  width: 33%;
+  border-color: #dddddd;
+}
+
+th
+{
+  font-weight: 300;
+}
+
+li
+{
+  font-size: 20px;
+}
+
+::selection
+{
+  background: #00aeed;
+}
+
+#navigation
+{
+  z-index: 100;
+  text-align: center;
+  min-width: 450px;
+}
+
+#navigation ul
+{
+  list-style: none;
+  padding: 0px;
+  text-align: center;
+  display: inline-block;
+}
+
+#navigation ul li
+{
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  background: #cccccc;
+}
+
+#navigation a
+{
+  text-decoration: none;
+}
+
+#content
+{
+  width: 60%;
+  min-width: 500px;
+  margin: 0px auto;
+  padding: 10px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+#content ul
+{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.menu-icon
+{
+  border: 0px;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  transition-property: transform;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  -webkit-transition-property: -webkit-transform;
+  transition-duration: .5s;
+  -moz-transition-duration: .5s;
+  -o-transition-duration: .5s;
+  -webkit-transition-duration: .5s;
+}
+
+.menu-icon:hover
+{
+  border-radius: 5px;
+  transition-property: transform;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  -webkit-transition-property: -webkit-transform;
+  transition-duration: .25s;
+  -moz-transition-duration: .25s;
+  -o-transition-duration: .25s;
+  -webkit-transition-duration: .25s;
+  transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  -webkit-transform: scale(1.25);
+  z-index: 200;
+}
+
+a
+{
+  text-decoration: none;
+  color: #0090c4;
+}
+
+a:active
+{
+  color: #00aeed;
+}
+
+a img
+{
+  border: none;
+}
+
+#logo-large
+{
+  width: 500px;
+  height: 294px;
+}
+
+#logo
+{
+  height: 50px;
+}
+
+#admin-links
+{
+  display: block;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+}
+
+#user
+{
+  margin: 0px 5px;
+}
+
+form table
+{
+  margin: 0px auto;
+}
+
+form th
+{
+  text-align: right;
+  font-weight: normal;
+}
+
+form input, form textarea
+{
+  padding: 5px;
+}
+
+form input[type="text"], form input[type="password"], form textarea
+{
+  width: 300px;
+  border: none;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  outline: none;
+  transition: box-shadow 0.25s ease-in-out;
+}
+
+form input[type="text"]:focus, form input[type="password"]:focus, form textarea:focus
+{
+  box-shadow: 0 0 5px #00aeed;
+  -moz-box-shadow: 0 0 5px #00aeed;
+  -o-box-shadow: 0 0 5px #00aeed;
+  -webkit-box-shadow: 0 0 5px #00aeed;
+}
+
+form .errorlist
+{
+  color: #ff0000;
+}
+
+form table
+{
+  margin: 0px auto;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path id="shop-icon" d="M362.832,287.916V452.25H252.5V287.916H362.832z M80.125,217.25v235H222.5v-40H120.125v-155h272.75
+	l-0.043,195h40.043v-235H80.125z M220.62,59.75l-17.798,85.332h-0.081v17.34c0,18.314-14.847,33.161-33.161,33.161
+	s-33.16-14.847-33.16-33.161v-17.34l50.841-85.332H220.62z M168.232,59.75l-51.91,85.332v17.34
+	c0,18.314-14.847,33.161-33.161,33.161S50,180.736,50,162.422v-17.34l83.666-85.332H168.232z M462,145.082v17.34
+	c0,18.314-14.847,33.161-33.161,33.161s-33.161-14.847-33.161-33.161v-17.34l-51.91-85.332h34.566L462,145.082z M289.08,145.082
+	h0.081v17.34c0,18.314-14.847,33.161-33.161,33.161s-33.161-14.847-33.161-33.161v-17.34h0.081l16.729-85.332h32.703L289.08,145.082
+	z M324.739,59.75l50.841,85.332v17.34c0,18.314-14.846,33.161-33.16,33.161s-33.161-14.847-33.161-33.161v-17.34h-0.081
+	L291.38,59.75H324.739z"/>
+</svg>

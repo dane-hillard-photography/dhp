@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+
+<path id="stackoverflow-icon" d="M307.783,406.887l-162.61,0.076l-0.014-34.728l162.603-0.084L307.783,406.887z M417.662,210.207
+
+	L389.845,50l-34.221,5.938l27.813,160.207L417.662,210.207z M311.693,327.623l-161.916-14.919l-3.188,34.589l161.919,14.905
+
+	L311.693,327.623z M322.375,282.304l-157.025-42.21l-9.022,33.535l157.036,42.215L322.375,282.304z M342.875,242.58l-140.058-82.607
+
+	l-17.652,29.904l140.065,82.612L342.875,242.58z M377.218,218.256L285.603,83.908l-28.696,19.565l91.619,134.342L377.218,218.256z
+
+	 M335.398,292.646V434.62H122.117V292.646H94.338v169.223h268.699V292.646H335.398z"/>
+
+</svg>
+
