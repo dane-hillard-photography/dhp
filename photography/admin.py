@@ -23,7 +23,7 @@ class PhotographAdmin(admin.ModelAdmin):
   save_on_top = True
 
 class AlbumAdmin(admin.ModelAdmin):
-  list_editable = ['title', 'sort_order', 'public']
+  list_editable = ['sort_order', 'public']
 
   fieldsets = [
     ('Album Information', {'fields': ['title', 'sort_order']}),
@@ -33,7 +33,7 @@ class AlbumAdmin(admin.ModelAdmin):
   date_hierarcy = 'published_date'
 
 class TagAdmin(admin.ModelAdmin):
-  list_editable = ['tag']
+	pass
 
 class ServiceForm(forms.ModelForm):
   description = forms.CharField(widget=forms.Textarea)

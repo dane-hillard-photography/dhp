@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.views.generic.base import RedirectView
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.conf.urls.static import static
 
 from sitemaps import PhotographSitemap, AlbumSitemap, SiteSitemap
 
@@ -29,4 +30,4 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout'),
     url(r'^sitemap\.xml', 'django.contrib.sitemaps.views.sitemap', { 'sitemaps': sitemaps }),
     url(r'^robots.txt$', TemplateView.as_view(template_name='robots.txt')),
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
