@@ -1,0 +1,29 @@
+.album
+{
+  /*display: inline-block;*/
+  margin: 10px 0px;
+}
+
+.album a:hover
+{
+  /*background: #00aeed;*/
+  letter-spacing: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.album a
+{
+  color: #000000;
+  padding: 8px;
+  transition-property: letter-spacing;
+  -moz-transition-property: letter-spacing;
+  -o-transition-property: letter-spacing;
+  -webkit-transition-property: letter-spacing;
+  transition-duration: 0.25s;
+  -moz-transition-duration: 0.25s;
+  -o-transition-duration: 0.25s;
+  -webkit-transition-duration: 0.25s;
+}
