@@ -1,4 +1,6 @@
 var _gaq = _gaq || [];
+var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
 _gaq.push(['_setAccount', 'UA-12156455-2']);
 _gaq.push(['_setDomainName', 'danehillard.com']);
 _gaq.push(['_trackPageview']);
