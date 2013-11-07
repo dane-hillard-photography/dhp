@@ -16,8 +16,20 @@
   <meta name="og:title" content="{{ photograph.title }} | {{ siteName }}" />
   <meta name="og:site_name" content="{{ siteName }}" />
   <meta name="og:description" content="{{ siteDescription }}" />
-  <meta name="og:image" content="{{ photograph.thumbnail_small.url }}" />
+  <meta name="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_small.url }}" />
 {% endblock og %}
+
+{% block twitter %}
+  <meta name="twitter:card" content="photo">
+  <meta name="twitter:url" content="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" /> 
+  <meta name="twitter:title" content="{{ photograph.title }} | {{ siteName }}" />
+  <meta name="twitter:description" content="{{ siteDescription }}" />
+  <meta name="twitter:site" content="@littleleviathan" />
+  <meta name="twitter:creator" content="@littleleviathan" />
+  <meta name="twitter:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_medium.url }}" />
+  <meta name="twitter:width" content="{{ photograph.thumbnail_medium.width }}" />
+  <meta name="twitter:height" content="{{ photograph.thumbnail_medium.height }}" />
+{% endblock twitter %}
 
 {% block content %}
   {% include 'home/fb_sdk.html' %}
