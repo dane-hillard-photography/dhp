@@ -184,7 +184,7 @@ if socket.gethostname() == 'danehillard':
 	SECRET_KEY = "sdfg#$T@$%Hsedfh@$%$%%%%%%@$5GWEFGdfgdfbdfGWE"
 	DEBUG = False
 	ALLOWED_HOSTS = ['www.danehillard.com']
-	DATABASES['host'] = ''
+	DATABASES['default']['host'] = ''
 else:
 	import mimetypes
 
