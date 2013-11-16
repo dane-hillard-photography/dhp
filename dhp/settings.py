@@ -20,7 +20,7 @@ DATABASES = {
 	  # The following settings are not used with sqlite3:
 	  'USER': 'root',
 	  'PASSWORD': 'l1ttl3l3v14th4n',
-	  'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+	  'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
 	  'PORT': '',                      # Set to empty string for default.
   }
 }
@@ -184,3 +184,9 @@ if socket.gethostname() == 'danehillard':
 	SECRET_KEY = "sdfg#$T@$%Hsedfh@$%$%%%%%%@$5GWEFGdfgdfbdfGWE"
 	DEBUG = False
 	ALLOWED_HOSTS = ['www.danehillard.com']
+	DATABASES['host'] = ''
+else:
+	import mimetypes
+
+	mimetypes.add_type("image/svg+xml", ".svg", True)
+	mimetypes.add_type("image/svg+xml", ".svgz", True)
