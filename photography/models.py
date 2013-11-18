@@ -133,21 +133,21 @@ class Photograph(models.Model):
       self.orientation = "S"
       
     ratio = 800.0 / ratioDivisor
-    im.thumbnail((self.width * ratio, self.height * ratio), PImage.ANTIALIAS)
+    im.thumbnail((int(self.width * ratio), int(self.height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
     im.save(tf.name, im.format)
     self.thumbnail_large.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
     ratio = 500.0 / ratioDivisor
-    im.thumbnail((self.width * ratio, self.height * ratio), PImage.ANTIALIAS)
+    im.thumbnail((int(self.width * ratio), int(self.height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
     im.save(tf.name, im.format)
     self.thumbnail_medium.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
     ratio = 200.0 / ratioDivisor
-    im.thumbnail((self.width * ratio, self.height * ratio), PImage.ANTIALIAS)
+    im.thumbnail((int(self.width * ratio), int(self.height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
     im.save(tf.name, im.format)
     self.thumbnail_small.save(self.image.name, File(open(tf.name)), save=False)
