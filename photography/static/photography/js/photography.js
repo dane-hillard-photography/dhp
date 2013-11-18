@@ -6,8 +6,7 @@ $(document).ready(function() {
       });
     },
     afterShow: function() {
-      FB.XFBML.parse();
-      loadJavaScript('body', '//assets.pinterest.com/js/pinit.js');
+	  loadJavaScript('body', '//assets.pinterest.com/js/pinit.js');
 
       var element, id = $(this.element).data('title-id');
 
@@ -25,8 +24,6 @@ $(document).ready(function() {
 
       if (id) {
         element = $('#' + id);
-
-		console.log(element);
 
         if (element.length) {
           this.title = element.html();
