@@ -26,6 +26,8 @@ $(document).ready(function() {
       if (id) {
         element = $('#' + id);
 
+		console.log(element);
+
         if (element.length) {
           this.title = element.html();
         }
