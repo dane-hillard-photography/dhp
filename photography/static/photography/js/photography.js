@@ -6,8 +6,6 @@ $(document).ready(function() {
       });
     },
     afterShow: function() {
-	  loadJavaScript('body', '//assets.pinterest.com/js/pinit.js');
-
       var element, id = $(this.element).data('title-id');
 
       if (id) {
@@ -29,9 +27,6 @@ $(document).ready(function() {
           this.title = element.html();
         }
       }
-    },
-    afterClose: function() {
-      $('script[id^="PIN_"]').remove();
     },
     openEffect  : 'elastic',
     closeEffect : 'elastic',
