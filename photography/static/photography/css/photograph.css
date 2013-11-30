@@ -1,24 +1,30 @@
-.photo-like-button, .photo-pin-button
+.photo-like-button, .photo-pin-button, .photo-tweet-button
 {
-  display: block !important;
-  position: fixed !important;
+	display: block !important;
+	position: fixed !important;
+}
+
+.photo-tweet-button
+{
+	top: 10px;
+	left: 10px;
 }
 
 .photo-like-button
 {
-  top: 10px;
-  left: 10px;
-  z-index: 1;
+	top: 35px;
+	left: 10px;
+	z-index: 1;
 }
 
 .photo-pin-button
 {
-  top: 35px;
-  left: 10px;
+	top: 60px;
+	left: 10px;
 }
 
 #feature
 {
-  margin: 0px auto;
-  display: table;
+	margin: 0px auto;
+	display: table;
 }
