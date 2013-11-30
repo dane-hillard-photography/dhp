@@ -5,18 +5,6 @@ $(document).ready(function() {
         return false;
       });
     },
-    afterShow: function() {
-      var element, id = $(this.element).data('title-id');
-
-      if (id) {
-        element = $('#' + id);
-      }
-
-      if (element.length) {
-        imagePage = $(element).find("a.permalink").attr("href");
-        imageTitle = $(element).find("span").text();
-      }
-    },
     beforeLoad: function() {
       var element, id = $(this.element).data('title-id');
 
@@ -52,8 +40,4 @@ $(document).ready(function() {
       }
     }
   });
-
-  function loadJavaScript(scriptParent, scriptName) {
-    $(scriptParent).append('<script type="text/javascript" src="' + scriptName + '"></script>');
-  }
 });
