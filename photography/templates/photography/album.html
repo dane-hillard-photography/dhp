@@ -33,7 +33,6 @@
 <script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
 {% endblock js %}
 {% block content %}
-  {% include 'home/tweet_button.html' %}
   <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
   <h1 id="title">{{ album.title }}</h1>
   <h2><a href="{% url 'photography:photography' %}" class="back-to-albums" title="Back to Portfolio">&laquo;</a></h2>
@@ -77,6 +76,3 @@
     {% endif %}
   </div>
 {% endblock content %}
-{% block final %}
-  <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
-{% endblock final %}

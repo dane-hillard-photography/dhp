@@ -32,7 +32,6 @@
 {% endblock twitter %}
 
 {% block content %}
-  {% include 'home/tweet_button.html' %}
   <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
   <div id="feature">
     <h1 id="title">{{ photograph.title }}</h1>
@@ -57,6 +56,3 @@
     </div>
   </div>
 {% endblock content %}
-{% block final %}
-  <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
-{% endblock final %}

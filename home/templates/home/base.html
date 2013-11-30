@@ -36,6 +36,7 @@
   </head>
   <body>
     {% include 'home/fb_sdk.html' %}
+    {% include 'home/twitter_sdk.html' %}
     <div id="navigation">
       {% block menu %}
       <ul>
@@ -91,7 +92,16 @@
           <a href="{% url 'contact:contact' %}" title="Book me!">Book me</a> today!
         </p>
       </div>
-      <div class="fb-like" data-href="http://www.facebook.com/danehillard" data-width="320" data-height="50" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
+	  <div class="fb-like" 
+		   data-href="http://www.facebook.com/danehillard" 
+		   data-width="300" 
+		   data-height="20" 
+		   data-colorscheme="light" 
+		   data-layout="standard" 
+		   data-action="like" 
+		   data-show-faces="false" 
+		   data-send="false">
+	  </div>
       {% endblock content %}
       <span id="admin-links">
       {% if request.user.is_authenticated %}
@@ -105,7 +115,9 @@
       {% endif %}
       </span>
     </div>
-	{% block final %}{% endblock final %}
+	{% block final %}
+		{% include 'home/pinterest_sdk.html' %}
+	{% endblock final %}
   </body>
 </html>
 
