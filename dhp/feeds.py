@@ -6,7 +6,7 @@ from photography.models import Photograph
 class LatestPhotosFeed(Feed):
 	title = "Dane Hillard Photography"
 	link = "http://www.danehillard.com"
-	description = "Some photos"
+	description_template = "feeds/latest_photos_description.html"
 
 	def items(self):
 		return Photograph.objects.filter(public=True).order_by('-published_date')[:10]

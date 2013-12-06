@@ -1,0 +1,3 @@
+<img src="http://{{ request.META.HTTP_HOST }}{% url 'photography:photo' obj.uuid %}" alt="{{ obj.description }}" title="{{ obj.title }}"/>
+<h1>{{ obj.title }}</h1>
+<p>{{ obj.description }}</p>
