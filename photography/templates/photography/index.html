@@ -29,6 +29,7 @@ portraiture, architecture, nature, wedding, and event photography.
     {% for album in album_list %}
     <li class="album"><a href="{% url 'photography:album' album.uuid %}">{{ album.title }}</a></li>
     {% endfor %}
+	<li id="latest-photos-feed"><a href="{% url 'photography:feed' %}"><img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}/black/rss.svg"></a></li>
   </ul>
   {% else %}
   <p>No albums are available.</p>
