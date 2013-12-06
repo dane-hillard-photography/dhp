@@ -21,6 +21,10 @@ portraiture, architecture, nature, wedding, and event photography.
 <meta property="og:description" content="{{ siteDescription }}" />
 {% endblock og %}
 
+{% block header_extras %}
+<link rel="alternate" type="application/rss+xml" title="Dane Hillard Photography" href="{% url 'photography:feed' %}">
+{% endblock header_extras %}
+
 {% block content %}
   <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
   <h1>Portfolio</h1>
