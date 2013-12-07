@@ -1,14 +1,9 @@
 {% extends "home/base.html" %}
 
-{% block title %}Contact{% endblock title %}
+{% block title %}Thanks{% endblock title %}
 
-{% block og %}
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Thanks | Dane Hillard Photography" />
-<meta property="og:url" content="http://www.danehillard.com/contact/submit" />
-<meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
-<meta property="og:description" content="{{ siteDescription }}" />
-{% endblock og %}
+{% block og_title %}Thanks | {{ block.super }}{% endblock og_title %}
+{% block og_url %}{{ block.super }}/submit/{% endblock og_url %}
 
 {% block content %}
 <p>

@@ -10,14 +10,16 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
 {% endblock css %}
 
-{% block og %}
-  <meta name="og:type" content="danehillard:photograph" />
-  <meta name="og:url" content="{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}" /> 
-  <meta name="og:title" content="{{ photograph.title }} | {{ siteName }}" />
-  <meta name="og:site_name" content="{{ siteName }}" />
-  <meta name="og:description" content="{{ siteDescription }}" />
-  <meta name="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_small.url }}" />
-{% endblock og %}
+{% block og_type %}danehillard:photograph{% endblock og_type %}
+{% block og_url %}{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}{% endblock og_url %} 
+{% block og_title %}{{ photograph.title }} | {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ photograph.description }}{% endblock og_description %}
+{% block og_images %}
+<meta name="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_large.url }}" />
+<meta name="og:image:type" content="image/jpeg" />
+<meta name="og:image:height" content="{{ photograph.l_height }}" />
+<meta name="og:image:width" content="{{ photograph.l_width }}" />
+{% endblock og_images %}
 
 {% block twitter %}
   <meta name="twitter:card" content="photo">
@@ -27,8 +29,8 @@
   <meta name="twitter:site" content="@littleleviathan" />
   <meta name="twitter:creator" content="@littleleviathan" />
   <meta name="twitter:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_medium.url }}" />
-  <meta name="twitter:width" content="{{ photograph.thumbnail_medium.width }}" />
-  <meta name="twitter:height" content="{{ photograph.thumbnail_medium.height }}" />
+  <meta name="twitter:width" content="{{ photograph.m_width }}" />
+  <meta name="twitter:height" content="{{ photograph.m_height }}" />
 {% endblock twitter %}
 
 {% block content %}

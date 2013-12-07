@@ -14,16 +14,18 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/album.css" />
 {% endblock css %}
 
-{% block og %}
-<meta name="og:type" content="danehillard:album" />
-<meta name="og:url" content="{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}" /> 
-<meta name="og:title" content="{{ album.title }} | {{ siteName }}" />
-<meta name="og:site_name" content="{{ siteName }}" />
-<meta name="og:description" content="{{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard." />
-{% for photograph in album.photograph_set.all %}
+{% block og_type %}danehillard:album{% endblock og_type %}
+{% block og_url %}{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}{% endblock og_url %} 
+{% block og_title %}{{ album.title }} | {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard{% endblock og_description %}
+{% block og_images %}
+{% for photograph in album.photograph_set.all|slice:":10" %}
 <meta name="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_large.url }}" />
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="{{ photograph.l_width }}">
+<meta property="og:image:height" content="{{ photograph.l_height }}">
 {% endfor %}
-{% endblock og %}
+{% endblock og_images %}
 
 {% block js %}
 {{ block.super }}

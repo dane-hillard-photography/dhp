@@ -24,11 +24,15 @@
     {% endblock js %}
     
     {% block og %}
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Dane Hillard Photography" />
-    <meta property="og:url" content="http://www.danehillard.com" />
+	<meta property="og:type" content="{% block og_type %}website{% endblock og_type %}" />
+	<meta property="og:title" content="{% block og_title %}Dane Hillard Photography{% endblock og_title %}" />
+	<meta property="og:url" content="{% block og_url %}http://www.danehillard.com{% endblock og_url %}" />
+	<meta property="og:description" content="{% block og_description %}{{ siteDescription }}{% endblock og_description %}" />
+	{% block og_images %}
     <meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
-    <meta property="og:description" content="{{ siteDescription }}" />
+    <meta property="og:image:height" content="294" />
+    <meta property="og:image:width" content="500" />
+	{% endblock og_images %}
     {% endblock og %}
 	{% block twitter %}{% endblock twitter %}
 	{% block header_extras %}{% endblock header_extras %}

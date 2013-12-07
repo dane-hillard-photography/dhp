@@ -13,13 +13,8 @@ portraiture, architecture, nature, wedding, and event photography.
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/index.css" />
 {% endblock css %}
 
-{% block og %}
-<meta property="og:title" content="Photography | Dane Hillard Photography" />
-<meta property="og:url" content="http://www.danehillard.com/photography/" />
-<meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
-<meta property="og:type" content="website" />
-<meta property="og:description" content="{{ siteDescription }}" />
-{% endblock og %}
+{% block og_title %}Photography | {{ block.super }}{% endblock og_title %}
+{% block og_url %}{{ block.super }}/photography/{% endblock og_url %}
 
 {% block header_extras %}
 <link rel="alternate" type="application/rss+xml" title="Dane Hillard Photography" href="{% url 'photography:feed' %}">

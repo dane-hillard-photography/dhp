@@ -14,13 +14,8 @@ Contact Dane Hillard Photography via email or through various other social chann
   <link rel="stylesheet" href="{{ STATIC_URL }}contact/css/contact.css" />
 {% endblock css %}
 
-{% block og %}
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Contact | Dane Hillard Photography" />
-<meta property="og:url" content="http://www.danehillard.com/contact/" />
-<meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
-<meta property="og:description" content="{{ siteDescription }}" />
-{% endblock og %}
+{% block og_title %}Contact | {{ block.super }}{% endblock og_title %}
+{% block og_url %}{{ block.super }}/contact/{% endblock og_url %}
 
 {% block content %}
 <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />

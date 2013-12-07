@@ -11,13 +11,8 @@ A collection of muscial works written or covered by Dane Hillard.
 <link rel="stylesheet" href="{{ STATIC_URL }}music/css/music.css" />
 {% endblock css %}
 
-{% block og %}
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Music | Dane Hillard Photography" />
-<meta property="og:url" content="http://www.danehillard.com/music/" />
-<meta property="og:image" content="http://www.danehillard.com/static/images/logos/dhp.png" />
-<meta property="og:description" content="{{ siteDescription }}" />
-{% endblock og %}
+{% block og_title %}Music | {{ block.super }}{% endblock og_title %}
+{% block og_url %}{{ block.super }}/music/{% endblock og_url %}
 
 {% block content %}
   <iframe

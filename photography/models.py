@@ -97,9 +97,6 @@ class Photograph(models.Model):
   published_date = models.DateTimeField()
   title = models.CharField(max_length=255)
   description = models.TextField(blank=True, null=True)
-  image = models.ImageField(upload_to=get_file_path)
-  width = models.IntegerField(blank=True, null=True)
-  height = models.IntegerField(blank=True, null=True)
   public = models.BooleanField(default=True)
   albums = models.ManyToManyField(Album)
   tags = models.ManyToManyField(Tag)
@@ -108,10 +105,22 @@ class Photograph(models.Model):
 
   user = models.ForeignKey(User, blank=True, null=True)
 
-  thumbnail_large = models.ImageField(upload_to="images/large", blank=True, null=True)
-  thumbnail_medium = models.ImageField(upload_to="images/medium", blank=True, null=True)
-  thumbnail_small = models.ImageField(upload_to="images/small", blank=True, null=True)
-  thumbnail_square = models.ImageField(upload_to="images/square", blank=True, null=True)
+  height = models.IntegerField(blank=True, null=True)
+  width = models.IntegerField(blank=True, null=True)
+  l_height = models.IntegerField(blank=True, null=True)
+  l_width = models.IntegerField(blank=True, null=True)
+  m_height = models.IntegerField(blank=True, null=True)
+  m_width = models.IntegerField(blank=True, null=True)
+  sm_height = models.IntegerField(blank=True, null=True)
+  sm_width = models.IntegerField(blank=True, null=True)
+  sq_height = models.IntegerField(blank=True, null=True)
+  sq_width = models.IntegerField(blank=True, null=True)
+
+  image = models.ImageField(upload_to=get_file_path, height_field="height", width_field="width")
+  thumbnail_large = models.ImageField(upload_to="images/large", blank=True, null=True, height_field="l_height", width_field="l_width")
+  thumbnail_medium = models.ImageField(upload_to="images/medium", blank=True, null=True, height_field="m_height", width_field="m_width")
+  thumbnail_small = models.ImageField(upload_to="images/small", blank=True, null=True, height_field="sm_height", width_field="sm_width")
+  thumbnail_square = models.ImageField(upload_to="images/square", blank=True, null=True, height_field="sq_height", width_field="sq_width")
 
   def get_absolute_url(self):
     from django.core.urlresolvers import reverse
@@ -120,34 +129,34 @@ class Photograph(models.Model):
   def save(self, *args, **kwargs):
     super(Photograph, self).save(*args, **kwargs)
     im = PImage.open(os.path.join(MEDIA_ROOT, self.image.name))
-    self.width, self.height = im.size
-    ratioDivisor = self.height
+    width, height = im.size
+    ratioDivisor = height
     thumbnailSize = (200, 200)
 
-    if self.width > self.height:
+    if width > height:
       self.orientation = "L"
-      ratioDivisor = self.width
-    elif self.width < self.height:
+      ratioDivisor = width
+    elif width < height:
       self.orientation = "P"
     else:
       self.orientation = "S"
       
     ratio = 800.0 / ratioDivisor
-    im.thumbnail((int(self.width * ratio), int(self.height * ratio)), PImage.ANTIALIAS)
+    im.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
     im.save(tf.name, im.format)
     self.thumbnail_large.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
     ratio = 500.0 / ratioDivisor
-    im.thumbnail((int(self.width * ratio), int(self.height * ratio)), PImage.ANTIALIAS)
+    im.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
     im.save(tf.name, im.format)
     self.thumbnail_medium.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
     ratio = 200.0 / ratioDivisor
-    im.thumbnail((int(self.width * ratio), int(self.height * ratio)), PImage.ANTIALIAS)
+    im.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
     im.save(tf.name, im.format)
     self.thumbnail_small.save(self.image.name, File(open(tf.name)), save=False)
