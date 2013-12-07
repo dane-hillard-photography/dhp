@@ -20,7 +20,7 @@
 {% block og_description %}{{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard{% endblock og_description %}
 {% block og_images %}
 {% for photograph in album.photograph_set.all|slice:":10" %}
-<meta name="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_large.url }}" />
+<meta property="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_large.url }}" />
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="{{ photograph.l_width }}">
 <meta property="og:image:height" content="{{ photograph.l_height }}">
