@@ -33,6 +33,7 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
+<script src="http://platform.tumblr.com/v1/share.js"></script>
 {% endblock js %}
 {% block content %}
   <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
@@ -48,9 +49,6 @@
       </a>
       <div class="photo-title" id="title-for-{{ photograph.uuid }}">
         <span itemprop="name">{{ photograph.title }}</span>
-        <a class="permalink" href="{{ photoUrl }}" title="Permalink">
-          <img src="{{ STATIC_URL}}{{ menuIcons }}white/link.svg" />
-        </a>
 		<div class="photo-tweet-button">
 			<a href="https://www.twitter.com/share?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}&via=littleleviathan&related=littleleviathan&text={{ photograph.title }}%20%E2%80%94%20a%20photograph%20by%20Dane%20Hillard&hashtags=photography,dhp&lang=en&count=horizontal"
 			   class="twitter-share-button" 
@@ -67,6 +65,14 @@
             <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" />
           </a>
         </div>
+		<div class="photo-tumblr-button">
+			<a href="http://www.tumblr.com/share/photo?source={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url }}&caption={{ photograph.title|urlencode:'' }}&clickthru={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}" target="_blank" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:61px; height:20px; background:url('http://platform.tumblr.com/v1/share_2.png') top left no-repeat transparent;">
+				Share on Tumblr
+			</a>
+		</div>
+        <a class="permalink" href="{{ photoUrl }}" title="Permalink">
+          <img src="{{ STATIC_URL}}{{ menuIcons }}white/link.svg" />
+        </a>
       </div>
     </div>
     {% endfor %}

@@ -37,19 +37,6 @@ div .photograph
 	margin: 0px auto;
 }
 
-.permalink
-{
-	position: fixed;
-	top: 87px;
-	left: 10px;
-}
-
-.permalink img
-{
-	width: 20px;
-	height: 20px;
-}
-
 .fancybox-outer
 {
 	box-shadow: 0px 4px 50px rgba(0, 0, 0, .85);
@@ -62,28 +49,42 @@ div .photograph
 	letter-spacing: 1px !important;
 }
 
-.photo-tweet-button
+.permalink, .photo-tweet-button, .photo-like-button, .photo-pin-button, .photo-tumblr-button
 {
 	position: fixed !important;
-	top: 10px;
 	left: 10px;
 	display: block !important;
+}
+
+.photo-tweet-button
+{
+	top: 10px;
 }
 
 .photo-like-button
 {
-	position: fixed !important;
 	top: 35px;
-	left: 10px;
-	display: block !important;
 }
 
 .photo-pin-button
 {
-	position: fixed !important;
 	top: 60px;
-	left: 10px;
-	display: block !important;
+}
+
+.photo-tumblr-button
+{
+	top: 85px;
+}
+
+.permalink
+{
+	top: 112px;
+}
+
+.permalink img
+{
+	width: 20px;
+	height: 20px;
 }
 
 .back-to-albums
