@@ -18,6 +18,7 @@ class PhotographAdmin(admin.ModelAdmin):
   ]
   inlines = [PhotographAlbumInline, PhotographTagInline]
   list_display = ('admin_thumbnail', 'title', 'description', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
+  list_filter = ('albums', 'public', 'tags',)
   date_hierarchy = 'published_date'
   search_fields = ['title']
   save_on_top = True
