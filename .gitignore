@@ -5,4 +5,4 @@ local_settings.py
 static/
 !*/static/
 media/
-sh.exe.stackdump
+*.stackdump

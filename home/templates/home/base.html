@@ -85,6 +85,13 @@
         <a href="{% url 'photography:photography' %}" title="Portfolio">
           <img itemprop="image" id="logo-large" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" />
         </a>
+		<div id="latest-photos">
+		{% for photo in latest_photos %}
+			<a href="{% url 'photography:photo' photo.uuid %}" title="{{ photo.title }}">
+				<img src="{{ photo.thumbnail_square.url }}" />
+			</a>
+		{% endfor %}
+		</div>
         <h1 itemprop="name">Dane Hillard Photography</h1>
         <hr />
         <p itemscope itemtype="http://schema.org/PostalAddress">

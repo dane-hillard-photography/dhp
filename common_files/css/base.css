@@ -198,3 +198,20 @@ form table
 {
   margin: 0px auto;
 }
+
+#latest-photos
+{
+  display: block;
+  margin: 20px auto;
+}
+
+#latest-photos a img
+{
+  height: 100px;
+  width: 100px;
+  margin: 5px;
+  border-radius: 5px;
+  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
