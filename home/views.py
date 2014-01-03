@@ -5,7 +5,7 @@ from django.utils import timezone
 from photography.models import Photograph
 
 class IndexView(generic.TemplateView):
-  template_name = 'home/base.html'
+  template_name = 'home/index.html'
 
   def get_context_data(self, **kwargs):
 	  context = super(IndexView, self).get_context_data(**kwargs)

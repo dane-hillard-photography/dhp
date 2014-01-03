@@ -10,11 +10,6 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
 {% endblock css %}
 
-{% block js %}
-{{ block.super }}
-<script src="http://platform.tumblr.com/v1/share.js"></script>
-{% endblock js %}
-
 {% block og_type %}danehillard:photograph{% endblock og_type %}
 {% block og_url %}{{ http }}{{ httpHost }}{% url 'photography:photo' photograph.uuid %}{% endblock og_url %} 
 {% block og_title %}{{ photograph.title }} | {{ block.super }}{% endblock og_title %}
@@ -68,3 +63,10 @@
 	</div>
   </div>
 {% endblock content %}
+{% block js %}
+{{ block.super }}
+<script src="http://platform.tumblr.com/v1/share.js"></script>
+{% include 'home/pinterest_sdk.html' %}
+{% include 'home/twitter_sdk.html' %}
+{% include 'home/fb_sdk.html' %}
+{% endblock js %}

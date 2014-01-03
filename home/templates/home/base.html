@@ -8,21 +8,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="google-site-verification" content="Boc3cLhNPB4ArvuP60R9_XvNp2rm4MlRFq5Uz3dh3cg" />
+	{% block meta %}
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta property="fb:app_id" content="152446884139" />
     <meta name="description" content="{% block description %}Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography{% endblock description %}" />
     <meta name="keywords" content="{% block keywords %}photography, photographer, wedding, portrait, portraiture, senior portraits, Dane, Hillard, Dane Hillard, Ann Arbor, Michigan, Ann Arbor Michigan, ASquared, A2, A Squared, southeast Michigan, event photography, wedding photography{% endblock keywords %}" />
+	{% endblock meta %}
 
     {% block css %}
     <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,200" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% get_static_prefix %}css/base.css" />
     {% endblock css %}
 
-    {% block js %}
-    <script type="text/javascript" src="{% get_static_prefix %}js/google_analytics_tracking.js"></script>
-    {% endblock js %}
-    
     {% block og %}
 	<meta property="og:type" content="{% block og_type %}website{% endblock og_type %}" />
 	<meta property="og:title" content="{% block og_title %}Dane Hillard Photography{% endblock og_title %}" />
@@ -37,13 +34,10 @@
 	{% block twitter %}{% endblock twitter %}
 	{% block header_extras %}{% endblock header_extras %}
 
-    <title>{% block title %}Home{% endblock %} | Dane Hillard Photography</title>
+    <title>{% block title %}Home{% endblock title %} | Dane Hillard Photography</title>
   </head>
   <body>
-    {% include 'home/fb_sdk.html' %}
-    {% include 'home/twitter_sdk.html' %}
     <div id="navigation">
-      {% block menu %}
       <ul>
         <li>
           <a href="{% url 'home:home' %}">
@@ -76,60 +70,31 @@
           </a>
         </li>
       </ul>
-      {% endblock menu %}
     </div>
+
+	<span id="admin-links">
+	{% if request.user.is_authenticated %}
+		<span id="user">{{ request.user.first_name }}</span>
+		<a id="logout" href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}">Logout</a>
+		{% if request.user.is_staff %}
+		| <a id="admin" href="{% url 'admin:index' %}">Administration</a>
+		{% endif %}
+	{% else %}
+		<a id="login" href="{% url 'django.contrib.auth.views.login' %}?next={% firstof request.path 'home:home' %}">Login</a>
+	{% endif %}
+	</span>
 
     <div id="content">
       {% block content %}
-      <div itemscope itemtype="http://schema.org/LocalBusiness">
-        <a href="{% url 'photography:photography' %}" title="Portfolio">
-          <img itemprop="image" id="logo-large" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" />
-        </a>
-		<div id="latest-photos">
-		{% for photo in latest_photos %}
-			<a href="{% url 'photography:photo' photo.uuid %}" title="{{ photo.title }}">
-				<img src="{{ photo.thumbnail_square.url }}" />
-			</a>
-		{% endfor %}
-		</div>
-        <h1 itemprop="name">Dane Hillard Photography</h1>
-        <hr />
-        <p itemscope itemtype="http://schema.org/PostalAddress">
-          <span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
-        <p>
-        <p itemprop="description">
-          {{ siteDescription }}
-        </p>
-        <p>
-          <a href="{% url 'contact:contact' %}" title="Book me!">Book me</a> today!
-        </p>
-      </div>
-	  <div class="fb-like" 
-		   data-href="http://www.facebook.com/danehillard" 
-		   data-width="300" 
-		   data-height="20" 
-		   data-colorscheme="light" 
-		   data-layout="standard" 
-		   data-action="like" 
-		   data-show-faces="true" 
-		   data-send="false">
-	  </div>
       {% endblock content %}
-      <span id="admin-links">
-      {% if request.user.is_authenticated %}
-      <span id="user">{{ request.user.first_name }}</span>
-      <a id="logout" href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}">Logout</a>
-      {% if request.user.is_staff %}
-      | <a id="admin" href="{% url 'admin:index' %}">Administration</a>
-      {% endif %}
-      {% else %}
-      <a id="login" href="{% url 'django.contrib.auth.views.login' %}?next={% firstof request.path 'home:home' %}">Login</a>
-      {% endif %}
-      </span>
     </div>
+
 	{% block final %}
-		{% include 'home/pinterest_sdk.html' %}
 	{% endblock final %}
+
+	{% block js %}
+    <script type="text/javascript" src="{% get_static_prefix %}js/google_analytics_tracking.js"></script>
+    {% endblock js %}
   </body>
 </html>
 

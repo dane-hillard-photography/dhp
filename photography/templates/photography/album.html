@@ -27,14 +27,6 @@
 {% endfor %}
 {% endblock og_images %}
 
-{% block js %}
-{{ block.super }}
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
-<script src="http://platform.tumblr.com/v1/share.js"></script>
-{% endblock js %}
 {% block content %}
   <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
   <h1 id="title">{{ album.title }}</h1>
@@ -84,3 +76,14 @@
     {% endif %}
   </div>
 {% endblock content %}
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
+<script src="http://platform.tumblr.com/v1/share.js"></script>
+{% include 'home/pinterest_sdk.html' %}
+{% include 'home/twitter_sdk.html' %}
+{% include 'home/fb_sdk.html' %}
+{% endblock js %}

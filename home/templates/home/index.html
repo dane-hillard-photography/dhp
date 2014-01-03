@@ -1,0 +1,46 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block meta %}
+{{ block.super }}
+<meta name="google-site-verification" content="Boc3cLhNPB4ArvuP60R9_XvNp2rm4MlRFq5Uz3dh3cg" />
+{% endblock meta %}
+
+{% block content %}
+<div itemscope itemtype="http://schema.org/LocalBusiness">
+	<a href="{% url 'photography:photography' %}" title="Portfolio">
+  		<img itemprop="image" id="logo-large" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" />
+	</a>
+<div id="latest-photos">
+{% for photo in latest_photos %}
+	<a href="{% url 'photography:photo' photo.uuid %}" title="{{ photo.title }}">
+		<img src="{{ photo.thumbnail_square.url }}" />
+	</a>
+{% endfor %}
+</div>
+	<h1 itemprop="name">Dane Hillard Photography</h1>
+	<hr />
+	<p itemscope itemtype="http://schema.org/PostalAddress">
+		<span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
+	<p>
+	<p itemprop="description">
+		{{ siteDescription }}
+	</p>
+<p>
+	<a href="{% url 'contact:contact' %}" title="Book me!">Book me</a> today!
+</p>
+<div class="fb-like" 
+	data-href="http://www.facebook.com/danehillard" 
+	data-width="300" 
+	data-height="20" 
+	data-colorscheme="light" 
+	data-layout="standard" 
+	data-action="like" 
+	data-show-faces="true" 
+	data-send="false">
+</div>
+{% endblock content %}
+
+{% block final %}
+	{% include 'home/fb_sdk.html' %}
+{% endblock final %}
