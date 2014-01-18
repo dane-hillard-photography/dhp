@@ -4,9 +4,7 @@ $(document).ready(function() {
       $.fancybox.wrap.bind("contextmenu", function(e) {
         return false;
       });
-    },
-    beforeLoad: function() {
-      var element, id = $(this.element).data('title-id');
+      var id = $(this.element).data('title-id');
 
       if (id) {
         element = $('#' + id);
@@ -33,11 +31,11 @@ $(document).ready(function() {
       title: {
         type: 'float',
         position: 'top'
-      },
+      }/*,
       thumbs: {
         width: 50,
         height: 50
-      }
+      }*/
     }
   });
 });
