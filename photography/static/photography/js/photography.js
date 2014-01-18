@@ -31,11 +31,7 @@ $(document).ready(function() {
       title: {
         type: 'float',
         position: 'top'
-      }/*,
-      thumbs: {
-        width: 50,
-        height: 50
-      }*/
+      }
     }
   });
 });
