@@ -144,28 +144,28 @@ class Photograph(models.Model):
     ratio = 800.0 / ratioDivisor
     im.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
-    im.save(tf.name, im.format)
+    im.save(tf.name, im.format, quality=100)
     self.thumbnail_large.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
     ratio = 500.0 / ratioDivisor
     im.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
-    im.save(tf.name, im.format)
+    im.save(tf.name, im.format, quality=100)
     self.thumbnail_medium.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
     ratio = 200.0 / ratioDivisor
     im.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
-    im.save(tf.name, im.format)
+    im.save(tf.name, im.format, quality=100)
     self.thumbnail_small.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
     thumbSquare = PImageOps.fit(im, thumbnailSize, PImage.ANTIALIAS)
     fn, ext = os.path.splitext(self.image.name)
     tf = NamedTemporaryFile()
-    thumbSquare.save(tf.name, im.format)
+    thumbSquare.save(tf.name, im.format, quality=100)
     self.thumbnail_square.save(self.image.name, File(open(tf.name)), save=False)
     tf.close()
 
