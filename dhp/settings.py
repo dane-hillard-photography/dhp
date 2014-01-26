@@ -182,7 +182,7 @@ LOGGING = {
 
 if socket.gethostname() == 'danehillard':
 	SECRET_KEY = "sdfg#$T@$%Hsedfh@$%$%%%%%%@$5GWEFGdfgdfbdfGWE"
-	#DEBUG = False
+	DEBUG = False
 	ALLOWED_HOSTS = ['www.danehillard.com']
 	DATABASES['default']['host'] = ''
 else:
