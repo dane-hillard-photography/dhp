@@ -2,7 +2,7 @@ import os
 import sys
 import site
 
-site.addsitedir('/var/www/.virtualenvs/myprojectenv/local/lib/python2.7/site-packages')
+site.addsitedir('/var/www/.virtualenvs/dhp/local/lib/python2.7/site-packages')
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
