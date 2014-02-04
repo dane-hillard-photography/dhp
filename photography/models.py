@@ -19,7 +19,10 @@ def generate_uuid():
   return str(uuid.uuid4())
 
 def max_sort_order():
-  return Album.objects.all().aggregate(Max('sort_order'))['sort_order__max'] + 1
+  current_max = Album.objects.all().aggregate(Max('sort_order'))['sort_order__max']
+  if current_max is None:
+	  current_max = 0
+  return current_max + 1
 
 def get_file_path(instance, filename):
   ext = filename.split('.')[-1]
