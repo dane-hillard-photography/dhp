@@ -4,52 +4,53 @@ from django import forms
 from photography.models import Photograph, Album, Tag, Service
 
 class PhotographAlbumInline(admin.TabularInline):
-  model = Photograph.albums.through
+    model = Photograph.albums.through
 
 class PhotographTagInline(admin.TabularInline):
-  model = Photograph.tags.through
+    model = Photograph.tags.through
 
 class PhotographAdmin(admin.ModelAdmin):
-  list_editable = ['title', 'description', 'public']
+    list_editable = ['title', 'description', 'public']
 
-  fieldsets = [
-    ('Photograph Information', {'fields': ['image', 'title', 'description']}),
-    ('Publishing', {'fields': ['public', 'user', 'published_date']}),
-  ]
-  inlines = [PhotographAlbumInline, PhotographTagInline]
-  list_display = ('admin_thumbnail', 'title', 'description', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
-  list_filter = ('albums', 'public', 'tags',)
-  date_hierarchy = 'published_date'
-  search_fields = ['title']
-  save_on_top = True
+    fieldsets = [
+        ('Photograph Information', {'fields': ['image', 'title', 'description']}),
+        ('Publishing', {'fields': ['public', 'user', 'published_date']}),
+    ]
+    inlines = [PhotographAlbumInline, PhotographTagInline]
+    list_display = ('admin_thumbnail', 'title', 'description', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
+    list_filter = ('albums', 'public', 'tags',)
+    date_hierarchy = 'published_date'
+    search_fields = ['title']
+    save_on_top = True
 
 class AlbumAdmin(admin.ModelAdmin):
-  list_editable = ['sort_order', 'public']
+    list_editable = ['sort_order', 'public']
 
-  fieldsets = [
-    ('Album Information', {'fields': ['title', 'sort_order']}),
-    ('Publishing', {'fields': ['public', 'user', 'published_date']}),
-  ]
-  list_display = ('title', 'sort_order', 'photos', 'published_date', 'public', 'user', 'uuid')
-  date_hierarcy = 'published_date'
+    fieldsets = [
+        ('Album Information', {'fields': ['title', 'sort_order']}),
+        ('Publishing', {'fields': ['public', 'user', 'published_date']}),
+    ]
+    list_display = ('title', 'sort_order', 'photos', 'published_date', 'public', 'user', 'uuid')
+    date_hierarcy = 'published_date'
 
 class TagAdmin(admin.ModelAdmin):
-	pass
+    pass
 
 class ServiceForm(forms.ModelForm):
-  description = forms.CharField(widget=forms.Textarea)
-  class Meta:
-    model = Service
+    description = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = Service
 
 class ServiceAdmin(admin.ModelAdmin):
-  form = ServiceForm
+    form = ServiceForm
 
-  def admin_price(self, obj):
-    return '$' + str(obj.price)
-  admin_price.admin_order_field = 'price'
-  admin_price.short_description = 'Price'
+    def admin_price(self, obj):
+        return '$' + str(obj.price)
+    admin_price.admin_order_field = 'price'
+    admin_price.short_description = 'Price'
 
-  list_display = ('title', 'description', 'admin_price')
+    list_display = ('title', 'description', 'admin_price')
 
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(Service, ServiceAdmin)

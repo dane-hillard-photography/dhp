@@ -1,8 +1,7 @@
-from django.conf.urls import patterns, include, url
-from django.views.generic.base import RedirectView
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from django.conf.urls import patterns, include, url
 
 from sitemaps import PhotographSitemap, AlbumSitemap, SiteSitemap
 
@@ -11,9 +10,9 @@ from dhp import settings
 admin.autodiscover()
 
 sitemaps = {
-  'photograph': PhotographSitemap,
-  'album': AlbumSitemap,
-  'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'music:music', 'about:about']),
+    'photograph': PhotographSitemap,
+    'album': AlbumSitemap,
+    'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'music:music', 'about:about']),
 }
 
 urlpatterns = patterns('',
