@@ -178,8 +178,8 @@ class Photograph(models.Model):
             return '<img src="{url}" width="60" />'.format(url=self.thumbnail_small.url)
         else:
             return 'No image available'
-        admin_thumbnail.short_description = 'Thumbnail'
-        admin_thumbnail.allow_tags = True
+    admin_thumbnail.short_description = 'Thumbnail'
+    admin_thumbnail.allow_tags = True
 
     def __unicode__(self):
         return self.title
