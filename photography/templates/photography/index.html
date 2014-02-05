@@ -21,7 +21,7 @@ portraiture, architecture, nature, wedding, and event photography.
 {% endblock header_extras %}
 
 {% block content %}
-  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
+  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="dHP Logo" />
   <h1>Portfolio</h1>
   {% if album_list %}
   <ul>
@@ -34,6 +34,6 @@ portraiture, architecture, nature, wedding, and event photography.
   <p>No albums are available.</p>
   {% endif %}
   <hr />
-  <h1>Photography Services</h1>
+  <h2>Photography Services</h2>
   <p>Please <a href="{% url 'contact:contact' %}">contact me</a> for a quote on portraiture, events, and your other photography needs.</p>
 {% endblock content %}

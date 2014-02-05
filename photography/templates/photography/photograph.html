@@ -34,7 +34,9 @@
 {% endblock twitter %}
 
 {% block content %}
-  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
+  <a href="{% url 'photography:photography' %}" title="Portfolio">
+	  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo" />
+  </a>
   <div id="feature">
     <h1 id="title">{{ photograph.title }}</h1>
     <img src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %}" />
