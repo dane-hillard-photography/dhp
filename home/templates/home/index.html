@@ -7,10 +7,6 @@
 {% endblock meta %}
 
 {% block content %}
-<div itemscope itemtype="http://schema.org/LocalBusiness">
-	<a href="{% url 'photography:photography' %}" title="Portfolio">
-  		<img itemprop="image" id="logo-large" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" />
-	</a>
 <div id="latest-photos">
 {% for photo in latest_photos %}
 	<a href="{% url 'photography:photo' photo.uuid %}" title="{{ photo.title }}">
@@ -18,14 +14,19 @@
 	</a>
 {% endfor %}
 </div>
-	<h1 itemprop="name">Dane Hillard Photography</h1>
-	<hr />
-	<p itemscope itemtype="http://schema.org/PostalAddress">
-		<span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
-	<p>
-	<p itemprop="description">
-		{{ siteDescription }}
-	</p>
+<div itemscope itemtype="http://schema.org/LocalBusiness">
+	<a href="{% url 'photography:photography' %}" title="Portfolio">
+  		<img itemprop="image" id="logo-large" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" />
+	</a>
+</div>
+<h2 itemprop="name">Dane Hillard Photography</h2>
+<hr />
+<p itemscope itemtype="http://schema.org/PostalAddress">
+	<span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
+<p>
+<p itemprop="description">
+	{{ siteDescription }}
+</p>
 <p>
 	<a href="{% url 'contact:contact' %}" title="Book me!">Book me</a> today!
 </p>

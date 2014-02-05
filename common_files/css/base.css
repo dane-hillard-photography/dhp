@@ -116,7 +116,7 @@ li
 a
 {
   text-decoration: none;
-  color: #0090c4;
+  color: #00aeed;
 }
 
 a:active
@@ -131,8 +131,8 @@ a img
 
 #logo-large
 {
-  width: 500px;
-  height: 294px;
+  width: 340px;
+  height: 200px;
 }
 
 #logo
