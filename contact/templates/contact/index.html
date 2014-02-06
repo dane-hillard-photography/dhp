@@ -18,7 +18,9 @@ Contact Dane Hillard Photography via email or through various other social chann
 {% block og_url %}{{ block.super }}/contact/{% endblock og_url %}
 
 {% block content %}
-<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
+<a href="{% url 'photography:photography' %}" title="Portfolio">
+	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo" />
+</a>
 <p class="call">
   My goal is to provide clients with images that do more than capture faces. A portrait
   should speak to its audience and reveal something about the subject. If you are

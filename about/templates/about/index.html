@@ -19,7 +19,9 @@ About Dane Hillard, the brains behind the Dane Hillard Photography operation.
 {% endblock og_images %}
 
 {% block content %}
-<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="DHP Logo" />
+<a href="{% url 'photography:photography' %}" title="Portfolio">
+	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="DHP Logo" />
+</a>
 <h1>About Me</h1>
 <img title="Credit: Rachel Liu Photography" id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait"/>
 <div id="bio">
