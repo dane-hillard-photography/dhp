@@ -31,7 +31,6 @@
 	  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo" />
   </a>
   <h1 id="title">{{ album.title }}</h1>
-  <h2><a href="{% url 'photography:photography' %}" class="back-to-albums" title="Back to Portfolio">&laquo;</a></h2>
   <div id="frame">
     {% if album.photograph_set.all %}
     {% for photograph in album.photograph_set.all %}
@@ -71,7 +70,6 @@
       </div>
     </div>
     {% endfor %}
-  <h2><a href="{% url 'photography:photography' %}" class="back-to-albums" title="Back to Portfolio">&laquo;</a></h2>
     {% else %}
       <p>
         This album is currently empty. Come back soon!
