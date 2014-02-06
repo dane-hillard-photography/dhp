@@ -47,8 +47,10 @@
 			   class="twitter-share-button" 
 			   data-lang="en">Tweet</a>
 		</div>
-		<div class="photo-like-button fb-like" data-href="{{ http }}{{ httpHost }}{{ photoUrl }}" 
-          data-send="false" data-layout="button_count">
+		<div class="photo-like-button fb-like"
+			 data-href="{{ http }}{{ httpHost }}{{ photoUrl }}"
+			 data-send="false"
+			 data-layout="button_count">
         </div>
         <div class="photo-pin-button">
           <a href="//www.pinterest.com/pin/create/button/?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}&media={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}%20%28danehillard.com%29"

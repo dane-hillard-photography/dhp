@@ -51,9 +51,9 @@ div .photograph
 
 .permalink, .photo-tweet-button, .photo-like-button, .photo-pin-button, .photo-tumblr-button
 {
+	display: block !important;
 	position: fixed !important;
 	left: 10px;
-	display: block !important;
 }
 
 .photo-tweet-button
