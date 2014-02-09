@@ -41,8 +41,8 @@ class Album(models.Model):
         return self.title
 
     def photos(self):
-        photoList = ['<a href="%s">%s</a>' % (reverse('admin:photography_photograph_change', args=(photo.id,)), photo.title) for photo in self.photograph_set.all().reverse()]
-        return ", ".join(photoList)
+        photo_list = ['<a href="%s">%s</a>' % (reverse('admin:photography_photograph_change', args=(photo.id,)), photo.title) for photo in self.photograph_set.all().reverse()]
+        return ", ".join(photo_list)
     photos.allow_tags = True
 
     def get_absolute_url(self):
