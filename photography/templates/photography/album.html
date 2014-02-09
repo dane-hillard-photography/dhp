@@ -26,6 +26,18 @@
 {% endfor %}
 {% endblock og_images %}
 
+{% block twitter %}
+  <meta name="twitter:card" content="gallery">
+  <meta name="twitter:url" content="{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}" />
+  <meta name="twitter:title" content="{{ album.title }} | {{ siteName }}" />
+  <meta name="twitter:description" content="{{ siteDescription }}" />
+  <meta name="twitter:site" content="@littleleviathan" />
+  <meta name="twitter:creator" content="@littleleviathan" />
+  {% for photograph in album.photograph_set.all|slice:":4" %}
+  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_small.url|urlencode:'' }}" />
+  {% endfor %}
+{% endblock twitter %}
+
 {% block content %}
   <a href="{% url 'photography:photography' %}" title="Portfolio">
 	  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo" />
