@@ -54,6 +54,7 @@ div .photograph
 	display: block !important;
 	position: fixed !important;
 	left: 10px;
+    line-height: 0px;
 }
 
 .photo-tweet-button
