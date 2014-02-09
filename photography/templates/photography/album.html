@@ -35,7 +35,7 @@
   <meta name="twitter:creator" content="@littleleviathan" />
   <meta name="twitter:domain" content="danehillard.com" />
   {% for photograph in album.photograph_set.all|slice:":4" %}
-  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_small.url }}" />
+  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_medium.url }}" />
   {% endfor %}
 {% endblock twitter %}
 
