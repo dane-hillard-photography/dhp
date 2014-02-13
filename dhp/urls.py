@@ -12,7 +12,7 @@ admin.autodiscover()
 sitemaps = {
     'photograph': PhotographSitemap,
     'album': AlbumSitemap,
-    'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'music:music', 'about:about']),
+    'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'about:about']),
 }
 
 urlpatterns = patterns('',
