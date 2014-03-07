@@ -12,7 +12,7 @@ admin.autodiscover()
 sitemaps = {
     'photograph': PhotographSitemap,
     'album': AlbumSitemap,
-    'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'music:music', 'about:about']),
+    'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'about:about']),
 }
 
 urlpatterns = patterns('',
@@ -23,7 +23,6 @@ urlpatterns = patterns('',
     url(r'^about/', include('about.urls', namespace='about')),
     url(r'^tools/dhpadmin/', include(admin.site.urls)),
     url(r'^photography/', include('photography.urls', namespace='photography')),
-    url(r'^music/', include('music.urls', namespace='music')),
     url(r'^contact/', include('contact.urls', namespace='contact')),
     url(r'^login/$', 'django.contrib.auth.views.login', { 'template_name': 'home/login.html' }),
     url(r'^logout/$', 'django.contrib.auth.views.logout'),

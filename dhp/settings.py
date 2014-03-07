@@ -147,7 +147,6 @@ INSTALLED_APPS = (
     'home',
     'about',
     'contact',
-    'music',
 )
 
 # A sample logging configuration. The only tangible logging
