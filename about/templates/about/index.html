@@ -20,10 +20,10 @@ About Dane Hillard, the brains behind the Dane Hillard Photography operation.
 
 {% block content %}
 <a href="{% url 'photography:photography' %}" title="Portfolio">
-	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="DHP Logo" />
+	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="DHP Logo" nopin="nopin" />
 </a>
 <h1>About Me</h1>
-<img title="Credit: Rachel Liu Photography" id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait"/>
+<img title="Credit: Rachel Liu Photography" id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait" nopin="nopin" />
 <div id="bio">
   <p>
     After graduating from the University of Michigan with a degree in computer 
@@ -55,7 +55,7 @@ About Dane Hillard, the brains behind the Dane Hillard Photography operation.
 <h2>Résumé</h2>
 <p>
   <a href="http://resume.linkedinlabs.com/j83am5nk0.pdf">
-    <img class="menu-icon" src="{{ STATIC_URL }}images/icons/menu/black/download.svg" />
+    <img class="menu-icon" src="{{ STATIC_URL }}images/icons/menu/black/download.svg" nopin="nopin" />
   </a>
 </p>
 {% endblock content %}
