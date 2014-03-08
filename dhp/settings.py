@@ -24,6 +24,14 @@ DATABASES = {
     }
 }
 
+SOCIAL_MEDIA_HANDLES = {
+    'facebook': 'danehillard',
+    'instagram': 'danehillard',
+    'pinterest': 'danehillard',
+    'twitter': 'dane_hillard',
+    'youtube': 'danehillardphoto'
+}
+
 LOGIN_REDIRECT_URL = "/"
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts

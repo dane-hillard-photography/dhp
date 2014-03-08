@@ -31,11 +31,11 @@
   <meta name="twitter:url" content="{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}" />
   <meta name="twitter:title" content="{{ album.title }} | {{ siteName }}" />
   <meta name="twitter:description" content="{{ siteDescription }}" />
-  <meta name="twitter:site" content="@littleleviathan" />
-  <meta name="twitter:creator" content="@littleleviathan" />
+  <meta name="twitter:site" content="@{{ social_media.twitter }}" />
+  <meta name="twitter:creator" content="@{{ social_media.twitter }}" />
   <meta name="twitter:domain" content="danehillard.com" />
   {% for photograph in album.photograph_set.all|slice:":4" %}
-  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_medium.url }}" />
+  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ http|add:httpHost|add:photograph.thumbnail_medium.url }}" />
   {% endfor %}
 {% endblock twitter %}
 
@@ -55,17 +55,17 @@
       <div class="photo-title" id="title-for-{{ photograph.uuid }}">
         <span itemprop="name">{{ photograph.title }}</span>
 		<div class="photo-tweet-button">
-			<a href="https://www.twitter.com/share?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}&via=littleleviathan&related=littleleviathan&text={{ photograph.title }}%20%E2%80%94%20a%20photograph%20by%20Dane%20Hillard&hashtags=photography,dhp&lang=en&count=horizontal"
+			<a href="https://www.twitter.com/share?url={{ http|add:httpHost|add:photoUrl|urlencode:'' }}&via={{ social_media.twitter }}&related={{ social_media.twitter }}&text={{ photograph.title }}%20%E2%80%94%20a%20photograph&lang=en&count=horizontal"
 			   class="twitter-share-button" 
 			   data-lang="en">Tweet</a>
 		</div>
 		<div class="photo-like-button fb-like"
-			 data-href="{{ http }}{{ httpHost }}{{ photoUrl }}"
+			 data-href="{{ http|add:httpHost|add:photoUrl }}"
 			 data-send="false"
 			 data-layout="button_count">
         </div>
         <div class="photo-pin-button">
-          <a href="//www.pinterest.com/pin/create/button/?url={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}&media={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}%20%28danehillard.com%29"
+          <a href="//www.pinterest.com/pin/create/button/?url={{ http|add:httpHost|add:photoUrl|urlencode:'' }}&media={{ http|add:httpHost|add:photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}"
             data-pin-do="buttonPin" 
 			data-pin-config="beside"
 			data-pin-color="red">
@@ -73,12 +73,12 @@
           </a>
         </div>
 		<div class="photo-tumblr-button">
-			<a href="http://www.tumblr.com/share/photo?source={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photograph.thumbnail_large.url }}&caption={{ photograph.title|urlencode:'' }}&clickthru={{ http|urlencode:'' }}{{ httpHost|urlencode:'' }}{{ photoUrl|urlencode:'' }}" target="_blank" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:61px; height:20px; background:url('http://platform.tumblr.com/v1/share_2.png') top left no-repeat transparent;">
+			<a href="http://www.tumblr.com/share/photo?source={{ http|add:httpHost|add:photograph.thumbnail_large.url }}&caption={{ photograph.title|urlencode:'' }}&clickthru={{ http|add:httpHost|add:photoUrl|urlencode:'' }}" target="_blank" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:61px; height:20px; background:url('http://platform.tumblr.com/v1/share_2.png') top left no-repeat transparent;">
 				Share on Tumblr
 			</a>
 		</div>
         <a class="permalink" href="{{ photoUrl }}" title="Permalink">
-          <img src="{{ STATIC_URL}}{{ menuIcons }}white/link.svg" />
+          <img src="{{ STATIC_URL|add:menuIcons }}white/link.svg" />
         </a>
       </div>
     </div>
