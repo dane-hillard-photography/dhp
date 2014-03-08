@@ -55,7 +55,7 @@
       <div class="photo-title" id="title-for-{{ photograph.uuid }}">
         <span itemprop="name">{{ photograph.title }}</span>
 		<div class="photo-tweet-button">
-			<a href="https://www.twitter.com/share?url={{ http|add:httpHost|add:photoUrl|urlencode:'' }}&via={{ social_media.twitter }}&related={{ social_media.twitter }}&text={{ photograph.title }}%20%E2%80%94%20a%20photograph&lang=en&count=horizontal"
+			<a href="https://www.twitter.com/share?url={{ http|add:httpHost|add:photoUrl|urlencode:'' }}&related={{ social_media.twitter }}&text={{ photograph.title|add:' — a photograph via @'|urlencode:'' }}{{ social_media.twitter }}&lang=en&count=horizontal"
 			   class="twitter-share-button" 
 			   data-lang="en">Tweet</a>
 		</div>

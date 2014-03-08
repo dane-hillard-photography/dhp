@@ -42,7 +42,7 @@
     <h1 id="title">{{ photograph.title }}</h1>
     <img src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %}" />
 	<div class="photo-tweet-button">
-		<a href="https://www.twitter.com/share?url={{ http|add:httpHost|add:request.get_full_path|urlencode:'' }}&via={{ social_media.twitter }}&related={{ social_media.twitter }}&text={{ photograph.title|add:' — a photograph'|urlencode:''}}&lang=en&count=horizontal"
+		<a href="https://www.twitter.com/share?url={{ http|add:httpHost|add:request.get_full_path|urlencode:'' }}&related={{ social_media.twitter }}&text={{ photograph.title|add:' — a photograph via @'|urlencode:''}}{{ social_media.twitter }}&lang=en&count=horizontal"
 		   class="twitter-share-button" 
 		   data-lang="en">Tweet</a>
 	</div>
