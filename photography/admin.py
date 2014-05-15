@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from photography.models import Photograph, Album, Service
+from photography.models import Photograph, Album
 
 class PhotographAdmin(admin.ModelAdmin):
     list_editable = ['title', 'description', 'public', 'album']
