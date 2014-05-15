@@ -49,6 +49,9 @@ class Album(models.Model):
         return reverse('photography:album', kwargs={'album_id': self.uuid})
 
     def save(self, *args, **kwargs):
+        current_order = 0
+        new_order = 0
+
         if self.pk is not None:
             current = Album.objects.get(pk=self.pk)
             current_order = current.sort_order
