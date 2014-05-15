@@ -29,21 +29,5 @@ class AlbumAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     pass
 
-class ServiceForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea)
-
-    class Meta:
-        model = Service
-
-class ServiceAdmin(admin.ModelAdmin):
-    form = ServiceForm
-
-    def admin_price(self, obj):
-        return '$' + str(obj.price)
-    admin_price.admin_order_field = 'price'
-    admin_price.short_description = 'Price'
-
-    list_display = ('title', 'description', 'admin_price')
-
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(Album, AlbumAdmin)
