@@ -101,7 +101,7 @@ class Photograph(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     public = models.BooleanField(default=True)
-    albums = models.ManyToManyField(Album)
+    album = models.ForeignKey(Album, blank=True, null=True)
     tags = models.ManyToManyField(Tag)
     orientation = models.CharField(max_length=1, choices=ORIENTATION_CHOICES, editable=False)
     uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)

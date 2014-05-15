@@ -4,21 +4,21 @@ from django import forms
 from photography.models import Photograph, Album, Tag, Service
 
 class PhotographAlbumInline(admin.TabularInline):
-    model = Photograph.albums.through
+    model = Album
 
 class PhotographTagInline(admin.TabularInline):
     model = Photograph.tags.through
 
 class PhotographAdmin(admin.ModelAdmin):
-    list_editable = ['title', 'description', 'public']
+    list_editable = ['title', 'description', 'public', 'album']
 
     fieldsets = [
         ('Photograph Information', {'fields': ['image', 'title', 'description']}),
         ('Publishing', {'fields': ['public', 'user', 'published_date']}),
     ]
     inlines = [PhotographAlbumInline, PhotographTagInline]
-    list_display = ('admin_thumbnail', 'title', 'description', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
-    list_filter = ('albums', 'public', 'tags',)
+    list_display = ('admin_thumbnail', 'title', 'description', 'album', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
+    list_filter = ('album', 'public', 'tags',)
     date_hierarchy = 'published_date'
     search_fields = ['title']
     save_on_top = True
