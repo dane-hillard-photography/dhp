@@ -46,5 +46,4 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'admin_price')
 
 admin.site.register(Photograph, PhotographAdmin)
-admin.site.register(Service, ServiceAdmin)
 admin.site.register(Album, AlbumAdmin)

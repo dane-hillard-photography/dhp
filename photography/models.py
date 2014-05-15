@@ -171,11 +171,3 @@ class Photograph(models.Model):
 
     def __unicode__(self):
         return self.title
-
-class Service(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=1000)
-    price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-
-    def __unicode__(self):
-        return self.title
