@@ -40,11 +40,6 @@ class Album(models.Model):
     def __unicode__(self):
         return self.title
 
-    def photos(self):
-        photo_list = ['<a href="%s">%s</a>' % (reverse('admin:photography_photograph_change', args=(photo.id,)), photo.title) for photo in self.photograph_set.all().reverse()]
-        return ", ".join(photo_list)
-    photos.allow_tags = True
-
     def get_absolute_url(self):
         return reverse('photography:album', kwargs={'album_id': self.uuid})
 
@@ -76,15 +71,6 @@ class Album(models.Model):
 
         super(Album, self).save(*args, **kwargs)
 
-class Tag(models.Model):
-    class Meta:
-        ordering = ['tag']
-
-    tag = models.CharField(max_length=255, unique=True)
-
-    def __unicode__(self):
-        return self.tag
-
 class Photograph(models.Model):
     class Meta:
         ordering = ['-published_date']
@@ -102,11 +88,10 @@ class Photograph(models.Model):
     description = models.TextField(blank=True, null=True)
     public = models.BooleanField(default=True)
     album = models.ForeignKey(Album, blank=True, null=True)
-    tags = models.ManyToManyField(Tag)
     orientation = models.CharField(max_length=1, choices=ORIENTATION_CHOICES, editable=False)
     uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
 
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True, default=1)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)

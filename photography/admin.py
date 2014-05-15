@@ -1,24 +1,17 @@
 from django.contrib import admin
 from django import forms
 
-from photography.models import Photograph, Album, Tag, Service
-
-class PhotographAlbumInline(admin.TabularInline):
-    model = Album
-
-class PhotographTagInline(admin.TabularInline):
-    model = Photograph.tags.through
+from photography.models import Photograph, Album, Service
 
 class PhotographAdmin(admin.ModelAdmin):
     list_editable = ['title', 'description', 'public', 'album']
 
     fieldsets = [
         ('Photograph Information', {'fields': ['image', 'title', 'description']}),
-        ('Publishing', {'fields': ['public', 'user', 'published_date']}),
+        ('Publishing', {'fields': ['public', 'album', 'user', 'published_date']}),
     ]
-    inlines = [PhotographAlbumInline, PhotographTagInline]
     list_display = ('admin_thumbnail', 'title', 'description', 'album', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
-    list_filter = ('album', 'public', 'tags',)
+    list_filter = ('album', 'public',)
     date_hierarchy = 'published_date'
     search_fields = ['title']
     save_on_top = True
@@ -30,7 +23,7 @@ class AlbumAdmin(admin.ModelAdmin):
         ('Album Information', {'fields': ['title', 'sort_order']}),
         ('Publishing', {'fields': ['public', 'user', 'published_date']}),
     ]
-    list_display = ('title', 'sort_order', 'photos', 'published_date', 'public', 'user', 'uuid')
+    list_display = ('title', 'sort_order', 'published_date', 'public', 'user', 'uuid')
     date_hierarcy = 'published_date'
 
 class TagAdmin(admin.ModelAdmin):
@@ -55,4 +48,3 @@ class ServiceAdmin(admin.ModelAdmin):
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Album, AlbumAdmin)
-admin.site.register(Tag, TagAdmin)
