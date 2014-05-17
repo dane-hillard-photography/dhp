@@ -40,15 +40,13 @@ class Album(models.Model):
     def __unicode__(self):
         return self.title
 
-    def photos(self):
-        photo_list = ['<a href="%s">%s</a>' % (reverse('admin:photography_photograph_change', args=(photo.id,)), photo.title) for photo in self.photograph_set.all().reverse()]
-        return ", ".join(photo_list)
-    photos.allow_tags = True
-
     def get_absolute_url(self):
         return reverse('photography:album', kwargs={'album_id': self.uuid})
 
     def save(self, *args, **kwargs):
+        current_order = 0
+        new_order = 0
+
         if self.pk is not None:
             current = Album.objects.get(pk=self.pk)
             current_order = current.sort_order
@@ -73,15 +71,6 @@ class Album(models.Model):
 
         super(Album, self).save(*args, **kwargs)
 
-class Tag(models.Model):
-    class Meta:
-        ordering = ['tag']
-
-    tag = models.CharField(max_length=255, unique=True)
-
-    def __unicode__(self):
-        return self.tag
-
 class Photograph(models.Model):
     class Meta:
         ordering = ['-published_date']
@@ -98,12 +87,11 @@ class Photograph(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     public = models.BooleanField(default=True)
-    albums = models.ManyToManyField(Album)
-    tags = models.ManyToManyField(Tag)
+    album = models.ForeignKey(Album, blank=True, null=True)
     orientation = models.CharField(max_length=1, choices=ORIENTATION_CHOICES, editable=False)
     uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
 
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True, default=1)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)
@@ -180,14 +168,6 @@ class Photograph(models.Model):
             return 'No image available'
     admin_thumbnail.short_description = 'Thumbnail'
     admin_thumbnail.allow_tags = True
-
-    def __unicode__(self):
-        return self.title
-
-class Service(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=1000)
-    price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
 
     def __unicode__(self):
         return self.title
