@@ -131,7 +131,7 @@ class Photograph(models.Model):
         im = PImage.open(os.path.join(MEDIA_ROOT, self.image.name))
         width, height = im.size
         ratio_divisor = height
-        thumbnail_size = (200, 200)
+        thumbnail_size = (250, 250)
 
         if width > height:
             self.orientation = "L"
