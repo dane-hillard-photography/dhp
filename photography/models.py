@@ -31,7 +31,7 @@ class Album(models.Model):
     class Meta:
         ordering = ['sort_order']
 
-    published_date = models.DateTimeField(datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now)
     title = models.CharField(max_length=255)
     public = models.BooleanField(default=True)
     uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
@@ -84,7 +84,7 @@ class Photograph(models.Model):
   
     directory = "images/uncropped"
 
-    published_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     public = models.BooleanField(default=True)
