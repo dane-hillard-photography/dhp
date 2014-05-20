@@ -1,5 +1,6 @@
 import os
 import uuid
+import datetime
 from PIL import Image as PImage
 from PIL import ImageOps as PImageOps
 from tempfile import *
@@ -30,12 +31,12 @@ class Album(models.Model):
     class Meta:
         ordering = ['sort_order']
 
-    published_date = models.DateTimeField()
+    published_date = models.DateTimeField(datetime.datetime.now())
     title = models.CharField(max_length=255)
     public = models.BooleanField(default=True)
     uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
     sort_order = models.IntegerField(blank=True, null=True, default=max_sort_order)
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True, default=User.objects.get(username='dane').id)
 
     def __unicode__(self):
         return self.title
@@ -83,7 +84,7 @@ class Photograph(models.Model):
   
     directory = "images/uncropped"
 
-    published_date = models.DateTimeField()
+    published_date = models.DateTimeField(default=datetime.datetime.now())
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     public = models.BooleanField(default=True)
@@ -91,7 +92,7 @@ class Photograph(models.Model):
     orientation = models.CharField(max_length=1, choices=ORIENTATION_CHOICES, editable=False)
     uuid = models.CharField("UUID", max_length=36, unique=True, default=generate_uuid, editable=False)
 
-    user = models.ForeignKey(User, blank=True, null=True, default=1)
+    user = models.ForeignKey(User, blank=True, null=True, default=User.objects.get(username='dane').id)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)
@@ -128,6 +129,12 @@ class Photograph(models.Model):
             self.orientation = "P"
         else:
             self.orientation = "S"
+
+        thumb_square = PImageOps.fit(im, thumbnail_size, PImage.ANTIALIAS)
+        tf = NamedTemporaryFile()
+        thumb_square.save(tf.name, im.format, quality=100)
+        self.thumbnail_square.save(self.image.name, File(open(tf.name)), save=False)
+        tf.close()
       
         ratio = 800.0 / ratio_divisor
         im.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
@@ -148,12 +155,6 @@ class Photograph(models.Model):
         tf = NamedTemporaryFile()
         im.save(tf.name, im.format, quality=100)
         self.thumbnail_small.save(self.image.name, File(open(tf.name)), save=False)
-        tf.close()
-
-        thumb_square = PImageOps.fit(im, thumbnail_size, PImage.ANTIALIAS)
-        tf = NamedTemporaryFile()
-        thumb_square.save(tf.name, im.format, quality=100)
-        self.thumbnail_square.save(self.image.name, File(open(tf.name)), save=False)
         tf.close()
 
         super(Photograph, self).save(*args, **kwargs)
