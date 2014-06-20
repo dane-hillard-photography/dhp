@@ -1,0 +1,14 @@
+@import ../../../../common_files/css/vendor-prefix
+
+.album
+  margin: 10px 0px
+
+  a
+    color: #000000
+    padding: 8px
+    +vendor-prefix(transition-property, letter-spacing)
+    +vendor-prefix(transition-duration, 0.25s)
+
+    &:hover
+      letter-spacing: 5px
+      +vendor-prefix(border-radius, 5px)

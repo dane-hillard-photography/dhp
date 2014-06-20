@@ -1,0 +1,38 @@
+@import ../../../../common_files/css/vendor-prefix
+
+p.call
+  text-align: justify
+
+.external-site
+  display: inline-block
+
+  a
+
+    img
+      width: 50px
+      height: 50px
+      +vendor-prefix(transition, background 0.2s ease-in-out)
+
+      &[alt=Facebook]:hover
+        background: #3B5998
+
+      &[alt=Instagram]:hover
+        background: #3F729B
+
+      &[alt=Twitter]:hover
+        background: #39A9E0
+
+      &[alt=Pinterest]:hover
+        background: #CB2027
+
+      &[alt=YouTube]:hover
+        background: #CD332D
+
+      &[alt=LinkedIn]:hover
+        background: #007FB1
+
+      &[alt=GitHub]:hover
+        background: #4183C4
+
+      &[alt=stackoverflow]:hover
+        background: #F47920
