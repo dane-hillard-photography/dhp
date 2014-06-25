@@ -88,10 +88,16 @@ def git_add(*args):
     env.run('git add {args}'.format(args=' '.join(args)))
 
 @task
+def deps():
+    """Updates dependencies via `pip install -r requirements.txt`"""
+    env.run('pip install -r requirements.txt')
+
+@task
 def deploy():
     """Pulls changes from master, updates the database, updates static files, and tells the webserver to reload."""
     with cd(env.project_path):
         git_pull()
         db()
         static()
+        deps()
         reload()
