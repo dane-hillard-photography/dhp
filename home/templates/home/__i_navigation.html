@@ -1,0 +1,30 @@
+{% load staticfiles i18n %}
+<div id="navigation">
+	<ul>
+		<li>
+			<a href="{% url 'home:home' %}" title="Home">
+				<img class="menu-icon"  src="{{ STATIC_URL }}images/icons/menu/black/home.svg" />
+			</a>
+		</li>
+		<li>
+			<a href="{% url 'photography:photography' %}" title="Photography">
+				<img class="menu-icon"  src="{{ STATIC_URL }}images/icons/menu/black/photography.svg" />
+			</a>
+		</li>
+		<li>
+			<a href="//blog.danehillard.com" title="Blog">
+				<img class="menu-icon"  src="{{ STATIC_URL }}images/icons/menu/black/blog.svg" />
+			</a>
+		</li>
+		<li>
+			<a href="{% url 'contact:contact' %}" title="Contact">
+				<img class="menu-icon"  src="{{ STATIC_URL }}images/icons/menu/black/contact.svg" />
+			</a>
+		</li>
+		<li>
+			<a href="{% url 'about:about' %}" title="About">
+				<img class="menu-icon"  src="{{ STATIC_URL }}images/icons/menu/black/user.svg" />
+			</a>
+		</li>
+	</ul>
+</div>
