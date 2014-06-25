@@ -10,7 +10,7 @@ def localhost():
 @task(alias='r')
 def remote():
     """Sets up environment for use on remote machine"""
-    env.host = 'www@danehillard.com'
+    env.hosts = ['www@danehillard.com']
     env.key_filename = '/Users/danehillard/.ssh/dhillard.pem'
     env.run = run
     env.project_venv = 'dhp'
