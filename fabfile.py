@@ -95,10 +95,10 @@ def deps():
 
 @task
 def deploy():
-    """Pulls changes from master, updates the database, updates static files, and tells the webserver to reload."""
+    """Runs 'git_pull', 'db', 'static', 'deps', 'reload'"""
     with cd(env.project_path):
         git_pull()
+        deps()
         db()
         static()
-        deps()
         reload()
