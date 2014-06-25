@@ -1,39 +1,37 @@
-{% extends "home/base.html" %}
-{% load static %}
+{% extends "home/__base.html" %}
+{% load staticfiles %}
 
-{% block title %}Photography{% endblock title %}
+{% block title %}Photography | {% endblock title %}
 
-{% block description %}
-The photography portfolio of Dane Hillard. This portfolio contains a variety of images including
-portraiture, architecture, nature, wedding, and event photography.
-{% endblock description %}
+{% block description %}The photography portfolio of Dane Hillard. This portfolio contains a variety of images including portraiture, architecture, nature, wedding, and event photography.{% endblock description %}
+{% block keywords %}photography, Ann Arbor, wedding photography, portrait photography, senior portraits, portraiture, fine art photography{% endblock keywords %}
 
 {% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}photography/css/index.css" />
+<link rel="stylesheet" href="{% static 'photography/css/index.css' %}" />
 {% endblock css %}
 
 {% block og_title %}Photography | {{ block.super }}{% endblock og_title %}
-{% block og_url %}{{ block.super }}/photography/{% endblock og_url %}
+{% block og_url %}{{ request.get_host|add:request.get_full_path }}{% endblock og_url %}
 
 {% block header_extras %}
 <link rel="alternate" type="application/rss+xml" title="Dane Hillard Photography" href="{% url 'photography:feed' %}">
 {% endblock header_extras %}
 
 {% block content %}
-  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" title="Dane Hillard Photography" alt="dHP Logo" nopin="nopin" />
+  <img id="logo" src="{% static 'images/logos/dhp.png' %}" title="Dane Hillard Photography" alt="dHP Logo" nopin="nopin" />
   <h1>Portfolio</h1>
   {% if album_list %}
   <ul>
     {% for album in album_list %}
     <li class="album"><a href="{% url 'photography:album' album.uuid %}">{{ album.title }}</a></li>
     {% endfor %}
-	<li id="latest-photos-feed"><a href="{% url 'photography:feed' %}"><img class="menu-icon" src="{{ STATIC_URL }}{{ menuIcons }}/black/rss.svg" nopin="nopin" /></a></li>
+	<li id="latest-photos-feed">
+		<a href="{% url 'photography:feed' %}">
+			<img class="menu-icon" src="{% static 'images/icons/menu/black/rss.svg' %}" nopin="nopin" />
+		</a>
+	</li>
   </ul>
   {% else %}
   <p>No albums are available.</p>
   {% endif %}
-  <hr />
-  <h2>Photography Services</h2>
-  <span>Please <a href="{% url 'contact:contact' %}">contact me</a> for a quote on portraiture, events, and your other photography needs.</span>
 {% endblock content %}

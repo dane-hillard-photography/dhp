@@ -1,25 +1,24 @@
-{% extends "home/base.html" %}
-{% load static %}
+{% extends "home/__base.html" %}
+{% load staticfiles %}
 
-{% block title %}{{ album.title }}{% endblock %}
+{% block title %}{{ album.title }} | {% endblock %}
 
 {% block description %}
 {{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard.
 {% endblock description %}
 
 {% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.css?v=2.1.5" />
-<link rel="stylesheet" href="{{ STATIC_URL }}photography/css/album.css" />
+<link rel="stylesheet" href="{% static 'js/jQuery/fancyBox/source/jquery.fancybox.css' %}?v=2.1.5" />
+<link rel="stylesheet" href="{% static 'photography/css/album.css' %}" />
 {% endblock css %}
 
 {% block og_type %}danehillard:album{% endblock og_type %}
-{% block og_url %}{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}{% endblock og_url %} 
+{% block og_url %}{{ request.get_host }}{% url 'photography:album' album.uuid %}{% endblock og_url %}
 {% block og_title %}{{ album.title }} | {{ block.super }}{% endblock og_title %}
 {% block og_description %}{{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard{% endblock og_description %}
 {% block og_images %}
 {% for photograph in album.photograph_set.all|slice:":10" %}
-<meta property="og:image" content="{{ http }}{{ httpHost }}{{ photograph.thumbnail_large.url }}" />
+<meta property="og:image" content="{{ request.get_host|add:photograph.thumbnail_large.url }}" />
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="{{ photograph.l_width }}">
 <meta property="og:image:height" content="{{ photograph.l_height }}">
@@ -28,20 +27,20 @@
 
 {% block twitter %}
   <meta name="twitter:card" content="gallery">
-  <meta name="twitter:url" content="{{ http }}{{ httpHost }}{% url 'photography:album' album.uuid %}" />
+  <meta name="twitter:url" content="{{ request.get_host }}{% url 'photography:album' album.uuid %}" />
   <meta name="twitter:title" content="{{ album.title }} | {{ siteName }}" />
   <meta name="twitter:description" content="{{ siteDescription }}" />
   <meta name="twitter:site" content="@{{ social_media.twitter }}" />
   <meta name="twitter:creator" content="@{{ social_media.twitter }}" />
   <meta name="twitter:domain" content="danehillard.com" />
   {% for photograph in album.photograph_set.all|slice:":4" %}
-  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ http|add:httpHost|add:photograph.thumbnail_medium.url }}" />
+  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ request.get_host|add:photograph.thumbnail_medium.url }}" />
   {% endfor %}
 {% endblock twitter %}
 
 {% block content %}
   <a href="{% url 'photography:photography' %}" title="Portfolio">
-	  <img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo" nopin="nopin" />
+	  <img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo" nopin="nopin" />
   </a>
   <h1 id="title">{{ album.title }}</h1>
   <div id="frame">
@@ -55,17 +54,17 @@
       <div class="photo-title" id="title-for-{{ photograph.uuid }}">
         <span itemprop="name">{{ photograph.title }}</span>
 		<div class="photo-tweet-button">
-			<a href="https://www.twitter.com/share?url={{ http|add:httpHost|add:photoUrl|urlencode:'' }}&related={{ social_media.twitter }}&text={{ photograph.title|add:' — a photograph via @'|urlencode:'' }}{{ social_media.twitter }}&lang=en&count=horizontal"
+			<a href="https://www.twitter.com/share?url={{ request.get_host|add:photoUrl|urlencode:'' }}&related={{ social_media.twitter }}&text={{ photograph.title|add:' — a photograph via @'|urlencode:'' }}{{ social_media.twitter }}&lang=en&count=horizontal"
 			   class="twitter-share-button" 
 			   data-lang="en">Tweet</a>
 		</div>
 		<div class="photo-like-button fb-like"
-			 data-href="{{ http|add:httpHost|add:photoUrl }}"
+			 data-href="{{ request.get_host|add:photoUrl }}"
 			 data-send="false"
 			 data-layout="button_count">
         </div>
         <div class="photo-pin-button">
-          <a href="//www.pinterest.com/pin/create/button/?url={{ http|add:httpHost|add:photoUrl|urlencode:'' }}&media={{ http|add:httpHost|add:photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}"
+          <a href="//www.pinterest.com/pin/create/button/?url={{ request.get_host|add:photoUrl|urlencode:'' }}&media={{ request.get_host|add:photograph.thumbnail_large.url|urlencode:'' }}&description={{ photograph.title|urlencode:'' }}"
             data-pin-do="buttonPin" 
 			data-pin-config="beside"
 			data-pin-color="red">
@@ -73,12 +72,12 @@
           </a>
         </div>
 		<div class="photo-tumblr-button">
-			<a href="http://www.tumblr.com/share/photo?source={{ http|add:httpHost|add:photograph.thumbnail_large.url|urlencode:'' }}&caption={{ photograph.title|urlencode:'' }}&clickthru={{ http|add:httpHost|add:photoUrl|urlencode:'' }}" target="_blank" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:61px; height:20px; background:url('http://platform.tumblr.com/v1/share_2.png') top left no-repeat transparent;">
+			<a href="http://www.tumblr.com/share/photo?source={{ request.get_host|add:photograph.thumbnail_large.url|urlencode:'' }}&caption={{ photograph.title|urlencode:'' }}&clickthru={{ request.get_host|add:photoUrl|urlencode:'' }}" target="_blank" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:61px; height:20px; background:url('http://platform.tumblr.com/v1/share_2.png') top left no-repeat transparent;">
 				Share on Tumblr
 			</a>
 		</div>
         <a class="permalink" href="{{ photoUrl }}" title="Permalink">
-          <img src="{{ STATIC_URL|add:menuIcons }}white/link.svg" nopin="nopin" />
+          <img src="{% static 'images/icons/menu/white/link.svg' %}" nopin="nopin" />
         </a>
       </div>
     </div>
@@ -93,8 +92,8 @@
 {% block js %}
 {{ block.super }}
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jQuery/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}photography/js/photography.js"></script>
+<script type="text/javascript" src="{% static 'js/jQuery/fancyBox/source/jquery.fancybox.pack.js' %}?v=2.1.5"></script>
+<script type="text/javascript" src="{% static 'photography/js/photography.js' %}"></script>
 <script src="http://platform.tumblr.com/v1/share.js"></script>
 {% include 'home/pinterest_sdk.html' %}
 {% include 'home/twitter_sdk.html' %}
