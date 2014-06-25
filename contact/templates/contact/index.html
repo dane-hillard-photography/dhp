@@ -1,9 +1,7 @@
 {% extends "home/__base.html" %}
-{% load static %}
+{% load staticfiles %}
 
-{% with 'images/icons/menu/' as menuIcons %}
-
-{% block title %}Contact{% endblock title %}
+{% block title %}Contact | {% endblock title %}
 
 {% block description %}
 Contact Dane Hillard Photography via email or through various other social channels.
@@ -18,8 +16,9 @@ Contact Dane Hillard Photography via email or through various other social chann
 {% block og_url %}{{ block.super }}/contact/{% endblock og_url %}
 
 {% block content %}
+{% with contact_icon_path=STATIC_URL|add:'images/icons/menu/white/' %}
 <a href="{% url 'photography:photography' %}" title="Portfolio">
-	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo" nopin="nopin" />
+	<img id="logo" src="{{ STATIC_URL }}images/logos/dhp.png" alt="dHP Logo" nopin="nopin" />
 </a>
 <p class="call">
   My goal is to provide clients with images that do more than capture faces. A portrait
@@ -44,47 +43,46 @@ Contact Dane Hillard Photography via email or through various other social chann
     <ul>
       <li class="external-site">
         <a target="_blank" href="http://www.facebook.com/danehillard">
-          <img src="{{ STATIC_URL }}/images/icons/menu/white/facebook.svg" alt="Facebook" nopin="nopin" />
+          <img src="{{ contact_icon_path }}facebook.svg" alt="Facebook" nopin="nopin" />
         </a>
       </li>
       <li class="external-site">
         <a target="_blank" href="http://www.pinterest.com/danehillard">
-          <img src="{{ STATIC_URL }}/images/icons/menu/white/pinterest.svg" alt="Pinterest" nopin="nopin" />
+          <img src="{{ contact_icon_path }}pinterest.svg" alt="Pinterest" nopin="nopin" />
         </a>
       </li>
       <li class="external-site">
         <a target="_blank" href="http://www.instagram.com/danehillard">
-          <img src="{{ STATIC_URL}}/images/icons/menu/white/instagram.svg" alt="Instagram" nopin="nopin" />
+          <img src="{{ contact_icon_path }}instagram.svg" alt="Instagram" nopin="nopin" />
         </a>
       </li>
       <li class="external-site">
         <a target="_blank" href="http://www.twitter.com/dane_hillard">
-          <img src="{{ STATIC_URL }}/images/icons/menu/white/twitter.svg" alt="Twitter" nopin="nopin" />
+          <img src="{{ contact_icon_path }}twitter.svg" alt="Twitter" nopin="nopin" />
         </a>
       </li>
       <li class="external-site">
         <a target="_blank" href="http://www.linkedin.com/in/danehillard">
-          <img src="{{ STATIC_URL }}/images/icons/menu/white/linkedin.svg" alt="LinkedIn" nopin="nopin" />
+          <img src="{{ contact_icon_path }}linkedin.svg" alt="LinkedIn" nopin="nopin" />
         </a>
       </li>
       <li class="external-site">
         <a target="_blank" href="http://www.youtube.com/danehillardphoto">
-          <img src="{{ STATIC_URL }}/images/icons/menu/white/youtube.svg" alt="YouTube" nopin="nopin" />
+          <img src="{{ contact_icon_path }}youtube.svg" alt="YouTube" nopin="nopin" />
         </a>
       </li>
       <li class="external-site">
         <a target="_blank" href="http://stackoverflow.com/users/2077393/dane-hillard">
-          <img src="{{ STATIC_URL }}/images/icons/menu/white/stackoverflow.svg" alt="stackoverflow" nopin="nopin" />
+          <img src="{{ contact_icon_path }}stackoverflow.svg" alt="stackoverflow" nopin="nopin" />
         </a>
       </li>
       <li class="external-site">
          <a target="_blank" href="http://www.github.com/daneah">
-          <img src="{{ STATIC_URL }}/images/icons/menu/white/github.svg" alt="GitHub" nopin="nopin" />
+          <img src="{{ contact_icon_path }}github.svg" alt="GitHub" nopin="nopin" />
         </a>
       </li>
     </ul>
   </div>
 </div>
-{% endblock content %}
-
 {% endwith %}
+{% endblock content %}

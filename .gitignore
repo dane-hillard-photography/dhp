@@ -8,3 +8,4 @@ media/
 *.stackdump
 .idea/
 *.css
+.sass-cache/

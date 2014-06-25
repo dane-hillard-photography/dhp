@@ -18,8 +18,12 @@ def manage(args):
     with prefix('workon {venv}'.format(venv=env.project_venv)):
         env.run('./manage.py {args}'.format(args=args))
 
-@task(alias='cs')
-def collectstatic():
+def compile_sass():
+    run('for file in `find . -name "*.sass"`; do sass $file:${file%.sass}.css; done')
+
+@task(alias='static')
+def update_static_files():
+    compile_sass()
     manage('collectstatic --noinput -i *.sass')
 
 @task(alias='db')
@@ -42,5 +46,5 @@ def deploy():
     with cd(env.project_path):
         run('git pull')
         update_database()
-        collectstatic()
+        update_static_files()
         reload_wsgi()
