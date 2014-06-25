@@ -15,7 +15,7 @@ def remote():
     env.project_path = 'dhp'
 
 def manage(args):
-    with prefix('source /usr/local/bin/virtualenvwrapper.sh; workon {venv}'.format(venv=env.project_venv)):
+    with prefix('workon {venv}'.format(venv=env.project_venv)):
         env.run('./manage.py {args}'.format(args=args))
 
 @task(alias='cs')
