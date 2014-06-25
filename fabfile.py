@@ -84,8 +84,8 @@ def git_commit(*args):
 
 @task
 def git_add(*args):
-    """Runs `git commit {args}`"""
-    env.run('git commit {args}'.format(args=' '.join(args)))
+    """Runs `git add {args}`"""
+    env.run('git add {args}'.format(args=' '.join(args)))
 
 @task
 def deploy():
