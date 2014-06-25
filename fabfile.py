@@ -90,7 +90,8 @@ def git_add(*args):
 @task
 def deps():
     """Updates dependencies via `pip install -r requirements.txt`"""
-    env.run('pip install -r requirements.txt')
+    with prefix('workon {venv}'.format(venv=env.project_venv)):
+        env.run('pip install -r requirements.txt')
 
 @task
 def deploy():
