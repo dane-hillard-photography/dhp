@@ -8,7 +8,7 @@ import MySQLdb
 
 from collections import defaultdict
 
-sys.path.append(os.path.dirname(__file__))
+sys.path.append(os.path.abspath('..'))
 
 from dhp import settings
 
