@@ -1,0 +1,34 @@
+@import dhp-constants
+
+#navigation
+  z-index: 100
+  text-align: center
+  min-width: 450px
+  margin: 25px 0
+
+  ul
+    list-style: none
+    padding: 0px
+    text-align: center
+    display: inline-block
+
+    li
+      display: inline-block
+      position: relative
+      text-align: center
+      background: $site-background
+
+  a
+    text-decoration: none
+
+    object
+      position: relative
+      display: inline-block
+
+      &:after
+        content: ""
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
