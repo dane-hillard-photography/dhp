@@ -33,6 +33,7 @@ def sass(search_path='.'):
 def static():
     """Runs 'sass' and 'collectstatic' tasks"""
     sass()
+    collectstatic()
 
 @task
 def collectstatic():
