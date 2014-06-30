@@ -63,6 +63,17 @@
 			Share on Tumblr
 		</a>
 	</div>
+  	{% if photosets %}
+	<div id="photo-photosets">
+		<p>This photo appeared in:
+			<ul>
+			{% for photoset in photosets %}
+				<li class="photo-photoset"><a href="{% url 'photography:photoset' photoset.id photoset.slug %}">{{ photoset.title }}</a></li>
+			{% endfor %}
+			</ul>
+		</p>
+	</div>
+  	{% endif %}
   </div>
 {% endblock content %}
 {% block js %}

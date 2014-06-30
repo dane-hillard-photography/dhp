@@ -3,7 +3,7 @@ from django.views import generic
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 
-from photography.models import Photograph, Album
+from photography.models import Photograph, Album, PhotoSet
 from dhp import settings
 
 class IndexView(generic.ListView):
@@ -32,6 +32,7 @@ class PhotographView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(PhotographView, self).get_context_data(**kwargs)
         context['social_media'] = settings.SOCIAL_MEDIA_HANDLES
+        context['photosets'] = self.get_object().photosets_in.all()
         return context
 
 class AlbumView(generic.DetailView):
@@ -49,3 +50,16 @@ class AlbumView(generic.DetailView):
         context = super(AlbumView, self).get_context_data(**kwargs)
         context['social_media'] = settings.SOCIAL_MEDIA_HANDLES
         return context
+
+class PhotoSetView(generic.DetailView):
+    template_name = 'photography/photoset.html'
+
+    def get_object(self):
+        return get_object_or_404(PhotoSet, id=self.kwargs['photoset_id'])
+
+class PhotoSetListView(generic.ListView):
+    template_name = 'photography/photoset_list.html'
+    context_object_name = 'photoset_list'
+
+    def get_queryset(self):
+        return PhotoSet.objects.all()

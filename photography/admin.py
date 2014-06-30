@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from photography.models import Photograph, Album
+from photography.models import Photograph, Album, PhotoSet
 
 class PhotographAdmin(admin.ModelAdmin):
     list_editable = ['title', 'description', 'public', 'album']
@@ -46,8 +46,9 @@ class AlbumAdmin(admin.ModelAdmin):
 
         super(AlbumAdmin, self).save_model(request, obj, form, change)
 
-class TagAdmin(admin.ModelAdmin):
-    pass
+class PhotoSetAdmin(admin.ModelAdmin):
+    list_display = ('feature_photo_thumbnail', 'title')
 
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(Album, AlbumAdmin)
+admin.site.register(PhotoSet, PhotoSetAdmin)
