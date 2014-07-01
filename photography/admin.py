@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from photography.models import Photograph, Album, PhotoSet
 
 class PhotographAdmin(admin.ModelAdmin):
-    list_editable = ['title', 'description', 'public', 'album']
+    list_editable = ['title', 'description', 'public', 'album', 'published_date']
 
     fieldsets = [
         ('Photograph Information', {'fields': ['image', 'title', 'description']}),
@@ -35,7 +35,7 @@ class PhotographAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(add_photoset_url)
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_editable = ['sort_order', 'public']
+    list_editable = ['sort_order', 'public', 'published_date']
 
     fieldsets = [
         ('Album Information', {'fields': ['title', 'sort_order']}),
@@ -66,7 +66,8 @@ class AlbumAdmin(admin.ModelAdmin):
         super(AlbumAdmin, self).save_model(request, obj, form, change)
 
 class PhotoSetAdmin(admin.ModelAdmin):
-    list_display = ('feature_photo_thumbnail', 'title')
+    list_editable = ['title', 'slug', 'body', 'feature_photo', 'published_date']
+    list_display = ('feature_photo_thumbnail', 'title', 'slug', 'body', 'feature_photo', 'published_date')
 
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(Album, AlbumAdmin)
