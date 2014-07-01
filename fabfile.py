@@ -1,17 +1,19 @@
+import os
+
 from fabric.api import *
 
 @task(alias='l')
 def localhost():
     """Sets up environment for use on localhost"""
     env.run = local
-    env.project_venv = 'dane-dhp'
-    env.project_path = '/Users/danehillard/me/sites/dhp'
+    env.project_venv = os.getenv('DHP_VENV')
+    env.project_path = os.getenv('DHP_PATH')
 
 @task(alias='r')
 def remote():
     """Sets up environment for use on remote machine"""
     env.hosts = ['www@danehillard.com']
-    env.key_filename = '/Users/danehillard/.ssh/dhillard.pem'
+    env.key_filename = os.getenv('DHP_KEY_FILE')
     env.run = run
     env.project_venv = 'dhp'
     env.project_path = 'dhp'
