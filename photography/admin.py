@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 from photography.models import Photograph, Album, PhotoSet
 
@@ -9,11 +11,30 @@ class PhotographAdmin(admin.ModelAdmin):
         ('Photograph Information', {'fields': ['image', 'title', 'description']}),
         ('Publishing', {'fields': ['public', 'album', 'user', 'published_date']}),
     ]
-    list_display = ('admin_thumbnail', 'title', 'description', 'album', 'size', 'orientation', 'published_date', 'public', 'user', 'uuid')
+    list_display = (
+        'admin_thumbnail',
+        'title',
+        'description',
+        'album',
+        'size',
+        'orientation',
+        'published_date',
+        'public',
+        'user',
+        'uuid'
+    )
+
     list_filter = ('album', 'public',)
     date_hierarchy = 'published_date'
     search_fields = ['title']
     save_on_top = True
+    actions = ['create_photoset_from_photos']
+
+    def create_photoset_from_photos(modeladmin, request, queryset):
+        ids = ','.join([str(photo_id) for photo_id in queryset.values_list('id', flat=True)])
+        add_photoset_url = '{url}?photos={ids}'.format(url=reverse('admin:photography_photoset_add'), ids=ids)
+        print add_photoset_url
+        return HttpResponseRedirect(add_photoset_url)
 
 class AlbumAdmin(admin.ModelAdmin):
     list_editable = ['sort_order', 'public']
