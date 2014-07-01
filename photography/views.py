@@ -57,6 +57,11 @@ class PhotoSetView(generic.DetailView):
     def get_object(self):
         return get_object_or_404(PhotoSet, id=self.kwargs['photoset_id'])
 
+    def get_context_data(self, **kwargs):
+        context = super(PhotoSetView, self).get_context_data(**kwargs)
+        context['social_media'] = settings.SOCIAL_MEDIA_HANDLES
+        return context
+
 class PhotoSetListView(generic.ListView):
     template_name = 'photography/photoset_list.html'
     context_object_name = 'photoset_list'
