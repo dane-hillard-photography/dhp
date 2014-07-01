@@ -1,8 +1,13 @@
 {% extends 'home/__base.html' %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'photography/css/photoset.css' %}" />
+{% endblock css %}
 {% block content %}
-	{% for photoset in photoset_list %}
-		<a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
-			<img src="{{ photoset.feature_photo.thumbnail_small.url }}" alt="{{ photoset.feature_photo.title }}"/>
-		</a>
-	{% endfor %}
+<h1>Photo Sets</h1>
+{% for photoset in photoset_list %}
+	<a class="photo" href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
+		<img src="{{ photoset.feature_photo.thumbnail_square.url }}" alt="{{ photoset.feature_photo.title }}"/>
+	</a>
+{% endfor %}
 {% endblock content %}
