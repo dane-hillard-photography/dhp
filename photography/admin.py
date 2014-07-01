@@ -17,11 +17,9 @@ class PhotographAdmin(admin.ModelAdmin):
         'description',
         'album',
         'size',
-        'orientation',
         'published_date',
         'public',
         'user',
-        'uuid'
     )
 
     list_filter = ('album', 'public',)

@@ -129,7 +129,7 @@ class Photograph(models.Model):
         super(Photograph, self).save(*args, **kwargs)
 
     def size(self):
-        return '{width} x {height}'.format(width=self.width, height=self.height)
+        return '{width}x{height}'.format(width=self.width, height=self.height)
 
     def admin_thumbnail(self):
         if self.image:
