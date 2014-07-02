@@ -158,5 +158,5 @@ class PhotoSet(models.Model):
     feature_photo_thumbnail.short_description = 'Feature Photo'
     feature_photo_thumbnail.allow_tags = True
 
-	def __unicode__(self):
-		return self.title
+    def __unicode__(self):
+        return self.title
