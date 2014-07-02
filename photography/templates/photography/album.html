@@ -49,7 +49,7 @@
     {% url 'photography:photo' photograph.uuid as photoUrl %}
     <div itemscope itemtype="http://schema.org/Product" class="photograph">
       <a class="photo" id="{{ photograph.uuid }}" rel="album" href="{{ photograph.thumbnail_large.url }}" data-title-id="title-for-{{ photograph.uuid }}">
-        <img itemprop="image" src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %}" />
+        <img itemprop="image" src="{{ photograph.thumbnail_square.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %}| A photograph by Ann Arbor photographer Dane Hillard" />
       </a>
       <div class="photo-title" id="title-for-{{ photograph.uuid }}">
         <span itemprop="name">{{ photograph.title }}</span>
