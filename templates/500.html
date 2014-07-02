@@ -1,6 +1,7 @@
 {% extends "home/__base.html" %}
+{% load staticfiles %}
 
-{% block title %}Server Error{% endblock title %}
+{% block title %}Server Error | {{ block.super }}{% endblock title %}
 
 {% block content %}
 <a href="{% url 'photography:photography' %}" title="Portfolio">
