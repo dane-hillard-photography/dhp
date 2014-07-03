@@ -34,7 +34,7 @@
   <meta name="twitter:creator" content="@{{ social_media.twitter }}" />
   <meta name="twitter:domain" content="danehillard.com" />
   {% for photograph in album.photograph_set.all|slice:":4" %}
-  <meta name="twitter:image{{ forloop.counter0 }}" content="{{ request.get_host|add:photograph.thumbnail_medium.url }}" />
+  <meta name="twitter:image{{ forloop.counter0 }}" content="http://{{ request.get_host|add:photograph.thumbnail_medium.url }}" />
   {% endfor %}
 {% endblock twitter %}
 
