@@ -4,6 +4,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'js/jQuery/fancyBox/source/jquery.fancybox.css' %}?v=2.1.5" />
 <link rel="stylesheet" type="text/css" href="{% static 'photography/css/photoset.css' %}" />
 {% endblock css %}
+
+{% block title %}{{ photoset.title }} | {{ block.super }}{% endblock title %}
+
 {% block og_type %}danehillard:album{% endblock og_type %}
 {% block og_url %}{{ request.get_host }}{% url 'photography:photoset' photoset.id photoset.slug %}{% endblock og_url %}
 {% block og_title %}{{ photoset.title }} | {{ block.super }}{% endblock og_title %}
@@ -30,11 +33,14 @@
 {% endblock twitter %}
 
 {% block content %}
+<a href="{% url 'photography:photography' %}" title="Portfolio">
+	<img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo" nopin="nopin"  />
+</a>
 <h1>{{ photoset.title }}</h1>
 <div id="photoset">
 	{% for photo in photoset.photos.all %}
 	<a id="{{ photo.uuid }}" rel="album" class="photo" href="{{ photo.thumbnail_large.url }}" data-title-id="title-for-{{ photo.uuid }}">
-		<img src="{{ photo.thumbnail_square.url }}" alt="{{ photo.title }}"/>
+		<img src="{{ photo.thumbnail_square.url }}" alt="{{ photo.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard"/>
 	</a>
 	{% endfor %}
 </div>

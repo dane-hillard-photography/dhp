@@ -1,8 +1,13 @@
 {% extends "home/__base.html" %}
+{% load staticfiles %}
 
-{% block title %}Server Error{% endblock title %}
+{% block title %}Server Error | {{ block.super }}{% endblock title %}
 
 {% block content %}
+<a href="{% url 'photography:photography' %}" title="Portfolio">
+	<img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo" nopin="nopin"  />
+</a>
+<h1>Ack!</h1>
 <p>
   Well, this is embarrassing. The server had a bit of a hiccup.
 </p>

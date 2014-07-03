@@ -17,19 +17,22 @@
 {% block title %}Home | {% endblock title %}
 
 {% block content %}
-<div id="latest-photos">
-{% for photoset in latest_photosets %}
-	<a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
-		<img src="{{ photoset.feature_photo.thumbnail_square.url }}" nopin="nopin" />
-	</a>
-{% endfor %}
-</div>
 <div itemscope itemtype="http://schema.org/LocalBusiness">
 	<a href="{% url 'photography:photography' %}" title="Portfolio">
   		<img itemprop="image" id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
 	</a>
 </div>
-<h2 itemprop="name">Dane Hillard Photography</h2>
+<h1 itemprop="name">Dane Hillard Photography</h1>
+<div id="latest-photos">
+{% for photoset in latest_photosets %}
+	<a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
+		<img src="{{ photoset.feature_photo.thumbnail_square.url }}" nopin="nopin" alt="{{ photoset.feature_photo.title }}{% if photoset.feature_photo.description %} | {{ photoset.feature_photo.description }}{% endif %}"/>
+	</a>
+{% endfor %}
+<p>
+	Go to <a href="{% url 'photography:photoset_list' %}">archive</a> or view my <a href="{% url 'photography:photography' %}">portfolio</a>
+</p>
+</div>
 <hr />
 <p itemscope itemtype="http://schema.org/PostalAddress">
 	<span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
