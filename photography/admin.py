@@ -26,9 +26,9 @@ class PhotographAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_date'
     search_fields = ['title']
     save_on_top = True
-    actions = ['create_photoset_from_photos']
+    actions = ['create_photo_set_from_photos']
 
-    def create_photoset_from_photos(modeladmin, request, queryset):
+    def create_photo_set_from_photos(modeladmin, request, queryset):
         ids = ','.join([str(photo_id) for photo_id in queryset.values_list('id', flat=True)])
         add_photoset_url = '{url}?photos={ids}'.format(url=reverse('admin:photography_photoset_add'), ids=ids)
         print add_photoset_url
@@ -68,6 +68,8 @@ class AlbumAdmin(admin.ModelAdmin):
 class PhotoSetAdmin(admin.ModelAdmin):
     list_editable = ['title', 'slug', 'body', 'feature_photo', 'published_date']
     list_display = ('feature_photo_thumbnail', 'title', 'slug', 'body', 'feature_photo', 'published_date')
+
+    prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(Album, AlbumAdmin)
