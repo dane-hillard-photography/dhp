@@ -27,6 +27,7 @@ class PhotographAdmin(admin.ModelAdmin):
     search_fields = ['title']
     save_on_top = True
     actions = ['create_photo_set_from_photos']
+    radio_fields = {'album': admin.VERTICAL}
 
     def create_photo_set_from_photos(modeladmin, request, queryset):
         ids = ','.join([str(photo_id) for photo_id in queryset.values_list('id', flat=True)])
@@ -70,6 +71,7 @@ class PhotoSetAdmin(admin.ModelAdmin):
     list_display = ('feature_photo_thumbnail', 'title', 'slug', 'body', 'feature_photo', 'published_date')
 
     prepopulated_fields = {'slug': ('title',)}
+    radio_fields = {'feature_photo': admin.HORIZONTAL}
 
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(Album, AlbumAdmin)
