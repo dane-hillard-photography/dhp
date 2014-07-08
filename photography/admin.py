@@ -67,8 +67,9 @@ class AlbumAdmin(admin.ModelAdmin):
         super(AlbumAdmin, self).save_model(request, obj, form, change)
 
 class PhotoSetAdmin(admin.ModelAdmin):
-    list_editable = ['title', 'slug', 'body', 'feature_photo', 'published_date']
-    list_display = ('feature_photo_thumbnail', 'title', 'slug', 'body', 'feature_photo', 'published_date')
+
+    list_editable = ['title', 'slug', 'body', 'published_date']
+    list_display = ('feature_photo_thumbnail', 'title', 'slug', 'body', 'published_date')
 
     prepopulated_fields = {'slug': ('title',)}
     radio_fields = {'feature_photo': admin.HORIZONTAL}

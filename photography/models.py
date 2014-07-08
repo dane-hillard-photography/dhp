@@ -155,7 +155,7 @@ class PhotoSet(models.Model):
 
     def feature_photo_thumbnail(self):
         return '<img src="{url}" width="60" />'.format(url=self.feature_photo.thumbnail_small.url)
-    feature_photo_thumbnail.short_description = 'Feature Photo'
+    feature_photo_thumbnail.short_description = 'Feature photo'
     feature_photo_thumbnail.allow_tags = True
 
     def __unicode__(self):
