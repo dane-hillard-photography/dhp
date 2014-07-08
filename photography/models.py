@@ -141,7 +141,6 @@ class Photograph(models.Model):
     admin_thumbnail.allow_tags = True
 
     def __unicode__(self):
-        #return self.title
         return mark_safe(self.admin_thumbnail())
 
 class PhotoSet(models.Model):
