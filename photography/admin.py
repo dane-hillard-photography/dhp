@@ -68,6 +68,10 @@ class AlbumAdmin(admin.ModelAdmin):
         super(AlbumAdmin, self).save_model(request, obj, form, change)
 
 class PhotoSetAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PhotoSetAdminForm, self).__init__(*args, **kwargs)
+        self.fields['feature_photo'].queryset = self.instance.photos
+
     class Meta:
         model = PhotoSet
         widgets = {
