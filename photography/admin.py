@@ -1,3 +1,5 @@
+from django import forms
+from django.db import models
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -66,7 +68,15 @@ class AlbumAdmin(admin.ModelAdmin):
 
         super(AlbumAdmin, self).save_model(request, obj, form, change)
 
+class PhotoSetAdminForm(forms.ModelForm):
+    class Meta:
+        model = PhotoSet
+        widgets = {
+            'photos': forms.widgets.CheckboxSelectMultiple
+        }
+
 class PhotoSetAdmin(admin.ModelAdmin):
+    form = PhotoSetAdminForm
 
     list_editable = ['title', 'slug', 'body', 'published_date']
     list_display = ('feature_photo_thumbnail', 'title', 'slug', 'body', 'published_date')
