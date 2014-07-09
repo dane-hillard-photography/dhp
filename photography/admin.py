@@ -70,15 +70,17 @@ class AlbumAdmin(admin.ModelAdmin):
 class PhotoSetAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PhotoSetAdminForm, self).__init__(*args, **kwargs)
-        initial_photo_ids = None
-        initial_data = kwargs.get('initial')
-        if initial_data:
-            initial_photo_ids = initial_data.get('photos')
-
-        if initial_photo_ids:
-            self.fields['feature_photo'].queryset = Photograph.objects.filter(id__in=initial_photo_ids)
-        else:
+        try:
+            PhotoSet.objects.get(pk=self.instance.pk)
             self.fields['feature_photo'].queryset = self.instance.photos
+        except PhotoSet.DoesNotExist:
+            initial_photo_ids = None
+            initial_data = kwargs.get('initial')
+            if initial_data:
+                initial_photo_ids = initial_data.get('photos')
+
+            if initial_photo_ids:
+                self.fields['feature_photo'].queryset = Photograph.objects.filter(id__in=initial_photo_ids)
 
     class Meta:
         model = PhotoSet
