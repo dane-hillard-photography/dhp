@@ -8,8 +8,8 @@
 {% block title %}{{ photoset.title }} | {{ block.super }}{% endblock title %}
 
 {% block og_type %}danehillard:album{% endblock og_type %}
-{% block og_url %}{{ request.get_host }}{% url 'photography:photoset' photoset.id photoset.slug %}{% endblock og_url %}
-{% block og_title %}{{ photoset.title }} | {{ block.super }}{% endblock og_title %}
+{% block og_url %}http://{{ request.get_host }}{% url 'photography:photoset' photoset.id photoset.slug %}{% endblock og_url %}
+{% block og_title %}{{ photoset.title }} | {% endblock og_title %}
 {% block og_images %}
 {% for photograph in photoset.photos.all|slice:":10" %}
 <meta property="og:image" content="{{ request.get_host|add:photograph.thumbnail_large.url }}" />

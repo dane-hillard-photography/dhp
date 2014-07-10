@@ -13,7 +13,7 @@
 {% endblock css %}
 
 {% block og_type %}danehillard:album{% endblock og_type %}
-{% block og_url %}{{ request.get_host }}{% url 'photography:album' album.uuid %}{% endblock og_url %}
+{% block og_url %}http://{{ request.get_host }}{% url 'photography:album' album.uuid %}{% endblock og_url %}
 {% block og_title %}{{ album.title }} | {{ block.super }}{% endblock og_title %}
 {% block og_description %}{{ album.title }} -- An album of {{ album.photograph_set.count }} photograph{{ album.photograph_set.count|pluralize }} by Dane Hillard{% endblock og_description %}
 {% block og_images %}
