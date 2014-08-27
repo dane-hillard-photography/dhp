@@ -39,11 +39,10 @@
 	</head>
 	<body>
 	{% include 'home/__i_navigation.html' %}
-	{% include 'home/__i_admin_links.html' %}
-
 	<div id="content">
 	{% block content %}
 	{% endblock content %}
+	{% include 'home/__i_admin_links.html' %}
 	</div>
 
 	{% block final %}

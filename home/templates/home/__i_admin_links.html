@@ -1,13 +1,15 @@
-<span id="admin-links">
-{% if request.user.is_authenticated %}
-	<span id="user">{{ request.user.first_name }}</span>
-	<a id="logout" href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}">Logout</a>
-	{% if request.user.is_staff %}
-	| <a id="admin" href="{% url 'admin:index' %}">Administration</a>
-	{% endif %}
-{% else %}
-	<a id="login" href="{% url 'django.contrib.auth.views.login' %}?next={% firstof request.path 'home:home' %}">
-		Login
-	</a>
-{% endif %}
-</span>
+<div id="admin-container">
+    <span id="admin-links">
+    {% if request.user.is_authenticated %}
+        <span id="user">{{ request.user.first_name }}</span>
+        <a id="logout" href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}">Logout</a>
+        {% if request.user.is_staff %}
+        | <a id="admin" href="{% url 'admin:index' %}">Administration</a>
+        {% endif %}
+    {% else %}
+        <a id="login" href="{% url 'django.contrib.auth.views.login' %}?next={% firstof request.path 'home:home' %}">
+            Login
+        </a>
+    {% endif %}
+    </span>
+</div>
