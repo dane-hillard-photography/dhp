@@ -1,32 +1,34 @@
 {% load staticfiles %}
 {% with STATIC_URL|add:'images/icons/menu/black/' as nav_menu_icon_path %}
-<div id="navigation">
-	<ul>
-		<li>
-			<a href="{% url 'home:home' %}" title="Home">
-				<img class="menu-icon"  src="{{ nav_menu_icon_path }}home.svg" />
-			</a>
-		</li>
-		<li>
-			<a href="{% url 'photography:photography' %}" title="Photography">
-				<img class="menu-icon"  src="{{ nav_menu_icon_path }}photography.svg" />
-			</a>
-		</li>
-		<li>
-			<a href="//blog.danehillard.com" title="Blog">
-				<img class="menu-icon"  src="{{ nav_menu_icon_path }}blog.svg" />
-			</a>
-		</li>
-		<li>
-			<a href="{% url 'contact:contact' %}" title="Contact">
-				<img class="menu-icon"  src="{{ nav_menu_icon_path }}contact.svg" />
-			</a>
-		</li>
-		<li>
-			<a href="{% url 'about:about' %}" title="About">
-				<img class="menu-icon"  src="{{ nav_menu_icon_path }}user.svg" />
-			</a>
-		</li>
-	</ul>
+<div id="nav-container">
+    <div id="navigation">
+        <ul>
+            <li>
+                <a href="{% url 'home:home' %}" title="Home">
+                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}home.svg" />
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'photography:photography' %}" title="Photography">
+                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}photography.svg" />
+                </a>
+            </li>
+            <li>
+                <a href="//blog.danehillard.com" title="Blog">
+                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}blog.svg" />
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'contact:contact' %}" title="Contact">
+                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}contact.svg" />
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'about:about' %}" title="About">
+                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}user.svg" />
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
 {% endwith %}
