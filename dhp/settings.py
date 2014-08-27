@@ -189,7 +189,7 @@ LOGGING = {
 if socket.gethostname() == 'danehillard':
     SECRET_KEY = "sdfg#$T@$%Hsedfh@$%$%%%%%%@$5GWEFGdfgdfbdfGWE"
     DEBUG = False
-    ALLOWED_HOSTS = ['.danehillard.com']
+    ALLOWED_HOSTS = ['www.danehillard.com']
     DATABASES['default']['host'] = ''
 else:
     import mimetypes
