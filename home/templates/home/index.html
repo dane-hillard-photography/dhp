@@ -17,9 +17,7 @@
 
 {% block content %}
 <div itemscope itemtype="http://schema.org/LocalBusiness">
-	<a href="{% url 'photography:photography' %}" title="Portfolio">
-  		<img itemprop="image" id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
-	</a>
+	<img itemprop="image" id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
 </div>
 <h1 itemprop="name">Dane Hillard Photography</h1>
 <div id="latest-photos">
@@ -29,7 +27,7 @@
 	</a>
 {% endfor %}
 <p>
-	Go to <a href="{% url 'photography:photoset_list' %}">archive</a> or view my <a href="{% url 'photography:photography' %}">portfolio</a>
+	<a href="{% url 'photography:photography' %}">Portfolio</a>
 </p>
 </div>
 <hr />

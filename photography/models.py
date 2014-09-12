@@ -7,10 +7,8 @@ from PIL import Image as PImage
 from PIL import ImageOps as PImageOps
 
 from django.db import models
-from django.db.models import Max
 from django.core.files import File
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 
 from dhp.settings import MEDIA_ROOT
@@ -18,33 +16,10 @@ from dhp.settings import MEDIA_ROOT
 def generate_uuid():
     return str(uuid.uuid4())
 
-def max_sort_order():
-    current_max = Album.objects.all().aggregate(Max('sort_order'))['sort_order__max']
-    if current_max is None:
-        current_max = 0
-    return current_max + 1
-
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     save_filename = '{uuid}.{ext}'.format(uuid=instance.uuid, ext=ext)
     return os.path.join(instance.directory, save_filename)
-
-class Album(models.Model):
-    class Meta:
-        ordering = ['sort_order']
-
-    title = models.CharField(max_length=255)
-    uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
-    public = models.BooleanField(default=True)
-    published_date = models.DateTimeField(default=datetime.datetime.now)
-    sort_order = models.IntegerField(blank=True, null=True, default=max_sort_order)
-    user = models.ForeignKey(User, blank=True, null=True, default=User.objects.get(username='dane').id)
-
-    def __unicode__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('photography:album', kwargs={'album_id': self.uuid})
 
 class Photograph(models.Model):
     class Meta:
@@ -60,7 +35,6 @@ class Photograph(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    album = models.ForeignKey(Album, blank=True, null=True, on_delete=models.SET_NULL)
     public = models.BooleanField(default=True)
     orientation = models.CharField(max_length=1, choices=ORIENTATION_CHOICES, editable=False)
     uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
