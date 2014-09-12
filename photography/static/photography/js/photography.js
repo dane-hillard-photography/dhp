@@ -4,15 +4,6 @@ $(document).ready(function() {
       $.fancybox.wrap.bind("contextmenu", function(e) {
         return false;
       });
-      var id = $(this.element).data('title-id');
-
-      if (id) {
-        element = $('#' + id);
-
-        if (element.length) {
-          this.title = element.html();
-        }
-      }
     },
     openEffect  : 'elastic',
     closeEffect : 'elastic',
