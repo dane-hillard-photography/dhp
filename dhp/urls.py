@@ -3,13 +3,14 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.conf.urls import patterns, include, url
 
-from sitemaps import PhotographSitemap, SiteSitemap
+from sitemaps import PhotographSitemap, PhotoSetSitemap, SiteSitemap
 
 from dhp import settings
 
 admin.autodiscover()
 
 sitemaps = {
+    'photoset': PhotoSetSitemap,
     'photograph': PhotographSitemap,
     'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'about:about']),
 }

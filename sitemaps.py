@@ -1,7 +1,8 @@
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.contrib.sitemaps import Sitemap
-from photography.models import Photograph
+
+from photography.models import Photograph, PhotoSet
 
 class PhotographSitemap(Sitemap):
     changefreq = 'daily'
@@ -17,6 +18,21 @@ class PhotographSitemap(Sitemap):
     @staticmethod
     def location(obj):
         return reverse('photography:photo', kwargs={'photo_id': obj.uuid})
+
+class PhotoSetSitemap(Sitemap):
+    changefreq = 'monthly'
+    priority = .75
+
+    def items(self):
+        return PhotoSet.objects.all()
+
+    @staticmethod
+    def lastmod(obj):
+        return obj.published_date
+
+    @staticmethod
+    def location(obj):
+        return reverse('photography:photoset', kwargs={'photoset_id': obj.id, 'photoset_slug': obj.slug})
 
 class SiteSitemap(Sitemap):
     changefreq = 'monthly'
