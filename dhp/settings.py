@@ -196,7 +196,7 @@ if socket.gethostname() == 'danehillard':
     SECRET_KEY = "sdfg#$T@$%Hsedfh@$%$%%%%%%@$5GWEFGdfgdfbdfGWE"
     DEBUG = False
     ALLOWED_HOSTS = ['www.danehillard.com']
-    DATABASES['default']['host'] = 'production.csnsdgwkxnzo.us-east-1.rds.amazonaws.com'
+    DATABASES['default']['HOST'] = 'production.csnsdgwkxnzo.us-east-1.rds.amazonaws.com'
 else:
     import mimetypes
 
