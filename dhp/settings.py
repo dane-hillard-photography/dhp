@@ -13,14 +13,20 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+DATABASE_NAME = os.getenv('DATABASE_NAME')
+DATABASE_USER = os.getenv('DATABASE_USER')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'localhost')
+DATABASE_PORT = os.getenv('DATABASE_PORT', '3306')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
-        'USER': 'root',
-        'PASSWORD': 'l1ttl3l3v14th4n',
-        'HOST': '127.0.0.1',
-        'PORT': '',
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
 
@@ -190,7 +196,6 @@ if socket.gethostname() == 'danehillard':
     SECRET_KEY = "sdfg#$T@$%Hsedfh@$%$%%%%%%@$5GWEFGdfgdfbdfGWE"
     DEBUG = False
     ALLOWED_HOSTS = ['www.danehillard.com']
-    DATABASES['default']['host'] = ''
 else:
     import mimetypes
 
