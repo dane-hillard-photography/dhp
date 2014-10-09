@@ -16,10 +16,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
-        'USER': 'root',
+        'NAME': 'dhp',
+        'USER': 'dhp',
         'PASSWORD': 'l1ttl3l3v14th4n',
-        'HOST': '127.0.0.1',
+        'HOST': '',
         'PORT': '',
     }
 }
@@ -190,7 +190,7 @@ if socket.gethostname() == 'danehillard':
     SECRET_KEY = "sdfg#$T@$%Hsedfh@$%$%%%%%%@$5GWEFGdfgdfbdfGWE"
     DEBUG = False
     ALLOWED_HOSTS = ['www.danehillard.com']
-    DATABASES['default']['host'] = ''
+    DATABASES['default']['host'] = 'production.csnsdgwkxnzo.us-east-1.rds.amazonaws.com'
 else:
     import mimetypes
 
