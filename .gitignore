@@ -9,3 +9,4 @@ media/
 .idea/
 *.css
 .sass-cache/
+*.css.map
