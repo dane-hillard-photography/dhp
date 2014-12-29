@@ -1,6 +1,6 @@
 {% extends "home/__base.html" %}
 
-{% block title %}Thanks{% endblock title %}
+{% block title %}Thanks | {{ block.super }}{% endblock title %}
 
 {% block og_title %}Thanks | {{ block.super }}{% endblock og_title %}
 {% block og_url %}{{ block.super }}/submit/{% endblock og_url %}
