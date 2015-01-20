@@ -34,7 +34,7 @@ SOCIAL_MEDIA_HANDLES = {
     'facebook': 'danehillard',
     'instagram': 'danehillard',
     'pinterest': 'danehillard',
-    'twitter': 'dane_hillard',
+    'twitter': 'danehillard',
     'youtube': 'danehillardphoto'
 }
 
