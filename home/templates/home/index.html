@@ -16,10 +16,10 @@
 {% block title %}Home | {% endblock title %}
 
 {% block content %}
-<div itemscope itemtype="http://schema.org/LocalBusiness">
-	<img itemprop="image" id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
+<div>
+	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
 </div>
-<h1 itemprop="name">Dane Hillard Photography</h1>
+<h1>Dane Hillard Photography</h1>
 <div id="latest-photos">
 {% for photoset in latest_photosets %}
 	<a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
@@ -31,10 +31,10 @@
 </p>
 </div>
 <hr />
-<p itemscope itemtype="http://schema.org/PostalAddress">
-	<span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
 <p>
-<p itemprop="description">
+	<span>Ann Arbor</span>, <span>MI</span>, <span>USA</span>
+<p>
+<p>
 	{{ siteDescription }}
 </p>
 <p>
