@@ -34,7 +34,7 @@ SOCIAL_MEDIA_HANDLES = {
     'facebook': 'danehillard',
     'instagram': 'danehillard',
     'pinterest': 'danehillard',
-    'twitter': 'dane_hillard',
+    'twitter': 'danehillard',
     'youtube': 'danehillardphoto'
 }
 
@@ -123,6 +123,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,6 +131,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'dhp.urls'
@@ -202,3 +204,13 @@ else:
 
     mimetypes.add_type("image/svg+xml", ".svg", True)
     mimetypes.add_type("image/svg+xml", ".svgz", True)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+CACHE_MIDDLEWARE_SECONDS = 3600
+CACHE_MIDDLEWARE_KEY_PREFIX = 'dhp'

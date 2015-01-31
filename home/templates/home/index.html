@@ -2,10 +2,6 @@
 {% load static %}
 
 {% block meta %}
-<meta http-equiv="content-type" content="text/html" />
-<meta charset="utf-8" />
-<meta name="description" content="{% block description %}Ann Arbor Wedding, Portrait, Fashion, Event, and Architecture Photography{% endblock description %}" />
-<meta name="keywords" content="{% block keywords %}photography, photographer, wedding, portrait, portraiture, senior portraits, Dane, Hillard, Dane Hillard, Ann Arbor, Michigan, Ann Arbor Michigan, ASquared, A2, A Squared, southeast Michigan, event photography, wedding photography{% endblock keywords %}" />
 <meta name="google-site-verification" content="Boc3cLhNPB4ArvuP60R9_XvNp2rm4MlRFq5Uz3dh3cg" />
 {% endblock meta %}
 
@@ -16,10 +12,10 @@
 {% block title %}Home | {% endblock title %}
 
 {% block content %}
-<div itemscope itemtype="http://schema.org/LocalBusiness">
-	<img itemprop="image" id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
+<div>
+	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
 </div>
-<h1 itemprop="name">Dane Hillard Photography</h1>
+<h1>Dane Hillard Photography</h1>
 <div id="latest-photos">
 {% for photoset in latest_photosets %}
 	<a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
@@ -31,10 +27,10 @@
 </p>
 </div>
 <hr />
-<p itemscope itemtype="http://schema.org/PostalAddress">
-	<span itemprop="addressLocality">Ann Arbor</span>, <span itemprop="addressRegion">MI</span>, <span itemprop="addressCountry">USA</span>
 <p>
-<p itemprop="description">
+	<span>Ann Arbor</span>, <span>MI</span>, <span>USA</span>
+<p>
+<p>
 	{{ siteDescription }}
 </p>
 <p>
