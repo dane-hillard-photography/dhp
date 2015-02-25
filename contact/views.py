@@ -14,21 +14,21 @@ class ContactFormView(FormView):
         conn = ses.connect_to_region('us-east-1')
 
         conn.send_email(
-            'dHP bot <no-reply@danehillard.com>',
-            'New message from ' + form.cleaned_data.get('name'),
-            form.cleaned_data.get('message'),
+            '{} <no-reply@danehillard.com>'.format(form.cleanded_data.get('name')),
+            form.cleaned_data.get('subject'),
+            form.cleaned_data.get('message') + '\n\n' + form.cleaned_data.get('name'),
             'contact@danehillard.com',
-            reply_addresses = (form.cleaned_data.get('email')),
+            reply_addresses = (form.cleaned_data.get('email'),),
         )
 
         conn.send_email(
-            'Dane Hillard Photography <contact@danehillard.com>',
+            'Dane Hillard Photography <no-reply@danehillard.com>',
             'Thank you for contacting dHP!',
             'Hey ' + form.cleaned_data.get('name') + """,
 <br /><br />
 Thanks for contacting me! If you requested further contact, you\'ll hear from me soon!
 <br /><br />
-Regards,
+Sincerely,
 <br /><br />
 Dane Hillard<br />
 <a href="http://www.danehillard.com">dHP</a>
