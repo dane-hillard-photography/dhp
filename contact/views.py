@@ -18,7 +18,7 @@ class ContactFormView(FormView):
             'New message from ' + form.cleaned_data.get('name'),
             form.cleaned_data.get('message'),
             'contact@danehillard.com',
-            reply_addresses = (form.cleaned_data.get('email'),
+            reply_addresses = (form.cleaned_data.get('email')),
         )
 
         conn.send_email(
