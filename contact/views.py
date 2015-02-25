@@ -16,16 +16,17 @@ class ContactFormView(FormView):
         conn.send_email(
             'dHP bot <no-reply@danehillard.com>',
             'New message from ' + form.cleaned_data.get('name'),
-            form.cleaned_data.get('message') + '\n\n' + form.cleaned_data.get('email'),
+            form.cleaned_data.get('message'),
             'contact@danehillard.com',
+            reply_addresses = (form.cleaned_data.get('email'),
         )
 
         conn.send_email(
-            'dHP bot <no-reply@danehillard.com>',
+            'Dane Hillard Photography <contact@danehillard.com>',
             'Thank you for contacting dHP!',
-            form.cleaned_data.get('name') + """,
+            'Hey ' + form.cleaned_data.get('name') + """,
 <br /><br />
-Thank you for your message. If you requested further contact, you\'ll hear from me soon!
+Thanks for contacting me! If you requested further contact, you\'ll hear from me soon!
 <br /><br />
 Regards,
 <br /><br />
