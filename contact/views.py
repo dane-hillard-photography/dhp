@@ -14,7 +14,7 @@ class ContactFormView(FormView):
         conn = ses.connect_to_region('us-east-1')
 
         conn.send_email(
-            '{} <no-reply@danehillard.com>'.format(form.cleanded_data.get('name')),
+            '{} <no-reply@danehillard.com>'.format(form.cleaned_data.get('name')),
             form.cleaned_data.get('subject'),
             form.cleaned_data.get('message') + '\n\n' + form.cleaned_data.get('name'),
             'contact@danehillard.com',
