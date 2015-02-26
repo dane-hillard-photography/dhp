@@ -1,4 +1,5 @@
 from django.views import generic
+from django.template import Context, loader
 from django.views.generic.edit import FormView
 
 from boto import ses
@@ -16,7 +17,7 @@ class ContactFormView(FormView):
         conn.send_email(
             '{} <no-reply@danehillard.com>'.format(form.cleaned_data.get('name')),
             form.cleaned_data.get('subject'),
-            form.cleaned_data.get('message') + '\n\n' + form.cleaned_data.get('name'),
+            form.cleaned_data.get('message') + '\n-' + form.cleaned_data.get('name'),
             'contact@danehillard.com',
             reply_addresses = (form.cleaned_data.get('email'),),
         )
@@ -24,15 +25,7 @@ class ContactFormView(FormView):
         conn.send_email(
             'Dane Hillard Photography <no-reply@danehillard.com>',
             'Thank you for contacting dHP!',
-            'Hey ' + form.cleaned_data.get('name') + """,
-<br /><br />
-Thanks for contacting me! If you requested further contact, you\'ll hear from me soon!
-<br /><br />
-Sincerely,
-<br /><br />
-Dane Hillard<br />
-<a href="http://www.danehillard.com">dHP</a>
-""",
+            loader.get_template('contact/contact_thank_you.html').render(Context({})).strip(),
             form.cleaned_data.get('email'),
             format='html'
         )
