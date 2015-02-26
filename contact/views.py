@@ -1,6 +1,6 @@
 from django.views import generic
 from django.template import Context, loader
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import FormView
 
 from boto import ses
@@ -10,7 +10,7 @@ from contact.forms import ContactForm
 class ContactFormView(FormView):
     template_name = 'contact/index.html'
     form_class = ContactForm
-    success_url = reverse('contact:submit')
+    success_url = reverse_lazy('contact:submit')
 
     def form_valid(self, form):
         conn = ses.connect_to_region('us-east-1')
