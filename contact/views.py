@@ -25,7 +25,7 @@ class ContactFormView(FormView):
         conn.send_email(
             'Dane Hillard Photography <no-reply@danehillard.com>',
             'Thank you for contacting dHP!',
-            loader.get_template('contact/contact_thank_you.html').render(Context({})).strip(),
+            loader.get_template('contact/contact_thank_you.html').render(Context({'name': form.cleaned_data.get('name')})).strip(),
             form.cleaned_data.get('email'),
             format='html'
         )
