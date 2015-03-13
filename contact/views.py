@@ -7,6 +7,7 @@ from boto import ses
 
 from contact.forms import ContactForm
 
+
 class ContactFormView(FormView):
     template_name = 'contact/index.html'
     form_class = ContactForm
@@ -36,6 +37,7 @@ class ContactFormView(FormView):
         )
 
         return super(ContactFormView, self).form_valid(form)
+
 
 class ContactSubmitView(generic.TemplateView):
     template_name = 'contact/submit.html'

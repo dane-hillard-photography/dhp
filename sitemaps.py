@@ -4,6 +4,7 @@ from django.contrib.sitemaps import Sitemap
 
 from photography.models import Photograph, PhotoSet
 
+
 class PhotographSitemap(Sitemap):
     changefreq = 'daily'
     priority = 1.0
@@ -19,6 +20,7 @@ class PhotographSitemap(Sitemap):
     def location(obj):
         return reverse('photography:photo', kwargs={'photo_id': obj.uuid})
 
+
 class PhotoSetSitemap(Sitemap):
     changefreq = 'monthly'
     priority = .75
@@ -33,6 +35,7 @@ class PhotoSetSitemap(Sitemap):
     @staticmethod
     def location(obj):
         return reverse('photography:photoset', kwargs={'photoset_id': obj.id, 'photoset_slug': obj.slug})
+
 
 class SiteSitemap(Sitemap):
     changefreq = 'monthly'

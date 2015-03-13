@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from photography.models import PhotoSet
 
+
 class IndexView(generic.TemplateView):
     template_name = 'home/index.html'
 

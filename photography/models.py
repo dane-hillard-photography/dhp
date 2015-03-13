@@ -13,13 +13,16 @@ from django.utils.safestring import mark_safe
 
 from dhp.settings import MEDIA_ROOT
 
+
 def generate_uuid():
     return str(uuid.uuid4())
+
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     save_filename = '{uuid}.{ext}'.format(uuid=instance.uuid, ext=ext)
     return os.path.join(instance.directory, save_filename)
+
 
 class Photograph(models.Model):
     class Meta:
@@ -40,7 +43,7 @@ class Photograph(models.Model):
     uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
     published_date = models.DateTimeField(default=datetime.datetime.now)
 
-    user = models.ForeignKey(User, blank=True, null=True, default=User.objects.get(username='dane').id)
+    user = models.ForeignKey(User, blank=True, null=True)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)
@@ -116,6 +119,7 @@ class Photograph(models.Model):
 
     def __unicode__(self):
         return mark_safe(self.admin_thumbnail())
+
 
 class PhotoSet(models.Model):
     class Meta:

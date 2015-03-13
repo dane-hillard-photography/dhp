@@ -1,4 +1,4 @@
-{% extends "home/__base.html" %}
+{% extends "__base.html" %}
 {% load staticfiles %}
 
 {% block title %}Contact | {% endblock title %}
@@ -9,7 +9,7 @@ Contact Dane Hillard Photography via email or through various other social chann
 
 {% block css %}
   {{ block.super }}
-  <link rel="stylesheet" href="{{ STATIC_URL }}contact/css/contact.css" />
+  <link rel="stylesheet" href="{% static 'contact/css/contact.css' %}" />
 {% endblock css %}
 
 {% block og_title %}Contact | {{ block.super }}{% endblock og_title %}

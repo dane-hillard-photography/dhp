@@ -1,7 +1,8 @@
-{% extends 'home/__base.html' %}
+{% extends '__base.html' %}
 {% load staticfiles photography_filters %}
 {% block description %}{{ photoset.body|truncatechars:150 }}{% endblock %}
 {% block css %}
+{{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'js/jQuery/fancyBox/source/jquery.fancybox.css' %}?v=2.1.5" />
 <link rel="stylesheet" type="text/css" href="{% static 'photography/css/photoset.css' %}" />
 {% endblock css %}

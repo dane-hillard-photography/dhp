@@ -1,52 +1,38 @@
-{% extends 'home/__base.html' %}
-{% load static %}
-
-{% block meta %}
-<meta name="google-site-verification" content="Boc3cLhNPB4ArvuP60R9_XvNp2rm4MlRFq5Uz3dh3cg" />
-{% endblock meta %}
+{% extends '__base.html' %}
+{% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/index.css" />
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
 {% endblock css %}
 
 {% block title %}Home | {% endblock title %}
 
 {% block content %}
 <div>
-	<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
+	<img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo -- Dane Hillard Photography" nopin="nopin" />
 </div>
 <h1>Dane Hillard Photography</h1>
 <div id="latest-photos">
-{% for photoset in latest_photosets %}
-	<a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
-		<img src="{{ photoset.feature_photo.thumbnail_square.url }}" nopin="nopin" alt="{{ photoset.feature_photo.title }}{% if photoset.feature_photo.description %} | {{ photoset.feature_photo.description }}{% endif %}"/>
-	</a>
-{% endfor %}
-<p>
-	<a href="{% url 'photography:photography' %}">Portfolio</a>
-</p>
+    {% for photoset in latest_photosets %}
+    <a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
+        <img src="{{ photoset.feature_photo.thumbnail_square.url }}" nopin="nopin" alt="{{ photoset.feature_photo.title }}{% if photoset.feature_photo.description %} | {{ photoset.feature_photo.description }}{% endif %}"/>
+    </a>
+    {% endfor %}
+    <p>
+        <a href="{% url 'photography:photography' %}">Portfolio</a>
+    </p>
 </div>
 <hr />
 <p>
 	<span>Ann Arbor</span>, <span>MI</span>, <span>USA</span>
 <p>
 <p>
-	{{ siteDescription }}
-</p>
-<p>
 	<a href="{% url 'contact:contact' %}" title="Book me!">Book me</a> today!
 </p>
-<div class="fb-like" 
-	data-href="http://www.facebook.com/danehillard" 
-	data-width="300"
-	data-colorscheme="light" 
-	data-layout="standard" 
-	data-action="like" 
-	data-show-faces="true" 
-	data-send="false">
-</div>
+{% include 'fb_like.html' %}
 {% endblock content %}
 
 {% block final %}
-	{% include 'home/fb_sdk.html' %}
+	{% include 'sdk_templates/fb_sdk.html' %}
 {% endblock final %}
