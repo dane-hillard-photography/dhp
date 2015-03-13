@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import FormView
 
 from boto import ses
+from django.conf import settings
 
 from contact.forms import ContactForm
 
@@ -14,7 +15,11 @@ class ContactFormView(FormView):
     success_url = reverse_lazy('contact:submit')
 
     def form_valid(self, form):
-        conn = ses.connect_to_region('us-east-1')
+        conn = ses.connect_to_region(
+            'us-east-1',
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
+        )
 
         contact_name = form.cleaned_data.get('name', '')
         contact_first_name = contact_name.split(' ')[0] if contact_name else ''
@@ -25,7 +30,7 @@ class ContactFormView(FormView):
             form.cleaned_data.get('subject'),
             '{}\n\n-{}'.format(form.cleaned_data.get('message'), contact_name),
             'contact@danehillard.com',
-            reply_addresses = (contact_email,),
+            reply_addresses=[contact_email],
         )
 
         conn.send_email(
