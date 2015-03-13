@@ -61,8 +61,10 @@
 	{% block final %}
 	{% endblock final %}
 
+    {% compress js %}
 	{% block js %}
 		<script type="text/javascript" src="{% static 'js/google_analytics_tracking.js' %}"></script>
 	{% endblock js %}
+    {% endcompress %}
 	</body>
 </html>
