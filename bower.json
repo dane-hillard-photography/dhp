@@ -1,0 +1,22 @@
+{
+  "name": "dhp",
+  "version": "0.0.0",
+  "homepage": "http://www.danehillard.com",
+  "description": "Dane Hillard Photography",
+  "authors": [
+    "Dane Hillard"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fancybox": "~2.1.5",
+    "jquery": "~2.1.3"
+  }
+}

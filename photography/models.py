@@ -13,13 +13,16 @@ from django.utils.safestring import mark_safe
 
 from dhp.settings import MEDIA_ROOT
 
+
 def generate_uuid():
     return str(uuid.uuid4())
+
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     save_filename = '{uuid}.{ext}'.format(uuid=instance.uuid, ext=ext)
     return os.path.join(instance.directory, save_filename)
+
 
 class Photograph(models.Model):
     class Meta:
@@ -40,7 +43,7 @@ class Photograph(models.Model):
     uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
     published_date = models.DateTimeField(default=datetime.datetime.now)
 
-    user = models.ForeignKey(User, blank=True, null=True, default=User.objects.get(username='dane').id)
+    user = models.ForeignKey(User, blank=True, null=True)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)
@@ -83,7 +86,7 @@ class Photograph(models.Model):
         original_image.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
         tf = NamedTemporaryFile()
         original_image.save(tf.name, original_image.format, quality=100)
-        new_image.save(self.image.name, File(open(tf.name)), save=False)
+        new_image.save(self.image.name, File(open(tf.name, 'rb')), save=False)
         tf.close()
 
     def save(self, *args, **kwargs):
@@ -94,7 +97,7 @@ class Photograph(models.Model):
         thumb_square = PImageOps.fit(image, thumbnail_size, PImage.ANTIALIAS)
         tf = NamedTemporaryFile()
         thumb_square.save(tf.name, image.format, quality=100)
-        self.thumbnail_square.save(self.image.name, File(open(tf.name)), save=False)
+        self.thumbnail_square.save(self.image.name, File(open(tf.name, 'rb')), save=False)
         tf.close()
       
         self.create_thumbnail(image, self.thumbnail_large, 800)
@@ -114,8 +117,9 @@ class Photograph(models.Model):
     admin_thumbnail.short_description = 'Thumbnail'
     admin_thumbnail.allow_tags = True
 
-    def __unicode__(self):
+    def __str__(self):
         return mark_safe(self.admin_thumbnail())
+
 
 class PhotoSet(models.Model):
     class Meta:
@@ -133,5 +137,5 @@ class PhotoSet(models.Model):
     feature_photo_thumbnail.short_description = 'Feature photo'
     feature_photo_thumbnail.allow_tags = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title

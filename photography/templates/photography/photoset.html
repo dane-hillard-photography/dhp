@@ -1,8 +1,9 @@
-{% extends 'home/__base.html' %}
+{% extends '__base.html' %}
 {% load staticfiles photography_filters %}
 {% block description %}{{ photoset.body|truncatechars:150 }}{% endblock %}
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'js/jQuery/fancyBox/source/jquery.fancybox.css' %}?v=2.1.5" />
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'fancybox/source/jquery.fancybox.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'photography/css/photoset.css' %}" />
 {% endblock css %}
 
@@ -48,8 +49,8 @@
 </div>
 {% block js %}
 {{ block.super }}
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript" src="{% static 'js/jQuery/fancyBox/source/jquery.fancybox.pack.js' %}?v=2.1.5"></script>
+<script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'fancybox/source/jquery.fancybox.pack.js' %}?v=2.1.5"></script>
 <script type="text/javascript" src="{% static 'photography/js/photoset.js' %}"></script>
 {% endblock js %}
 {% endblock content %}
