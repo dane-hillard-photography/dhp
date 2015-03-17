@@ -1,11 +1,6 @@
 {% extends "__base.html" %}
 {% load static %}
 
-{% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}about/css/about.css" />
-{% endblock css %}
-
 {% block title %}About | {% endblock title %}
 
 {% block description %}
@@ -19,7 +14,7 @@ About Dane Hillard, the brains behind the Dane Hillard Photography operation.
 {% endblock og_images %}
 
 {% block content %}
-<img id="logo" src="{% get_static_prefix %}images/logos/dhp.png" alt="dHP Logo" nopin="nopin" />
+{% include '__i_dhp_logo.html' %}
 <h1>About Me</h1>
 <img title="Credit: Rachel Liu Photography" id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait" nopin="nopin" />
 <div id="bio">

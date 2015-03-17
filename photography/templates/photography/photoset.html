@@ -3,8 +3,7 @@
 {% block description %}{{ photoset.body|truncatechars:150 }}{% endblock %}
 {% block css %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'fancybox/source/jquery.fancybox.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'photography/css/photoset.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'fancybox/source/jquery.fancybox.css' %}?v=2.1.5" />
 {% endblock css %}
 
 {% block title %}{{ photoset.title }} | {% endblock title %}
@@ -35,7 +34,7 @@
 {% endblock twitter %}
 
 {% block content %}
-<img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo" nopin="nopin"  />
+{% include '__i_dhp_logo.html' %}
 <h1>{{ photoset.title }}</h1>
 <div id="photoset">
 	{% for photo in photoset.photos.all %}
@@ -49,8 +48,7 @@
 </div>
 {% block js %}
 {{ block.super }}
-<script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'fancybox/source/jquery.fancybox.pack.js' %}?v=2.1.5"></script>
-<script type="text/javascript" src="{% static 'photography/js/photoset.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/photoset.js' %}"></script>
 {% endblock js %}
 {% endblock content %}

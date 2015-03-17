@@ -1,11 +1,7 @@
 {% extends '__base.html' %}
 {% load staticfiles %}
-{% block css %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'photography/css/photoset.css' %}" />
-{% endblock css %}
 {% block content %}
-<img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo" nopin="nopin"  />
+{% include '__i_dhp_logo.html' %}
 <h1>Portfolio</h1>
 {% for photoset in photoset_list %}
 	<a class="photo" href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">

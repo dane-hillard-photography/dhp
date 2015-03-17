@@ -2,36 +2,10 @@
 @import dhp-constants
 
 form
-  table
-    margin: 0px auto
-
-  th
-    text-align: right
-    font-weight: normal
-
   input, textarea
-    margin: 5px
-    padding: 5px
-    width: 300px
-    border: none
-    outline: none
-    vertical-align: middle
-    +vendor-prefix(border-radius, 5px)
-    +vendor-prefix(transition, box-shadow 0.25s ease-in-out)
+    @include transition-property(box-shadow)
+    @include transition-duration(.25s)
+    @include transition-timing-function(ease-in-out)
 
     &:focus
-      +vendor-prefix(box-shadow, 0 0 5px $site-accent)
-
-  input[type="submit"]
-    background: #aaa
-    width: 200px
-
-    &:hover
-      background: #999
-      cursor: pointer
-
-  .errorlist
-    color: #ff0000
-
-  table
-    margin: 0px auto
+      @include box-shadow(0 0 5px $site-accent)

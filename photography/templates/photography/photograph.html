@@ -5,11 +5,6 @@
 
 {% block description %}{{ photograph.title }}{% if photograph.description %} — {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} — A photograph by Dane Hillard. Published: {{ photograph.published_date|date:"l, F jS, Y" }}{% endblock description %}
 
-{% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
-{% endblock css %}
-
 {% block og_type %}danehillard:photograph{% endblock og_type %}
 {% block og_url %}{{ request.get_host }}{% url 'photography:photo' photograph.uuid %}{% endblock og_url %}
 {% block og_title %}{{ photograph.title }} | {{ block.super }}{% endblock og_title %}
@@ -35,7 +30,7 @@
 {% endblock twitter %}
 
 {% block content %}
-  <img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo" nopin="nopin"  />
+  {% include '__i_dhp_logo.html' %}
   <div id="feature">
     <h1 id="title">{{ photograph.title }}</h1>
     <img src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard" />

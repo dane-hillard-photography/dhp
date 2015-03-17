@@ -7,17 +7,12 @@
 Contact Dane Hillard Photography via email or through various other social channels.
 {% endblock description %}
 
-{% block css %}
-  {{ block.super }}
-  <link rel="stylesheet" href="{% static 'contact/css/contact.css' %}" />
-{% endblock css %}
-
 {% block og_title %}Contact | {{ block.super }}{% endblock og_title %}
 {% block og_url %}{{ block.super }}/contact/{% endblock og_url %}
 
 {% block content %}
 {% with contact_icon_path=STATIC_URL|add:'images/icons/menu/white/' %}
-<img id="logo" src="{{ STATIC_URL }}images/logos/dhp.png" alt="dHP Logo" nopin="nopin" />
+{% include '__i_dhp_logo.html' %}
 <h1>Get in touch!</h1>
 <p class="call">
   My goal is to provide clients with images that do more than capture faces. A portrait
@@ -31,7 +26,7 @@ Contact Dane Hillard Photography via email or through various other social chann
   {{ form.as_table }}
   <tr>
     <td></td>
-    <td><input type="submit" value="Submit" /></td>
+    <td><input class="button" type="submit" value="Submit" /></td>
   </tr>
 </table>
 </form>
