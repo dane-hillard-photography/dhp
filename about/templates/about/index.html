@@ -15,40 +15,39 @@ About Dane Hillard, the brains behind the Dane Hillard Photography operation.
 
 {% block content %}
 {% include '__i_dhp_logo.html' %}
-<h1>About Me</h1>
-<img title="Credit: Rachel Liu Photography" id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait" nopin="nopin" />
-<div id="bio">
-  <p>
-    After graduating from the University of Michigan with a degree in computer 
-    engineering/mathematics, I've been living in Ann Arbor <a target="_blank" href="http://www.compendiabio.com">working as a software engineer</a>.
-    I may qualify for <a target="_blank" href="http://questionablecontent.net/view.php?comic=1942">townie status</a> 
-    sooner than I wish to. By day I work on web applications that spread knowledge. By night I fight crime.
-    I also like writing <a target="_blank" href="http://www.littleleviathan.com">music</a>.
-  </p>
-  <p>
-    I developed an interest in photography after my father purchased a DSLR. He'd had an old
-    Minolta 35mm film camera for forever but it wasn't until this simpler, sleek technology touched my
-    hands that I was inspired to pick it up. I started using his camera more than he did and
-    was coerced into purchasing my own. I began with a Sony Alpha but I have been shooting
-    Nikon ever since a Christmas vacation theft debacle in 2009.
-  </p>
-  <p>
-    I especially enjoy fashion and nature photography. Each provides an opportunity for me
-    to develop new relationships and gain insight into people and places. I'm appreciative
-    of new outlooks and consider myself a continual learner. I consider wisdom and knowledge
-    two of the highest virtues; any who possess them have the tools to build
-    virtuosity throughout the rest of their lives.
-  </p>
-  <p>
-    I'd like to thank you for coming to my site. I encourage you to browse my <a href="{% url 'photography:photography' %}">portfolio</a>
-    and <a href="{% url 'contact:contact' %}">contact me</a> with your questions, comments, and critiques.
-  </p>
+<h1 class="text-center">About Me</h1>
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-4">
+        <img class="img-responsive" title="Credit: Rachel Liu Photography" id="me" src="{{ STATIC_URL }}images/DaneHillard.jpg" alt="Dane Hillard portrait" nopin="nopin" />
+    </div>
 </div>
-<hr />
-<h2>Résumé</h2>
-<p>
-  <a href="http://resume.linkedinlabs.com/j83am5nk0.pdf">
-    <img class="menu-icon" src="{{ STATIC_URL }}images/icons/menu/black/download.svg" nopin="nopin" />
-  </a>
-</p>
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-md-offset-2">
+        <p>
+            After graduating from the University of Michigan with a degree in computer
+            engineering/mathematics, I've been living in Ann Arbor <a target="_blank" href="http://www.compendiabio.com">working as a software engineer</a>.
+            I may qualify for <a target="_blank" href="http://questionablecontent.net/view.php?comic=1942">townie status</a>
+            sooner than I wish to. By day I work on web applications that spread knowledge. By night I fight crime.
+            I also like writing <a target="_blank" href="http://www.littleleviathan.com">music</a>.
+        </p>
+        <p>
+            I developed an interest in photography after my father purchased a DSLR. He'd had an old
+            Minolta 35mm film camera for forever but it wasn't until this simpler, sleek technology touched my
+            hands that I was inspired to pick it up. I started using his camera more than he did and
+            was coerced into purchasing my own. I began with a Sony Alpha but I have been shooting
+            Nikon ever since a Christmas vacation theft debacle in 2009.
+        </p>
+        <p>
+            I especially enjoy fashion and nature photography. Each provides an opportunity for me
+            to develop new relationships and gain insight into people and places. I'm appreciative
+            of new outlooks and consider myself a continual learner. I consider wisdom and knowledge
+            two of the highest virtues; any who possess them have the tools to build
+            virtuosity throughout the rest of their lives.
+        </p>
+        <p>
+            I'd like to thank you for coming to my site. I encourage you to browse my <a href="{% url 'photography:photography' %}">portfolio</a>
+            and <a href="{% url 'contact:contact' %}">contact me</a> with your questions, comments, and critiques.
+        </p>
+    </div>
+</div>
 {% endblock content %}

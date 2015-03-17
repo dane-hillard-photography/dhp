@@ -5,7 +5,7 @@
 <h1>Portfolio</h1>
 {% for photoset in photoset_list %}
 	<a class="photo" href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
-		<img src="{{ photoset.feature_photo.thumbnail_square.url }}" alt="{{ photoset.feature_photo.title }}"/>
+		<img class="img-rounded" src="{{ photoset.feature_photo.thumbnail_square.url }}" alt="{{ photoset.feature_photo.title }}"/>
 	</a>
 {% endfor %}
 {% endblock content %}

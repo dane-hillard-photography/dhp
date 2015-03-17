@@ -16,7 +16,6 @@ body
   background: $site-accent
 
 .menu-icon
-  border: 0
   position: relative
   width: $menu-link-size
   height: $menu-link-size
@@ -29,53 +28,28 @@ body
     @include transition-duration(.25s)
     @include scale(1.25)
 
-.external-site
-  a
-    img
-      width: 50px
-      height: 50px
-      +vendor-prefix(transition, background 0.2s ease-in-out)
+.external-site a img
+  width: 50px
+  height: 50px
+  @include transition(background 0.2s ease-in-out)
 
-      &[alt=Facebook]:hover
-        background: #3B5998
+  &[alt=Facebook]:hover
+    background: #3B5998
 
-      &[alt=Instagram]:hover
-        background: #3F729B
+  &[alt=Instagram]:hover
+    background: #3F729B
 
-      &[alt=Twitter]:hover
-        background: #39A9E0
+  &[alt=Twitter]:hover
+    background: #39A9E0
 
-      &[alt=Pinterest]:hover
-        background: #CB2027
+  &[alt=Pinterest]:hover
+    background: #CB2027
 
-      &[alt=YouTube]:hover
-        background: #CD332D
+  &[alt=YouTube]:hover
+    background: #CD332D
 
-      &[alt=LinkedIn]:hover
-        background: #007FB1
-
-      &[alt=GitHub]:hover
-        background: #4183C4
-
-      &[alt=stackoverflow]:hover
-        background: #F47920
+  &[alt=LinkedIn]:hover
+    background: #007FB1
 
 .fb-like
   height: 57px
-
-#latest-photos
-  display: block
-  margin: 20px auto
-
-  a img
-    height: 250px
-    width: 250px
-    margin: 5px
-    +vendor-prefix(border-radius, 5px)
-
-.photo img
-  border: 0
-  height: 250px
-  width: 250px
-  margin: 5px
-  +vendor-prefix(border-radius, 5px)
