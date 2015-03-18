@@ -29,14 +29,14 @@
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,200">
         {% compress css %}
             {% block css %}
-            <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}">
             {% endblock css %}
         {% endcompress %}
         <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 	</head>
 	<body>
 	{% include '__i_navigation.html' %}
-	<div id="content">
+	<div class="content container-fluid">
 	{% block content %}
 	{% endblock content %}
 	{% include '__i_admin_links.html' %}
@@ -64,6 +64,8 @@
     {% compress js %}
 	{% block js %}
 		<script type="text/javascript" src="{% static 'js/google_analytics_tracking.js' %}"></script>
+		<script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
 	{% endblock js %}
     {% endcompress %}
 	</body>

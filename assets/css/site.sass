@@ -1,0 +1,67 @@
+@import dhp-constants
+@import ../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap
+@import form
+@import fancybox_overrides
+
+.admin-links
+  font-size: $font-size-admin-links
+
+.navbar .navbar-nav
+  display: inline-block
+  float: none
+  vertical-align: top
+
+.navbar .navbar-collapse
+  text-align: center
+
+.photo-thumbnail
+  margin: 10px
+
+body
+  overflow-y: scroll
+  font-weight: $font-weight
+  background: $background-color
+
+.dhp-logo
+  height: $dhp-logo-height
+
+::selection
+  background: $site-accent
+
+.menu-icon
+  @include transition-property(transform)
+  @include transition-duration(.25s)
+  @include transition-transform(.5s)
+
+  &:hover
+    @include transition-property(transform)
+    @include transition-duration(.25s)
+    @include scale(1.25)
+
+  svg
+    width: $menu-link-size
+    height: $menu-link-size
+    fill: $text-color
+
+.external-site
+  a svg
+    width: $menu-link-size
+    height: $menu-link-size
+    fill: $external-site-link-color
+    @include transition(background 0.2s ease-in-out)
+
+  &.facebook:hover a svg
+    background: #3B5998
+  &.instagram:hover a svg
+    background: #3F729B
+  &.twitter:hover a svg
+    background: #39A9E0
+  &.pinterest:hover a svg
+    background: #CB2027
+  &.youtube:hover a svg
+    background: #CD332D
+  &.linkedin:hover a svg
+    background: #007FB1
+
+.fb-like
+  height: 57px

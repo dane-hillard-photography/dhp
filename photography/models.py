@@ -129,7 +129,7 @@ class PhotoSet(models.Model):
     slug = models.SlugField(max_length=40)
     body = models.TextField()
     feature_photo = models.ForeignKey(Photograph, related_name='photosets_featured_in')
-    photos = models.ManyToManyField(Photograph, related_name='photosets_in', )
+    photos = models.ManyToManyField(Photograph, related_name='photosets_in')
     published_date = models.DateTimeField(default=datetime.datetime.now)
 
     def feature_photo_thumbnail(self):

@@ -1,34 +1,33 @@
 {% load staticfiles %}
-{% with STATIC_URL|add:'images/icons/menu/black/' as nav_menu_icon_path %}
-<div id="nav-container">
-    <div id="navigation">
-        <ul>
-            <li>
-                <a href="{% url 'home:home' %}" title="Home">
-                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}home.svg" alt="home link icon" />
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'photography:photography' %}" title="Photography">
-                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}photography.svg" alt="photography link icon" />
-                </a>
-            </li>
-            <li>
-                <a href="//blog.danehillard.com" title="Blog">
-                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}blog.svg" alt="blog link icon" />
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'contact:contact' %}" title="Contact">
-                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}contact.svg" alt="contact link icon"/>
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'about:about' %}" title="About">
-                    <img class="menu-icon"  src="{{ nav_menu_icon_path }}user.svg" alt="about link icon"/>
-                </a>
-            </li>
-        </ul>
+
+<div class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{% url 'home:home' %}" title="Home"><div class="menu-icon">{% include 'iconography/home.svg' %}</div></a>
+                </li>
+                <li>
+                    <a href="{% url 'photography:photography' %}" title="Photography"><div class="menu-icon">{% include 'iconography/photography.svg' %}</div></a>
+                </li>
+                <li>
+                    <a href="//blog.danehillard.com" title="Blog"><div class="menu-icon">{% include 'iconography/blog.svg' %}</div></a>
+                </li>
+                <li>
+                    <a href="{% url 'contact:contact' %}" title="Contact"><div class="menu-icon">{% include 'iconography/contact.svg' %}</div></a>
+                </li>
+                <li>
+                    <a href="{% url 'about:about' %}" title="About"><div class="menu-icon">{% include 'iconography/user.svg' %}</div></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
-{% endwith %}

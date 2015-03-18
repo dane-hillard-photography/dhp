@@ -6,7 +6,11 @@
 {% block og_url %}{{ block.super }}/submit/{% endblock og_url %}
 
 {% block content %}
-<p>
-  Thank you for your message! You will receive a confirmation shortly.
-</p>
+{% include '__i_dhp_logo.html' %}
+<div class="text-center">
+    <h1>Thank You!</h1>
+    <p>
+      You'll receive a confirmation message shortly.
+    </p>
+</div>
 {% endblock content %}

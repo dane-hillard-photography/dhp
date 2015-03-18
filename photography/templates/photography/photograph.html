@@ -5,11 +5,6 @@
 
 {% block description %}{{ photograph.title }}{% if photograph.description %} — {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} — A photograph by Dane Hillard. Published: {{ photograph.published_date|date:"l, F jS, Y" }}{% endblock description %}
 
-{% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}photography/css/photograph.css" />
-{% endblock css %}
-
 {% block og_type %}danehillard:photograph{% endblock og_type %}
 {% block og_url %}{{ request.get_host }}{% url 'photography:photo' photograph.uuid %}{% endblock og_url %}
 {% block og_title %}{{ photograph.title }} | {{ block.super }}{% endblock og_title %}
@@ -35,20 +30,22 @@
 {% endblock twitter %}
 
 {% block content %}
-  <img id="logo" src="{% static 'images/logos/dhp.png' %}" alt="dHP Logo" nopin="nopin"  />
-  <div id="feature">
-    <h1 id="title">{{ photograph.title }}</h1>
-    <img src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard" />
-  	{% if photosets %}
-	<div id="photo-photosets">
-		<p>Read more about the photo here:
-			<ul>
-			{% for photoset in photosets %}
-				<li class="photo-photoset"><a href="{% url 'photography:photoset' photoset.id photoset.slug %}">{{ photoset.title }}</a></li>
-			{% endfor %}
-			</ul>
-		</p>
-	</div>
-  	{% endif %}
-  </div>
+{% include '__i_dhp_logo.html' %}
+<h1 class="text-center">{{ photograph.title }}</h1>
+<div class="row">
+    <div class="text-center col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+        <img class="img-responsive" src="{{ photograph.thumbnail_large.url }}" alt="{{ photograph.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard" />
+        {% if photosets %}
+        <div>
+            <p>Read more about the photo here:
+                <ul class="list-unstyled">
+                {% for photoset in photosets %}
+                    <li><a href="{% url 'photography:photoset' photoset.id photoset.slug %}">{{ photoset.title }}</a></li>
+                {% endfor %}
+                </ul>
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock content %}
