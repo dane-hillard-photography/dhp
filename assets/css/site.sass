@@ -1,8 +1,21 @@
 @import dhp-constants
 @import ../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap
 @import form
-@import nav
 @import fancybox_overrides
+
+.admin-links
+  font-size: $font-size-admin-links
+
+.navbar .navbar-nav
+  display: inline-block
+  float: none
+  vertical-align: top
+
+.navbar .navbar-collapse
+  text-align: center
+
+.photo-thumbnail
+  margin: 10px
 
 body
   overflow-y: scroll
@@ -16,9 +29,6 @@ body
   background: $site-accent
 
 .menu-icon
-  position: relative
-  width: $menu-link-size
-  height: $menu-link-size
   @include transition-property(transform)
   @include transition-duration(.25s)
   @include transition-transform(.5s)
@@ -28,27 +38,29 @@ body
     @include transition-duration(.25s)
     @include scale(1.25)
 
-.external-site a img
-  width: 50px
-  height: 50px
-  @include transition(background 0.2s ease-in-out)
+  svg
+    width: $menu-link-size
+    height: $menu-link-size
+    fill: $text-color
 
-  &[alt=Facebook]:hover
+.external-site
+  a svg
+    width: $menu-link-size
+    height: $menu-link-size
+    fill: $external-site-link-color
+    @include transition(background 0.2s ease-in-out)
+
+  &.facebook:hover a svg
     background: #3B5998
-
-  &[alt=Instagram]:hover
+  &.instagram:hover a svg
     background: #3F729B
-
-  &[alt=Twitter]:hover
+  &.twitter:hover a svg
     background: #39A9E0
-
-  &[alt=Pinterest]:hover
+  &.pinterest:hover a svg
     background: #CB2027
-
-  &[alt=YouTube]:hover
+  &.youtube:hover a svg
     background: #CD332D
-
-  &[alt=LinkedIn]:hover
+  &.linkedin:hover a svg
     background: #007FB1
 
 .fb-like

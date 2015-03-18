@@ -1,6 +1,6 @@
 {% load future %}
 <div class="row text-center">
-    <span>
+    <span class="admin-links">
         {% if request.user.is_authenticated %}
         <span>{{ request.user.first_name }}</span>
         <a href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}">Logout</a>

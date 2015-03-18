@@ -35,15 +35,17 @@
 
 {% block content %}
 {% include '__i_dhp_logo.html' %}
-<h1>{{ photoset.title }}</h1>
-<div id="photoset">
-	{% for photo in photoset.photos.all %}
-	<a id="{{ photo.uuid }}" rel="album" class="photo" href="{{ photo.thumbnail_large.url }}" data-title-id="title-for-{{ photo.uuid }}">
-		<img class="img-rounded" src="{{ photo.thumbnail_square.url }}" alt="{{ photo.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard"/>
-	</a>
-	{% endfor %}
+<h1 class="text-center">{{ photoset.title }}</h1>
+<div class="row">
+    <div class="text-center col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        {% for photo in photoset.photos.all %}
+        <a id="{{ photo.uuid }}" rel="album" class="photo" href="{{ photo.thumbnail_large.url }}" data-title-id="title-for-{{ photo.uuid }}">
+            <img class="photo-thumbnail img-rounded" src="{{ photo.thumbnail_square.url }}" alt="{{ photo.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard"/>
+        </a>
+        {% endfor %}
+    </div>
 </div>
-<div id="photoset-body">
+<div class="text-center">
 	{{ photoset.body|to_markdown }}
 </div>
 {% block js %}

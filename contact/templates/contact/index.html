@@ -11,62 +11,66 @@ Contact Dane Hillard Photography via email or through various other social chann
 {% block og_url %}{{ block.super }}/contact/{% endblock og_url %}
 
 {% block content %}
-{% with contact_icon_path=STATIC_URL|add:'images/icons/menu/white/' %}
+{% with contact_icon_path=STATIC_URL|add:'images/icons/iconography/white/' %}
 {% include '__i_dhp_logo.html' %}
-<h1>Get in touch!</h1>
-<p class="call">
-  My goal is to provide clients with images that do more than capture faces. A portrait
-  should speak to its audience and reveal something about the subject. If you are
-  interested in setting up a portrait session or have any questions regarding me,
-  my equipment, or what a session with me might be like, please contact me using
-  the form below.
-</p>
+<h1 class="text-center">Get in touch!</h1>
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <p class="call">
+          My goal is to provide clients with images that do more than capture faces. A portrait
+          should speak to its audience and reveal something about the subject. If you are
+          interested in setting up a portrait session or have any questions regarding me,
+          my equipment, or what a session with me might be like, please contact me using
+          the form below.
+        </p>
+    </div>
+</div>
 <form action="{% url 'contact:contact' %}" id="contact-form" method="post">{% csrf_token %}
-<table>
-  {{ form.as_table }}
-  <tr>
-    <td></td>
-    <td><input class="button" type="submit" value="Submit" /></td>
-  </tr>
-</table>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+            <div class="form-group">
+                <label for="{{ form.name.auto_id }}">{{ form.name.html_name|title }}</label>
+                <input class="form-control" id="{{ form.name.auto_id }}" name="{{ form.name.html_name }}" />
+                <label for="{{ form.email.auto_id }}">{{ form.email.html_name|title }}</label>
+                <input class="form-control" id="{{ form.email.auto_id }}" name="{{ form.email.html_name }}" />
+                <label for="{{ form.phone.auto_id }}">{{ form.phone.html_name|title }}</label>
+                <input class="form-control" id="{{ form.phone.auto_id }}" name="{{ form.phone.html_name }}" />
+                <label for="{{ form.subject.auto_id }}">{{ form.subject.html_name|title }}</label>
+                <input class="form-control" id="{{ form.subject.auto_id }}" name="{{ form.subject.html_name }}" />
+                <label for="{{ form.message.auto_id }}">{{ form.message.html_name|title }}</label>
+                <textarea class="form-control" id="{{ form.message.auto_id }}" name="{{ form.message.html_name }}"></textarea>
+            </div>
+            <input class="btn btn-primary btn-large" type="submit" value="Submit" />
+        </div>
+    </div>
 </form>
 
-<div>
+<div class="text-center">
   <p>You can also connect with me on the following sites:</p>
-  <div id="external-sites">
-    <ul>
-      <li class="external-site">
-        <a target="_blank" href="http://www.facebook.com/danehillard">
-          <img src="{{ contact_icon_path }}facebook.svg" alt="Facebook" nopin="nopin" />
-        </a>
-      </li>
-      <li class="external-site">
-        <a target="_blank" href="http://www.pinterest.com/danehillard">
-          <img src="{{ contact_icon_path }}pinterest.svg" alt="Pinterest" nopin="nopin" />
-        </a>
-      </li>
-      <li class="external-site">
-        <a target="_blank" href="http://www.instagram.com/danehillard">
-          <img src="{{ contact_icon_path }}instagram.svg" alt="Instagram" nopin="nopin" />
-        </a>
-      </li>
-      <li class="external-site">
-        <a target="_blank" href="http://www.twitter.com/danehillard">
-          <img src="{{ contact_icon_path }}twitter.svg" alt="Twitter" nopin="nopin" />
-        </a>
-      </li>
-      <li class="external-site">
-        <a target="_blank" href="http://www.linkedin.com/in/danehillard">
-          <img src="{{ contact_icon_path }}linkedin.svg" alt="LinkedIn" nopin="nopin" />
-        </a>
-      </li>
-      <li class="external-site">
-        <a target="_blank" href="http://www.youtube.com/danehillardphoto">
-          <img src="{{ contact_icon_path }}youtube.svg" alt="YouTube" nopin="nopin" />
-        </a>
-      </li>
-    </ul>
-  </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="list-inline">
+              <li class="external-site facebook">
+                <a target="_blank" href="http://www.facebook.com/danehillard">{% include 'iconography/facebook.svg' %}</a>
+              </li>
+              <li class="external-site pinterest">
+                <a target="_blank" href="http://www.pinterest.com/danehillard">{% include 'iconography/pinterest.svg' %}</a>
+              </li>
+              <li class="external-site instagram">
+                <a target="_blank" href="http://www.instagram.com/danehillard">{% include 'iconography/instagram.svg' %}</a>
+              </li>
+              <li class="external-site twitter">
+                <a target="_blank" href="http://www.twitter.com/danehillard">{% include 'iconography/twitter.svg' %}</a>
+              </li>
+              <li class="external-site linkedin">
+                <a target="_blank" href="http://www.linkedin.com/in/danehillard">{% include 'iconography/linkedin.svg' %}</a>
+              </li>
+              <li class="external-site youtube">
+                <a target="_blank" href="http://www.youtube.com/danehillardphoto">{% include 'iconography/youtube.svg' %}</a>
+              </li>
+            </ul>
+        </div>
+    </div>
 </div>
 {% endwith %}
 {% endblock content %}
