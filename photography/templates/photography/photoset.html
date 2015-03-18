@@ -45,9 +45,12 @@
         {% endfor %}
     </div>
 </div>
-<div class="text-center">
-	{{ photoset.body|to_markdown }}
+<div class="row">
+    <div class="text-justify col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        {{ photoset.body|to_markdown }}
+    </div>
 </div>
+
 {% block js %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'fancybox/source/jquery.fancybox.pack.js' %}?v=2.1.5"></script>
