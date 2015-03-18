@@ -8,7 +8,7 @@
     <div class="text-center col-xs-12 col-md-8 col-md-offset-2">
         {% for photoset in photoset_list %}
         <a href="{% url 'photography:photoset' photoset.id photoset.slug %}" title="{{ photoset.title }}">
-            <img class="photo-thumbnail img-rounded" src="{{ photoset.feature_photo.thumbnail_square.url }}" alt="{{ photoset.feature_photo.title }}"/>
+            <img class="photo-thumbnail img-rounded" src="{{ photoset.feature_photo.thumbnail_square.url }}" alt="{{ photoset.feature_photo.title }}" nopin="nopin" />
         </a>
         {% endfor %}
     </div>

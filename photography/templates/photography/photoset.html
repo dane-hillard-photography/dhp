@@ -40,7 +40,7 @@
     <div class="text-center col-xs-12 col-md-8 col-md-offset-2">
         {% for photo in photoset.photos.all %}
         <a id="{{ photo.uuid }}" rel="album" class="photo" href="{{ photo.thumbnail_large.url }}" data-title-id="title-for-{{ photo.uuid }}">
-            <img class="photo-thumbnail img-rounded" src="{{ photo.thumbnail_square.url }}" alt="{{ photo.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard"/>
+            <img class="photo-thumbnail img-rounded" src="{{ photo.thumbnail_square.url }}" alt="{{ photo.title }}{% if photograph.description %} | {% autoescape on %}{{ photograph.description }}{% endautoescape %}{% endif %} | A photograph by Ann Arbor photographer Dane Hillard" nopin="nopin" />
         </a>
         {% endfor %}
     </div>
