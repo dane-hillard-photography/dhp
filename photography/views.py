@@ -5,10 +5,11 @@ from django.shortcuts import get_object_or_404
 from photography.models import Photograph, PhotoSet
 from dhp import settings
 
+
 class PhotographView(generic.DetailView):
     template_name = 'photography/photograph.html'
 
-    def get_object(self):
+    def get_object(self, *args, **kwargs):
         if self.request.user.is_superuser:
             return get_object_or_404(Photograph, uuid=self.kwargs['photo_id'])
         else:
@@ -22,16 +23,18 @@ class PhotographView(generic.DetailView):
         context['photosets'] = self.get_object().photosets_in.all()
         return context
 
+
 class PhotoSetView(generic.DetailView):
     template_name = 'photography/photoset.html'
 
-    def get_object(self):
+    def get_object(self, *args, **kwargs):
         return get_object_or_404(PhotoSet, id=self.kwargs['photoset_id'])
 
     def get_context_data(self, **kwargs):
         context = super(PhotoSetView, self).get_context_data(**kwargs)
         context['social_media'] = settings.SOCIAL_MEDIA_HANDLES
         return context
+
 
 class PhotoSetListView(generic.ListView):
     template_name = 'photography/photoset_list.html'

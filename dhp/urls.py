@@ -27,5 +27,12 @@ urlpatterns = patterns(
     url(r'^sitemap\.xml', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
+if settings.DEBUG:
+    urlpatterns += patterns(
+        '',
+        url(r'^404/$', TemplateView.as_view(template_name='404.html'), name='not_found'),
+        url(r'^500/$', TemplateView.as_view(template_name='500.html'), name='server_error'),
+    )
+
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
