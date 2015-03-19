@@ -50,10 +50,10 @@
         {{ photoset.body|to_markdown }}
     </div>
 </div>
+{% endblock content %}
 
 {% block js %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'fancybox/source/jquery.fancybox.pack.js' %}?v=2.1.5"></script>
 <script type="text/javascript" src="{% static 'js/photoset.js' %}"></script>
 {% endblock js %}
-{% endblock content %}
