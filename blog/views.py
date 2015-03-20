@@ -24,13 +24,16 @@ class PostView(View):
         {% block content %}
             {% include \'__i_dhp_logo.html\' %}
             {% if not post.published %}
-                <h1 class="text-danger text-center">NOT PUBLISHED</h1>
+            <h1 class="text-danger text-center">NOT PUBLISHED</h1>
             {% endif %}
         ''' + post.body + '''
-        {% endblock %}
+        {% endblock content %}
         '''
+
         template = get_template_from_string(template_string)
-        return HttpResponse(template.render(RequestContext(request)))
+        context = RequestContext(request)
+        context['post'] = post
+        return HttpResponse(template.render(context))
 
 
 class WriterView(View):
