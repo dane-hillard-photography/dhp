@@ -8,13 +8,27 @@ from blog.models import Post
 
 class PostView(View):
     def get(self, request, *args, **kwargs):
-        matching_posts = Post.objects.filter(slug=kwargs.get('slug')).filter(published=True)
+        matching_posts = Post.objects.filter(slug=kwargs.get('slug'))
+
+        if not request.user.is_authenticated():
+            matching_posts = matching_posts.filter(published=True)
+
         if len(matching_posts) != 1:
             raise Http404('No published post with slug \'{}\' was found'.format(kwargs.get('slug')))
         else:
             post = matching_posts[0]
 
-        template_string = '{% extends \'__base.html\' %}{% load snippets %}{% block content %}' + post.body + '{% endblock %}'
+        template_string = '''
+        {% extends \'__base.html\' %}
+        {% load snippets %}
+        {% block content %}
+            {% include \'__i_dhp_logo.html\' %}
+            {% if not post.published %}
+                <h1 class="text-danger text-center">NOT PUBLISHED</h1>
+            {% endif %}
+        ''' + post.body + '''
+        {% endblock %}
+        '''
         template = get_template_from_string(template_string)
         return HttpResponse(template.render(RequestContext(request)))
 

@@ -2,11 +2,10 @@
 {% load snippets %}
 
 {% block content %}
+{% include '__i_dhp_logo.html' %}
 {# Post body goes here #}
 
-<h1 class="text-center">Hello!</h1>
-{% fixed_background_image 'https://ununsplash.imgix.net/photo-1423753623104-718aaace6772?fit=crop&fm=jpg&h=600&q=75&w=1050' %}
-{{ request.path }}
+
 
 {# End post body #}
 {% endblock content %}
