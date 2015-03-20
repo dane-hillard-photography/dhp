@@ -35,49 +35,46 @@
         <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 	</head>
 	<body>
-	{% include '__i_navigation.html' %}
-	<div class="content container-fluid">
-	{% block content %}
-	{% endblock content %}
+	    {% include '__i_navigation.html' %}
+        <div class="content container-fluid">
+        {% block content %}{% endblock content %}
 
-    {% block disqus %}
-	<div class="container-fluid">
-	    <div class="row">
-	        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-	        {% include 'disqus.html' %}
-	        </div>
+        {% block disqus %}
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            {% include 'disqus.html' %}
+            </div>
         </div>
-    </div>
-    {% endblock %}
+        {% endblock %}
 
-	{% include '__i_admin_links.html' %}
-	</div>
+        {% include '__i_admin_links.html' %}
+        </div>
 
-    <script type="application/ld+json">
-    {
-        "@context" : "http://schema.org",
-        "@type" : "Organization",
-        "name" : "Dane Hillard Photography",
-        "url" : "http://www.danehillard.com",
-        "logo" : "http://www.danehillard.com/static/images/logos/dhp.png",
-        "sameAs" : [
-            "http://www.facebook.com/danehillard",
-            "http://instagram.com/danehillard",
-            "http://www.linkedin.com/in/danehillard",
-            "http://plus.google.com/danehillard",
-            "http://www.twitter.com/danehillard"
-        ]
-    }
-    </script>
-	{% block final %}
-	{% endblock final %}
+        <script type="application/ld+json">
+        {
+            "@context" : "http://schema.org",
+            "@type" : "Organization",
+            "name" : "Dane Hillard Photography",
+            "url" : "http://www.danehillard.com",
+            "logo" : "http://www.danehillard.com/static/images/logos/dhp.png",
+            "sameAs" : [
+                "http://www.facebook.com/danehillard",
+                "http://instagram.com/danehillard",
+                "http://www.linkedin.com/in/danehillard",
+                "http://plus.google.com/danehillard",
+                "http://www.twitter.com/danehillard"
+            ]
+        }
+        </script>
+        {% block final %}
+        {% endblock final %}
 
-    {% compress js %}
-	{% block js %}
-		<script type="text/javascript" src="{% static 'js/google_analytics_tracking.js' %}"></script>
-		<script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
-	{% endblock js %}
-    {% endcompress %}
+        {% compress js %}
+        {% block js %}
+            <script type="text/javascript" src="{% static 'js/google_analytics_tracking.js' %}"></script>
+            <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
+        {% endblock js %}
+        {% endcompress %}
 	</body>
 </html>

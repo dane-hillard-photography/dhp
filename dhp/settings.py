@@ -97,6 +97,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'compressor',
+    'blog',
     'photography',
     'home',
     'about',
