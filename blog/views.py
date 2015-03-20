@@ -1,7 +1,7 @@
 from django.views.generic import View
-from django.template import RequestContext
 from django.http import HttpResponse, Http404
-from django.template.loader import get_template_from_string, render_to_string
+from django.template.loader import render_to_string
+from django.template import RequestContext, Template
 
 from blog.models import Post
 
@@ -18,26 +18,8 @@ class PostView(View):
         else:
             post = matching_posts[0]
 
-        template_string = '''
-        {% extends \'__base.html\' %}
-        {% load snippets %}
-        {% block content %}
-            {% include \'__i_dhp_logo.html\' %}
-            {% if not post.published %}
-            <h1 class="text-danger text-center">NOT PUBLISHED</h1>
-            {% endif %}
-        ''' + post.body + '''
-        {% endblock content %}
-        '''
+        initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=RequestContext(request))
 
-        template = get_template_from_string(template_string)
         context = RequestContext(request)
         context['post'] = post
-        return HttpResponse(template.render(context))
-
-
-class WriterView(View):
-    def get(self, request, *args, **kwargs):
-        template_string = render_to_string('blog/post_writer.html')
-        template = get_template_from_string(template_string)
-        return HttpResponse(template.render(RequestContext(request)))
+        return HttpResponse(Template(initial_template_string).render(context))
