@@ -7,6 +7,10 @@ from blog.models import Post, Tag, Category
 class PostAdmin(admin.ModelAdmin):
     model = Post
 
+    list_display = ('title', 'slug', 'published', 'date_created', 'date_modified')
+    list_filter = ('date_created',)
+    list_editable = ('slug', 'published',)
+    search_fields = ('title', 'body',)
     prepopulated_fields = {'slug': ('title',)}
 
 
