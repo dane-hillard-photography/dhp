@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+from photography.models import Photograph
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -28,6 +30,7 @@ class Post(models.Model):
     published = models.BooleanField(default=False)
     categories = models.ManyToManyField(Category, blank=True, null=True)
     tags = models.ManyToManyField(Tag, blank=True, null=True)
+    feature_image = models.ForeignKey(Photograph, blank=True, null=True)
 
     def __str__(self):
         return self.title

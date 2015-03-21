@@ -7,7 +7,7 @@
     {% if not post.published %}
     <h1 class="text-danger text-center">NOT PUBLISHED</h1>
     {% endif %}
-    <h1 class="text-center">{{ post.title }}<br/><small>{{ post.date_created|naturalday|title }}</small></h1>
+    <h1 class="text-center">{{ post.title }}<br/><small>{{ post.date_created|naturaltime }}</small></h1>
 {% endverbatim %}
 {% autoescape off %}
     {{ postbody }}
