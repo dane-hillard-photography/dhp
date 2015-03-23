@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -28,7 +30,8 @@ class Post(models.Model):
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    published = models.BooleanField(default=False)
+    go_live_date = models.DateTimeField('Date and time to publish this post', blank=True, null=True, default=datetime.now())
+    take_down_date = models.DateTimeField('Date and time to unpublish this post', blank=True, null=True)
     categories = models.ManyToManyField(Category, blank=True, null=True)
     tags = models.ManyToManyField(Tag, blank=True, null=True)
     feature_image = models.ForeignKey(Photograph, blank=True, null=True)
@@ -38,3 +41,8 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post', kwargs={'slug': self.slug})
+
+    def published(self):
+        right_now = datetime.now()
+        return not self.go_live_date or self.go_live_date < right_now > self.take_down_date
+    published.boolean = True

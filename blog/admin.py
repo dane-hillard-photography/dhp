@@ -21,13 +21,13 @@ class PostAdmin(admin.ModelAdmin):
     model = Post
     form = PostAdminForm
 
-    list_display = ('title', 'slug', 'subtitle', 'published', 'date_created', 'date_modified')
-    list_filter = ('published', 'date_created',)
-    list_editable = ('slug', 'subtitle', 'published',)
+    list_display = ('title', 'slug', 'subtitle', 'go_live_date', 'take_down_date', 'published',)
+    list_filter = ('go_live_date', 'take_down_date',)
+    list_editable = ('slug', 'subtitle', 'go_live_date', 'take_down_date',)
     search_fields = ('title', 'slug', 'subtitle', 'body',)
     prepopulated_fields = {'slug': ('title',)}
-    date_hierarchy = 'date_created'
-    fields = ('published', ('title', 'slug', 'subtitle'), 'body', ('categories', 'tags'), 'feature_image')
+    date_hierarchy = 'go_live_date'
+    fields = (('go_live_date', 'take_down_date',), ('title', 'slug', 'subtitle'), 'body', ('categories', 'tags'), 'feature_image')
     raw_id_fields = ('categories', 'tags', 'feature_image')
 
 

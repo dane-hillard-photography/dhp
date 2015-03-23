@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.views.generic import View
 from django.http import HttpResponse, Http404
 from django.template.loader import render_to_string
@@ -11,7 +13,8 @@ class PostView(View):
         matching_posts = Post.objects.filter(slug=kwargs.get('slug'))
 
         if not request.user.is_authenticated():
-            matching_posts = matching_posts.filter(published=True)
+            right_now = datetime.now()
+            matching_posts = matching_posts.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now)
 
         if len(matching_posts) != 1:
             raise Http404('No published post with slug \'{}\' was found'.format(kwargs.get('slug')))
