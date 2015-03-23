@@ -1,0 +1,8 @@
+<a href="//{{ request.META.HTTP_HOST }}{% url 'blog:post' obj.slug %}" title="{{ obj.title }}">
+	<img src="//{{ request.META.HTTP_HOST }}{{ obj.feature_image.image.url }}"
+		 alt="{{ obj.subtitle }}"
+		 title="{{ obj.title }}"
+	/>
+</a>
+<h1>{{ obj.title }}</h1>
+<p>{{ obj.subtitle }}</p>

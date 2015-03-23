@@ -2,10 +2,12 @@ from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed
 
 from photography.models import Photograph
+from blog.models import Post
+
 
 class LatestPhotosFeed(Feed):
     title = "Dane Hillard Photography"
-    link = "http://www.danehillard.com"
+    link = "//www.danehillard.com"
     description_template = "feeds/latest_photos_description.html"
 
     @staticmethod
@@ -20,3 +22,22 @@ class LatestPhotosFeed(Feed):
 
     def item_link(self, item):
         return reverse('photography:photo', args=[item.uuid])
+
+
+class LatestPostsFeed(Feed):
+    title = 'Dane Hillard Photography'
+    link = '//www.danehillard.com'
+    description_template = 'feeds/latest_posts_description.html'
+
+    @staticmethod
+    def items():
+        return Post.objects.filter(published=True).order_by('-date_created')[:10]
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.subtitle or 'Dane Hillard Photography'
+
+    def item_link(self, item):
+        return reverse('blog:post', args=[item.slug])

@@ -100,9 +100,9 @@ class Photograph(models.Model):
         self.thumbnail_square.save(self.image.name, File(open(tf.name, 'rb')), save=False)
         tf.close()
       
-        self.create_thumbnail(image, self.thumbnail_large, 800)
-        self.create_thumbnail(image, self.thumbnail_medium, 500)
-        self.create_thumbnail(image, self.thumbnail_small, 200)
+        self.create_thumbnail(image, self.thumbnail_large, 1200)
+        self.create_thumbnail(image, self.thumbnail_medium, 800)
+        self.create_thumbnail(image, self.thumbnail_small, 300)
 
         super(Photograph, self).save(*args, **kwargs)
 
@@ -111,14 +111,14 @@ class Photograph(models.Model):
 
     def admin_thumbnail(self):
         if self.image:
-            return '<img src="{url}" width="60" />'.format(url=self.thumbnail_small.url)
+            return '<img src="{url}" height="100" />'.format(url=self.thumbnail_small.url)
         else:
             return 'No image available'
     admin_thumbnail.short_description = 'Thumbnail'
     admin_thumbnail.allow_tags = True
 
     def __str__(self):
-        return mark_safe(self.admin_thumbnail())
+        return '{} ({}x{})'.format(self.title, self.width, self.height)
 
 
 class PhotoSet(models.Model):

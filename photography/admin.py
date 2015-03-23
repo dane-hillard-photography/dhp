@@ -66,7 +66,7 @@ class PhotoSetAdmin(admin.ModelAdmin):
     list_display = ('feature_photo_thumbnail', 'title', 'slug', 'body', 'published_date')
 
     prepopulated_fields = {'slug': ('title',)}
-    radio_fields = {'feature_photo': admin.HORIZONTAL}
+    raw_id_fields = ('feature_photo', 'photos',)
 
 admin.site.register(Photograph, PhotographAdmin)
 admin.site.register(PhotoSet, PhotoSetAdmin)

@@ -4,9 +4,10 @@ from django.views.generic import TemplateView
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from sitemaps import PhotographSitemap, PhotoSetSitemap, SiteSitemap
-
 from django.conf import settings
+
+from dhp.feeds import LatestPostsFeed
+from sitemaps import PhotographSitemap, PhotoSetSitemap, SiteSitemap
 
 sitemaps = {
     'photoset': PhotoSetSitemap,
@@ -26,6 +27,7 @@ urlpatterns = patterns(
     url(r'^logout/$', 'django.contrib.auth.views.logout'),
     url(r'^robots.txt$', TemplateView.as_view(template_name='robots.txt')),
     url(r'^sitemap\.xml', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    url(r'^feed/$', LatestPostsFeed(), name='feed'),
 )
 
 if settings.DEBUG:

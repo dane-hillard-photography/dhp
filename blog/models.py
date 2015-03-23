@@ -24,6 +24,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
+    subtitle = models.CharField(max_length=255, blank=True, null=True)
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
