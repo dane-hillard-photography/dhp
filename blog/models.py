@@ -44,5 +44,7 @@ class Post(models.Model):
 
     def published(self):
         right_now = datetime.now()
-        return not self.go_live_date or self.go_live_date < right_now > self.take_down_date
+        if (self.go_live_date and self.go_live_date <= right_now) and (not self.take_down_date or right_now < self.take_down_date):
+            return True
+        return False
     published.boolean = True
