@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed
 
@@ -31,7 +33,8 @@ class LatestPostsFeed(Feed):
 
     @staticmethod
     def items():
-        return Post.objects.filter(published=True).order_by('-date_created')[:10]
+        right_now = datetime.now()
+        return Post.objects.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now).order_by('-date_created')[:10]
 
     def item_title(self, item):
         return item.title
