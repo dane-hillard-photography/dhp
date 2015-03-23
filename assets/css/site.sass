@@ -12,13 +12,14 @@ a:active
 .admin-links
   font-size: $font-size-admin-links
 
-.navbar .navbar-nav
-  display: inline-block
-  float: none
-  vertical-align: top
+.navbar
+  .navbar-nav
+    display: inline-block
+    float: none
+    vertical-align: top
 
-.navbar .navbar-collapse
-  text-align: center
+  .navbar-collapse
+    text-align: center
 
 .photo-thumbnail
   margin: 10px
@@ -102,12 +103,10 @@ body
 .btn
   border: none
 
-.btn.outline
-  background: none
-
-.btn.outline
-  border: 2px solid #ffffff
-  color: #ffffff
+  &.outline
+    background: none
+    border: 2px solid #ffffff
+    color: #ffffff
 
 .btn-primary.outline:hover,
 .btn-primary.outline:active
@@ -122,7 +121,7 @@ body
   margin-bottom: $buffer-margin
 
 .inner-padding
-  padding: 50px
+  padding: $inner-padding
 
 .post-row
   color: #ffffff
