@@ -1,5 +1,7 @@
 {% load staticfiles %}
+{% load cache %}
 
+{% cache 3600 navbar %}
 <div class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -31,3 +33,4 @@
         </div>
     </div>
 </div>
+{% endcache %}

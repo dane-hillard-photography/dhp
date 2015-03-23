@@ -1,0 +1,17 @@
+{% verbatim %}
+{% extends '__base.html' %}
+{% load humanize %}
+{% load snippets %}
+{% block content %}
+    {% include '__i_dhp_logo.html' %}
+    {% if not post.published %}
+    <h1 class="text-danger text-center">NOT PUBLISHED</h1>
+    {% endif %}
+    <h1 class="text-center">{{ post.title }}<br/><small>{{ post.date_created|naturaltime }}</small></h1>
+{% endverbatim %}
+{% autoescape off %}
+    {{ postbody }}
+{% endautoescape %}
+{% verbatim %}
+{% endblock content %}
+{% endverbatim %}
