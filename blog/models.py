@@ -30,7 +30,7 @@ class Post(models.Model):
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    go_live_date = models.DateTimeField('Date and time to publish this post', blank=True, null=True, default=datetime.now())
+    go_live_date = models.DateTimeField('Date and time to publish this post', blank=True, null=True, default=datetime.now)
     take_down_date = models.DateTimeField('Date and time to unpublish this post', blank=True, null=True)
     categories = models.ManyToManyField(Category, blank=True, null=True)
     tags = models.ManyToManyField(Tag, blank=True, null=True)
