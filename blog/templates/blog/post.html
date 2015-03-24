@@ -1,5 +1,6 @@
 {% verbatim %}
 {% extends '__base.html' %}
+{% load future %}
 {% load humanize %}
 {% load snippets %}
 {% block content %}
@@ -7,11 +8,15 @@
     {% if not post.published %}
     <h1 class="text-danger text-center">NOT PUBLISHED</h1>
     {% endif %}
-    <h1 class="text-center">{{ post.title }}<br/><small>{% firstof post.go_live_date|naturaltime post.date_created|naturaltime %}</small></h1>
+    <h1 class="text-center">
+        {{ post.title }}{% if post.subtitle %} <small>{{ post.subtitle }}</small>{% endif %}<br/>
+        <small>{% firstof post.go_live_date|naturaltime post.date_created|naturaltime %}</small>
+    </h1>
 {% endverbatim %}
 {% autoescape off %}
     {{ postbody }}
 {% endautoescape %}
 {% verbatim %}
+{% include 'contact_links.html' %}
 {% endblock content %}
 {% endverbatim %}
