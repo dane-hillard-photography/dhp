@@ -9,7 +9,7 @@ from blog.models import Post
 
 class LatestPhotosFeed(Feed):
     title = "Dane Hillard Photography"
-    link = "//www.danehillard.com"
+    link = "http://www.danehillard.com"
     description_template = "feeds/latest_photos_description.html"
 
     @staticmethod
@@ -28,7 +28,7 @@ class LatestPhotosFeed(Feed):
 
 class LatestPostsFeed(Feed):
     title = 'Dane Hillard Photography'
-    link = '//www.danehillard.com'
+    link = 'http://www.danehillard.com'
     description_template = 'feeds/latest_posts_description.html'
 
     @staticmethod
