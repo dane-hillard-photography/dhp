@@ -19,7 +19,6 @@ class PhotographView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PhotographView, self).get_context_data(**kwargs)
-        context['social_media'] = settings.SOCIAL_MEDIA_HANDLES
         context['photosets'] = self.get_object().photosets_in.all()
         return context
 
@@ -32,7 +31,6 @@ class PhotoSetView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PhotoSetView, self).get_context_data(**kwargs)
-        context['social_media'] = settings.SOCIAL_MEDIA_HANDLES
         return context
 
 

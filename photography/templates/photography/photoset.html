@@ -25,8 +25,8 @@
   <meta name="twitter:url" content="{{ request.get_host }}{% url 'photography:photoset' photoset.id photoset.slug %}" />
   <meta name="twitter:title" content="{{ photoset.title }} | Dane Hillard Photography" />
   <meta name="twitter:description" content="A photo set by Dane Hillard Photography" />
-  <meta name="twitter:site" content="@{{ social_media.twitter }}" />
-  <meta name="twitter:creator" content="@{{ social_media.twitter }}" />
+  <meta name="twitter:site" content="@{{ SOCIAL_MEDIA.twitter }}" />
+  <meta name="twitter:creator" content="@{{ SOCIAL_MEDIA.twitter }}" />
   <meta name="twitter:domain" content="danehillard.com" />
   {% for photograph in photoset.photos.all|slice:":4" %}
   <meta name="twitter:image{{ forloop.counter0 }}" content="http://{{ request.get_host|add:photograph.thumbnail_medium.url }}" />

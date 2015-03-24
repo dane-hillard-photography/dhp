@@ -3,6 +3,28 @@
 {% load future %}
 {% load humanize %}
 {% load snippets %}
+
+{% block og_type %}article{% endblock %}
+{% block og_url %}//{{ request.META.HTTP_HOST }}{% url 'blog:post' post.slug %}{% endblock %}
+{% block og_title %}{{ post.title }} | Dane Hillard Photography{% endblock %}
+{% block og_description %}{% firstof post.subtitle 'A blog post by Dane Hillard Photography' %}{% endblock %}
+{% block og_images %}
+<meta property="og:image" content="//{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}" />
+<meta property="og:image:height" content="{{ post.feature_image.image.height }}" />
+<meta property="og:image:width" content="{{ post.feature_image.image.width }}" />
+{% endblock og_images %}
+
+{% block twitter %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="//{{ request.get_host }}{% url 'blog:post' post.slug %}" />
+  <meta name="twitter:title" content="{{ post.title }} | Dane Hillard Photography" />
+  <meta name="twitter:description" content="A blog post by Dane Hillard Photography" />
+  <meta name="twitter:site" content="@{{ SOCIAL_MEDIA.twitter }}" />
+  <meta name="twitter:creator" content="@{{ SOCIAL_MEDIA.twitter }}" />
+  <meta name="twitter:domain" content="danehillard.com" />
+  <meta name="twitter:image" content="http://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}" />
+{% endblock twitter %}
+
 {% block content %}
     {% include '__i_dhp_logo.html' %}
     <div class="text-center">

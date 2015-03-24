@@ -27,12 +27,13 @@ DATABASES = {
     }
 }
 
-SOCIAL_MEDIA_HANDLES = {
+SOCIAL_MEDIA = {
     'facebook': 'danehillard',
     'instagram': 'danehillard',
     'pinterest': 'danehillard',
     'twitter': 'danehillard',
-    'youtube': 'danehillardphoto'
+    'youtube': 'danehillard',
+    'linkedin': 'danehillard',
 }
 
 LOGIN_REDIRECT_URL = '/'
@@ -69,6 +70,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'context_processors.template_visible_settings',
+)
+
+TEMPLATE_VISIBLE_SETTINGS = (
+    'SOCIAL_MEDIA',
 )
 
 MIDDLEWARE_CLASSES = (
