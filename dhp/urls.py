@@ -7,12 +7,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
 from dhp.feeds import LatestPostsFeed
-from sitemaps import PhotographSitemap, PhotoSetSitemap, SiteSitemap
+from sitemaps import PhotographSitemap, PhotoSetSitemap, SiteSitemap, PostSitemap
 
 sitemaps = {
     'photoset': PhotoSetSitemap,
     'photograph': PhotographSitemap,
     'pages': SiteSitemap(['home:home', 'photography:photography', 'contact:contact', 'about:about']),
+    'posts': PostSitemap,
 }
 
 urlpatterns = patterns(
