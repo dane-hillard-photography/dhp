@@ -5,13 +5,14 @@
 {% load snippets %}
 {% block content %}
     {% include '__i_dhp_logo.html' %}
-    {% if not post.published %}
-    <h1 class="text-danger text-center">NOT PUBLISHED</h1>
-    {% endif %}
-    <h1 class="text-center">
-        {{ post.title }}{% if post.subtitle %} <small>{{ post.subtitle }}</small>{% endif %}<br/>
-        <small>{% firstof post.go_live_date|naturaltime post.date_created|naturaltime %}</small>
-    </h1>
+    <div class="text-center">
+        {% if not post.published %}
+        <h1 class="text-danger">NOT PUBLISHED</h1>
+        {% endif %}
+        <h1>{{ post.title }}</h1>
+        {% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
+        <h6>{% firstof post.go_live_date|naturaltime post.date_created|naturaltime %}</h6>
+    </div>
 {% endverbatim %}
 {% autoescape off %}
     {{ postbody }}
