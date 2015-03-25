@@ -28,7 +28,7 @@ class ContactFormView(FormView):
         conn.send_email(
             '{} <no-reply@danehillard.com>'.format(contact_name),
             form.cleaned_data.get('subject'),
-            '{}\n\n-{}'.format(form.cleaned_data.get('message'), contact_name),
+            '{}\n\n-{}\n{}'.format(form.cleaned_data.get('message'), contact_name, form.cleaned_data.get('phone')),
             'contact@danehillard.com',
             reply_addresses=[contact_email],
         )
