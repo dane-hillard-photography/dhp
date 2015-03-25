@@ -10,6 +10,8 @@ from django.db import models
 from django.core.files import File
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
+from django.db.models.signals import post_delete
+from django.dispatch.dispatcher import receiver
 
 from dhp.settings import MEDIA_ROOT
 
@@ -139,3 +141,12 @@ class PhotoSet(models.Model):
 
     def __str__(self):
         return self.title
+
+
+@receiver(post_delete, sender=Photograph)
+def photograph_delete(sender, instance, **kwargs):
+    instance.image.delete(False)
+    instance.thumbnail_square.delete(False)
+    instance.thumbnail_small.delete(False)
+    instance.thumbnail_medium.delete(False)
+    instance.thumbnail_large.delete(False)
