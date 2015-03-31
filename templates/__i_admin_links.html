@@ -3,12 +3,12 @@
     <span class="admin-links">
         {% if request.user.is_authenticated %}
         <span>{{ request.user.first_name }}</span>
-        <a href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}">Logout</a>
+        <a href="{% url 'django.contrib.auth.views.logout' %}?next={% url 'home:home' %}" tabindex="-1">Logout</a>
             {% if request.user.is_staff %}
-            | <a href="{% url 'admin:index' %}">Administration</a>
+            | <a href="{% url 'admin:index' %}" tabindex="-1">Administration</a>
             {% endif %}
         {% else %}
-        <a href="{% url 'django.contrib.auth.views.login' %}?next={% firstof request.path 'home:home' %}">Login</a>
+        <a href="{% url 'django.contrib.auth.views.login' %}?next={% firstof request.path 'home:home' %}" tabindex="-1">Login</a>
         {% endif %}
     </span>
 </div>
