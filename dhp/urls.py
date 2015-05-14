@@ -26,7 +26,7 @@ urlpatterns = patterns(
     url(r'^post/', include('blog.urls', namespace='blog')),
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'home/login.html'}),
     url(r'^logout/$', 'django.contrib.auth.views.logout'),
-    url(r'^robots.txt$', TemplateView.as_view(template_name='robots.txt')),
+    url(r'^robots.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     url(r'^sitemap\.xml', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'^feed/$', LatestPostsFeed(), name='feed'),
 )
