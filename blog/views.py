@@ -21,10 +21,10 @@ class PostView(View):
         else:
             post = matching_posts[0]
 
-        initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=RequestContext(request))
-
         context = RequestContext(request)
         context['post'] = post
+
+        initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=context)
         return HttpResponse(Template(initial_template_string).render(context))
 
 
