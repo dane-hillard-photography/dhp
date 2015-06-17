@@ -24,6 +24,9 @@
     </div>
 </div>
 {% endfor %}
+
+{% now "Y" as current_year %}
+<a href="{% url 'blog:post_year_archive' current_year %}">More Posts</a>
 {% endblock content %}
 
 {% block final %}
