@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.views.generic import View
+from django.views.generic import View, YearArchiveView, MonthArchiveView
 from django.http import HttpResponse, Http404
 from django.template.loader import render_to_string
 from django.template import RequestContext, Template
@@ -21,8 +21,19 @@ class PostView(View):
         else:
             post = matching_posts[0]
 
-        initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=RequestContext(request))
-
         context = RequestContext(request)
-        context['post'] = post
+        initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=context)
+        context.update({'post': post})
+
         return HttpResponse(Template(initial_template_string).render(context))
+
+
+class PostYearArchiveView(YearArchiveView):
+    model = Post
+    date_field = 'go_live_date'
+
+
+class PostMonthArchiveView(MonthArchiveView):
+    model = Post
+    date_field = 'go_live_date'
+    month_format = '%m'
