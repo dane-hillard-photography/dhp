@@ -22,9 +22,9 @@ class PostView(View):
             post = matching_posts[0]
 
         context = RequestContext(request)
-
         initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=context)
-        context['post'] = post
+        context.update({'post': post})
+
         return HttpResponse(Template(initial_template_string).render(context))
 
 
