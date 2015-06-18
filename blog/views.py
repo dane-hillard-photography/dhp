@@ -31,9 +31,13 @@ class PostView(View):
 class PostYearArchiveView(YearArchiveView):
     model = Post
     date_field = 'go_live_date'
+    allow_empty = True
+    queryset = Post.objects.exclude(take_down_date__lte=datetime.now())
 
 
 class PostMonthArchiveView(MonthArchiveView):
     model = Post
     date_field = 'go_live_date'
     month_format = '%m'
+    allow_empty = True
+    queryset = Post.objects.exclude(take_down_date__lte=datetime.now())
