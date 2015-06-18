@@ -8,5 +8,11 @@
         <li><a href="{% url 'blog:post_month_archive' year|date:"Y" month|date:"m" %}">{{ month|date:"F" }}</a></li>
     {% endfor %}
     </ul>
+    {% if previous_year %}
+        <a class="btn btn-primary" href="{% url 'blog:post_year_archive' previous_year|date:"Y" %}">&larr; Older</a>
+    {% endif %}
+    {% if next_year %}
+        <a class="btn btn-primary" href="{% url 'blog:post_year_archive' next_year|date:"Y" %}">Newer &rarr;</a>
+    {% endif %}
 </div>
 {% endblock %}
