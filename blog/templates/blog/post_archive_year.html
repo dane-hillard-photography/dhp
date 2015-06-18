@@ -3,8 +3,10 @@
 {% include '__i_dhp_logo.html' %}
 <h1 class="text-center">{{ year|date:"Y" }}</h1>
 <div class="text-center">
-{% for month in date_list %}
-    <a href="{% url 'blog:post_month_archive' year|date:"Y" month|date:"m" %}">{{ month|date:"F" }}</a>
-{% endfor %}
+    <ul class="list-unstyled">
+    {% for month in date_list %}
+        <li><a href="{% url 'blog:post_month_archive' year|date:"Y" month|date:"m" %}">{{ month|date:"F" }}</a></li>
+    {% endfor %}
+    </ul>
 </div>
 {% endblock %}

@@ -3,8 +3,10 @@
     {% include '__i_dhp_logo.html' %}
     <h1 class="text-center">{{ month|date:"F" }} {{ year|date:"Y" }}</h1>
     <div class="text-center">
-    {% for post in object_list %}
-        <a href="{% url 'blog:post' post.slug %}">{{ post.title }}</a>
-    {% endfor %}
+        <ul class="list-unstyled">
+        {% for post in object_list %}
+            <li><a href="{% url 'blog:post' post.slug %}">{{ post.title }}</a></li>
+        {% endfor %}
+        </ul>
     </div>
 {% endblock %}
