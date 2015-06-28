@@ -5,39 +5,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.sitemaps import Sitemap
 
 from blog.models import Post
-from photography.models import Photograph, PhotoSet
-
-
-class PhotographSitemap(Sitemap):
-    changefreq = 'daily'
-    priority = 1.0
-
-    def items(self):
-        return Photograph.objects.filter(published_date__lte=timezone.now(), public=True)
-
-    @staticmethod
-    def lastmod(obj):
-        return obj.published_date
-
-    @staticmethod
-    def location(obj):
-        return reverse('photography:photo', kwargs={'photo_id': obj.uuid})
-
-
-class PhotoSetSitemap(Sitemap):
-    changefreq = 'monthly'
-    priority = .75
-
-    def items(self):
-        return PhotoSet.objects.all()
-
-    @staticmethod
-    def lastmod(obj):
-        return obj.published_date
-
-    @staticmethod
-    def location(obj):
-        return reverse('photography:photoset', kwargs={'photoset_id': obj.id, 'photoset_slug': obj.slug})
 
 
 class SiteSitemap(Sitemap):
@@ -70,6 +37,5 @@ class PostSitemap(Sitemap):
     def lastmod(obj):
         return obj.date_modified
 
-    @staticmethod
-    def location(obj):
+    def location(self, obj):
         return reverse('blog:post', kwargs={'slug': obj.slug})

@@ -123,26 +123,6 @@ class Photograph(models.Model):
         return '{} ({}x{})'.format(self.title, self.width, self.height)
 
 
-class PhotoSet(models.Model):
-    class Meta:
-        ordering = ['-published_date']
-
-    title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=40)
-    body = models.TextField()
-    feature_photo = models.ForeignKey(Photograph, related_name='photosets_featured_in')
-    photos = models.ManyToManyField(Photograph, related_name='photosets_in')
-    published_date = models.DateTimeField(default=datetime.datetime.now)
-
-    def feature_photo_thumbnail(self):
-        return '<img src="{url}" width="60" />'.format(url=self.feature_photo.thumbnail_small.url)
-    feature_photo_thumbnail.short_description = 'Feature photo'
-    feature_photo_thumbnail.allow_tags = True
-
-    def __str__(self):
-        return self.title
-
-
 @receiver(post_delete, sender=Photograph)
 def photograph_delete(sender, instance, **kwargs):
     instance.image.delete(False)
