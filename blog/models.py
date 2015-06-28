@@ -32,8 +32,8 @@ class Post(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     go_live_date = models.DateTimeField('Date and time to publish this post', blank=True, null=True, default=datetime.now)
     take_down_date = models.DateTimeField('Date and time to unpublish this post', blank=True, null=True)
-    categories = models.ManyToManyField(Category)
-    tags = models.ManyToManyField(Tag)
+    categories = models.ManyToManyField(Category, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
     feature_image = models.ForeignKey(Photograph, blank=True, null=True)
 
     def __str__(self):
