@@ -30,18 +30,11 @@ class Photograph(models.Model):
     class Meta:
         ordering = ['-published_date']
 
-    ORIENTATION_CHOICES = (
-        ('P', 'Portrait'),
-        ('L', 'Landscape'),
-        ('S', 'Square'),
-    )
-  
     directory = os.path.join('images', 'uncropped')
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     public = models.BooleanField(default=True)
-    orientation = models.CharField(max_length=1, choices=ORIENTATION_CHOICES, editable=False)
     uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
     published_date = models.DateTimeField(default=datetime.datetime.now)
 
@@ -77,13 +70,6 @@ class Photograph(models.Model):
         width, height = original_image.size
         ratio_divisor = height if height > width else width
         ratio = float(max_size) / ratio_divisor
-
-        if width > height:
-            self.orientation = "L"
-        elif width < height:
-            self.orientation = "P"
-        else:
-            self.orientation = "S"
 
         original_image.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
         tf = NamedTemporaryFile()
