@@ -4,6 +4,7 @@
 {% load snippets %}
 
 {% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
+{% block description %}{{ post.title }} | A blog post on Dane Hillard Photography | {{ block.super }}{% endblock %}
 
 {% block og_type %}article{% endblock %}
 {% block og_url %}http://{{ request.META.HTTP_HOST }}{% url 'blog:post' post.slug %}{% endblock %}
