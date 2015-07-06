@@ -1,7 +1,7 @@
 {% extends '__base_no_disqus.html' %}
 {% block content %}
     {% include '__i_dhp_logo.html' %}
-    <h1 class="text-center">{{ month|date:"F" }} {{ year|date:"Y" }}</h1>
+    <h1 class="text-center">Archive: {{ month|date:"F" }} {{ month|date:"Y" }}</h1>
     <div class="text-center">
         <ul class="list-unstyled">
         {% for post in object_list %}
