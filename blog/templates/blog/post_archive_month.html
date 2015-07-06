@@ -1,4 +1,8 @@
 {% extends '__base_no_disqus.html' %}
+
+{% block title %}Archive: {{ month|date:"F" }} {{ month|date:"Y" }} | {% endblock %}
+{% block description %}Archive of posts on Dane Hillard Photography from {{ month|date:"F" }} {{ month|date:"Y" }}{% endblock %}
+
 {% block content %}
     {% include '__i_dhp_logo.html' %}
     <h1 class="text-center">Archive: {{ month|date:"F" }} {{ month|date:"Y" }}</h1>
