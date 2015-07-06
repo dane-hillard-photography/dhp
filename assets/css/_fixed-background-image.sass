@@ -1,0 +1,24 @@
+@mixin fixed-background-image()
+  background-attachment: fixed
+  background-size: cover
+  background-position: center
+  background-repeat: no-repeat
+
+.fixed-background-image
+  @include fixed-background-image
+  margin: 0.8em 0
+  position: relative
+  overflow: hidden
+  padding: 50% 0 0 0
+
+  img
+    position: absolute
+    opacity: 0
+    width: 100%
+    height: auto
+    top: 0
+    left: 0
+
+@media only screen and (max-device-width: 480px)
+  .fixed-background-image img
+    opacity: 1

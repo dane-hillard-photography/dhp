@@ -1,0 +1,34 @@
+.menu-icon
+  @include transition-property(transform)
+  @include transition-duration(.25s)
+  @include transition-transform(.5s)
+
+  &:hover
+    @include transition-property(transform)
+    @include transition-duration(.25s)
+    @include scale(1.25)
+
+  svg
+    width: $menu-link-size
+    height: $menu-link-size
+    fill: $text-color
+
+.external-site
+  a svg
+    width: $menu-link-size
+    height: $menu-link-size
+    fill: $external-site-link-color
+    @include transition(background 0.2s ease-in-out)
+
+  &.facebook:hover a svg
+    background: #3B5998
+  &.instagram:hover a svg
+    background: #3F729B
+  &.twitter:hover a svg
+    background: #39A9E0
+  &.pinterest:hover a svg
+    background: #CB2027
+  &.youtube:hover a svg
+    background: #CD332D
+  &.linkedin:hover a svg
+    background: #007FB1
