@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from photography.models import Photograph
+
 
 class PhotographAdmin(admin.ModelAdmin):
     list_editable = ['title', 'description', 'public', 'published_date']
@@ -22,3 +24,5 @@ class PhotographAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_date'
     search_fields = ['title']
     save_on_top = True
+
+admin.site.register(Photograph, PhotographAdmin)
