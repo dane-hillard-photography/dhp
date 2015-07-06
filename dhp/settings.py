@@ -39,7 +39,7 @@ SOCIAL_MEDIA = {
 LOGIN_REDIRECT_URL = '/'
 ALLOWED_HOSTS = os.getenv(PROJECT_VARIABLE_PATTERN.format('ALLOWED_HOSTS'), '*').split(',')
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Detroit'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 USE_L10N = True
