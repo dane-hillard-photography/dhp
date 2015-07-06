@@ -3,4 +3,4 @@
 {% block error_page_title %}Server Error{% endblock %}
 
 {% block error_heading %}Ack!{% endblock %}
-{% block error_message %}Well, this is embarrassing. The server had a bit of a hiccup.{% endblock %}
+{% block error_message %}Well, this is embarrassing. The server had a bit of a hiccup. Go back <a href="{% url 'home:home' %}">home</a>?{% endblock %}

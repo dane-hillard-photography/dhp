@@ -3,4 +3,4 @@
 {% block error_page_title %}Not Found{% endblock %}
 
 {% block error_heading %}Ack!{% endblock %}
-{% block error_message %}Well, this is embarrassing. That resource couldn't be found on the server.{% endblock %}
+{% block error_message %}Well, this is embarrassing. That resource couldn't be found on the server. Go back <a href="{% url 'home:home' %}">home</a>?{% endblock %}
