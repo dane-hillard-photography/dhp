@@ -34,4 +34,21 @@
 
 {% block final %}
 	{% include 'sdk_templates/fb_sdk.html' %}
+
+    <script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "Organization",
+        "name" : "Dane Hillard Photography",
+        "url" : "http://www.danehillard.com",
+        "logo" : "http://www.danehillard.com/static/images/logos/dhp.png",
+        "sameAs" : [
+            "http://www.facebook.com/danehillard",
+            "http://instagram.com/danehillard",
+            "http://www.linkedin.com/in/danehillard",
+            "http://plus.google.com/danehillard",
+            "http://www.twitter.com/danehillard"
+        ]
+    }
+    </script>
 {% endblock final %}

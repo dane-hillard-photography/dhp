@@ -43,4 +43,17 @@
 {% verbatim %}
 {% include 'contact_links.html' %}
 {% endblock content %}
+{% block final %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ post.title }}",
+  "alternativeHeadline": "{{ post.subtitle }}",
+  "image": ["http://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}"],
+  "datePublished": "{{ post.go_live_date }}",
+  "description": "{{ post.title }} | {{ post.subtitle }} | Dane Hillard Photography"
+}
+</script>
+{% endblock final %}
 {% endverbatim %}
