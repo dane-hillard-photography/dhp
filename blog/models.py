@@ -6,6 +6,14 @@ from django.core.urlresolvers import reverse
 from photography.models import Photograph
 
 
+class Link(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.title
+
+
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
@@ -35,6 +43,7 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     feature_image = models.ForeignKey(Photograph, blank=True, null=True)
+    related_links = models.ManyToManyField(Link, blank=True)
 
     def __str__(self):
         return self.title

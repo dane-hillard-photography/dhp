@@ -42,6 +42,24 @@
     {{ postbody }}
 {% endautoescape %}
 {% verbatim %}
+
+{% if post.related_links.all %}
+<hr />
+
+<h2 class="text-center">Related Reading</h2>
+<div class="text-center">
+    <ul class="list-unstyled">
+        {% for related_link in post.related_links.all %}
+        <li>
+            <a href="{{ related_link.url }}">{% autoescape off %}{{ related_link.title }}{% endautoescape %}</a>
+        </li>
+        {% endfor %}
+  </ul>
+</div>
+
+<hr />
+{% endif %}
+
 {% include 'contact_links.html' %}
 {% endblock content %}
 {% block final %}
