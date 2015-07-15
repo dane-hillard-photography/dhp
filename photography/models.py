@@ -7,13 +7,11 @@ from PIL import Image as PImage
 from PIL import ImageOps as PImageOps
 
 from django.db import models
+from django.conf import settings
 from django.core.files import File
 from django.contrib.auth.models import User
-from django.utils.safestring import mark_safe
-from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
-
-from dhp.settings import MEDIA_ROOT
+from django.db.models.signals import post_delete
 
 
 def generate_uuid():
@@ -23,14 +21,10 @@ def generate_uuid():
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     save_filename = '{uuid}.{ext}'.format(uuid=instance.uuid, ext=ext)
-    return os.path.join(instance.directory, save_filename)
+    return os.path.join(settings.IMAGE_UPLOAD_PATH, save_filename)
 
 
 class Photograph(models.Model):
-    class Meta:
-        ordering = ['-published_date']
-
-    directory = os.path.join('images', 'uncropped')
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -52,7 +46,7 @@ class Photograph(models.Model):
     sq_width = models.IntegerField(blank=True, null=True)
 
     image = models.ImageField(upload_to=get_file_path, height_field='height', width_field='width')
-    
+
     thumbnail_large = models.ImageField(
         upload_to='images/large', blank=True, null=True, height_field='l_height', width_field='l_width')
     thumbnail_medium = models.ImageField(
@@ -61,6 +55,9 @@ class Photograph(models.Model):
         upload_to='images/small', blank=True, null=True, height_field='sm_height', width_field='sm_width')
     thumbnail_square = models.ImageField(
         upload_to='images/square', blank=True, null=True, height_field='sq_height', width_field='sq_width')
+
+    class Meta:
+        ordering = ['-published_date']
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
@@ -79,7 +76,7 @@ class Photograph(models.Model):
 
     def save(self, *args, **kwargs):
         super(Photograph, self).save(*args, **kwargs)
-        image = PImage.open(os.path.join(MEDIA_ROOT, self.image.name))
+        image = PImage.open(os.path.join(settings.MEDIA_ROOT, self.image.name))
         
         thumbnail_size = (250, 250)
         thumb_square = PImageOps.fit(image, thumbnail_size, PImage.ANTIALIAS)

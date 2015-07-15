@@ -50,6 +50,8 @@ STATIC_URL = os.getenv(PROJECT_VARIABLE_PATTERN.format('STATIC_URL'), '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv(PROJECT_VARIABLE_PATTERN.format('MEDIA_ROOT'), 'media'))
 MEDIA_URL = os.getenv(PROJECT_VARIABLE_PATTERN.format('MEDIA_URL'), '/media/')
 
+IMAGE_UPLOAD_PATH = os.path.join('images', 'uncropped')
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
     os.path.join(BASE_DIR, 'bower_components'),
@@ -61,17 +63,24 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.request',
-    'django.core.context_processors.static',
-    'django.core.context_processors.media',
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.request',
-    'context_processors.template_visible_settings',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'context_processors.template_visible_settings',
+            ],
+        },
+    },
+]
 
 TEMPLATE_VISIBLE_SETTINGS = (
     'SOCIAL_MEDIA',
@@ -88,10 +97,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'dhp.urls'
 WSGI_APPLICATION = 'dhp.wsgi.application'
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
