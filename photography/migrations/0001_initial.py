@@ -2,12 +2,14 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 from django.conf import settings
 import photography.models
-import datetime
 
 
 class Migration(migrations.Migration):
+
+    replaces = [('photography', '0001_initial'), ('photography', '0002_auto_20150628_2036'), ('photography', '0003_remove_photograph_orientation')]
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
@@ -17,49 +19,31 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Photograph',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('title', models.CharField(max_length=255)),
-                ('description', models.TextField(null=True, blank=True)),
+                ('description', models.TextField(blank=True, null=True)),
                 ('public', models.BooleanField(default=True)),
-                ('orientation', models.CharField(editable=False, max_length=1, choices=[('P', 'Portrait'), ('L', 'Landscape'), ('S', 'Square')])),
-                ('uuid', models.CharField(unique=True, editable=False, default=photography.models.generate_uuid, verbose_name='UUID', max_length=36)),
+                ('uuid', models.CharField(editable=False, verbose_name='UUID', default=photography.models.generate_uuid, max_length=36, unique=True)),
                 ('published_date', models.DateTimeField(default=datetime.datetime.now)),
-                ('height', models.IntegerField(null=True, blank=True)),
-                ('width', models.IntegerField(null=True, blank=True)),
-                ('l_height', models.IntegerField(null=True, blank=True)),
-                ('l_width', models.IntegerField(null=True, blank=True)),
-                ('m_height', models.IntegerField(null=True, blank=True)),
-                ('m_width', models.IntegerField(null=True, blank=True)),
-                ('sm_height', models.IntegerField(null=True, blank=True)),
-                ('sm_width', models.IntegerField(null=True, blank=True)),
-                ('sq_height', models.IntegerField(null=True, blank=True)),
-                ('sq_width', models.IntegerField(null=True, blank=True)),
-                ('image', models.ImageField(width_field='width', upload_to=photography.models.get_file_path, height_field='height')),
-                ('thumbnail_large', models.ImageField(null=True, width_field='l_width', upload_to='images/large', blank=True, height_field='l_height')),
-                ('thumbnail_medium', models.ImageField(null=True, width_field='m_width', upload_to='images/medium', blank=True, height_field='m_height')),
-                ('thumbnail_small', models.ImageField(null=True, width_field='sm_width', upload_to='images/small', blank=True, height_field='sm_height')),
-                ('thumbnail_square', models.ImageField(null=True, width_field='sq_width', upload_to='images/square', blank=True, height_field='sq_height')),
-                ('user', models.ForeignKey(null=True, to=settings.AUTH_USER_MODEL, blank=True)),
+                ('height', models.IntegerField(blank=True, null=True)),
+                ('width', models.IntegerField(blank=True, null=True)),
+                ('l_height', models.IntegerField(blank=True, null=True)),
+                ('l_width', models.IntegerField(blank=True, null=True)),
+                ('m_height', models.IntegerField(blank=True, null=True)),
+                ('m_width', models.IntegerField(blank=True, null=True)),
+                ('sm_height', models.IntegerField(blank=True, null=True)),
+                ('sm_width', models.IntegerField(blank=True, null=True)),
+                ('sq_height', models.IntegerField(blank=True, null=True)),
+                ('sq_width', models.IntegerField(blank=True, null=True)),
+                ('image', models.ImageField(width_field='width', height_field='height', upload_to=photography.models.get_file_path)),
+                ('thumbnail_large', models.ImageField(width_field='l_width', upload_to='images/large', height_field='l_height', null=True, blank=True)),
+                ('thumbnail_medium', models.ImageField(width_field='m_width', upload_to='images/medium', height_field='m_height', null=True, blank=True)),
+                ('thumbnail_small', models.ImageField(width_field='sm_width', upload_to='images/small', height_field='sm_height', null=True, blank=True)),
+                ('thumbnail_square', models.ImageField(width_field='sq_width', upload_to='images/square', height_field='sq_height', null=True, blank=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, blank=True, null=True)),
             ],
             options={
                 'ordering': ['-published_date'],
             },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='PhotoSet',
-            fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
-                ('title', models.CharField(max_length=100)),
-                ('slug', models.SlugField(max_length=40)),
-                ('body', models.TextField()),
-                ('published_date', models.DateTimeField(default=datetime.datetime.now)),
-                ('feature_photo', models.ForeignKey(related_name='photosets_featured_in', to='photography.Photograph')),
-                ('photos', models.ManyToManyField(related_name='photosets_in', to='photography.Photograph')),
-            ],
-            options={
-                'ordering': ['-published_date'],
-            },
-            bases=(models.Model,),
         ),
     ]
