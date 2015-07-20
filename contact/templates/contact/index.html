@@ -31,19 +31,19 @@ Contact Dane Hillard Photography via email or through various other social chann
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
             <div class="form-group{% if form.name.errors %} has-error{% endif %}">
-                <input class="form-control" id="{{ form.name.auto_id }}" name="{{ form.name.html_name }}" placeholder="{{ form.name.html_name|title }}" />
+                <input class="form-control" id="{{ form.name.auto_id }}" name="{{ form.name.html_name }}" placeholder="{{ form.name.html_name|title }}" title="{{ form.name.html_name|title }}" />
             </div>
             <div class="form-group{% if form.email.errors %} has-error{% endif %}">
-                <input class="form-control" id="{{ form.email.auto_id }}" name="{{ form.email.html_name }}" placeholder="{{ form.email.html_name|title }}" />
+                <input class="form-control" id="{{ form.email.auto_id }}" name="{{ form.email.html_name }}" placeholder="{{ form.email.html_name|title }}" title="{{ form.email.html_name|title }}" />
             </div>
             <div class="form-group{% if form.phone.errors %} has-error{% endif %}">
-                <input class="form-control" id="{{ form.phone.auto_id }}" name="{{ form.phone.html_name }}" placeholder="{{ form.phone.html_name|title }}" />
+                <input class="form-control" id="{{ form.phone.auto_id }}" name="{{ form.phone.html_name }}" placeholder="{{ form.phone.html_name|title }}" title="{{ form.phone.html_name|title }}" />
             </div>
             <div class="form-group{% if form.subject.errors %} has-error{% endif %}">
-                <input class="form-control" id="{{ form.subject.auto_id }}" name="{{ form.subject.html_name }}" placeholder="{{ form.subject.html_name|title }}" />
+                <input class="form-control" id="{{ form.subject.auto_id }}" name="{{ form.subject.html_name }}" placeholder="{{ form.subject.html_name|title }}" title="{{ form.subject.html_name|title }}" />
             </div>
             <div class="form-group{% if form.message.errors %} has-error{% endif %}">
-                <textarea class="form-control" id="{{ form.message.auto_id }}" name="{{ form.message.html_name }}" placeholder="{{ form.message.html_name|title }}"></textarea>
+                <textarea class="form-control" id="{{ form.message.auto_id }}" name="{{ form.message.html_name }}" placeholder="{{ form.message.html_name|title }}" title="{{ form.message.html_name|title }}" ></textarea>
             </div>
         </div>
     </div>
