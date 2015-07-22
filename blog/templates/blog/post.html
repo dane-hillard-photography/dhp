@@ -2,6 +2,7 @@
 {% extends '__base.html' %}
 {% load humanize %}
 {% load snippets %}
+{% load social %}
 
 {% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
 {% block description %}{{ post.title }} | A blog post on Dane Hillard Photography | {{ block.super }}{% endblock %}
@@ -37,7 +38,15 @@
         {% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
         <h6>{% firstof post.go_live_date|naturaltime post.date_created|naturaltime %}</h6>
     </div>
+
+<div class="row text-center">
+    <div class="col-xs-2 col-xs-offset-5">
+        {% feedly_button %}
+        {% include 'social/pin_it.html' %}
+    </div>
+</div>
 {% endverbatim %}
+
 {% autoescape off %}
     {{ postbody }}
 {% endautoescape %}
@@ -62,7 +71,10 @@
 
 {% include 'contact_links.html' %}
 {% endblock content %}
+
+
 {% block final %}
+{% include 'sdk_templates/pinterest_sdk.html' %}
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",

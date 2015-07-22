@@ -1,2 +1,3 @@
+{% load static from staticfiles %}
 <div id="fb-root"></div>
-<script type="text/javascript" src="{{ STATIC_URL }}js/fb_sdk.js"></script>
+<script type="text/javascript" src="{% static 'js/fb_sdk.js' %}"></script>
