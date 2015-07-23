@@ -73,13 +73,9 @@
 {% include 'contact_links.html' %}
 {% endblock content %}
 
-{% block js %}
-{{ block.super }}
-<script type="text/javascript" src="{% static 'js/blog-post.js' %}"></script>
-{% endblock js %}
-
 {% block final %}
 {% include 'sdk_templates/pinterest_sdk.html' %}
+<script type="text/javascript" src="{% static 'js/blog-post.js' %}"></script>
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
