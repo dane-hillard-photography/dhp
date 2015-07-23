@@ -3,6 +3,7 @@
 {% load humanize %}
 {% load snippets %}
 {% load social %}
+{% load static %}
 
 {% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
 {% block description %}{{ post.title }} | A blog post on Dane Hillard Photography | {{ block.super }}{% endblock %}
@@ -72,6 +73,10 @@
 {% include 'contact_links.html' %}
 {% endblock content %}
 
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/blog-post.js' %}"></script>
+{% endblock js %}
 
 {% block final %}
 {% include 'sdk_templates/pinterest_sdk.html' %}

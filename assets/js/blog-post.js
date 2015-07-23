@@ -16,3 +16,4 @@ $('#pinterest-pin').on('click', function(){
         'eventLabel': 'pinterest pin',
         'eventValue': 1
     });
+});
