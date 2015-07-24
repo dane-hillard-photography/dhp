@@ -48,8 +48,6 @@
 
             {% include '__i_admin_links.html' %}
         </div>
-        {% block final %}
-        {% endblock final %}
 
         {% compress js %}
         {% block js %}
@@ -63,5 +61,8 @@
             <script type="text/javascript" src="{% static 'bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
         {% endblock js %}
         {% endcompress %}
+
+        {% block final %}
+        {% endblock final %}
 	</body>
 </html>
