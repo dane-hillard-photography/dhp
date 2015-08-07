@@ -84,7 +84,8 @@
   "alternativeHeadline": "{{ post.subtitle }}",
   "image": ["http://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}"],
   "datePublished": "{{ post.go_live_date }}",
-  "description": "{{ post.title }} | {{ post.subtitle }} | Dane Hillard Photography"
+  "description": "{{ post.title }} | {{ post.subtitle }} | Dane Hillard Photography",
+  "articleBody": "{% autoescape off %}{{ post.body }}{% endautoescape %}"
 }
 </script>
 {% endblock final %}
