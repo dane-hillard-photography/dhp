@@ -16,6 +16,7 @@ sitemaps = {
 
 urlpatterns = patterns(
     '',
+    url(r'^ofeGnQL9.html$', TemplateView.as_view(template_name='godaddy_verification.html', content_type='text/html')),
     url(settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^$', include('home.urls', namespace='home')),
     url(r'^', include('blog.urls', namespace='blog')),
