@@ -10,7 +10,7 @@ About Dane Hillard, the brains behind the Dane Hillard Photography operation.
 {% block og_title %}About | {{ block.super }}{% endblock og_title %}
 {% block og_url %}{{ block.super }}/about/{% endblock og_url %}
 {% block og_images %}
-<meta property="og:image" content="{% static 'images/DaneHillard.jpg' %}" />
+<meta property="og:image" content="{{ request.get_host }}{% static 'images/DaneHillard.jpg' %}" />
 {% endblock og_images %}
 
 {% block content %}
