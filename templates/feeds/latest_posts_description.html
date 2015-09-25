@@ -1,5 +1,5 @@
-<a href="http://{{ request.META.HTTP_HOST }}{% url 'blog:post' obj.slug %}" title="{{ obj.title }}">
-	<img src="http://{{ request.META.HTTP_HOST }}{{ obj.feature_image.image.url }}"
+<a href="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'blog:post' obj.slug %}" title="{{ obj.title }}">
+    <img src="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ obj.feature_image.image.url }}"
 		 alt="{{ obj.subtitle }}"
 		 title="{{ obj.title }}"
 	/>
