@@ -26,18 +26,19 @@ class ContactFormView(FormView):
         contact_email = form.cleaned_data.get('email')
 
         conn.send_email(
-            '{} <no-reply@danehillard.com>'.format(contact_name),
-            form.cleaned_data.get('subject'),
-            '{}\n\n-{}\n{}'.format(form.cleaned_data.get('message'), contact_name, form.cleaned_data.get('phone')),
-            'contact@danehillard.com',
+            source='{} <no-reply@danehillard.com>'.format(contact_name),
+            subject=form.cleaned_data.get('subject'),
+            body='{}\n\n-{}\n{}'.format(form.cleaned_data.get('message'), contact_name, form.cleaned_data.get('phone')),
+            to_addresses='contact@danehillard.com',
             reply_addresses=[contact_email],
+            format='text'
         )
 
         conn.send_email(
-            'Dane Hillard Photography <no-reply@danehillard.com>',
-            'Thank you for contacting dHP!',
-            loader.get_template('contact/contact_thank_you.html').render(Context({'name': contact_first_name})).strip(),
-            contact_email,
+            source='Dane Hillard Photography <no-reply@danehillard.com>',
+            subject='Thank you for contacting dHP!',
+            body=loader.get_template('contact/contact_thank_you.html').render(Context({'name': contact_first_name})).strip(),
+            to_addresses=contact_email,
             format='html'
         )
 
