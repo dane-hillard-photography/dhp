@@ -8,7 +8,6 @@ PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
 SECRET_KEY = os.getenv(PROJECT_VARIABLE_PATTERN.format('SECRET_KEY'))
 
 DEBUG = os.getenv(PROJECT_VARIABLE_PATTERN.format('DEBUG'), False) == 'TRUE'
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Dane Hillard', 'github@danehillard.com'),
@@ -71,6 +70,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
