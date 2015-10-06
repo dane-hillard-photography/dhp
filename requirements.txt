@@ -1,6 +1,6 @@
 Django==1.8.5
 Markdown==2.6.1
-Pillow==2.7.0
+Pillow==3.0.0
 boto==2.36.0
 django-appconf==1.0.1
 django-codemirror-widget==0.4.0

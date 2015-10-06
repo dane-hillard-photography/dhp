@@ -117,7 +117,7 @@ INSTALLED_APPS = (
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache' if not DEBUG else 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache' if not DEBUG else 'django.core.cache.backends.dummy.DummyCache',
         'LOCATION': os.getenv(PROJECT_VARIABLE_PATTERN.format('MEMCACHED_ENDPOINT'), '127.0.0.1:11211'),
     }
 }
