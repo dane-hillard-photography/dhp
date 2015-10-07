@@ -8,7 +8,6 @@ PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
 SECRET_KEY = os.getenv(PROJECT_VARIABLE_PATTERN.format('SECRET_KEY'))
 
 DEBUG = os.getenv(PROJECT_VARIABLE_PATTERN.format('DEBUG'), False) == 'TRUE'
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Dane Hillard', 'github@danehillard.com'),
@@ -71,6 +70,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -117,7 +117,7 @@ INSTALLED_APPS = (
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache' if not DEBUG else 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache' if not DEBUG else 'django.core.cache.backends.dummy.DummyCache',
         'LOCATION': os.getenv(PROJECT_VARIABLE_PATTERN.format('MEMCACHED_ENDPOINT'), '127.0.0.1:11211'),
     }
 }
@@ -166,3 +166,4 @@ LOGGING = {
         },
     },
 }
+
