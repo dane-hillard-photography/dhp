@@ -5,4 +5,4 @@ python:
 script:
   - python manage.py test --noinput
 before_script:
-  - mysql -e 'create database dhp; grant all privileges on dhp.* to travis@127.0.0.1;'
+  - mysql -e 'create database dhp;'
