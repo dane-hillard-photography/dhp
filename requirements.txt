@@ -6,7 +6,6 @@ django-codemirror-widget==0.4.0
 django-compressor==1.5
 django-nose==1.4.2
 gunicorn==19.3.0
-Markdown==2.6.1
 mysqlclient==1.3.6
 Pillow==3.0.0
 python3-memcached==1.51
