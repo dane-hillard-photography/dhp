@@ -3,4 +3,6 @@ python:
   - "3.4"
   - "3.5"
 script:
-  - python manage.py test
+  - python manage.py test --noinput
+before_script:
+  - mysql -e 'create database dhp; grant all privileges on dhp.* to travis@127.0.0.1;'
