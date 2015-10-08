@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'home',
     'about',
     'contact',
+    'django_nose',
 )
 
 CACHES = {
@@ -167,3 +168,4 @@ LOGGING = {
     },
 }
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner' 
