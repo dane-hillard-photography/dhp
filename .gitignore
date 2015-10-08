@@ -1,6 +1,6 @@
 *.log
 *.pot
-*.pyc
+*.py[cod]
 local_settings.py
 static/
 !*/static/
@@ -12,3 +12,4 @@ media/
 *.css.map
 bower_components/
 .DS_Store
+.coverage

@@ -98,7 +98,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'dhp.urls'
 WSGI_APPLICATION = 'dhp.wsgi.application'
 
-INSTALLED_APPS = (
+THIRD_PARTY_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -107,14 +107,19 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.admin',
+    'django_nose',
     'compressor',
+]
+
+MY_APPS = [
     'blog',
     'photography',
     'home',
     'about',
     'contact',
-    'django_nose',
-)
+]
+
+INSTALLED_APPS = THIRD_PARTY_APPS + MY_APPS
 
 CACHES = {
     'default': {
@@ -169,3 +174,13 @@ LOGGING = {
 }
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner' 
+
+NOSE_ARGS = [
+    '-d',
+    '--quiet',
+    '--with-fixture-bundling',
+    '--with-coverage',
+    '--cover-package=.',
+    '--cover-erase',
+    '--cover-branches',
+]
