@@ -184,5 +184,3 @@ NOSE_ARGS = [
     '--cover-erase',
     '--cover-branches',
 ]
-
-bad_thing = 
