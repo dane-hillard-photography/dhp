@@ -61,7 +61,7 @@
     <ul class="list-unstyled">
         {% for related_link in post.related_links.all %}
         <li>
-            <a href="{{ related_link.url }}">{% autoescape off %}{{ related_link.title }}{% endautoescape %}</a>
+            <a href="{{ related_link.url }}" target="_blank">{% autoescape off %}{{ related_link.title }}{% endautoescape %}</a>
         </li>
         {% endfor %}
   </ul>
