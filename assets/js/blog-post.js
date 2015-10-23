@@ -26,6 +26,7 @@ $('.external-site a').on('click', function(){
         'eventLabel': $(this).attr('title'),
         'eventValue': 1
     });
+});
 
 $(window).on("scroll", function() {
     var scrollHeight = $(document).height();
