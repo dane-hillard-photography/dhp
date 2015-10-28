@@ -29,17 +29,23 @@ $(function(){
         });
     });
 
+    var readEventSentAlready = false;
+
     $(window).on("scroll", function() {
-        var scrollHeight = $(document).height();
+        var elementPosition = $('.external-site-list').offset().top;
         var scrollPosition = $(window).height() + $(window).scrollTop();
-        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-            ga('send', {
-                'hitType': 'event',
-                'eventCategory': 'post',
-                'eventAction': 'read',
-                'eventLabel': 'post read',
-                'eventValue': 1
-            });
+        if (elementPosition < scrollPosition) {
+            if (readEventSentAlready != true) {
+                ga('send', {
+                    'hitType': 'event',
+                    'eventCategory': 'post',
+                    'eventAction': 'read',
+                    'eventLabel': 'post read',
+                    'eventValue': 1
+                });
+            }
+
+            readEventSentAlready = true;
         }
     });
 });
