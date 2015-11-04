@@ -5,13 +5,13 @@
 {% load social %}
 {% load static %}
 
-{% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
-{% block description %}{{ post.title }} | A blog post on Dane Hillard Photography | {{ block.super }}{% endblock %}
+{% block title %}{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %} | {{ block.super }}{% endblock %}
+{% block description %}A blog post on Dane Hillard Photography | {{ block.super }}{% endblock %}
 
 {% block og_type %}article{% endblock %}
 {% block og_url %}{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'blog:post' post.slug %}{% endblock %}
-{% block og_title %}{{ post.title }} | Dane Hillard Photography{% endblock %}
-{% block og_description %}{% firstof post.subtitle 'A blog post by Dane Hillard Photography' %}{% endblock %}
+{% block og_title %}{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %}{% endblock %}
+{% block og_description %}A blog post on Dane Hillard Photography{% endblock %}
 {% block og_images %}
 <meta property="og:image" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}" />
 <meta property="og:image:height" content="{{ post.feature_image.image.height }}" />
@@ -21,8 +21,8 @@
 {% block twitter %}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="{{ request.scheme }}://{{ request.get_host }}{% url 'blog:post' post.slug %}" />
-  <meta name="twitter:title" content="{{ post.title }} | Dane Hillard Photography" />
-  <meta name="twitter:description" content="A blog post by Dane Hillard Photography" />
+  <meta name="twitter:title" content="{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %}" />
+  <meta name="twitter:description" content="A blog post on Dane Hillard Photography" />
   <meta name="twitter:site" content="@{{ SOCIAL_MEDIA.twitter }}" />
   <meta name="twitter:creator" content="@{{ SOCIAL_MEDIA.twitter }}" />
   <meta name="twitter:domain" content="danehillard.com" />
@@ -84,7 +84,7 @@
   "alternativeHeadline": "{{ post.subtitle }}",
   "image": ["{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}"],
   "datePublished": "{{ post.go_live_date }}",
-  "description": "{{ post.title }} | {{ post.subtitle }} | Dane Hillard Photography"
+  "description": "{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %} | Dane Hillard Photography"
 }
 </script>
 {% endblock final %}
