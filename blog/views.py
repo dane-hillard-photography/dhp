@@ -4,28 +4,34 @@ from django.views.generic import View, YearArchiveView, MonthArchiveView
 from django.http import HttpResponse, Http404
 from django.template.loader import render_to_string
 from django.template import RequestContext, Template
+from django.views.decorators.http import last_modified
+from django.views.decorators.cache import cache_control
 
 from blog.models import Post
 
+def post_last_modified(request, slug):
+    return Post.objects.get(slug=slug).date_modified
 
-class PostView(View):
-    def get(self, request, *args, **kwargs):
-        matching_posts = Post.objects.filter(slug=kwargs.get('slug'))
 
-        if not request.user.is_authenticated():
-            right_now = datetime.now()
-            matching_posts = matching_posts.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now)
+@cache_control(max_age=3600 * 24)
+@last_modified(post_last_modified)
+def post_view(request, slug):
+    matching_posts = Post.objects.filter(slug=slug)
 
-        if len(matching_posts) != 1:
-            raise Http404('No published post with slug \'{}\' was found'.format(kwargs.get('slug')))
-        else:
-            post = matching_posts[0]
+    if not request.user.is_authenticated():
+        right_now = datetime.now()
+        matching_posts = matching_posts.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now)
 
-        context = RequestContext(request)
-        initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=context)
-        context.update({'post': post})
+    if len(matching_posts) != 1:
+        raise Http404('No published post with slug \'{}\' was found'.format(slug))
+    else:
+        post = matching_posts[0]
 
-        return HttpResponse(Template(initial_template_string).render(context))
+    context = RequestContext(request)
+    initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=context)
+    context.update({'post': post})
+
+    return HttpResponse(Template(initial_template_string).render(context))
 
 
 class PostYearArchiveView(YearArchiveView):
