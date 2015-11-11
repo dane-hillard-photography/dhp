@@ -15,7 +15,7 @@
 
         <meta property="og:type" content="{% block og_type %}{% endblock og_type %}" />
         <meta property="og:title" content="{% block og_title %}Dane Hillard Photography{% endblock og_title %}" />
-        <meta property="og:url" content="{% block og_url %}{% endblock og_url %}" />
+        <meta property="og:url" content="{% block og_url %}{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ request.path }}{% endblock og_url %}" />
         <meta property="og:description" content="{% block og_description %}{% endblock og_description %}" />
         {% block og_images %}
         <meta property="og:image" content="https://www.danehillard.com/static/images/logos/dhp.png" />

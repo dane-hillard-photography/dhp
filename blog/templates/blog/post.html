@@ -9,7 +9,6 @@
 {% block description %}A blog post on Dane Hillard Photography | {{ block.super }}{% endblock %}
 
 {% block og_type %}article{% endblock %}
-{% block og_url %}{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'blog:post' post.slug %}{% endblock %}
 {% block og_title %}{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %}{% endblock %}
 {% block og_description %}A blog post on Dane Hillard Photography{% endblock %}
 {% block og_images %}
