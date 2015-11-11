@@ -1,8 +1,8 @@
 <a href="{% url 'photography:photo' obj.uuid %}" title="{{ obj.title }}">
-	<img src="http://{{ request.META.HTTP_HOST }}{{ MEDIA_URL }}{{ obj.thumbnail_large }}"
-		 alt="{{ obj.description }}"
-		 title="{{ obj.title }}"
-	/>
+    <img src="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ MEDIA_URL }}{{ obj.thumbnail_large }}"
+         alt="{{ obj.description }}"
+         title="{{ obj.title }}"
+    />
 </a>
 <h1>{{ obj.title }}</h1>
 <p>{{ obj.description }}</p>
