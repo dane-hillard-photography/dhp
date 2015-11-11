@@ -186,8 +186,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'default': {
-            'format' : "%(asctime)s;%(levelname)s;%(name)s;%(message)s",
-            # 'datefmt' : "%Y %m %d %H:%M:%S"
+            'format' : "%(asctime)s|%(levelname)s|%(name)s|%(message)s",
         },
     },
     'handlers': {
@@ -197,10 +196,10 @@ LOGGING = {
         },
     },
     'loggers': {
-        'blog': {
+        app: {
             'handlers': ['console'],
-            'level': 'DEBUG' if DEBUG else 'WARNING',
-        },
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        } for app in MY_APPS
     },
 }
 
