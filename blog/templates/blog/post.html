@@ -81,7 +81,7 @@
   "@type": "BlogPosting",
   "headline": "{{ post.title }}",
   "alternativeHeadline": "{{ post.subtitle }}",
-  "image": ["{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}"],
+  {% if post.feature_image %}"image": ["{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}"],{% endif %}
   "datePublished": "{{ post.go_live_date }}",
   "description": "{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %} | Dane Hillard Photography"
 }
