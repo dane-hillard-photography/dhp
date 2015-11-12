@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.template import RequestContext, Template
 from django.views.decorators.http import last_modified
 from django.views.decorators.cache import cache_control
+from django.shortcuts import get_list_or_404
 
 from blog.models import Post
 
@@ -23,12 +24,10 @@ def post_view(request, slug):
 
     if not request.user.is_authenticated():
         right_now = datetime.now()
-        matching_posts = matching_posts.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now)
+        matching_posts = matching_posts.exclude(take_down_date__lte=right_now)
+        matching_posts = get_list_or_404(matching_posts, go_live_date__lte=right_now)
 
-    if len(matching_posts) != 1:
-        raise Http404('No published post with slug \'{}\' was found'.format(slug))
-    else:
-        post = matching_posts[0]
+    post = matching_posts[0]
 
     context = RequestContext(request)
     initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=context)
