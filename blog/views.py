@@ -10,7 +10,10 @@ from django.views.decorators.cache import cache_control
 from blog.models import Post
 
 def post_last_modified(request, slug):
-    return Post.objects.get(slug=slug).date_modified
+    try:
+        post = Post.objects.get(slug=slug).date_modified
+    except Post.DoesNotExist:
+        pass
 
 
 @cache_control(max_age=3600 * 24)
