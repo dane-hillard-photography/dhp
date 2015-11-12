@@ -13,7 +13,7 @@ def post_last_modified(request, slug):
     try:
         post = Post.objects.get(slug=slug).date_modified
     except Post.DoesNotExist:
-        pass
+        return None
 
 
 @cache_control(max_age=3600 * 24)
