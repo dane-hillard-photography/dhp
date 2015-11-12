@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from django.views.generic import View, YearArchiveView, MonthArchiveView
-from django.http import HttpResponse, Http404
+from django.views.generic import YearArchiveView, MonthArchiveView
+from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.template import RequestContext, Template
 from django.views.decorators.http import last_modified
@@ -10,9 +10,11 @@ from django.shortcuts import get_list_or_404
 
 from blog.models import Post
 
+
 def post_last_modified(request, slug):
     try:
-        post = Post.objects.get(slug=slug).date_modified
+        post = Post.objects.get(slug=slug)
+        return post.date_modified
     except Post.DoesNotExist:
         return None
 
@@ -20,7 +22,7 @@ def post_last_modified(request, slug):
 @cache_control(max_age=3600 * 24)
 @last_modified(post_last_modified)
 def post_view(request, slug):
-    matching_posts = Post.objects.filter(slug=slug)
+    matching_posts = get_list_or_404(Post, slug=slug)
 
     if not request.user.is_authenticated():
         right_now = datetime.now()

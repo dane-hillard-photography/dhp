@@ -37,10 +37,12 @@
 </div>
 {% endfor %}
 
+{% if latest_posts %}
 <div class="text-center top-buffer">
 {% now "Y" as year %}
     <a class="btn btn-primary" href="{% url 'blog:post_year_archive' year %}">More Posts</a>
 </div>
+{% endif %}
 
 {% endblock content %}
 
