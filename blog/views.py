@@ -22,7 +22,7 @@ def post_last_modified(request, slug):
 @cache_control(max_age=3600 * 24)
 @last_modified(post_last_modified)
 def post_view(request, slug):
-    matching_posts = get_list_or_404(Post, slug=slug)
+    matching_posts = Post.objects.filter(slug=slug)
 
     if not request.user.is_authenticated():
         right_now = datetime.now()
