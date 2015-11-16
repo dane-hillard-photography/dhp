@@ -83,7 +83,7 @@ IMAGE_UPLOAD_PATH = os.path.join('images', 'uncropped')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
-    os.path.join(BASE_DIR, 'bower_components'),
+    os.path.join(BASE_DIR, 'node_modules'),
 )
 
 STATICFILES_FINDERS = (

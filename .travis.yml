@@ -5,11 +5,10 @@ python:
 script:
   - python manage.py test --noinput
 before_script:
-  - npm install -g bower
   - gem install sass
   - mysql -e 'create database dhp;'
   - python manage.py migrate
-  - bower update
+  - npm install
   - sass assets/css/site.sass assets/css/site.css
   - python manage.py collectstatic --noinput --ignore *.sass
   - python manage.py compress
