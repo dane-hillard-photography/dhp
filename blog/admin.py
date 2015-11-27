@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from django.forms.widgets import Textarea
 
 from codemirror import CodeMirrorTextarea
 
@@ -10,8 +11,8 @@ class PostAdminForm(forms.ModelForm):
     class Meta:
         model = Post
         widgets = {
-            'body': CodeMirrorTextarea(
-            )
+            'body': CodeMirrorTextarea(),
+            'meta_description': Textarea(),
         }
         exclude = []
 
@@ -27,7 +28,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'slug', 'subtitle', 'body',)
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'go_live_date'
-    fields = (('go_live_date', 'take_down_date',), ('title', 'slug', 'subtitle'), 'body', ('categories', 'tags'), 'feature_image', 'related_links',)
+    fields = (('go_live_date', 'take_down_date',), ('title', 'slug', 'subtitle'), 'meta_description', 'body', ('categories', 'tags'), 'feature_image', 'related_links',)
     raw_id_fields = ('categories', 'tags', 'feature_image', 'related_links',)
 
 

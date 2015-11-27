@@ -36,6 +36,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     subtitle = models.CharField(max_length=255, blank=True, null=True)
     body = models.TextField()
+    meta_description = models.CharField(max_length=150, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     go_live_date = models.DateTimeField('Date and time to publish this post', blank=True, null=True, default=datetime.now)
