@@ -1,6 +1,6 @@
 {% extends '__base_no_disqus.html' %}
 
-{% block title %}Archive: {{ month|date:"F" }} {{ month|date:"Y" }} | {% endblock %}
+{% block title %}Archive: {{ month|date:"F" }} {{ month|date:"Y" }} | {{ block.super }}{% endblock %}
 {% block description %}Archive of posts on Dane Hillard Photography from {{ month|date:"F" }} {{ month|date:"Y" }}{% endblock %}
 
 {% block content %}
