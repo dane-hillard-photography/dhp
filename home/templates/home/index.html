@@ -1,7 +1,7 @@
 {% extends '__base.html' %}
 {% load staticfiles %}
 
-{% block title %}Home | {% endblock title %}
+{% block title %}Home | {{ block.super }}{% endblock title %}
 
 {% block og_type %}business.business{% endblock %}
 {% block og_extras %}
