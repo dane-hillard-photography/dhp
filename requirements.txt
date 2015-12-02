@@ -1,6 +1,6 @@
 boto==2.36.0
 coverage==4.0.0
-Django==1.8.5
+Django==1.9.0
 django-appconf==1.0.1
 django-codemirror-widget==0.4.0
 django-compressor==1.5
