@@ -176,7 +176,6 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-sass', 'sass {infile} {outfile}'),
 )
 
-COMPRESS_OFFLINE = True
 COMPRESS_OUTPUT_DIR = ''
 
 AWS_ACCESS_KEY_ID = os.getenv(PROJECT_VARIABLE_PATTERN.format('AWS_ACCESS_KEY_ID'))
