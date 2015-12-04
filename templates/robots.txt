@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /photography
 Disallow: /archive
 Disallow: /login
