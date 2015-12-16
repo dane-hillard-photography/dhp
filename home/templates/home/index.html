@@ -29,11 +29,11 @@
 </div>
 
 {% for post in latest_posts %}
-<div itemscope itemtype="http://schema.org/BlogPosting" class="row inner-padding post-row" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url({{ post.feature_image.thumbnail_large.url }});">
+<div class="row inner-padding post-row" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url({{ post.feature_image.thumbnail_large.url }});">
     <div class="text-center col-xs-12 col-md-8 col-md-offset-2">
-        <h2 itemprop="headline">{{ post.title }}</h2>
-        {% if post.subtitle %}<p itemprop="alternativeHeadline">{{ post.subtitle }}</p>{% endif %}
-        <a class="btn btn-primary outline" itemprop="url" href="{% url 'blog:post' post.slug %}">Read More</a>
+        <h2>{{ post.title }}</h2>
+        {% if post.subtitle %}<p>{{ post.subtitle }}</p>{% endif %}
+        <a class="btn btn-primary outline" href="{% url 'blog:post' post.slug %}">Read More</a>
     </div>
 </div>
 {% endfor %}
