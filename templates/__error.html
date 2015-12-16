@@ -3,6 +3,10 @@
 
 {% block title %}{% block error_page_title %}{% endblock %} | {{ block.super }}{% endblock title %}
 
+{% block extra_meta_tags %}
+<meta name="robots" content="noindex" />
+{% endblock extra_meta_tags %}
+
 {% block content %}
 {% include '__i_dhp_logo.html' %}
 <div class="text-center">
