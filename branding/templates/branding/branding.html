@@ -1,0 +1,40 @@
+{% extends '__base_no_disqus.html' %}
+{% load static %}
+
+{% block title %}Branding | {{ block.super }}{% endblock %}
+
+{% block content %}
+{% include '__i_dhp_logo.html' %}
+<div class="row text-center">
+    <div class="col-md-4 col-md-offset-4">
+        <h1>Branding</h1>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-4 col-md-offset-4">
+        <h2>Logo</h2>
+    </div>
+</div>
+{% include '__i_dhp_logo.html' %}
+<div class="row text-center">
+    <div class="col-md-4 col-md-offset-4">
+        <h2>Buttons</h2>
+        <button class="btn btn-primary">Click Me!</button>
+        <button class="btn btn-primary outline">Click Me!</button>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-4 col-md-offset-4">
+        <h2>Form Inputs</h2>
+        <form>
+            <input class="form-control" type="text" placeholder="Type here" />
+        </form>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-4 col-md-offset-4">
+        <h2>Links</h2>
+        <a href="#">I am a link</a>
+    </div>
+</div>
+{% endblock content %}

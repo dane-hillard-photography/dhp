@@ -33,6 +33,7 @@ if settings.DEBUG:
     urlpatterns += [
         url(r'^404/$', TemplateView.as_view(template_name='404.html'), name='not_found'),
         url(r'^500/$', TemplateView.as_view(template_name='500.html'), name='server_error'),
+        url(r'^branding/', include('branding.urls', namespace='branding')),
     ]
 
 urlpatterns += staticfiles_urlpatterns()
