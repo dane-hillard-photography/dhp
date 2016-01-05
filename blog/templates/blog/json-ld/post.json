@@ -1,0 +1,12 @@
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ post.title }}",
+  "alternativeHeadline": "{{ post.subtitle }}",
+  {% if post.feature_image %}"image": ["{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}"],{% endif %}
+  "datePublished": "{{ post.go_live_date|date:'c' }}",
+  "dateModified": "{{ post.date_modified|date:'c' }}",
+  "publisher": {% include 'json-ld/organization.json' %},
+  "author": {% include 'json-ld/person.json' %},
+  "description": "{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %} | Dane Hillard Photography"
+}

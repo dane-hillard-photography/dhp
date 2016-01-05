@@ -1,0 +1,19 @@
+{
+  "@context" : "http://schema.org",
+  "@type": "Organization",
+  "name": "Dane Hillard Photography",
+  "url" : "https://www.danehillard.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.danehillard.com/static/images/logos/dhp.png",
+    "height": 294,
+    "width": 500
+  },
+  "sameAs" : [
+            "http://www.facebook.com/danehillard",
+            "http://instagram.com/danehillard",
+            "http://www.linkedin.com/in/danehillard",
+            "http://plus.google.com/danehillard",
+            "http://www.twitter.com/danehillard"
+  ]
+}
