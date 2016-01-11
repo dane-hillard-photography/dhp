@@ -1,6 +1,5 @@
 {% verbatim %}
 {% extends '__base.html' %}
-{% load humanize %}
 {% load snippets %}
 {% load social %}
 {% load static %}
@@ -36,7 +35,7 @@
         {% endif %}
         <h1>{{ post.title }}</h1>
         {% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
-        <h6>{% firstof post.go_live_date|naturaltime post.date_created|naturaltime %}</h6>
+        <h6>{% firstof post.go_live_date|date:"jS F, Y" post.date_created|date:"jS F, Y" %}</h6>
     </div>
 
 <div class="row text-center">
@@ -74,7 +73,9 @@
 
 {% block final %}
 {% include 'sdk_templates/pinterest_sdk.html' %}
+{% if request.META.HTTP_HOST == 'danehillard.com' %}
 <script type="text/javascript" src="{% static 'js/blog-post.js' %}"></script>
+{% endif %}
 <script type="application/ld+json">{% include 'blog/json-ld/post.json' %}</script>
 {% endblock final %}
 {% endverbatim %}
