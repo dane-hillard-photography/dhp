@@ -36,8 +36,9 @@ class ContactFormView(FormView):
             logging.error(result.get('ErrorResponse', {}).get('Error', {}).get('Message',''))
 
     def form_valid(self, form):
-        contact_name = form.cleaned_data.get('name', '')
-        contact_first_name = contact_name.split(' ')[0] if contact_name else ''
+        contact_first_name = form.cleaned_data.get('first_name', '')
+        contact_last_name = form.cleaned_data.get('last_name', '')
+        contact_name = ' '.join((contact_first_name, contact_last_name))
         contact_email = form.cleaned_data.get('email')
 
         self.send_email(
