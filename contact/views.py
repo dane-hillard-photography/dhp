@@ -65,7 +65,7 @@ class ContactFormView(FormView):
         if form.cleaned_data.get('join_mailing_list'):
             subscription_body = {
                 'email_address': contact_email,
-                'status': 'subscribed',
+                'status': 'pending',
                 'merge_fields': {
                     'FNAME': contact_first_name,
                     'LNAME': contact_last_name,
