@@ -28,11 +28,7 @@ class Photograph(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    public = models.BooleanField(default=True)
     uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
-    published_date = models.DateTimeField(default=datetime.datetime.now)
-
-    user = models.ForeignKey(User, blank=True, null=True)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)
@@ -55,9 +51,6 @@ class Photograph(models.Model):
         upload_to='images/small', blank=True, null=True, height_field='sm_height', width_field='sm_width')
     thumbnail_square = models.ImageField(
         upload_to='images/square', blank=True, null=True, height_field='sq_height', width_field='sq_width')
-
-    class Meta:
-        ordering = ['-published_date']
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
