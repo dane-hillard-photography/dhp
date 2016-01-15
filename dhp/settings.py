@@ -221,3 +221,4 @@ NOSE_ARGS = [
     '--cover-erase',
     '--cover-branches',
 ]
+
