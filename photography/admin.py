@@ -4,19 +4,18 @@ from photography.models import Photograph
 
 
 class PhotographAdmin(admin.ModelAdmin):
-    list_editable = ['title', 'description',]
+    list_editable = ['alt_text']
 
     fieldsets = [
-        ('Photograph Information', {'fields': ['image', 'title', 'description']}),
+        ('Photograph Information', {'fields': ['image', 'alt_text']}),
     ]
     list_display = (
         'admin_thumbnail',
-        'title',
-        'description',
+        'alt_text',
         'size',
     )
 
-    search_fields = ['title']
+    search_fields = ['alt_text']
     save_on_top = True
 
 admin.site.register(Photograph, PhotographAdmin)

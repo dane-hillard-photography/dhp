@@ -26,8 +26,7 @@ def get_file_path(instance, filename):
 
 class Photograph(models.Model):
 
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    alt_text = models.CharField(max_length=255)
     uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
 
     height = models.IntegerField(blank=True, null=True)
