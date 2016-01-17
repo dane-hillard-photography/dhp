@@ -1,6 +1,5 @@
 import os
 import uuid
-import datetime
 from tempfile import *
 
 from PIL import Image as PImage
@@ -95,7 +94,7 @@ class Photograph(models.Model):
     admin_thumbnail.allow_tags = True
 
     def __str__(self):
-        return '{} ({}x{})'.format(self.title, self.width, self.height)
+        return '{} ({}x{})'.format(self.alt_text, self.width, self.height)
 
 
 @receiver(post_delete, sender=Photograph)
