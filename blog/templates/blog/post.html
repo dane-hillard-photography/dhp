@@ -73,7 +73,7 @@
 
 {% block final %}
 {% include 'sdk_templates/pinterest_sdk.html' %}
-{% if request.META.HTTP_HOST == 'danehillard.com' %}
+{% if request.META.HTTP_HOST == 'www.danehillard.com' %}
 <script type="text/javascript" src="{% static 'js/blog-post.js' %}"></script>
 {% endif %}
 <script type="application/ld+json">{% include 'blog/json-ld/post.json' %}</script>
