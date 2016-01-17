@@ -32,7 +32,7 @@ def post_view(request, slug):
     post = matching_posts[0]
 
     context = RequestContext(request)
-    initial_template_string = render_to_string('blog/post.html', dictionary={'postbody': post.body}, context_instance=context)
+    initial_template_string = render_to_string(request=request, template_name='blog/post.html', context={'postbody': post.body})
     context.update({'post': post})
 
     return HttpResponse(Template(initial_template_string).render(context))

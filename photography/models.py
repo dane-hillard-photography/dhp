@@ -3,7 +3,6 @@ import uuid
 from tempfile import *
 
 from PIL import Image as PImage
-from PIL import ImageOps as PImageOps
 
 from django.db import models
 from django.conf import settings
@@ -47,8 +46,6 @@ class Photograph(models.Model):
         upload_to='images/medium', blank=True, null=True, height_field='m_height', width_field='m_width')
     thumbnail_small = models.ImageField(
         upload_to='images/small', blank=True, null=True, height_field='sm_height', width_field='sm_width')
-    thumbnail_square = models.ImageField(
-        upload_to='images/square', blank=True, null=True, height_field='sq_height', width_field='sq_width')
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
@@ -69,13 +66,6 @@ class Photograph(models.Model):
         super(Photograph, self).save(*args, **kwargs)
         image = PImage.open(os.path.join(settings.MEDIA_ROOT, self.image.name))
         
-        thumbnail_size = (250, 250)
-        thumb_square = PImageOps.fit(image, thumbnail_size, PImage.ANTIALIAS)
-        tf = NamedTemporaryFile()
-        thumb_square.save(tf.name, image.format, quality=100)
-        self.thumbnail_square.save(self.image.name, File(open(tf.name, 'rb')), save=False)
-        tf.close()
-      
         self.create_thumbnail(image, self.thumbnail_large, 1200)
         self.create_thumbnail(image, self.thumbnail_medium, 800)
         self.create_thumbnail(image, self.thumbnail_small, 300)
@@ -100,7 +90,6 @@ class Photograph(models.Model):
 @receiver(post_delete, sender=Photograph)
 def photograph_delete(sender, instance, **kwargs):
     instance.image.delete(False)
-    instance.thumbnail_square.delete(False)
     instance.thumbnail_small.delete(False)
     instance.thumbnail_medium.delete(False)
     instance.thumbnail_large.delete(False)
