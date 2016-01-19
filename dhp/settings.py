@@ -79,8 +79,6 @@ STATIC_URL = os.getenv(PROJECT_VARIABLE_PATTERN.format('STATIC_URL'), '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv(PROJECT_VARIABLE_PATTERN.format('MEDIA_ROOT'), 'media'))
 MEDIA_URL = os.getenv(PROJECT_VARIABLE_PATTERN.format('MEDIA_URL'), '/media/')
 
-IMAGE_UPLOAD_PATH = os.path.join('images', 'uncropped')
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
     os.path.join(BASE_DIR, 'node_modules'),
@@ -193,13 +191,14 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'default': {
-            'format' : "%(asctime)s|%(levelname)s|%(name)s|%(message)s",
+            'format': "%(asctime)s|%(levelname)s|%(name)s|%(message)s",
         },
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'default',
+            'level': 'DEBUG' if DEBUG else 'INFO',
         },
     },
     'loggers': {
