@@ -1,6 +1,7 @@
 import os
 import uuid
-from tempfile import *
+import logging
+from tempfile import NamedTemporaryFile
 
 from PIL import Image as PImage
 
@@ -10,22 +11,31 @@ from django.core.files import File
 from django.contrib.auth.models import User
 from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_delete
+from django.core.files.move import file_move_safe
+from django.core.exceptions import ValidationError
+
+
+logger = logging.getLogger(__name__)
+
+IMAGE_SUBPATH = 'images'
+ORIG_SUBPATH = os.path.join(IMAGE_SUBPATH, 'uncropped')
+LARGE_SUBPATH = os.path.join(IMAGE_SUBPATH, 'large')
+MEDIUM_SUBPATH = os.path.join(IMAGE_SUBPATH, 'medium')
+SMALL_SUBPATH = os.path.join(IMAGE_SUBPATH, 'small')
 
 
 def generate_uuid():
-    return str(uuid.uuid4())
+    pass
 
 
 def get_file_path(instance, filename):
-    ext = filename.split('.')[-1]
-    save_filename = '{uuid}.{ext}'.format(uuid=instance.uuid, ext=ext)
-    return os.path.join(settings.IMAGE_UPLOAD_PATH, save_filename)
+    return os.path.join(ORIG_SUBPATH, filename)
 
 
 class Photograph(models.Model):
 
     alt_text = models.CharField(max_length=255)
-    uuid = models.CharField('UUID', max_length=36, unique=True, default=generate_uuid, editable=False)
+    filename = models.CharField(max_length=100, blank=True, null=True)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)
@@ -41,16 +51,16 @@ class Photograph(models.Model):
     image = models.ImageField(upload_to=get_file_path, height_field='height', width_field='width')
 
     thumbnail_large = models.ImageField(
-        upload_to='images/large', blank=True, null=True, height_field='l_height', width_field='l_width')
+        upload_to=LARGE_SUBPATH, blank=True, null=True, height_field='l_height', width_field='l_width')
     thumbnail_medium = models.ImageField(
-        upload_to='images/medium', blank=True, null=True, height_field='m_height', width_field='m_width')
+        upload_to=MEDIUM_SUBPATH, blank=True, null=True, height_field='m_height', width_field='m_width')
     thumbnail_small = models.ImageField(
-        upload_to='images/small', blank=True, null=True, height_field='sm_height', width_field='sm_width')
+        upload_to=SMALL_SUBPATH, blank=True, null=True, height_field='sm_height', width_field='sm_width')
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('photography:photo', kwargs={'photo_id': self.uuid})
-    
+
     def create_thumbnail(self, original_image, new_image, max_size):
         width, height = original_image.size
         ratio_divisor = height if height > width else width
@@ -62,13 +72,30 @@ class Photograph(models.Model):
         new_image.save(self.image.name, File(open(tf.name, 'rb')), save=False)
         tf.close()
 
+    def clean(self):
+        super(Photograph, self).clean()
+        new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
+
+        if self.pk is None or new_filepath != Photograph.objects.get(pk=self.pk).image.path:
+            if os.path.exists(new_filepath):
+                raise ValidationError({'filename': 'A photo with this filename already exists!'})
+
     def save(self, *args, **kwargs):
+        self.clean()
         super(Photograph, self).save(*args, **kwargs)
+
         image = PImage.open(os.path.join(settings.MEDIA_ROOT, self.image.name))
-        
+
         self.create_thumbnail(image, self.thumbnail_large, 1200)
         self.create_thumbnail(image, self.thumbnail_medium, 800)
         self.create_thumbnail(image, self.thumbnail_small, 300)
+
+        for img in [self.image, self.thumbnail_large, self.thumbnail_medium, self.thumbnail_small]:
+            file_move_safe(
+                img.path,
+                os.path.join(os.path.dirname(img.path), self.filename)
+            )
+            img.name = os.path.join(os.path.dirname(img.name), self.filename)
 
         super(Photograph, self).save(*args, **kwargs)
 
