@@ -1,6 +1,6 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PROJECT_NAME = 'DHP'
 PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
