@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.views.generic import YearArchiveView, MonthArchiveView
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, Http404
 from django.template.loader import render_to_string
 from django.template import RequestContext, Template
 from django.views.decorators.http import last_modified
@@ -32,7 +32,7 @@ def post_view(request, slug):
     try:
         post = matching_posts[0]
     except IndexError:
-        return HttpResponseNotFound('No post at this URL')
+        raise Http404
 
     context = RequestContext(request)
     initial_template_string = render_to_string(request=request, template_name='blog/post.html', context={'postbody': post.body})
