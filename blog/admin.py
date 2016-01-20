@@ -28,8 +28,20 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'slug', 'subtitle', 'body',)
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'go_live_date'
-    fields = (('go_live_date', 'take_down_date',), ('title', 'slug', 'subtitle'), 'meta_description', 'body', ('categories', 'tags'), 'feature_image', 'related_links',)
-    raw_id_fields = ('categories', 'tags', 'feature_image', 'related_links',)
+    save_on_top = True
+
+    fieldsets = (
+        ('Content', {
+            'fields': ('title', 'slug', 'subtitle', 'body', 'feature_image', 'images',),
+        }),
+        ('SEO and Relationships', {
+            'fields': ('meta_description', 'categories', 'tags', 'related_links',),
+        }),
+        ('Publishing', {
+            'fields': ('go_live_date', 'take_down_date',),
+        }),
+    )
+    raw_id_fields = ('categories', 'tags', 'feature_image', 'images', 'related_links',)
 
 
 @admin.register(Tag)
