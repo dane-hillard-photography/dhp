@@ -16,18 +16,11 @@ def get_photo_by_filename(filename):
         logger.warning('No photo with the filename \'{}\' exists!'.format(filename))
 
 
-@register.inclusion_tag('blog/full_background_image.html')
-def full_background_image(url, position=None, padding_override=None):
-    return {'url': url, 'position': position, 'padding_override': padding_override}
-
-
 @register.inclusion_tag('blog/responsive_image.html')
 def image(filename):
     return {'photo': get_photo_by_filename(filename)}
 
 
-@register.inclusion_tag('blog/full_background_image.html')
+@register.inclusion_tag('blog/background_image.html')
 def background_image(filename):
-    photo = get_photo_by_filename(filename)
-    if photo:
-        return {'url': photo.thumbnail_large.url}
+    return {'photo': get_photo_by_filename(filename)}
