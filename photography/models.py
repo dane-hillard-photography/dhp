@@ -75,10 +75,16 @@ class Photograph(models.Model):
     def clean(self):
         super(Photograph, self).clean()
         new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
+        existing_filepath = None
 
-        if self.pk is None or new_filepath != Photograph.objects.get(pk=self.pk).image.path:
-            if os.path.exists(new_filepath):
+        if self.pk:
+            existing_filepath = Photograph.objects.get(pk=self.pk).image.path
+
+        if self.pk is None or (self.filename and new_filepath != existing_filepath):
+            if os.path.isfile(new_filepath):
                 raise ValidationError({'filename': 'A photo with this filename already exists!'})
+        if existing_filepath and not self.filename:
+            raise ValidationError({'filename': 'Don\'t orphan an otherwise happy photo!'})
 
     def save(self, *args, **kwargs):
         self.clean()
@@ -91,11 +97,12 @@ class Photograph(models.Model):
         self.create_thumbnail(image, self.thumbnail_small, 300)
 
         for img in [self.image, self.thumbnail_large, self.thumbnail_medium, self.thumbnail_small]:
-            file_move_safe(
-                img.path,
-                os.path.join(os.path.dirname(img.path), self.filename)
-            )
-            img.name = os.path.join(os.path.dirname(img.name), self.filename)
+            if self.filename:
+                file_move_safe(
+                    img.path,
+                    os.path.join(os.path.dirname(img.path), self.filename)
+                )
+                img.name = os.path.join(os.path.dirname(img.name), self.filename)
 
         super(Photograph, self).save(*args, **kwargs)
 
