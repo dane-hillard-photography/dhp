@@ -32,7 +32,7 @@ class PostAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Content', {
-            'fields': ('title', 'slug', 'subtitle', 'body', 'feature_image', 'images',),
+            'fields': ('title', 'slug', 'subtitle', 'body', 'feature_image',),
         }),
         ('SEO and Relationships', {
             'fields': ('meta_description', 'categories', 'tags', 'related_links',),
@@ -41,7 +41,7 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ('go_live_date', 'take_down_date',),
         }),
     )
-    raw_id_fields = ('categories', 'tags', 'feature_image', 'images', 'related_links',)
+    raw_id_fields = ('categories', 'tags', 'feature_image', 'related_links',)
 
 
 @admin.register(Tag)

@@ -44,7 +44,6 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     feature_image = models.ForeignKey(Photograph, blank=True, null=True, related_name='featured_in')
-    images = models.ManyToManyField(Photograph, blank=True, related_name='used_in')
     related_links = models.ManyToManyField(Link, blank=True)
 
     def __str__(self):
