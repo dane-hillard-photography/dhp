@@ -15,13 +15,13 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{% url 'home:home' %}" title="Home"><div class="menu-icon">{% include 'iconography/home.svg' %}</div></a>
+                    <a href="{% url 'home:home' %}" title="Home"><div class="menu-icon" aria-label="Home">{% include 'iconography/home.svg' %}</div></a>
                 </li>
                 <li>
-                    <a href="{% url 'contact:contact' %}" title="Contact"><div class="menu-icon">{% include 'iconography/contact.svg' %}</div></a>
+                    <a href="{% url 'contact:contact' %}" title="Contact"><div class="menu-icon" aria-label="Contact">{% include 'iconography/contact.svg' %}</div></a>
                 </li>
                 <li>
-                    <a href="{% url 'about:about' %}" title="About"><div class="menu-icon">{% include 'iconography/user.svg' %}</div></a>
+                    <a href="{% url 'about:about' %}" title="About"><div class="menu-icon" aria-label="About">{% include 'iconography/user.svg' %}</div></a>
                 </li>
             </ul>
         </div>
