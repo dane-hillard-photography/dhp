@@ -28,8 +28,8 @@
     {% include 'fb_like.html' %}
 </div>
 
-{% if latest_posts %}
-{% with latest_posts.0 as post %}
+{% if posts %}
+{% with posts.0 as post %}
 <div class="row inner-padding post-row" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url({{ post.feature_image.thumbnail_large.url }});">
     <div class="text-center col-md-8 col-md-offset-2">
         {% include 'home/post_snippet.html' %}
@@ -38,7 +38,7 @@
 {% endwith %}
 {% endif %}
 
-{% for post in latest_posts %}
+{% for post in posts %}
     {% if forloop.first %}
     {% else %}
         {% if forloop.counter|divisibleby:2 %}
@@ -58,15 +58,21 @@
     {% endif %}
 {% endfor %}
 
-{% if latest_posts %}
-<div class="text-center top-buffer">
-{% now "Y" as year %}
-    <a class="btn btn-primary" href="{% url 'blog:post_year_archive' year %}">More Posts</a>
-</div>
-{% endif %}
-
-<hr />
 <footer>
+    <h2 class="text-center">Earlier Posts</h2>
+    <hr />
+    <div class="row">
+    {% for year, posts in posts_by_year.items %}
+        <div class="col-sm-3 col-lg-2">
+            <h5 class="year-post-list-header">{{ year }}</h5>
+            <ul class="year-post-list">
+                {% for post in posts %}
+                <li><a href="{% url 'blog:post' post.slug %}"><small>{{ post.title }}</small></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    </div>
 </footer>
 
 {% endblock content %}
