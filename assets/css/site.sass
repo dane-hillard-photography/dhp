@@ -55,11 +55,12 @@ body
 
 .year-post-list
   list-style: none
-  margin: 0 0 30px 0
+  margin: 0 0 $all-post-list-bottom-margin 0
   padding: 0
+  font-size: $all-post-list-font-size
 
   li:not(:last-child)
-    border-bottom: 1px solid darken($background-color, 8)
+    border-bottom: $all-post-list-separator-thickness solid $all-post-list-separator-color
 
 .year-post-list-header
-  margin-bottom: 5px
+  margin-bottom: $all-post-list-header-bottom-margin
