@@ -38,7 +38,7 @@
 {% endwith %}
 {% endif %}
 
-{% for post in posts %}
+{% for post in posts|slice:":5" %}
     {% if forloop.first %}
     {% else %}
         {% if forloop.counter|divisibleby:2 %}
