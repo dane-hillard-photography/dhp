@@ -37,13 +37,6 @@
         {% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
         <h6>{% firstof post.go_live_date|date:"jS F, Y" post.date_created|date:"jS F, Y" %}</h6>
     </div>
-
-<div class="row text-center">
-    <div class="col-xs-2 col-xs-offset-5">
-        {% feedly_button %}
-        {% include 'social/pin_it.html' %}
-    </div>
-</div>
 {% endverbatim %}
 
 {% autoescape off %}
