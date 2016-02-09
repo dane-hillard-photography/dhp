@@ -1,0 +1,3 @@
+<h2>{{ post.title }}</h2>
+{% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
+<a class="btn btn-primary outline" href="{% url 'blog:post' post.slug %}">Read More</a>

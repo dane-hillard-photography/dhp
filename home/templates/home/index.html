@@ -28,14 +28,34 @@
     {% include 'fb_like.html' %}
 </div>
 
-{% for post in latest_posts %}
+{% if latest_posts %}
+{% with latest_posts.0 as post %}
 <div class="row inner-padding post-row" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url({{ post.feature_image.thumbnail_large.url }});">
-    <div class="text-center col-xs-12 col-md-8 col-md-offset-2">
-        <h2>{{ post.title }}</h2>
-        {% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
-        <a class="btn btn-primary outline" href="{% url 'blog:post' post.slug %}">Read More</a>
+    <div class="text-center col-md-8 col-md-offset-2">
+        {% include 'home/post_snippet.html' %}
     </div>
 </div>
+{% endwith %}
+{% endif %}
+
+{% for post in latest_posts %}
+    {% if forloop.first %}
+    {% else %}
+        {% if forloop.counter|divisibleby:2 %}
+            <div class="row">
+                <div class="text-center col-md-{% if forloop.last %}12{% else %}6{% endif %} post-row inner-padding" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url({{ post.feature_image.thumbnail_large.url }});">
+                    {% include 'home/post_snippet.html' %}
+                </div>
+        {% else %}
+                <div class="text-center col-md-6 post-row inner-padding" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url({{ post.feature_image.thumbnail_large.url }});">
+                    {% include 'home/post_snippet.html' %}
+                </div>
+            </div>
+        {% endif %}
+        {% if forloop.last and forloop.counter|divisibleby:2 %}
+            </div>
+        {% endif %}
+    {% endif %}
 {% endfor %}
 
 {% if latest_posts %}
@@ -44,6 +64,10 @@
     <a class="btn btn-primary" href="{% url 'blog:post_year_archive' year %}">More Posts</a>
 </div>
 {% endif %}
+
+<hr />
+<footer>
+</footer>
 
 {% endblock content %}
 
