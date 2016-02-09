@@ -67,7 +67,7 @@
             <h5 class="year-post-list-header">{{ year }}</h5>
             <ul class="year-post-list">
                 {% for post in posts %}
-                <li><a href="{% url 'blog:post' post.slug %}"><small>{{ post.title }}</small></a></li>
+                <li><a href="{% url 'blog:post' post.slug %}">{{ post.title }}</a></li>
                 {% endfor %}
             </ul>
         </div>

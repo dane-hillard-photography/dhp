@@ -13,6 +13,12 @@ a:focus,
 a:active
   text-decoration: none !important
 
+a::selection
+  color: $highlighted-link-color
+
+a:hover::selection
+  color: $highlighted-link-hover-color
+
 .admin-links
   font-size: $font-size-admin-links
 
