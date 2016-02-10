@@ -23,7 +23,7 @@ def post_last_modified(request, slug):
 def post_view(request, slug):
     matching_posts = Post.objects.filter(slug=slug)
 
-    if not request.user.is_authenticated():
+    if not any([request.user.is_authenticated(), getattr(request, 'is_whitelisted_crawler', False)]):
         right_now = datetime.now()
         matching_posts = matching_posts.exclude(take_down_date__lte=right_now)
         matching_posts = get_list_or_404(matching_posts, go_live_date__lte=right_now)

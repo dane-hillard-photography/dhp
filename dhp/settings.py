@@ -127,6 +127,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'seo.middleware.RedirectMiddleware',
+    'seo.middleware.CrawlerMiddleware',
 )
 
 ROOT_URLCONF = 'dhp.urls'
@@ -222,4 +223,10 @@ NOSE_ARGS = [
     '--cover-branches',
 ]
 
-FOO = 'bar'
+WHITELISTED_CRAWLERS = {
+    'facebook': [
+        'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)',
+        'facebookexternalhit/1.1',
+        'Facebot',
+    ]
+}
