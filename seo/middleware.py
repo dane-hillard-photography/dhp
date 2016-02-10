@@ -18,9 +18,14 @@ class RedirectMiddleware(object):
 
 
 class CrawlerMiddleware(object):
-    def is_facebook_crawler(self, user_agent):
+    @staticmethod
+    def is_facebook_crawler(user_agent):
         return user_agent in settings.WHITELISTED_CRAWLERS.get('facebook', [])
+
+    @staticmethod
+    def is_twitter_crawler(user_agent):
+        return user_agent in settings.WHITELISTED_CRAWLERS.get('twitter', [])
 
     def process_request(self, request):
         user_agent = request.META.get('HTTP_USER_AGENT')
-        request.is_whitelisted_crawler = self.is_facebook_crawler(user_agent)
+        request.is_whitelisted_crawler = self.is_facebook_crawler(user_agent) or self.is_twitter_crawler(user_agent)

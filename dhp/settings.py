@@ -228,5 +228,9 @@ WHITELISTED_CRAWLERS = {
         'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)',
         'facebookexternalhit/1.1',
         'Facebot',
+    ],
+    'twitter': [
+        'Twitterbot',
+        'Twitterbot/1.0',
     ]
 }
