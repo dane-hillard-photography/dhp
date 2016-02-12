@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.views import generic
 
 from blog.models import Post
@@ -10,13 +8,8 @@ class IndexView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        right_now = datetime.now()
 
-        all_live_posts = Post.objects.filter(
-            go_live_date__lte=right_now
-        ).exclude(
-            take_down_date__lte=right_now
-        ).order_by('-go_live_date')
+        all_live_posts = Post.get_live_posts().order_by('-go_live_date')
 
         dates = [post.go_live_date for post in all_live_posts]
         years = set([date.year for date in dates])

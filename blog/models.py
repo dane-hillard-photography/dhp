@@ -58,3 +58,24 @@ class Post(models.Model):
             return True
         return False
     published.boolean = True
+
+    @staticmethod
+    def get_live_posts():
+        right_now = datetime.now()
+        return Post.objects.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now)
+
+    def get_previous_posts(self):
+        all_live_posts = self.get_live_posts()
+        return all_live_posts.filter(go_live_date__lt=self.go_live_date).order_by('-go_live_date')
+
+    def get_following_posts(self):
+        all_live_posts = self.get_live_posts()
+        return all_live_posts.filter(go_live_date__gt=self.go_live_date).order_by('go_live_date')
+
+    def get_previous_post(self):
+        previous_posts = self.get_previous_posts()
+        return previous_posts[0] if previous_posts else None
+
+    def get_next_post(self):
+        following_posts = self.get_following_posts()
+        return following_posts[0] if following_posts else None
