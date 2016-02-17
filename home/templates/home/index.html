@@ -78,7 +78,7 @@
 {% endblock content %}
 
 {% block final %}
-    <script>{% include 'json-ld/organization.json' %}</script>
+    <script type="application/ld+json">{% include 'json-ld/organization.json' %}</script>
 {% endblock final %}
 
 {% block js %}
