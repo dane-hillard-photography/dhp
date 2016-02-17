@@ -78,22 +78,7 @@
 {% endblock content %}
 
 {% block final %}
-    <script type="application/ld+json">
-    {
-        "@context" : "http://schema.org",
-        "@type" : "Organization",
-        "name" : "Dane Hillard Photography",
-        "url" : "https://www.danehillard.com",
-        "logo" : "https://www.danehillard.com/static/images/logos/dhp.png",
-        "sameAs" : [
-            "http://www.facebook.com/danehillard",
-            "http://instagram.com/danehillard",
-            "http://www.linkedin.com/in/danehillard",
-            "http://plus.google.com/danehillard",
-            "http://www.twitter.com/danehillard"
-        ]
-    }
-    </script>
+    <script>{% include 'json-ld/organization.json' %}</script>
 {% endblock final %}
 
 {% block js %}
