@@ -21,10 +21,10 @@ def post_last_modified(request, slug):
 @cache_control(max_age=3600 * 24)
 @last_modified(post_last_modified)
 def post_view(request, slug):
+    right_now = datetime.now()
     matching_posts = Post.objects.filter(slug=slug)
 
     if not any([request.user.is_authenticated(), getattr(request, 'is_whitelisted_crawler', False)]):
-        right_now = datetime.now()
         matching_posts = matching_posts.exclude(take_down_date__lte=right_now)
         matching_posts = get_list_or_404(matching_posts, go_live_date__lte=right_now)
 
@@ -35,6 +35,6 @@ def post_view(request, slug):
 
     context = RequestContext(request)
     initial_template_string = render_to_string(request=request, template_name='blog/post.html', context={'postbody': post.body})
-    context.update({'post': post})
+    context.update({'post': post, 'previous_post': post.get_previous_post(), 'next_post': post.get_next_post()})
 
     return HttpResponse(Template(initial_template_string).render(context))

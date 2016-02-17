@@ -44,18 +44,36 @@
 {% endautoescape %}
 {% verbatim %}
 
-{% if post.related_links.all %}
+{% if previous_post or next_post or post.related_links.all %}
 <hr />
 
-<h2 class="text-center">Related Reading</h2>
-<div class="text-center">
-    <ul class="list-unstyled">
-        {% for related_link in post.related_links.all %}
-        <li>
-            <a href="{{ related_link.url }}" target="_blank" rel="nofollow">{% autoescape off %}{{ related_link.title }}{% endautoescape %}</a>
-        </li>
-        {% endfor %}
-  </ul>
+<div class="row">
+{% if post.related_links.all %}
+    <div class="col-md-6{% if not previous_post %} col-xs-offset-3{% else %} col-md-push-3{% endif %}">
+        <h2 class="text-center">Related Reading</h2>
+        <div class="text-center">
+            <ul class="list-unstyled related-reading-list">
+                {% for related_link in post.related_links.all %}
+                <li>
+                    <a href="{{ related_link.url }}" target="_blank" rel="nofollow">{% autoescape off %}{{ related_link.title }}{% endautoescape %}</a>
+                </li>
+                {% endfor %}
+          </ul>
+        </div>
+    </div>
+{% endif %}
+
+{% if previous_post %}
+    <div class="col-xs-6{% if post.related_links.all %} col-md-3 col-md-pull-6{% endif %} text-left">
+        <a class="btn btn-primary" href="{% url 'blog:post' previous_post.slug %}" title="{{ previous_post.title }}">&larr; Previous Post</a>
+    </div>
+{% endif %}
+
+{% if next_post %}
+    <div class="col-xs-6{% if post.related_links.all %} col-md-3{% endif %}{% if not previous_post %} col-md-offset-6{% endif %} text-right">
+        <a class="btn btn-primary" href="{% url 'blog:post' next_post.slug %}" title="{{ next_post.title }}">Next Post &rarr;</a>
+    </div>
+{% endif %}
 </div>
 
 <hr />
