@@ -14,37 +14,53 @@ About Dane Hillard, the brains behind the Dane Hillard Photography operation.
 
 {% block content %}
 {% include '__i_dhp_logo.html' %}
+<div class="row">
+    <div class="text-center col-md-4">
+        <h2>Address</h2>
+        <div>Nickels Arcade</div>
+        <div>Suite 210</div>
+        <div>Ann Arbor, MI 48103</div>
+    </div>
+    <div class="text-center col-md-4">
+        <h2>Hours</h2>
+        <div>Weeknights</div>
+        <div>Weekends</div>
+        <div>By Appointment</div>
+    </div>
+    <div class="text-center col-md-4">
+        <h2>Specialties</h2>
+        <div>Fashion Photography</div>
+        <div>Lifestyle Photography</div>
+    </div>
+</div>
+<hr />
 <h1 class="text-center">About Me</h1>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3 col-md-2 col-md-offset-5">
-        <img class="img-responsive" title="Credit: Rachel Liu Photography" id="me" src="{% static 'images/DaneHillard.jpg' %}" alt="Dane Hillard portrait" nopin="nopin" />
+        <img class="img-responsive" title="Credit: Peter Ung Photography" id="me" src="{% static 'images/Dane-Hillard-portrait-by-Peter-Ung-Photography.jpg' %}" alt="Dane Hillard portrait courtesy of Peter Ung Photography" nopin="nopin" />
     </div>
 </div>
-<div class="row">
-    <div class="text-justify col-sm-12 col-md-8 col-md-offset-2">
+<div class="row top-buffer">
+    <div class="text-justify col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
         <p>
-            After graduating from the University of Michigan with a degree in computer
-            engineering/mathematics, I've been living in Ann Arbor <a target="_blank" href="http://www.jstor.org" rel="nofollow">working as a software engineer</a>.
-            I may qualify for <a target="_blank" href="http://questionablecontent.net/view.php?comic=1942" rel="nofollow">townie status</a>
-            sooner than I wish to. By day I work on web applications that spread knowledge. By night I fight crime.
-            I also like writing <a target="_blank" href="http://www.littleleviathan.com" rel="nofollow">music</a>.
+            I've been behind the camera ever since I moved to Ann Arbor in 2007. I developed a particular
+            interest in fashion photography after reading several fashion blogs my friends
+            were into. I really enjoy men's and women's style equally and even like to see them
+            mix when it's done well.
         </p>
         <p>
-            I developed an interest in photography after my father purchased a DSLR. He'd had an old
-            Minolta 35mm film camera for forever but it wasn't until this simpler, sleek technology touched my
-            hands that I was inspired to pick it up. I started using his camera more than he did and
-            was coerced into purchasing my own. I began with a Sony Alpha but I have been shooting
-            Nikon ever since a Christmas vacation theft debacle in 2009.
+            Fashion is an expressive medium and as such offers an individuality many others can't.
+            Each person can take fashion and really make it their own. There are several organizations
+            in Ann Arbor doing just that. Learning what makes people want to design, produce, and wear
+            different materials and patterns is simply intriguing and often insightful.
         </p>
         <p>
-            I especially enjoy fashion and nature photography. Each provides an opportunity for me
-            to develop new relationships and gain insight into people and places. I'm appreciative
-            of new outlooks and consider myself a continual learner. I consider wisdom and knowledge
-            two of the highest virtues; any who possess them have the tools to build
-            virtuosity throughout the rest of their lives.
+            I'm working slowly on ways to foster the existing fashion and style in Ann Arbor. It's a
+            small town but it's bursting with talent. I can't wait to see it thrive!
         </p>
         <p>
-            I'd like to thank you for coming to my site. I encourage you <a href="{% url 'contact:contact' %}">contact me</a> with your questions, comments, and critiques.
+            I'd like to thank you for your interest in my work. I encourage you <a href="{% url 'contact:contact' %}">contact me</a>
+            about anything from booking to talking shop about fashion!
         </p>
     </div>
 </div>
