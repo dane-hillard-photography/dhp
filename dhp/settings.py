@@ -36,36 +36,6 @@ SOCIAL_MEDIA = {
     'linkedin': 'danehillard',
 }
 
-BASE_KEYWORDS = [
-    'fashion',
-    'fashion photographer',
-    'fashion photography',
-    'lifestyle',
-    'lifestyle photographer',
-    'lifestyle photography',
-    'portrait',
-    'portraits',
-    'portraiture',
-    'portrait photographer',
-    'portrait photography',
-
-    'Michigan',
-    'Ann Arbor',
-    'Ann Arbor Michigan',
-    'A2',
-    'AA',
-    'ASquared',
-    'A Squared',
-
-    'Dane',
-    'Hillard',
-    'Dane Hillard',
-    'Dane Hillard Photography',
-    'dHP',
-    'Ann Arbor photographer',
-    'Ann Arbor photography',
-]
-
 LOGIN_REDIRECT_URL = '/'
 ALLOWED_HOSTS = os.getenv(PROJECT_VARIABLE_PATTERN.format('ALLOWED_HOSTS'), '*').split(',')
 
@@ -115,7 +85,6 @@ MAILCHIMP_SIGNUP_LINK = 'http://eepurl.com/bfrKM1'
 
 TEMPLATE_VISIBLE_SETTINGS = (
     'SOCIAL_MEDIA',
-    'BASE_KEYWORDS',
     'MAILCHIMP_SIGNUP_LINK',
 )
 
