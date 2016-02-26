@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="fixed-background-image"
-         style="background-image: url({{ photo.thumbnail_large.url }});{% if position %} background-position: {{ position }};{% endif %}{% if padding_override %} padding-top: {{ padding_override }};{% endif %}">
+         style="background-image: url({{ photo.thumbnail_large.url }});{% if position %} background-position: {{ position }};{% endif %}{% if padding %} padding-top: {{ padding }};{% endif %}">
          {% image photo.filename %}
     </div>
 </div>
