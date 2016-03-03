@@ -22,5 +22,12 @@ def image(filename):
 
 
 @register.inclusion_tag('blog/background_image.html')
-def background_image(filename):
-    return {'photo': get_photo_by_filename(filename)}
+def background_image(filename, position=None, padding=None):
+    context = {'photo': get_photo_by_filename(filename)}
+    if position:
+        context['position'] = position
+
+    if padding:
+        context['padding'] = padding
+
+    return context

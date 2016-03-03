@@ -66,11 +66,13 @@ class Post(models.Model):
 
     def get_previous_posts(self):
         all_live_posts = self.get_live_posts()
-        return all_live_posts.filter(go_live_date__lt=self.go_live_date).order_by('-go_live_date')
+        cutoff_date = self.go_live_date or datetime.now()
+        return all_live_posts.filter(go_live_date__lt=cutoff_date).order_by('-go_live_date')
 
     def get_following_posts(self):
         all_live_posts = self.get_live_posts()
-        return all_live_posts.filter(go_live_date__gt=self.go_live_date).order_by('go_live_date')
+        cutoff_date = self.go_live_date or datetime.now()
+        return all_live_posts.filter(go_live_date__gt=cutoff_date).order_by('go_live_date')
 
     def get_previous_post(self):
         previous_posts = self.get_previous_posts()
