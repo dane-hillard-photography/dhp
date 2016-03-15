@@ -30,7 +30,7 @@
 {% block content %}
     <div class="text-center">
         {% if not post.published %}
-        <h1 class="text-danger">NOT PUBLISHED</h1>
+        <h1 class="text-danger">DRAFT</h1>
         {% endif %}
         <h1>{{ post.title }}</h1>
         {% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
