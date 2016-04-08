@@ -26,6 +26,10 @@ class CrawlerMiddleware(object):
     def is_twitter_crawler(user_agent):
         return user_agent in settings.WHITELISTED_CRAWLERS.get('twitter', [])
 
+    @staticmethod
+    def is_google_crawler(user_agent):
+        return user_agent in settings.WHITELISTED_CRAWLERS.get('google', [])
+
     def process_request(self, request):
         user_agent = request.META.get('HTTP_USER_AGENT')
         request.is_whitelisted_crawler = self.is_facebook_crawler(user_agent) or self.is_twitter_crawler(user_agent)

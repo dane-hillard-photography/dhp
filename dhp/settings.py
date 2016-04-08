@@ -201,5 +201,8 @@ WHITELISTED_CRAWLERS = {
     'twitter': [
         'Twitterbot',
         'Twitterbot/1.0',
-    ]
+    ],
+    'google': [
+        'Googlebot',
+    ],
 }
