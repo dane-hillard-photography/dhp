@@ -32,4 +32,4 @@ class CrawlerMiddleware(object):
 
     def process_request(self, request):
         user_agent = request.META.get('HTTP_USER_AGENT')
-        request.is_whitelisted_crawler = self.is_facebook_crawler(user_agent) or self.is_twitter_crawler(user_agent)
+        request.is_whitelisted_crawler = self.is_facebook_crawler(user_agent) or self.is_twitter_crawler(user_agent) or self.is_google_crawler(user_agent)
