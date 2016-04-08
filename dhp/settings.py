@@ -204,5 +204,6 @@ WHITELISTED_CRAWLERS = {
     ],
     'google': [
         'Googlebot',
+        'Googlebot/2.1',
     ],
 }
