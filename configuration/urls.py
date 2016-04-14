@@ -27,13 +27,13 @@ urlpatterns = [
     url(r'^robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     url(r'^sitemap\.xml', sitemap, {'sitemaps': sitemaps}),
     url(r'^feed/', LatestPostsFeed(), name='feed'),
+    url(r'^branding/', include('branding.urls', namespace='branding')),
 ]
 
 if settings.DEBUG:
     urlpatterns += [
         url(r'^404/$', TemplateView.as_view(template_name='404.html'), name='not_found'),
         url(r'^500/$', TemplateView.as_view(template_name='500.html'), name='server_error'),
-        url(r'^branding/', include('branding.urls', namespace='branding')),
     ]
 
 urlpatterns += staticfiles_urlpatterns()
