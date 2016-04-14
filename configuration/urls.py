@@ -8,7 +8,7 @@ from django.contrib.sitemaps.views import sitemap
 
 from django.conf import settings
 
-from dhp.feeds import LatestPostsFeed
+from configuration.feeds import LatestPostsFeed
 from sitemaps import SiteSitemap, PostSitemap
 
 sitemaps = {

@@ -99,8 +99,8 @@ MIDDLEWARE_CLASSES = (
     'seo.middleware.CrawlerMiddleware',
 )
 
-ROOT_URLCONF = 'dhp.urls'
-WSGI_APPLICATION = 'dhp.wsgi.application'
+ROOT_URLCONF = 'configuration.urls'
+WSGI_APPLICATION = 'configuration.wsgi.application'
 
 THIRD_PARTY_APPS = [
     'django.contrib.auth',
