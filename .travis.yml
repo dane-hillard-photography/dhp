@@ -11,3 +11,5 @@ before_script:
   - npm install
   - sass assets/css/site.sass assets/css/site.css
   - python manage.py collectstatic --noinput --ignore *.sass
+notifications:
+  slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
