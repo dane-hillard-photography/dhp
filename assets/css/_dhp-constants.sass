@@ -1,5 +1,7 @@
 $white: #ffffff
 $black: #000000
+$base-font: 'Yanone Kaffeesatz'
+$base-font-fallback: sans-serif
 
 $site-accent: #00aeed
 $background-color: lighten(desaturate($site-accent, 95), 35)
@@ -8,7 +10,7 @@ $text-color: darken($site-accent, 40)
 $blockquote-border-color: darken($site-accent, 25)
 $blockquote-font-size: 40px
 
-$font-family-base: 'Yanone Kaffeesatz', sans-serif
+$font-family-base: $base-font, $base-font-fallback
 $font-size-base: 24px
 $font-size-admin-links: 14px
 $font-size-checkbox-labels: 18px
