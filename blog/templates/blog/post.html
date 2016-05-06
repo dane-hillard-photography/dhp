@@ -33,8 +33,8 @@
         <h1 class="text-danger">DRAFT</h1>
         {% endif %}
         <h1>{{ post.title }}</h1>
-        {% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
-        <h6>{% firstof post.go_live_date|date:"jS F, Y" post.date_created|date:"jS F, Y" %}</h6>
+        {% if post.subtitle %}<h2>{{ post.subtitle }}</h2>{% endif %}
+        <h3>{% firstof post.go_live_date|date:"jS F, Y" post.date_created|date:"jS F, Y" %}</h3>
     </div>
 {% endverbatim %}
 
