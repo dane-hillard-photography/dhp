@@ -35,7 +35,7 @@ $(function(){
         var elementPosition = $('.external-site-list').offset().top;
         var scrollPosition = $(window).height() + $(window).scrollTop();
         if (elementPosition < scrollPosition) {
-            if (readEventSentAlready != true) {
+            if (!readEventSentAlready) {
                 ga('send', {
                     'hitType': 'event',
                     'eventCategory': 'post',
