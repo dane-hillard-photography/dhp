@@ -8,7 +8,7 @@ from django.template import Context, loader
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import FormView
 
-import boto3
+from boto3.session import Session
 from botocore.exceptions import ClientError
 
 import requests
@@ -23,7 +23,8 @@ class ContactFormView(FormView):
 
     @staticmethod
     def send_email(source='', to_addresses=None, reply_addresses=None, subject='', body='', email_format='html'):
-        client = boto3.client('ses', region_name='us-east-1')
+        session = Session(aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+        client = session.client('ses', region_name='us-east-1')
 
         to_addresses = to_addresses or []
         reply_addresses = reply_addresses or []
