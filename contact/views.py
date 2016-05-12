@@ -95,6 +95,7 @@ class ContactFormView(FormView):
             body='{}\n\n-{}\n{}'.format(form.cleaned_data.get('message'), contact_name, form.cleaned_data.get('phone')),
             to_addresses=['contact@danehillard.com'],
             reply_addresses=[contact_email],
+            email_format='text'
         )
 
         self.send_email(
