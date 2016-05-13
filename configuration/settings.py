@@ -122,6 +122,7 @@ MY_APPS = [
     'about',
     'contact',
     'branding',
+    'seo',
 ]
 
 INSTALLED_APPS = THIRD_PARTY_APPS + MY_APPS
