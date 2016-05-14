@@ -5,3 +5,13 @@ omit =
     */tests/*
     */test_*
     manage.py
+    configuration/*
+    */admin.py
+    */apps.py
+    */urls.py
+
+branch = True
+
+[report]
+skip_covered = True
+show_missing = True
