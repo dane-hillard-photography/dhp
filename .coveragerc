@@ -5,6 +5,7 @@ omit =
     */tests/*
     */test_*
     manage.py
+<<<<<<< HEAD
     configuration/*
     */admin.py
     */apps.py
@@ -15,3 +16,5 @@ branch = True
 [report]
 skip_covered = True
 show_missing = True
+=======
+>>>>>>> master
