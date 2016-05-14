@@ -26,11 +26,6 @@
   <meta name="twitter:image" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.feature_image.image.url }}" />
 {% endblock twitter %}
 
-{% block css %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'css/post.css' %}">
-{% endblock css %}
-
 {% block content %}
     <div class="text-center">
         {% if not post.published %}
