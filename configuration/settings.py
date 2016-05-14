@@ -190,7 +190,6 @@ NOSE_ARGS = [
     '--with-coverage',
     '--cover-package=.',
     '--cover-erase',
-    '--cover-branches',
 ]
 
 WHITELISTED_CRAWLERS = {
