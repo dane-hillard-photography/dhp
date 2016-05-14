@@ -4,6 +4,6 @@
     "dependencies": {
         "jquery": "~2.1.4",
         "bootstrap-sass": "~3.3.4",
-        "codemirror": "~5.5.0"
+        "codemirror": "~5.14.2"
     }
 }

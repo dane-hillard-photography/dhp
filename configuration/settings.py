@@ -207,3 +207,6 @@ WHITELISTED_CRAWLERS = {
         'Googlebot/2.1',
     ],
 }
+
+CODEMIRROR_MODE = 'xml'
+CODEMIRROR_THEME = 'bespin'
