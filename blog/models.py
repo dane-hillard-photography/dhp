@@ -49,29 +49,35 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    @staticmethod
+    def get_now():
+        return datetime.now()
+
     def get_absolute_url(self):
         return reverse('blog:post', kwargs={'slug': self.slug})
 
     def published(self):
-        right_now = datetime.now()
+        right_now = self.get_now()
+        print(right_now)
+        print(self.go_live_date)
         if (self.go_live_date and self.go_live_date <= right_now) and (not self.take_down_date or right_now < self.take_down_date):
             return True
         return False
     published.boolean = True
 
-    @staticmethod
-    def get_live_posts():
-        right_now = datetime.now()
+    @classmethod
+    def get_live_posts(cls):
+        right_now = cls.get_now()
         return Post.objects.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now)
 
     def get_previous_posts(self):
         all_live_posts = self.get_live_posts()
-        cutoff_date = self.go_live_date or datetime.now()
+        cutoff_date = self.go_live_date or self.get_now()
         return all_live_posts.filter(go_live_date__lt=cutoff_date).order_by('-go_live_date')
 
     def get_following_posts(self):
         all_live_posts = self.get_live_posts()
-        cutoff_date = self.go_live_date or datetime.now()
+        cutoff_date = self.go_live_date or self.get_now()
         return all_live_posts.filter(go_live_date__gt=cutoff_date).order_by('go_live_date')
 
     def get_previous_post(self):
