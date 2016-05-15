@@ -9,9 +9,10 @@ omit =
     */admin.py
     */apps.py
     */urls.py
+    sitemaps.py
 
 branch = True
 
 [report]
-skip_covered = True
 show_missing = True
+skip_covered = True
