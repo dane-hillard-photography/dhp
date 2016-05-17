@@ -14,5 +14,6 @@ omit =
 branch = True
 
 [report]
+precision = 2
 show_missing = True
 skip_covered = True
