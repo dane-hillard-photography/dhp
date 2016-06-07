@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^sitemap\.xml', sitemap, {'sitemaps': sitemaps}),
     url(r'^feed/', LatestPostsFeed(), name='feed'),
     url(r'^branding/', include('branding.urls', namespace='branding')),
+    url(r'^webmention', include('webmention.urls', namespace='webmention')),
 ]
 
 if settings.DEBUG:

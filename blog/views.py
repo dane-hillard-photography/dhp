@@ -7,6 +7,8 @@ from django.views.decorators.http import last_modified
 from django.views.decorators.cache import cache_control
 from django.shortcuts import get_list_or_404
 
+from webmention.middleware import include_webmention_information
+
 from blog.models import Post
 
 
@@ -20,6 +22,7 @@ def post_last_modified(request, slug):
 
 @cache_control(max_age=3600 * 24)
 @last_modified(post_last_modified)
+@include_webmention_information
 def post_view(request, slug):
     right_now = datetime.now()
     matching_posts = Post.objects.filter(slug=slug)

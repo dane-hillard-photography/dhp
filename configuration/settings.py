@@ -115,6 +115,7 @@ THIRD_PARTY_APPS = [
     'django.contrib.admin',
     'django_nose',
     'compressor',
+    'webmention',
 ]
 
 MY_APPS = [
