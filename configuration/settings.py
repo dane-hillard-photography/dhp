@@ -1,4 +1,5 @@
 import os
+import rollbar
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -97,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'seo.middleware.RedirectMiddleware',
     'seo.middleware.CrawlerMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 )
 
 ROOT_URLCONF = 'configuration.urls'
@@ -210,3 +212,11 @@ WHITELISTED_CRAWLERS = {
 
 CODEMIRROR_MODE = 'xml'
 CODEMIRROR_THEME = 'blackboard'
+
+ROLLBAR = {
+    'access_token': 'ce60f2254ab046f5917b9cea7b467068',
+    'environment': 'development' if DEBUG else 'production',
+    'root': BASE_DIR,
+}
+
+rollbar.init(**ROLLBAR)
