@@ -1,0 +1,1 @@
+danehillard.com is the website for me, Dane Hillard, to showcase my photography. I'm a web application developer and I use this site to keep my chops up on things like Django, HTML5, CSS3, and JavaScript.
