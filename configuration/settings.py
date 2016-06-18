@@ -1,14 +1,17 @@
 import os
-import rollbar
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PROJECT_NAME = 'DHP'
 PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
 
-SECRET_KEY = os.getenv(PROJECT_VARIABLE_PATTERN.format('SECRET_KEY'))
 
-DEBUG = os.getenv(PROJECT_VARIABLE_PATTERN.format('DEBUG'), False) == 'TRUE'
+def get_env_var(var_name, default=None):
+    return os.getenv(PROJECT_VARIABLE_PATTERN.format(var_name), default)
+
+SECRET_KEY = get_env_var('SECRET_KEY')
+
+DEBUG = get_env_var('DEBUG', False) == 'TRUE'
 
 ADMINS = (
     ('Dane Hillard', 'github@danehillard.com'),
@@ -19,11 +22,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv(PROJECT_VARIABLE_PATTERN.format('DATABASE_NAME')),
-        'USER': os.getenv(PROJECT_VARIABLE_PATTERN.format('DATABASE_USER')),
-        'PASSWORD': os.getenv(PROJECT_VARIABLE_PATTERN.format('DATABASE_PASSWORD')),
-        'HOST': os.getenv(PROJECT_VARIABLE_PATTERN.format('DATABASE_HOST'), 'localhost'),
-        'PORT': os.getenv(PROJECT_VARIABLE_PATTERN.format('DATABASE_PORT'), 3306),
+        'NAME': get_env_var('DATABASE_NAME'),
+        'USER': get_env_var('DATABASE_USER'),
+        'PASSWORD': get_env_var('DATABASE_PASSWORD'),
+        'HOST': get_env_var('DATABASE_HOST', 'localhost'),
+        'PORT': get_env_var('DATABASE_PORT', 3306),
         'CONN_MAX_AGE': 300,
     }
 }
@@ -38,7 +41,7 @@ SOCIAL_MEDIA = {
 }
 
 LOGIN_REDIRECT_URL = '/'
-ALLOWED_HOSTS = os.getenv(PROJECT_VARIABLE_PATTERN.format('ALLOWED_HOSTS'), '*').split(',')
+ALLOWED_HOSTS = get_env_var('ALLOWED_HOSTS', '*').split(',')
 
 TIME_ZONE = 'America/Detroit'
 LANGUAGE_CODE = 'en-us'
@@ -46,10 +49,10 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = False
 
-STATIC_ROOT = os.path.join(BASE_DIR, os.getenv(PROJECT_VARIABLE_PATTERN.format('STATIC_ROOT'), 'static'))
-STATIC_URL = os.getenv(PROJECT_VARIABLE_PATTERN.format('STATIC_URL'), '/static/')
-MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv(PROJECT_VARIABLE_PATTERN.format('MEDIA_ROOT'), 'media'))
-MEDIA_URL = os.getenv(PROJECT_VARIABLE_PATTERN.format('MEDIA_URL'), '/media/')
+STATIC_ROOT = os.path.join(BASE_DIR, get_env_var('STATIC_ROOT', 'static'))
+STATIC_URL = get_env_var('STATIC_URL', '/static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, get_env_var('MEDIA_ROOT', 'media'))
+MEDIA_URL = get_env_var('MEDIA_URL', '/media/')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
@@ -134,14 +137,14 @@ INSTALLED_APPS = THIRD_PARTY_APPS + MY_APPS
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache' if not DEBUG else 'django.core.cache.backends.dummy.DummyCache',
-        'LOCATION': os.getenv(PROJECT_VARIABLE_PATTERN.format('MEMCACHED_ENDPOINT'), '127.0.0.1:11211'),
+        'LOCATION': get_env_var('MEMCACHED_ENDPOINT', '127.0.0.1:11211'),
     }
 }
 
 CACHE_MIDDLEWARE_SECONDS = 3600
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_NAME.lower()
 
-ADMIN_URL = os.getenv(PROJECT_VARIABLE_PATTERN.format('ADMIN_URL'), r'^admin/')
+ADMIN_URL = get_env_var('ADMIN_URL', r'^admin/')
 
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.cssmin.CSSMinFilter',
@@ -153,11 +156,11 @@ COMPRESS_PRECOMPILERS = (
 
 COMPRESS_OUTPUT_DIR = ''
 
-AWS_ACCESS_KEY_ID = os.getenv(PROJECT_VARIABLE_PATTERN.format('AWS_ACCESS_KEY_ID'))
-AWS_SECRET_ACCESS_KEY = os.getenv(PROJECT_VARIABLE_PATTERN.format('AWS_SECRET_ACCESS_KEY'))
+AWS_ACCESS_KEY_ID = get_env_var('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_env_var('AWS_SECRET_ACCESS_KEY')
 
-MAILCHIMP_API_KEY = os.getenv(PROJECT_VARIABLE_PATTERN.format('MAILCHIMP_API_KEY'))
-MAILCHIMP_LIST_ID = os.getenv(PROJECT_VARIABLE_PATTERN.format('MAILCHIMP_LIST_ID'))
+MAILCHIMP_API_KEY = get_env_var('MAILCHIMP_API_KEY')
+MAILCHIMP_LIST_ID = get_env_var('MAILCHIMP_LIST_ID')
 
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
@@ -220,7 +223,5 @@ ROLLBAR = {
     'environment': 'development' if DEBUG else 'production',
     'root': BASE_DIR,
 }
-
-rollbar.init(**ROLLBAR)
 
 DISQUS_DOMAIN = 'danehillard-dev' if DEBUG else 'danehillard'

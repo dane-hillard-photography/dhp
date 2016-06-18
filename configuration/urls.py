@@ -20,6 +20,7 @@ urlpatterns = [
     url(settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^', include('home.urls', namespace='home')),
     url(r'^', include('blog.urls', namespace='blog')),
+    url(r'^', include('photography.urls', namespace='photography')),
     url(r'^about/', include('about.urls', namespace='about')),
     url(r'^contact/', include('contact.urls', namespace='contact')),
     url(r'^login/', login, {'template_name': 'home/login.html'}, name='login'),

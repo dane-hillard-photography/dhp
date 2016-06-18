@@ -1,5 +1,4 @@
 import os
-import uuid
 import logging
 from tempfile import NamedTemporaryFile
 
@@ -36,6 +35,7 @@ class Photograph(models.Model):
 
     alt_text = models.CharField(max_length=255)
     filename = models.CharField(max_length=100, blank=True, null=True)
+    in_portfolio = models.BooleanField(default=False)
 
     height = models.IntegerField(blank=True, null=True)
     width = models.IntegerField(blank=True, null=True)

@@ -1,0 +1,70 @@
+{% extends '__base_no_disqus.html' %}
+
+{% load static %}
+
+{% block title %}Portfolio | {{ block.super }}{% endblock %}
+{% block description %}Photography Portfolio for Dane Hillard Photography{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'GammaGallery/css/style.css' %}" />
+<noscript><link rel="stylesheet" type="text/css" href="{% static 'GammaGallery/css/noJS.css' %}" /></noscript>
+{{ block.super }}
+{% endblock %}
+
+{% block extra_meta_tags %}
+<script type="text/javascript" src="{% static 'GammaGallery/js/modernizr.custom.70736.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="gamma-container gamma-loading" id="gamma-container">
+        <ul class="gamma-gallery">
+            {% for photo in photos %}
+            <li>
+                <div data-alt="img{{ forloop.counter0 }}" data-max-width="1800" data-max-height="2400">
+                    <div data-src="{{ photo.thumbnail_large.url }}" data-min-width="300"></div>
+                    <div data-src="{{ photo.thumbnail_medium.url }}" data-min-width="100"></div>
+                    <div data-src="{{ photo.thumbnail_small.url }}"></div>
+                    <noscript>
+                        <img src="{{ photo.thumbnail_small.url }}" alt="{{ photo.alt_text }}"/>
+                    </noscript>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="gamma-overlay"></div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'GammaGallery/js/jquery.masonry.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'GammaGallery/js/jquery.history.js' %}"></script>
+<script type="text/javascript" src="{% static 'GammaGallery/js/js-url.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'GammaGallery/js/jquerypp.custom.js' %}"></script>
+<script type="text/javascript" src="{% static 'GammaGallery/js/gamma.js' %}"></script>
+<script type="text/javascript">
+	$(function() {
+		var GammaSettings = {
+				// order is important!
+				viewport : [ {
+					width : 1200,
+					columns : 5
+				}, {
+					width : 900,
+					columns : 4
+				}, {
+					width : 500,
+					columns : 3
+				}, {
+					width : 320,
+					columns : 2
+				}, {
+					width : 0,
+					columns : 2
+				} ]
+		};
+
+		Gamma.init( GammaSettings );
+	});
+</script>
+{% endblock %}
