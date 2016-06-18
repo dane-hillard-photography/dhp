@@ -87,6 +87,7 @@ MAILCHIMP_SIGNUP_LINK = 'http://eepurl.com/bfrKM1'
 TEMPLATE_VISIBLE_SETTINGS = (
     'SOCIAL_MEDIA',
     'MAILCHIMP_SIGNUP_LINK',
+    'DISQUS_DOMAIN',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -221,3 +222,5 @@ ROLLBAR = {
 }
 
 rollbar.init(**ROLLBAR)
+
+DISQUS_DOMAIN = 'danehillard-dev' if DEBUG else 'danehillard'
