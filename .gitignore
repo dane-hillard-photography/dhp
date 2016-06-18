@@ -7,8 +7,8 @@ static/
 media/
 *.stackdump
 .idea/
-*.css
 .sass-cache/
+assets/css
 *.css.map
 .DS_Store
 .coverage
