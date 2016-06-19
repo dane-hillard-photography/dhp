@@ -92,13 +92,19 @@ class Photograph(models.Model):
         super(Photograph, self).save(*args, **kwargs)
 
         image = PImage.open(os.path.join(settings.MEDIA_ROOT, self.image.name))
+        existing_filepath = None
+        new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
+
+        if self.pk:
+            existing_photo = Photograph.objects.get(pk=self.pk)
+            existing_filepath = existing_photo.image.path
 
         self.create_thumbnail(image, self.thumbnail_large, 1200)
         self.create_thumbnail(image, self.thumbnail_medium, 800)
         self.create_thumbnail(image, self.thumbnail_small, 300)
 
         for img in [self.image, self.thumbnail_large, self.thumbnail_medium, self.thumbnail_small]:
-            if self.filename:
+            if self.filename and new_filepath != existing_filepath:
                 file_move_safe(
                     img.path,
                     os.path.join(os.path.dirname(img.path), self.filename)
