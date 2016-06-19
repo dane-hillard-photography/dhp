@@ -148,6 +148,7 @@ ADMIN_URL = get_env_var('ADMIN_URL', r'^admin/')
 
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.cssmin.CSSMinFilter',
+    'compressor.filters.css_default.CssAbsoluteFilter',
 )
 
 COMPRESS_PRECOMPILERS = (
