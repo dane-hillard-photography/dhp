@@ -45,8 +45,6 @@ class Photograph(models.Model):
     m_width = models.IntegerField(blank=True, null=True)
     sm_height = models.IntegerField(blank=True, null=True)
     sm_width = models.IntegerField(blank=True, null=True)
-    sq_height = models.IntegerField(blank=True, null=True)
-    sq_width = models.IntegerField(blank=True, null=True)
 
     image = models.ImageField(upload_to=get_file_path, height_field='height', width_field='width')
 

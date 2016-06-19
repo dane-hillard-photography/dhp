@@ -6,65 +6,32 @@
 {% block description %}Photography Portfolio for Dane Hillard Photography{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'GammaGallery/css/style.css' %}" />
-<noscript><link rel="stylesheet" type="text/css" href="{% static 'GammaGallery/css/noJS.css' %}" /></noscript>
 {{ block.super }}
-{% endblock %}
-
-{% block extra_meta_tags %}
-<script type="text/javascript" src="{% static 'GammaGallery/js/modernizr.custom.70736.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'lightbox2/dist/css/lightbox.min.css' %}" />
 {% endblock %}
 
 {% block content %}
-    <div class="gamma-container gamma-loading" id="gamma-container">
-        <ul class="gamma-gallery">
-            {% for photo in photos %}
-            <li>
-                <div data-alt="img{{ forloop.counter0 }}" data-max-width="1800" data-max-height="2400">
-                    <div data-src="{{ photo.thumbnail_large.url }}" data-min-width="300"></div>
-                    <div data-src="{{ photo.thumbnail_medium.url }}" data-min-width="100"></div>
-                    <div data-src="{{ photo.thumbnail_small.url }}"></div>
-                    <noscript>
-                        <img src="{{ photo.thumbnail_small.url }}" alt="{{ photo.alt_text }}"/>
-                    </noscript>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-        <div class="gamma-overlay"></div>
+<h1 class="text-center">Portfolio</h1>
+<div class="grid" data-masonry='{ "itemSelector": ".grid-item" }'>
+    {% for photo in photos %}
+    <div class="grid-item{% if photo.thumbnail_small.width > photo.thumbnail_small.height %} grid-item--width2{% endif %}">
+        <a href="{{ photo.thumbnail_large.url }}" data-lightbox="portfolio">
+            <img class="img-responsive" src="{{ photo.thumbnail_small.url }}" alt="{{ photo.alt_text }}" />
+        </a>
     </div>
+    {% endfor %}
+</div>
+<div class="clearfix"></div>
 {% endblock %}
 
 {% block js %}
 {{ block.super }}
-<script type="text/javascript" src="{% static 'GammaGallery/js/jquery.masonry.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'GammaGallery/js/jquery.history.js' %}"></script>
-<script type="text/javascript" src="{% static 'GammaGallery/js/js-url.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'GammaGallery/js/jquerypp.custom.js' %}"></script>
-<script type="text/javascript" src="{% static 'GammaGallery/js/gamma.js' %}"></script>
-<script type="text/javascript">
-	$(function() {
-		var GammaSettings = {
-				// order is important!
-				viewport : [ {
-					width : 1200,
-					columns : 5
-				}, {
-					width : 900,
-					columns : 4
-				}, {
-					width : 500,
-					columns : 3
-				}, {
-					width : 320,
-					columns : 2
-				}, {
-					width : 0,
-					columns : 2
-				} ]
-		};
-
-		Gamma.init( GammaSettings );
-	});
+<script type="text/javascript" src="{% static 'masonry-layout/dist/masonry.pkgd.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lightbox2/dist/js/lightbox.min.js' %}"></script>
+<script>
+    lightbox.option({
+      'resizeDuration': 300,
+      'wrapAround': true
+    })
 </script>
 {% endblock %}

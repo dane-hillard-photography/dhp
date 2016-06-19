@@ -8,8 +8,9 @@ media/
 *.stackdump
 .idea/
 .sass-cache/
-assets/css
+assets/css/*.css
 *.css.map
 .DS_Store
 .coverage
 node_modules/
+Gemfile.lock
