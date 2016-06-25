@@ -29,10 +29,5 @@
 {{ block.super }}
 <script type="text/javascript" src="{% static 'masonry-layout/dist/masonry.pkgd.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'lightbox2/dist/js/lightbox.min.js' %}"></script>
-<script>
-    lightbox.option({
-      'resizeDuration': 300,
-      'wrapAround': true
-    })
-</script>
+<script type="text/javascript" src="{% static 'js/portfolio.js' %}"></script>
 {% endblock %}
