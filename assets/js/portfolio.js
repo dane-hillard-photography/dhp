@@ -3,4 +3,9 @@ $(function(){
       'resizeDuration': 300,
       'wrapAround': true
     });
+
+    $('.grid').masonry({
+      itemSelector: '.grid-item',
+      columnWidth: 200
+    });
 });

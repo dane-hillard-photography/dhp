@@ -13,7 +13,7 @@
 
 {% block content %}
 <h1 class="text-center">Portfolio</h1>
-<div class="grid" data-masonry='{ "itemSelector": ".grid-item" }'>
+<div class="grid">
     {% for photo in photos %}
     <div class="grid-item{% if photo.thumbnail_small.width > photo.thumbnail_small.height %} grid-item--width2{% endif %}">
         <a href="{{ photo.thumbnail_large.url }}" data-lightbox="portfolio">
