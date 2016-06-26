@@ -31,10 +31,10 @@
                             {% if post.subtitle %}<h2>{{ post.subtitle }}</h2>{% endif %}
 
                             <!-- The date and time when your article was originally published -->
-                            <time class="op-published" datetime="{{ post.go_live_date|date:"Y-m-d\TH:i:s\Z" }}Z">{{ post.go_live_date }}</time>
+                            <time class="op-published" datetime="{{ post.go_live_date|date:'Y-m-d\TH:i:s\Z' }}">{{ post.go_live_date }}</time>
 
                             <!-- The date and time when your article was last updated -->
-                            <time class="op-modified" dateTime="{{ post.date_modified|date:"Y-m-d\TH:i:s\Z" }}">{{ post.date_modified }}</time>
+                            <time class="op-modified" dateTime="{% now 'Y-m-d\TH:i:s\Z' %}">{% now 'F jS, Y' %}</time>
 
                             <!-- The authors of your article -->
                             <address>
