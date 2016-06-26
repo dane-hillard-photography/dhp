@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.template import RequestContext, Template
 from django.views.decorators.http import last_modified
 from django.views.decorators.cache import cache_control
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, render
 
 from webmention.middleware import include_webmention_information
 
@@ -41,3 +41,13 @@ def post_view(request, slug):
     context.update({'post': post, 'previous_post': post.get_previous_post(), 'next_post': post.get_next_post()})
 
     return HttpResponse(Template(initial_template_string).render(context))
+
+def instant_article_view(request):
+    right_now = datetime.now()
+    posts = Post.objects.filter(go_live_date__lte=right_now).exclude(take_down_date__lte=right_now).order_by('-date_created')
+
+    for post in posts:
+        context = RequestContext(request)
+        template = Template('{% load snippets %}' + post.body)
+        post.rendered_body = template.render(context)
+    return render(request, 'blog/instant_articles.html', context={'posts': posts})
