@@ -51,8 +51,9 @@
         {% endif %}
     {% endif %}
 {% endfor %}
+{% endblock content %}
 
-<footer>
+{% block footer %}
     <h2 class="text-center">All Posts</h2>
     <hr />
     <div class="row">
@@ -67,9 +68,9 @@
         </div>
     {% endfor %}
     </div>
-</footer>
+    {{ block.super }}
+{% endblock footer %}
 
-{% endblock content %}
 
 {% block final %}
     <script type="application/ld+json">{% include 'json-ld/organization.json' %}</script>
