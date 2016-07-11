@@ -52,7 +52,14 @@
             </div>
             {% endblock %}
 
-            {% include '__i_admin_links.html' %}
+            <footer>
+            {% block footer %}
+                {% include '__i_admin_links.html' %}
+                <div class="row text-center bottom-buffer">
+                    <small>Copyright &copy; {% now 'Y' %} Dane Hillard | Ann Arbor, Michigan | contact@danehillard.com</small>
+                </div>
+            {% endblock footer %}
+            </footer>
         </div>
 
         {% compress js %}

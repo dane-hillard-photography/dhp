@@ -12,7 +12,7 @@ from configuration.feeds import LatestPostsFeed
 from sitemaps import SiteSitemap, PostSitemap
 
 sitemaps = {
-    'pages': SiteSitemap(['home:home', 'contact:contact', 'about:about', 'photography:portfolio']),
+    'pages': SiteSitemap(['home:home', 'contact:contact', 'about:about', 'about:pricing', 'photography:portfolio']),
     'posts': PostSitemap,
 }
 

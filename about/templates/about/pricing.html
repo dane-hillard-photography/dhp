@@ -1,0 +1,25 @@
+{% extends "__base_no_disqus.html" %}
+{% load staticfiles %}
+
+{% block title %}Pricing | {{ block.super }}{% endblock title %}
+
+{% block description %}
+Pricing and package information for Dane Hillard Photography.
+{% endblock description %}
+
+{% block og_title %}Pricing | {{ block.super }}{% endblock og_title %}
+
+{% block content %}
+<h1 class="text-center">Pricing</h1>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <p>
+            Photographers tend to have extensive package options with complex pricing structures.
+            I try to keep my pricing as simple as possible &mdash; My sessions are $100 per hour of shooting time, with a one hour minimum.
+            This rate includes digital delivery of retouched images as well as non-exclusive, non-commercial rights.
+            I'm happy to work with you on exceptions to my rate or licensing structure!
+            <a href="{% url 'contact:contact' %}">Contact me</a> for more information.
+        </p>
+    </div>
+</div>
+{% endblock content %}
