@@ -94,6 +94,7 @@ TEMPLATE_VISIBLE_SETTINGS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'security.middleware.ContentSecurityPolicyMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,6 +131,7 @@ MY_APPS = [
     'contact',
     'branding',
     'seo',
+    'security',
 ]
 
 INSTALLED_APPS = THIRD_PARTY_APPS + MY_APPS
