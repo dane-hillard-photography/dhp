@@ -4,7 +4,7 @@ CONTENT_SECURITY_POLICY = {
     'style-src': "'self' fonts.googleapis.com a.disquscdn.com 'unsafe-inline'",
     'font-src': "'self' fonts.gstatic.com",
     'frame-src': "'self' staticxx.facebook.com www.facebook.com disqus.com",
-    'img-src': "'self' data: www.facebook.com referrer.disqus.com a.disquscdn.com",
+    'img-src': "'self' data: www.facebook.com referrer.disqus.com a.disquscdn.com www.google-analytics.com",
 }
 
 class ContentSecurityPolicyMiddleware(object):
