@@ -1,4 +1,5 @@
 import os
+from django.http import Http404
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -225,6 +226,9 @@ ROLLBAR = {
     'access_token': 'ce60f2254ab046f5917b9cea7b467068',
     'environment': 'development' if DEBUG else 'production',
     'root': BASE_DIR,
+    'exception_level_filters': [
+        (Http404, 'ignored'),
+    ]
 }
 
 DISQUS_DOMAIN = 'danehillard-dev' if DEBUG else 'danehillard'
