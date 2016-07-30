@@ -96,6 +96,8 @@ TEMPLATE_VISIBLE_SETTINGS = (
 
 MIDDLEWARE_CLASSES = (
     'security.middleware.ContentSecurityPolicyMiddleware',
+    'security.middleware.HSTSMiddleware',
+    'security.middleware.ContentTypeOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
