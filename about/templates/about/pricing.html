@@ -4,7 +4,7 @@
 {% block title %}Pricing | {{ block.super }}{% endblock title %}
 
 {% block description %}
-Pricing and package information for Dane Hillard Photography.
+Pricing and package information for weddings, engagements, and more by Dane Hillard Photography.
 {% endblock description %}
 
 {% block og_title %}Pricing | {{ block.super }}{% endblock og_title %}
@@ -13,12 +13,49 @@ Pricing and package information for Dane Hillard Photography.
 <h1 class="text-center">Pricing</h1>
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h2 class="text-center">Weddings</h2>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1">
+                <img class="img-responsive" src="{% static 'images/Corey-and-Anastasia-Lake-Michigan-wedding.jpg' %}" alt="Corey and Anastasia's Lake Michigan Wedding">
+            </div>
+        </div>
         <p>
-            Photographers tend to have extensive package options with complex pricing structures.
-            I try to keep my pricing as simple as possible &mdash; My sessions are $100 per hour of shooting time, with a one hour minimum.
-            This rate includes digital delivery of retouched images as well as non-exclusive, non-commercial rights.
-            I'm happy to work with you on exceptions to my rate or licensing structure!
-            <a href="{% url 'contact:contact' %}">Contact me</a> for more information.
+            Weddings are typically the culmination of months of logistics and stress. An ideal wedding day is the opportunity
+            to reap the benefits of all that careful planning. One way to make this easier is to simplify the photography schedule as much as possible.
+            My wedding package provides full-day coverage for a single base price. Please <a href="{% url 'contact:contact' %}">contact me</a> to
+            receive more information about what the package entails!
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h2 class="text-center">Engagements</h2>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1">
+                <img class="img-responsive" src="{% static 'images/Vincent-and-Daisy-engagement-Law-Quad.jpg' %}" alt="Vincent and Daisy's Law Quad Engagement">
+            </div>
+        </div>
+        <p>
+            Engagement sessions are a great way to make your announcement with a splash. I'm interested in capturing your relationship and
+            shared interests to help remember the moment in high fidelity for years to come. Please <a href="{% url 'contact:contact' %}">contact me</a> to
+            receive more information about what the package entails!
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h2 class="text-center">Fashion, Lifestyle, and Editorial</h2>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1">
+                <img class="img-responsive" src="{% static 'images/James-Howard-maroon-and-fold-jersey-detail.jpg' %}" alt="James Howard's upcycled shirts">
+            </div>
+        </div>
+        <p>
+            I am truly inspired by people who are out there creating things with their hands or innovating.
+            Please <a href="{% url 'contact:contact' %}">contact me</a> to tell me more about your vision.
+            We will work closely together to develop a shared understanding and get a killer product out of it!
         </p>
     </div>
 </div>
