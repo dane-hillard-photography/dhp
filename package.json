@@ -2,10 +2,10 @@
   "name": "dhp",
   "version": "1.0.0",
   "dependencies": {
-    "bootstrap-sass": "~3.3.4",
-    "codemirror": "~5.14.2",
-    "jquery": "~2.1.4",
-    "lightbox2": "^2.8.2",
-    "masonry-layout": "^4.1.0"
+    "bootstrap-sass": "3.3.4",
+    "codemirror": "5.14.2",
+    "jquery": "2.1.4",
+    "lightbox2": "2.8.2",
+    "masonry-layout": "4.1.0"
   }
 }
