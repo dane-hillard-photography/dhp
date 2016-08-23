@@ -69,9 +69,11 @@
                 {% include 'disqus.js' %}
             </script>
             {% endblock disqus_js %}
+            {% block google_analytics %}
             {% if request.META.HTTP_HOST == 'www.danehillard.com' %}
             <script type="text/javascript" src="{% static 'js/google_analytics_tracking.js' %}"></script>
             {% endif %}
+            {% endblock google_analytics %}
             <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
         {% endblock js %}
