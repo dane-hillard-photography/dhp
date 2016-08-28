@@ -124,6 +124,7 @@ THIRD_PARTY_APPS = [
     'django_nose',
     'compressor',
     'webmention',
+    'debug_toolbar',
 ]
 
 MY_APPS = [
