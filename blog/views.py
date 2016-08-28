@@ -12,24 +12,15 @@ from webmention.middleware import include_webmention_information
 from blog.models import Post
 
 
-def post_last_modified(request, slug):
-    try:
-        post = Post.objects.get(slug=slug)
-        return post.date_modified
-    except Post.DoesNotExist:
-        return None
-
-
 @cache_control(max_age=3600 * 24)
-@last_modified(post_last_modified)
 @include_webmention_information
 def post_view(request, slug):
     right_now = datetime.now()
-    matching_posts = Post.objects.filter(slug=slug)
+    matching_posts = Post.objects.select_related('feature_image').prefetch_related('related_links').filter(slug=slug)
 
     if not any([request.user.is_authenticated(), getattr(request, 'is_whitelisted_crawler', False)]):
-        matching_posts = matching_posts.exclude(take_down_date__lte=right_now)
-        matching_posts = get_list_or_404(matching_posts, go_live_date__lte=right_now)
+        matching_posts = [post for post in matching_posts if not post.take_down_date or post.take_down_date <= right_now]
+        matching_posts = [post for post in matching_posts if not post.go_live_date or post.go_live_date <= right_now]
 
     try:
         post = matching_posts[0]
