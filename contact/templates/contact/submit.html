@@ -1,5 +1,10 @@
 {% extends "__base_no_disqus.html" %}
 
+{% block extra_meta_tags %}
+{{ block.super }}
+<meta name="robots" content="noindex">
+{% endblock extra_meta_tags %}
+
 {% block title %}Thanks | {{ block.super }}{% endblock title %}
 
 {% block og_title %}Thanks | {{ block.super }}{% endblock og_title %}
