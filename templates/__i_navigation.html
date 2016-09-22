@@ -2,7 +2,7 @@
 {% load cache %}
 
 {% cache 3600 navbar %}
-<div class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,5 +35,5 @@
             </ul>
         </div>
     </div>
-</div>
+</nav>
 {% endcache %}
