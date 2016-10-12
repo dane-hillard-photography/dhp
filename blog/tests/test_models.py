@@ -11,24 +11,28 @@ def mock_now():
 
 
 class LinkTestCase(TestCase):
+
     def test_str(self):
         link = Link(title='foo', url='http://foo.com')
         self.assertEqual('foo', str(link))
 
 
 class CategoryTestCase(TestCase):
+
     def test_str(self):
         category = Category(name='foo')
         self.assertEqual('foo', str(category))
 
 
 class TagTestCase(TestCase):
+
     def test_str(self):
         tag = Tag(name='foo')
         self.assertEqual('foo', str(tag))
 
 
 class PostTestCase(TestCase):
+
     def test_str(self):
         post = Post(
             title='foo',
@@ -69,4 +73,3 @@ class PostTestCase(TestCase):
         )
 
         self.assertFalse(post.published())
-

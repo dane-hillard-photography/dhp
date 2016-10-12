@@ -7,6 +7,7 @@ from context_processors import template_visible_settings
 
 
 class ContextProcessorTestCase(TestCase):
+
     @override_settings(TEMPLATE_VISIBLE_SETTINGS=('FOO',), FOO='bar')
     def test_template_visible_settings(self):
         request = Mock()

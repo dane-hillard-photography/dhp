@@ -8,6 +8,7 @@ from seo.middleware import RedirectMiddleware, CrawlerMiddleware
 
 
 class RedirectMiddlewareTestCase(TestCase):
+
     def setUp(self):
         self.middleware = RedirectMiddleware()
 
@@ -34,6 +35,7 @@ class RedirectMiddlewareTestCase(TestCase):
 
 
 class CrawlerMiddlewareTestCase(TestCase):
+
     def setUp(self):
         self.middleware = CrawlerMiddleware()
 

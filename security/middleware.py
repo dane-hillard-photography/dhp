@@ -7,17 +7,23 @@ CONTENT_SECURITY_POLICY = {
     'img-src': "'self' data: www.facebook.com referrer.disqus.com a.disquscdn.com www.google-analytics.com",
 }
 
+
 class ContentSecurityPolicyMiddleware(object):
+
     def process_response(self, request, response):
         response['Content-Security-Policy'] = '; '.join(('{} {}'.format(key, value) for key, value in CONTENT_SECURITY_POLICY.items()))
         return response
 
+
 class ContentTypeOptionsMiddleware(object):
+
     def process_response(self, request, response):
         response['X-Content-Type-Options'] = 'nosniff'
         return response
 
+
 class HSTSMiddleware(object):
+
     def process_response(self, request, response):
         response['Strict-Transport-Security'] = 'max-age=31536000'
         return response
