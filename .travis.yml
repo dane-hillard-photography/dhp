@@ -5,6 +5,8 @@ python:
   - "3.5"
 script:
   - python manage.py test --noinput
+install:
+  - pip install -r dev-requirements.txt
 before_script:
   - gem install sass
   - mysql -e 'create database dhp;'
