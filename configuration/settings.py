@@ -195,7 +195,7 @@ LOGGING = {
     },
 }
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner' 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = [
     '-d',

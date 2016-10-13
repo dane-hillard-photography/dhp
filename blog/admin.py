@@ -8,6 +8,7 @@ from blog.models import Post, Tag, Category, Link
 
 
 class PostAdminForm(forms.ModelForm):
+
     class Meta:
         model = Post
         widgets = {

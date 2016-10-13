@@ -8,6 +8,7 @@ import requests
 
 
 class MailChimp(object):
+
     @staticmethod
     def subscribe(contact_email, contact_first_name, contact_last_name):
         subscription_body = {

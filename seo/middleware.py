@@ -15,6 +15,7 @@ REDIRECT_PATTERNS = {
 
 
 class RedirectMiddleware(object):
+
     def process_request(self, request):
         for pattern in REDIRECT_PATTERNS:
             if re.match(pattern, request.path):
@@ -22,6 +23,7 @@ class RedirectMiddleware(object):
 
 
 class CrawlerMiddleware(object):
+
     @staticmethod
     def is_facebook_crawler(user_agent):
         return user_agent in settings.WHITELISTED_CRAWLERS.get('facebook', [])

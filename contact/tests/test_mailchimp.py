@@ -9,6 +9,7 @@ from contact.mailchimp import MailChimp
 
 
 class MailChimpTestCase(TestCase):
+
     @patch('requests.post')
     @patch('requests.get')
     def test_subscribe_happy_path(self, get, post):
@@ -19,7 +20,7 @@ class MailChimpTestCase(TestCase):
         check = Mock()
         check.status_code = 200
         get.return_value = check
-        
+
         MailChimp.subscribe('foo', 'bar', 'baz')
 
         post.assert_called_once_with(
@@ -38,7 +39,7 @@ class MailChimpTestCase(TestCase):
         get.assert_called_once_with(
             'https://us3.api.mailchimp.com/3.0/lists/{}/members/{}'.format(settings.MAILCHIMP_LIST_ID, 'acbd18db4cc2f85cedef654fccc4a4d8'),
         )
-        
+
     @patch('requests.post')
     @patch('requests.get')
     def test_subscribe_when_subscribe_fails(self, get, post):
