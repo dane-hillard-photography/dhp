@@ -121,11 +121,15 @@ THIRD_PARTY_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.admin',
-    'django_nose',
     'compressor',
     'webmention',
-    'debug_toolbar',
 ]
+
+if DEBUG:
+    THIRD_PARTY_APPS += [
+        'django_nose',
+        'debug_toolbar',
+    ]
 
 MY_APPS = [
     'blog',
