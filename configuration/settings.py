@@ -230,7 +230,7 @@ CODEMIRROR_MODE = 'xml'
 CODEMIRROR_THEME = 'blackboard'
 
 ROLLBAR = {
-    'access_token': 'ce60f2254ab046f5917b9cea7b467068',
+    'access_token': get_env_var('ROLLBAR_ACCESS_TOKEN'),
     'environment': 'development' if DEBUG else 'production',
     'root': BASE_DIR,
     'exception_level_filters': [
