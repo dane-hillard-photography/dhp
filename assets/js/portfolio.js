@@ -1,4 +1,7 @@
+/* global lightbox */
+
 $(function(){
+    "use strict";
     lightbox.option({
       'resizeDuration': 300,
       'wrapAround': true
@@ -6,6 +9,7 @@ $(function(){
 });
 
 $(window).load(function(){
+    "use strict";
     $('.grid').masonry({
       itemSelector: '.grid-item',
       columnWidth: 150
