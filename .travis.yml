@@ -11,6 +11,7 @@ before_script:
   - mysql -e 'create database dhp;'
   - python manage.py migrate
   - npm install
+  - bundle install
   - compass compile -e production
   - python manage.py collectstatic --noinput --ignore *.sass
 notifications:
