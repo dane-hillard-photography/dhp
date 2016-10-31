@@ -1,0 +1,17 @@
+form {
+  input, textarea {
+    @include transition-property(box-shadow);
+    @include transition-duration(.25s);
+    @include transition-timing-function(ease-in-out);
+
+    &:focus {
+      @include box-shadow(0 0 5px $site-accent);
+    }
+  }
+}
+
+.checkbox label {
+  font-weight: $font-weight;
+  font-size: $font-size-checkbox-labels;
+  line-height: normal;
+}
