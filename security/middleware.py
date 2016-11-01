@@ -28,6 +28,7 @@ FRAME_SOURCES = [
 IMAGE_SOURCES = [
     'a.disquscdn.com',
     'referrer.disqus.com',
+    'stats.g.doubleclick.net',
     'www.facebook.com',
     'www.google-analytics.com',
 ]
