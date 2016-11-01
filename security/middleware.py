@@ -1,10 +1,44 @@
+SCRIPT_SOURCES = [
+    'ajax.googleapis.com',
+    'assets.pinterest.com',
+    'connect.facebook.net',
+    'danehillard.disqus.com',
+    'danehillard-dev.disqus.com',
+    'log.pinterest.com',
+    'platform.instagram.com',
+    'www.google-analytics.com',
+]
+
+STYLE_SOURCES = [
+    'a.disquscdn.com',
+    'fonts.googleapis.com',
+]
+
+FONT_SOURCES = [
+    'fonts.gstatic.com',
+]
+
+FRAME_SOURCES = [
+    'disqus.com',
+    'staticxx.facebook.com',
+    'www.facebook.com',
+    'www.instagram.com',
+]
+
+IMAGE_SOURCES = [
+    'a.disquscdn.com',
+    'referrer.disqus.com',
+    'www.facebook.com',
+    'www.google-analytics.com',
+]
+
 CONTENT_SECURITY_POLICY = {
     'default-src': "'self'",
-    'script-src': "'self' connect.facebook.net assets.pinterest.com danehillard.disqus.com danehillard-dev.disqus.com log.pinterest.com www.google-analytics.com platform.instagram.com 'unsafe-inline'",
-    'style-src': "'self' fonts.googleapis.com a.disquscdn.com 'unsafe-inline'",
-    'font-src': "'self' fonts.gstatic.com",
-    'frame-src': "'self' staticxx.facebook.com www.facebook.com www.instagram.com disqus.com",
-    'img-src': "'self' data: www.facebook.com referrer.disqus.com a.disquscdn.com www.google-analytics.com",
+    'script-src': "'self' {} 'unsafe-inline'".format(' '.join(SCRIPT_SOURCES)),
+    'style-src': "'self' {} 'unsafe-inline'".format(' '.join(STYLE_SOURCES)),
+    'font-src': "'self' {}".format(' '.join(FONT_SOURCES)),
+    'frame-src': "'self' {}".format(' '.join(FRAME_SOURCES)),
+    'img-src': "'self' data: {}".format(' '.join(IMAGE_SOURCES)),
 }
 
 
