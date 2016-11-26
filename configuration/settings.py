@@ -94,7 +94,9 @@ TEMPLATE_VISIBLE_SETTINGS = (
     'DISQUS_DOMAIN',
 )
 
-THE_MIDDLEWARE_CLASSES = []
+THE_MIDDLEWARE_CLASSES = [
+    'django.middleware.gzip.GZipMiddleware',
+]
 
 if DEBUG:
     THE_MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
