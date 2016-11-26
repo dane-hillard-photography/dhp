@@ -5,8 +5,9 @@ from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth.views import login, logout
 from django.contrib.sitemaps.views import sitemap
-
 from django.conf import settings
+
+import debug_toolbar
 
 from configuration.feeds import LatestPostsFeed
 from sitemaps import SiteSitemap, PostSitemap
@@ -37,6 +38,9 @@ if settings.DEBUG:
     urlpatterns += [
         url(r'^404/$', TemplateView.as_view(template_name='404.html'), name='not_found'),
         url(r'^500/$', TemplateView.as_view(template_name='500.html'), name='server_error'),
+    ]
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
     ]
 
 urlpatterns += staticfiles_urlpatterns()

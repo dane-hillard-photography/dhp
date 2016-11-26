@@ -96,6 +96,7 @@ TEMPLATE_VISIBLE_SETTINGS = (
 
 MIDDLEWARE_CLASSES = (
     'security.middleware.ContentSecurityPolicyMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'security.middleware.HSTSMiddleware',
     'security.middleware.ContentTypeOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
