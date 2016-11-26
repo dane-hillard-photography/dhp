@@ -103,8 +103,6 @@ if DEBUG:
 
 THE_MIDDLEWARE_CLASSES.extend([
     'security.middleware.ContentSecurityPolicyMiddleware',
-    'security.middleware.HSTSMiddleware',
-    'security.middleware.ContentTypeOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -264,3 +262,6 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.redirects.RedirectsPanel',
     'debug_toolbar.panels.profiling.ProfilingPanel',
 ]
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_HSTS_INCLUDE_SECONDS = 31536000
