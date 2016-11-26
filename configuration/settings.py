@@ -94,9 +94,13 @@ TEMPLATE_VISIBLE_SETTINGS = (
     'DISQUS_DOMAIN',
 )
 
-MIDDLEWARE_CLASSES = (
+THE_MIDDLEWARE_CLASSES = []
+
+if DEBUG:
+    THE_MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
+THE_MIDDLEWARE_CLASSES.extend([
     'security.middleware.ContentSecurityPolicyMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'security.middleware.HSTSMiddleware',
     'security.middleware.ContentTypeOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -108,7 +112,9 @@ MIDDLEWARE_CLASSES = (
     'seo.middleware.RedirectMiddleware',
     'seo.middleware.CrawlerMiddleware',
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
-)
+])
+
+MIDDLEWARE_CLASSES = tuple(THE_MIDDLEWARE_CLASSES)
 
 ROOT_URLCONF = 'configuration.urls'
 WSGI_APPLICATION = 'configuration.wsgi.application'
