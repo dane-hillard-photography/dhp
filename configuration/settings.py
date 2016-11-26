@@ -103,6 +103,7 @@ if DEBUG:
 
 THE_MIDDLEWARE_CLASSES.extend([
     'security.middleware.ContentSecurityPolicyMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
