@@ -96,6 +96,7 @@ TEMPLATE_VISIBLE_SETTINGS = (
 
 THE_MIDDLEWARE_CLASSES = [
     'django.middleware.gzip.GZipMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
 ]
 
 if DEBUG:
