@@ -1,3 +1,6 @@
+from django.conf import settings
+
+
 SCRIPT_SOURCES = [
     'ajax.googleapis.com',
     'assets.pinterest.com',
@@ -46,5 +49,6 @@ CONTENT_SECURITY_POLICY = {
 class ContentSecurityPolicyMiddleware(object):
 
     def process_response(self, request, response):
-        response['Content-Security-Policy'] = '; '.join(('{} {}'.format(key, value) for key, value in CONTENT_SECURITY_POLICY.items()))
+        csp_header = 'Content-Security-Policy{report_only}'.format(report_only='-Report-Only' if getattr(settings, 'CSP_REPORT_ONLY', False) else '')
+        response[csp_header] = '; '.join(('{} {}'.format(key, value) for key, value in CONTENT_SECURITY_POLICY.items()))
         return response
