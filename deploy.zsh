@@ -7,7 +7,8 @@ pip install -q -r requirements.txt
 ./manage.py migrate
 
 npm update
-compass compile -e production --force
+compass clean
+compass compile -e production
 ./manage.py collectstatic --noinput --ignore *.sass --ignore *.scss
 
 touch configuration/wsgi.py
