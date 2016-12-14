@@ -8,7 +8,7 @@ pip install -q -r requirements.txt
 
 npm update
 compass compile -e production --force
-./manage.py collectstatic --noinput --ignore *.sass
+./manage.py collectstatic --noinput --ignore *.sass --ignore *.scss
 
 touch configuration/wsgi.py
 
