@@ -1,3 +1,15 @@
-<h2>{{ post.title }}</h2>
-{% if post.subtitle %}<h4>{{ post.subtitle }}</h4>{% endif %}
-<a class="btn btn-primary outline" href="{% url 'blog:post' post.slug %}">Read More<span class="sr-only"> about {{ post.title }}</span></a>
+<div class="row top-buffer">
+    <div class="col-md-2 col-md-offset-4">
+        <img class="img-responsive" src="{{ post.feature_image.thumbnail_small.url }}" alt="{{ post.feature_image.alt_text }}" />
+    </div>
+    <div class="col-md-4 text-left">
+        <h2>
+            {{ post.title }}
+            {% if post.subtitle %}<small>{{ post.subtitle }}</small>{% endif %}
+        </h2>
+        <p>{{ post.body|truncatewords_html:50|striptags }}</p>
+        <a class="btn btn-primary outline" href="{% url 'blog:post' post.slug %}">
+            Read More<span class="sr-only"> about {{ post.title }}</span>
+        </a>
+    </div>
+</div>
