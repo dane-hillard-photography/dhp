@@ -7,7 +7,7 @@
             {{ post.title }}
             {% if post.subtitle %}<small>{{ post.subtitle }}</small>{% endif %}
         </h2>
-        <p>{{ post.body|truncatewords_html:50|striptags }}</p>
+        <p>{{ post.meta_description }}</p>
         <a class="btn btn-primary outline" href="{% url 'blog:post' post.slug %}">
             Read More<span class="sr-only"> about {{ post.title }}</span>
         </a>
