@@ -2,12 +2,16 @@
     <div class="col-md-2 col-md-offset-4">
         <img class="img-responsive" src="{{ post.feature_image.thumbnail_small.url }}" alt="{{ post.feature_image.alt_text }}" />
     </div>
-    <div class="col-md-4 text-left">
+    <div class="col-md-6 text-left">
         <h2>
             {{ post.title }}
             {% if post.subtitle %}<small>{{ post.subtitle }}</small>{% endif %}
         </h2>
-        <p>{{ post.meta_description }}</p>
+        <div class="row">
+            <div class="col-md-6">
+                <p>{{ post.meta_description }}</p>
+            </div>
+        </div>
         <a class="btn btn-primary outline" href="{% url 'blog:post' post.slug %}">
             Read More<span class="sr-only"> about {{ post.title }}</span>
         </a>
