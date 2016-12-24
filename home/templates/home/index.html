@@ -18,13 +18,11 @@
 {% block content %}
 <h1 class="text-center">Dane Hillard Photography<br/><small>Ann Arbor, MI, USA</small></h1>
 
-<div class="text-center row bottom-buffer">
-    {% include 'fb_like.html' %}
-</div>
-
+<div class="top-buffer">
 {% for post in posts|slice:":4" %}
     {% include 'home/post_snippet.html' %}
 {% endfor %}
+</div>
 {% endblock content %}
 
 {% block footer %}
