@@ -2,10 +2,22 @@
   margin-top: $buffer-margin;
 }
 
+.top-buffer-large {
+  margin-top: $buffer-margin-large;
+}
+
 .bottom-buffer {
   margin-bottom: $buffer-margin;
 }
 
+.bottom-buffer-large {
+  margin-bottom: $buffer-margin-large;
+}
+
 .inner-padding {
   padding: $inner-padding;
+}
+
+.no-top-margin {
+  margin-top: 0;
 }
