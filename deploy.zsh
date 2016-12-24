@@ -4,6 +4,7 @@ git pull
 
 pip install -q -r requirements.txt
 
+./manage.py makemigrations thumbnail
 ./manage.py migrate
 
 npm update

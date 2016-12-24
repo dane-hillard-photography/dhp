@@ -136,6 +136,7 @@ THIRD_PARTY_APPS = [
     'django.contrib.admin',
     'compressor',
     'webmention',
+    'sorl.thumbnail',
 ]
 
 if DEBUG:
