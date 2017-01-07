@@ -16,3 +16,4 @@ before_script:
   - python manage.py collectstatic --noinput --ignore *.sass
 notifications:
   slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
+  email: false
