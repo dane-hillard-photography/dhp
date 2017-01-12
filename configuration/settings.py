@@ -101,6 +101,7 @@ THE_MIDDLEWARE_CLASSES = [
     'django.middleware.gzip.GZipMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
+    'logutil.middleware.RequestIdMiddleware',
 ]
 
 if DEBUG:
@@ -272,3 +273,5 @@ DEBUG_TOOLBAR_PANELS = [
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_SECONDS = 31536000
+
+INCLUDE_REQUEST_ID_IN_RESPONSE = True

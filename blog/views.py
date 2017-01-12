@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from django.http import HttpResponse, Http404
@@ -10,6 +11,8 @@ from django.shortcuts import get_list_or_404, render
 from webmention.middleware import include_webmention_information
 
 from blog.models import Post
+
+LOGGER = logging.getLogger(__name__)
 
 
 @cache_control(max_age=3600 * 24)
@@ -25,6 +28,7 @@ def post_view(request, slug):
     try:
         post = matching_posts[0]
     except IndexError:
+        LOGGER.warn('Attempted lookup of unknown post {}'.format(slug))
         raise Http404
 
     context = RequestContext(request)
