@@ -28,12 +28,13 @@
 {% block footer %}
     <hr />
     <h2>All Posts</h2>
+    {% regroup posts by go_live_date|date:"Y" as posts_by_year %}
     <div class="row">
-    {% for year, posts in posts_by_year.items %}
+    {% for year in posts_by_year %}
         <div class="col-sm-3 col-lg-2">
-            <h5 class="year-post-list-header">{{ year }}</h5>
+            <h5 class="year-post-list-header">{{ year.grouper }}</h5>
             <ul class="year-post-list">
-                {% for post in posts %}
+                {% for post in year.list %}
                 <li><a href="{% url 'blog:post' post.slug %}">{{ post.title }}</a></li>
                 {% endfor %}
             </ul>
