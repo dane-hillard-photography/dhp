@@ -10,6 +10,7 @@ PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
 def get_env_var(var_name, default=None):
     return os.getenv(PROJECT_VARIABLE_PATTERN.format(var_name), default)
 
+
 SECRET_KEY = get_env_var('SECRET_KEY')
 
 DEBUG = get_env_var('DEBUG', False) == 'TRUE'
@@ -159,9 +160,14 @@ MY_APPS = [
 
 INSTALLED_APPS = THIRD_PARTY_APPS + MY_APPS
 
+cache_backend = 'django.core.cache.backends.memcached.MemcachedCache'
+
+if DEBUG:
+    cache_backend = 'django.core.cache.backends.dummy.DummyCache'
+
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache' if not DEBUG else 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': cache_backend,
         'LOCATION': get_env_var('MEMCACHED_ENDPOINT', '127.0.0.1:11211'),
     }
 }
