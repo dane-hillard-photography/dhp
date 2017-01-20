@@ -3,6 +3,7 @@ cache: pip
 python:
   - "3.4"
   - "3.5"
+  - "3.6"
 script:
   - python manage.py test --noinput
 install:
