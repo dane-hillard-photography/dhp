@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# business: http://ogp.me/ns/business#">
+        {% block google_analytics %}
+            {% if request.META.HTTP_HOST == 'www.danehillard.com' %}
+                <script type="text/javascript" src="{% static 'js/google_analytics_tracking_flicker.js' %}"></script>
+                <script type="text/javascript" src="{% static 'js/google_analytics_tracking.js' %}"></script>
+            {% endif %}
+        {% endblock google_analytics %}
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
 
@@ -39,9 +46,9 @@
         <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
         <link rel="publisher" href="https://plus.google.com/+DaneHillard">
         <link rel="author" href="/humans.txt">
-	</head>
-	<body>
-	    {% include '__i_navigation.html' %}
+    </head>
+    <body>
+        {% include '__i_navigation.html' %}
         <div class="content container-fluid">
             {% block content %}{% endblock content %}
 
@@ -70,11 +77,6 @@
                 {% include 'disqus.js' %}
             </script>
             {% endblock disqus_js %}
-            {% block google_analytics %}
-            {% if request.META.HTTP_HOST == 'www.danehillard.com' %}
-            <script type="text/javascript" src="{% static 'js/google_analytics_tracking.js' %}"></script>
-            {% endif %}
-            {% endblock google_analytics %}
             <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
         {% endblock js %}
@@ -82,5 +84,5 @@
 
         {% block final %}
         {% endblock final %}
-	</body>
+    </body>
 </html>

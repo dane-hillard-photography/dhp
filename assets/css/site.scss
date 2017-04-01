@@ -97,3 +97,7 @@ body {
     border-bottom: $all-post-list-separator-thickness solid $all-post-list-separator-color;
   }
 }
+
+.async-hide {
+    opacity: 0 !important;
+}
