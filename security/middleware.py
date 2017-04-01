@@ -16,6 +16,7 @@ SCRIPT_SOURCES = [
 STYLE_SOURCES = [
     'a.disquscdn.com',
     'fonts.googleapis.com',
+    'optimize.google.com',
 ]
 
 FONT_SOURCES = [
@@ -27,6 +28,7 @@ FRAME_SOURCES = [
     'staticxx.facebook.com',
     'www.facebook.com',
     'www.instagram.com',
+    'optimize.google.com',
 ]
 
 IMAGE_SOURCES = [
@@ -35,6 +37,7 @@ IMAGE_SOURCES = [
     'stats.g.doubleclick.net',
     'www.facebook.com',
     'www.google-analytics.com',
+    'optimize.google.com',
 ]
 
 CONTENT_SECURITY_POLICY = {
