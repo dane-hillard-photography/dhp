@@ -10,6 +10,7 @@ SCRIPT_SOURCES = [
     'log.pinterest.com',
     'platform.instagram.com',
     'www.google-analytics.com',
+    'optimize.google.com',
 ]
 
 STYLE_SOURCES = [
