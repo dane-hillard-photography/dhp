@@ -49,9 +49,10 @@ CONTENT_SECURITY_POLICY = {
     'font-src': "'self' {}".format(' '.join(FONT_SOURCES)),
     'frame-src': "'self' {}".format(' '.join(FRAME_SOURCES)),
     'img-src': "'self' data: {}".format(' '.join(IMAGE_SOURCES)),
-    'upgrade-insecure-requests': '',
 }
 
+if not settings.DEBUG:
+    CONTENT_SECURITY_POLICY['upgrade-insecure-requests'] = ''
 
 class ContentSecurityPolicyMiddleware(object):
 
