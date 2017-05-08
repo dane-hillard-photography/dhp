@@ -3,17 +3,24 @@
 $(function(){
     "use strict";
     lightbox.option({
-      'resizeDuration': 300,
-      'wrapAround': true
+      "resizeDuration": 300,
+      "wrapAround": true
     });
 });
 
 $(window).load(function(){
     "use strict";
-    $(".grid").imagesLoaded(function() {
-        $('.grid').masonry({
-          itemSelector: '.grid-item',
-          columnWidth: 300
-        });
+
+    $(".grid-item").hide();
+
+    var $grid = $(".grid").masonry({
+      itemSelector: ".grid-item",
+      columnWidth: 300
+    });
+
+    $(".grid").imagesLoaded().progress(function(imageLoad, image) {
+        var $theImage = $(image.img).parents(".grid-item");
+        $theImage.show();
+        $grid.masonry("appended", $theImage);
     });
 });
