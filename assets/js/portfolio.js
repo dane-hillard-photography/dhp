@@ -8,15 +8,15 @@ $(function(){
     });
 
     $(".grid-item").hide();
+});
+
+$(window).load(function(){
+    "use strict";
 
     var $grid = $(".grid").masonry({
       itemSelector: ".grid-item",
       columnWidth: 300
     });
-});
-
-$(window).load(function(){
-    "use strict";
 
     $(".grid").imagesLoaded().progress(function(imageLoad, image) {
         var $theImage = $(image.img).parents(".grid-item");
