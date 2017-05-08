@@ -34,7 +34,7 @@ FRAME_SOURCES = [
 ]
 
 IMAGE_SOURCES = [
-    'a.disquscdn.com',
+    '*.disquscdn.com',
     'referrer.disqus.com',
     'stats.g.doubleclick.net',
     'www.facebook.com',
@@ -49,6 +49,7 @@ CONTENT_SECURITY_POLICY = {
     'font-src': "'self' {}".format(' '.join(FONT_SOURCES)),
     'frame-src': "'self' {}".format(' '.join(FRAME_SOURCES)),
     'img-src': "'self' data: {}".format(' '.join(IMAGE_SOURCES)),
+    'upgrade-secure-requests': '',
 }
 
 
