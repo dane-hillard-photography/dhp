@@ -6,10 +6,6 @@ $(function(){
       "resizeDuration": 300,
       "wrapAround": true
     });
-});
-
-$(window).load(function(){
-    "use strict";
 
     $(".grid-item").hide();
 
@@ -17,6 +13,10 @@ $(window).load(function(){
       itemSelector: ".grid-item",
       columnWidth: 300
     });
+});
+
+$(window).load(function(){
+    "use strict";
 
     $(".grid").imagesLoaded().progress(function(imageLoad, image) {
         var $theImage = $(image.img).parents(".grid-item");
