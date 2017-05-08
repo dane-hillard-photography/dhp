@@ -11,10 +11,11 @@ SCRIPT_SOURCES = [
     'platform.instagram.com',
     'www.google-analytics.com',
     'optimize.google.com',
+    'disqus.com',
 ]
 
 STYLE_SOURCES = [
-    'a.disquscdn.com',
+    'disquscdn.com',
     'fonts.googleapis.com',
     'optimize.google.com',
 ]
