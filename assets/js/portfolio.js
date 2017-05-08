@@ -10,8 +10,10 @@ $(function(){
 
 $(window).load(function(){
     "use strict";
-    $('.grid').masonry({
-      itemSelector: '.grid-item',
-      columnWidth: 300
+    $(".grid").imagesLoaded(function() {
+        $('.grid').masonry({
+          itemSelector: '.grid-item',
+          columnWidth: 300
+        });
     });
 });
