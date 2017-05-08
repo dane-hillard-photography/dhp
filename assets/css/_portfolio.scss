@@ -1,6 +1,6 @@
 .grid-item {
   float: left;
-  width: 150px;
+  width: 400px;
   transition: opacity 0.25s ease;
 
   &:hover {
@@ -11,7 +11,7 @@
 }
 
 .grid-item--width2 {
-  width: 300px;
+  width: 800px;
 }
 
 .grid {

@@ -15,9 +15,9 @@
 <h1 class="text-center">Portfolio</h1>
 <div class="grid">
     {% for photo in photos %}
-    <div class="grid-item{% if photo.thumbnail_small.width > photo.thumbnail_small.height %} grid-item--width2{% endif %}">
+    <div class="grid-item{% if photo.width > photo.height %} grid-item--width2{% endif %}">
         <a href="{{ photo.thumbnail_large.url }}" data-lightbox="portfolio">
-            <img class="img-responsive" src="{{ photo.thumbnail_small.url }}" alt="{{ photo.alt_text }}" />
+            <img class="img-responsive" src="{{ photo.thumbnail_medium.url }}" alt="{{ photo.alt_text }}" />
         </a>
     </div>
     {% endfor %}
