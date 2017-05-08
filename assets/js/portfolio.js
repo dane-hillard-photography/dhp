@@ -8,10 +8,6 @@ $(function(){
     });
 
     $(".grid-item").hide();
-});
-
-$(window).load(function(){
-    "use strict";
 
     var $grid = $(".grid").masonry({
       itemSelector: ".grid-item",
