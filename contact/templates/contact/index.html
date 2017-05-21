@@ -29,32 +29,27 @@ Contact Dane Hillard Photography via email or through various other social chann
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
             <div class="form-group{% if form.first_name.errors %} has-error{% endif %}">
                 <input type="text" class="form-control" id="{{ form.first_name.auto_id }}" name="{{ form.first_name.html_name }}" placeholder="First name *" title="First name" required="required" />
-                <label for="{{ form.first_name.auto_id }}" class="sr-only">First Name</label> 
+                <label for="{{ form.first_name.auto_id }}" class="sr-only">First Name</label>
             </div>
             <div class="form-group{% if form.last_name.errors %} has-error{% endif %}">
                 <input type="text" class="form-control" id="{{ form.last_name.auto_id }}" name="{{ form.last_name.html_name }}" placeholder="Last name *" title="Last name" required="required" />
-                <label for="{{ form.last_name.auto_id }}" class="sr-only">Last Name</label> 
+                <label for="{{ form.last_name.auto_id }}" class="sr-only">Last Name</label>
             </div>
             <div class="form-group{% if form.email.errors %} has-error{% endif %}">
                 <input type="email" class="form-control" id="{{ form.email.auto_id }}" name="{{ form.email.html_name }}" placeholder="{{ form.email.html_name|title }} *" title="{{ form.email.html_name|title }}" required="required" />
-                <label for="{{ form.email.auto_id }}" class="sr-only">Email</label> 
+                <label for="{{ form.email.auto_id }}" class="sr-only">Email</label>
             </div>
             <div class="form-group{% if form.phone.errors %} has-error{% endif %}">
                 <input type="phone" class="form-control" id="{{ form.phone.auto_id }}" name="{{ form.phone.html_name }}" placeholder="{{ form.phone.html_name|title }}" title="{{ form.phone.html_name|title }}" />
-                <label for="{{ form.phone.auto_id }}" class="sr-only">Phone</label> 
+                <label for="{{ form.phone.auto_id }}" class="sr-only">Phone</label>
             </div>
             <div class="form-group{% if form.subject.errors %} has-error{% endif %}">
                 <input type="text" class="form-control" id="{{ form.subject.auto_id }}" name="{{ form.subject.html_name }}" placeholder="{{ form.subject.html_name|title }} *" title="{{ form.subject.html_name|title }}" required="required" />
-                <label for="{{ form.subject.auto_id }}" class="sr-only">Subject</label> 
+                <label for="{{ form.subject.auto_id }}" class="sr-only">Subject</label>
             </div>
             <div class="form-group{% if form.message.errors %} has-error{% endif %}">
                 <textarea class="form-control" id="{{ form.message.auto_id }}" name="{{ form.message.html_name }}" placeholder="{{ form.message.html_name|title }} *" title="{{ form.message.html_name|title }}" required="required"></textarea>
-                <label for="{{ form.message.auto_id }}" class="sr-only">Message</label> 
-            </div>
-            <div class="checkbox">
-                <label for="{{ form.join_mailing_list.auto_id }}">
-                    <input type="checkbox" checked="checked" id="{{ form.join_mailing_list.auto_id }}" name="{{ form.join_mailing_list.html_name }}" title="{{ form.join_mailing_list.html_name|title }}" />Join mailing list for blog updates and special rates
-                </label>
+                <label for="{{ form.message.auto_id }}" class="sr-only">Message</label>
             </div>
         </div>
     </div>
@@ -64,6 +59,4 @@ Contact Dane Hillard Photography via email or through various other social chann
         </div>
     </div>
 </form>
-
-{% include 'contact_links.html' %}
 {% endblock content %}

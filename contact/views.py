@@ -35,9 +35,6 @@ class ContactFormView(FormView):
             to_addresses=[contact_email],
         )
 
-        if form.cleaned_data.get('join_mailing_list'):
-            MailChimp.subscribe(contact_email, contact_first_name, contact_last_name)
-
         return super(ContactFormView, self).form_valid(form)
 
 

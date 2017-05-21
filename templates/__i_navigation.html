@@ -17,20 +17,21 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="{% url 'home:home' %}">Home</a>
+                <li><a href="{% url 'home:home' %}">Home</a></li>
+                <li><a href="{% url 'photography:portfolio' %}">Portfolio</a></li>
+                <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+                <li><a href="{% url 'about:pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'about:about' %}">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="external-site facebook">
+                    <a target="_blank" title="Facebook" href="http://www.facebook.com/{{ SOCIAL_MEDIA.facebook }}" aria-label="Facebook">{% include 'iconography/facebook.svg' %}</a>
                 </li>
-                <li>
-                    <a href="{% url 'photography:portfolio' %}">Portfolio</a>
+                <li class="external-site instagram">
+                    <a target="_blank" title="Instagram" href="http://www.instagram.com/{{ SOCIAL_MEDIA.instagram }}" aria-label="Instagram">{% include 'iconography/instagram.svg' %}</a>
                 </li>
-                <li>
-                    <a href="{% url 'contact:contact' %}">Contact</a>
-                </li>
-                <li>
-                    <a href="{% url 'about:pricing' %}">Pricing</a>
-                </li>
-                <li>
-                    <a href="{% url 'about:about' %}">About</a>
+                <li class="external-site twitter">
+                    <a target="_blank" title="Twitter" href="http://www.twitter.com/{{ SOCIAL_MEDIA.twitter }}" aria-label="Twitter">{% include 'iconography/twitter.svg' %}</a>
                 </li>
             </ul>
         </div>
