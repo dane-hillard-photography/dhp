@@ -42,8 +42,6 @@ SOCIAL_MEDIA = {
     'linkedin': 'danehillard',
 }
 
-FONT_FAMILY = 'Yanone+Kaffeesatz:200,400'
-
 LOGIN_REDIRECT_URL = '/'
 ALLOWED_HOSTS = get_env_var('ALLOWED_HOSTS', '*').split(',')
 
