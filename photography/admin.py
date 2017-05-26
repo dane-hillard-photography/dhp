@@ -3,6 +3,7 @@ from django.contrib import admin
 from photography.models import Photograph
 
 
+@admin.register(Photograph)
 class PhotographAdmin(admin.ModelAdmin):
     list_editable = ['in_portfolio', 'alt_text', 'filename']
     fields = ['in_portfolio', 'admin_thumbnail', 'image', 'filename', 'alt_text']
@@ -18,5 +19,3 @@ class PhotographAdmin(admin.ModelAdmin):
 
     search_fields = ['filename', 'alt_text']
     save_on_top = True
-
-admin.site.register(Photograph, PhotographAdmin)
