@@ -1,5 +1,5 @@
 from django.views import generic
-from django.template import Context, loader
+from django.template import loader
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import FormView
 
@@ -31,7 +31,7 @@ class ContactFormView(FormView):
         send_email(
             source='Dane Hillard Photography <no-reply@danehillard.com>',
             subject='Thank you for contacting dHP!',
-            body=loader.get_template('contact/contact_thank_you.html').render(Context({'name': contact_first_name})).strip(),
+            body=loader.get_template('contact/contact_thank_you.html').render({'name': contact_first_name}).strip(),
             to_addresses=[contact_email],
         )
 
