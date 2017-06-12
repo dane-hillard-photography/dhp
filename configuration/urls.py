@@ -10,6 +10,9 @@ from django.conf import settings
 from configuration.feeds import LatestPostsFeed
 from sitemaps import SiteSitemap, PostSitemap
 
+admin.site.site_header = settings.SITE_NAME
+admin.site.site_title = settings.SITE_NAME
+
 sitemaps = {
     'pages': SiteSitemap(['home:home', 'contact:contact', 'about:about', 'about:pricing', 'photography:portfolio']),
     'posts': PostSitemap,

@@ -10,6 +10,7 @@ PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
 def get_env_var(var_name, default=None):
     return os.getenv(PROJECT_VARIABLE_PATTERN.format(var_name), default)
 
+SITE_NAME = 'Dane Hillard Photography'
 
 SECRET_KEY = get_env_var('SECRET_KEY')
 
