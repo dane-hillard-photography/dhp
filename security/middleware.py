@@ -10,9 +10,10 @@ SCRIPT_SOURCES = [
     'log.pinterest.com',
     'platform.instagram.com',
     'www.google-analytics.com',
-    'optimize.google.com',
     '*.disquscdn.com',
     'disqus.com',
+    '*.google.com',
+    '*.gstatic.com',
 ]
 
 STYLE_SOURCES = [
@@ -30,7 +31,7 @@ FRAME_SOURCES = [
     'staticxx.facebook.com',
     'www.facebook.com',
     'www.instagram.com',
-    'optimize.google.com',
+    '*.google.com',
 ]
 
 IMAGE_SOURCES = [
