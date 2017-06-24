@@ -1,12 +1,26 @@
+$transition-in-time: 0.75s;
+$transition-out-time: 0.5s;
+$easing: ease-in-out;
+
 .grid-item {
   float: left;
   width: 300px;
-  transition: opacity 0.25s ease;
+  transition: opacity $transition-out-time $easing;
+  overflow: hidden;
+
+  & .img-responsive {
+    transition: transform $transition-out-time $easing;
+  }
 
   &:hover {
     opacity: 0.5;
-    transition: opacity 0.25s ease;
+    transition: opacity $transition-in-time $easing;
     cursor: pointer;
+
+    & .img-responsive {
+      transform: scale(1.1);
+      transition: transform $transition-in-time $easing;
+    }
   }
 }
 
