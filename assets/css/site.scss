@@ -27,17 +27,6 @@ a:hover::selection {
   font-size: $font-size-admin-links;
 }
 
-.navbar {
-  .navbar-nav {
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  .navbar-collapse {
-    text-align: center;
-  }
-}
-
 h1, h2, h3, h4, h5, h6 {
   &, & small {
     font-weight: $font-weight;
