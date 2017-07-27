@@ -33,11 +33,11 @@
     {% for year in posts_by_year %}
         <div class="col-sm-3 col-lg-2">
             <h5 class="year-post-list-header">{{ year.grouper }}</h5>
-            <ul class="year-post-list">
+            <ol class="year-post-list">
                 {% for post in year.list %}
                 <li><a href="{% url 'blog:post' post.slug %}">{{ post.title }}</a></li>
                 {% endfor %}
-            </ul>
+            </ol>
         </div>
     {% endfor %}
     </div>
