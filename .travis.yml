@@ -8,6 +8,8 @@ script:
   - python manage.py test --noinput
 install:
   - pip install -r dev-requirements.txt
+before_install:
+  - rvm install 2.0.0
 before_script:
   - mysql -e 'create database dhp;'
   - python manage.py migrate
