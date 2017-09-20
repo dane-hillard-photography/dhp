@@ -39,5 +39,10 @@ class CrawlerMiddleware(object):
     def process_request(self, request):
         user_agent = request.META.get('HTTP_USER_AGENT')
         LOGGER.debug('Received request with user agent string \'{}\''.format(user_agent))
-        request.is_whitelisted_crawler = self.is_facebook_crawler(user_agent) or self.is_twitter_crawler(user_agent) or self.is_google_crawler(user_agent)
+
+        request.is_whitelisted_crawler = any([
+            self.is_facebook_crawler(user_agent),
+            self.is_twitter_crawler(user_agent),
+            self.is_google_crawler(user_agent),
+        ])
         LOGGER.debug('Request has {} whitelisted'.format('been' if request.is_whitelisted_crawler else 'not been'))

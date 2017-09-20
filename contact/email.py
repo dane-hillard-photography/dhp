@@ -15,7 +15,7 @@ def send_email(source='', to_addresses=None, reply_addresses=None, subject='', b
     reply_addresses = reply_addresses or []
 
     try:
-        response = client.send_email(
+        client.send_email(
             Source=source,
             Destination={
                 'ToAddresses': to_addresses,
