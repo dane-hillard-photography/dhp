@@ -6,7 +6,7 @@ python:
   - "3.5"
   - "3.6"
 script:
-  - python manage.py test --noinput
+  - coverage run --source='.' manage.py test --noinput && coverage report
 install:
   - pip install -r dev-requirements.txt
 before_install:

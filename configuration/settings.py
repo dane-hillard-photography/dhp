@@ -143,7 +143,6 @@ THIRD_PARTY_APPS = [
 
 if DEBUG:
     THIRD_PARTY_APPS += [
-        'django_nose',
         'debug_toolbar',
     ]
 
@@ -219,17 +218,6 @@ LOGGING = {
         } for app in MY_APPS
     },
 }
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '-d',
-    '--quiet',
-    '--with-fixture-bundling',
-    '--with-coverage',
-    '--cover-package=.',
-    '--cover-erase',
-]
 
 WHITELISTED_CRAWLERS = {
     'facebook': [
