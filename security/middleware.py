@@ -55,9 +55,14 @@ CONTENT_SECURITY_POLICY = {
 if not settings.DEBUG:
     CONTENT_SECURITY_POLICY['upgrade-insecure-requests'] = ''
 
-class ContentSecurityPolicyMiddleware(object):
+def content_security_policy_middleware(get_response):
 
-    def process_response(self, request, response):
-        csp_header = 'Content-Security-Policy{report_only}'.format(report_only='-Report-Only' if getattr(settings, 'CSP_REPORT_ONLY', False) else '')
-        response[csp_header] = '; '.join(('{} {}'.format(key, value) for key, value in CONTENT_SECURITY_POLICY.items()))
+    def middleware(request):
+        response = get_response(request)
+        csp_header = 'Content-Security-Policy{report_only}'.format(
+            report_only='-Report-Only' if getattr(settings, 'CSP_REPORT_ONLY', False) else ''
+        )
+        response[csp_header] = '; '.join('{} {}'.format(key, value) for key, value in CONTENT_SECURITY_POLICY.items())
         return response
+
+    return middleware

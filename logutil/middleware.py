@@ -6,12 +6,13 @@ REQUEST_ID_HEADER = getattr(settings, 'REQUEST_ID_HEADER', 'X-Request-ID')
 INCLUDE_REQUEST_ID_IN_RESPONSES = getattr(settings, 'INCLUDE_REQUEST_ID_IN_RESPONSES', False)
 
 
-class RequestIdMiddleware(object):
-    def process_request(self, request):
+def request_id_middleware(get_response):
+    def middleware(request):
         if not hasattr(request, 'id'):
             request.id = uuid.uuid4().hex
 
-    def process_response(self, request, response):
+        response = get_response(request)
+
         if all([
             INCLUDE_REQUEST_ID_IN_RESPONSES,
             REQUEST_ID_HEADER not in response,
@@ -20,3 +21,5 @@ class RequestIdMiddleware(object):
             response[REQUEST_ID_HEADER] = request.id
 
         return response
+
+    return middleware

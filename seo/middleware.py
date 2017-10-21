@@ -14,35 +14,40 @@ REDIRECT_PATTERNS = {
 }
 
 
-class RedirectMiddleware(object):
+def is_facebook_crawler(user_agent):
+    return user_agent in settings.WHITELISTED_CRAWLERS.get('facebook', [])
 
-    def process_request(self, request):
+
+def is_twitter_crawler(user_agent):
+    return user_agent in settings.WHITELISTED_CRAWLERS.get('twitter', [])
+
+
+def is_google_crawler(user_agent):
+    return user_agent in settings.WHITELISTED_CRAWLERS.get('google', [])
+
+
+def redirect_middleware(get_reponse):
+
+    def middleware(request):
         for pattern in REDIRECT_PATTERNS:
             if re.match(pattern, request.path):
                 return HttpResponsePermanentRedirect(REDIRECT_PATTERNS[pattern])
 
+    return middleware
 
-class CrawlerMiddleware(object):
 
-    @staticmethod
-    def is_facebook_crawler(user_agent):
-        return user_agent in settings.WHITELISTED_CRAWLERS.get('facebook', [])
+def crawler_middleware(get_response):
 
-    @staticmethod
-    def is_twitter_crawler(user_agent):
-        return user_agent in settings.WHITELISTED_CRAWLERS.get('twitter', [])
-
-    @staticmethod
-    def is_google_crawler(user_agent):
-        return user_agent in settings.WHITELISTED_CRAWLERS.get('google', [])
-
-    def process_request(self, request):
+    def middleware(request):
         user_agent = request.META.get('HTTP_USER_AGENT')
         LOGGER.debug('Received request with user agent string \'{}\''.format(user_agent))
 
         request.is_whitelisted_crawler = any([
-            self.is_facebook_crawler(user_agent),
-            self.is_twitter_crawler(user_agent),
-            self.is_google_crawler(user_agent),
+            is_facebook_crawler(user_agent),
+            is_twitter_crawler(user_agent),
+            is_google_crawler(user_agent),
         ])
         LOGGER.debug('Request has {} whitelisted'.format('been' if request.is_whitelisted_crawler else 'not been'))
+        return get_response(request)
+
+    return middleware
