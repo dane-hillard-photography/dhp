@@ -30,7 +30,7 @@ class RedirectMiddlewareTestCase(TestCase):
         middleware.REDIRECT_PATTERNS = {'bar': 'baz'}
 
         response = self.middleware(request)
-        self.assertIsNone(response)
+        self.assertFalse(isinstance(response, HttpResponsePermanentRedirect))
 
 
 class CrawlerMiddlewareTestCase(TestCase):
