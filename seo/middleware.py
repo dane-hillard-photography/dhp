@@ -26,12 +26,14 @@ def is_google_crawler(user_agent):
     return user_agent in settings.WHITELISTED_CRAWLERS.get('google', [])
 
 
-def redirect_middleware(get_reponse):
+def redirect_middleware(get_response):
 
     def middleware(request):
         for pattern in REDIRECT_PATTERNS:
             if re.match(pattern, request.path):
                 return HttpResponsePermanentRedirect(REDIRECT_PATTERNS[pattern])
+
+        return get_response(request)
 
     return middleware
 
@@ -48,6 +50,7 @@ def crawler_middleware(get_response):
             is_google_crawler(user_agent),
         ])
         LOGGER.debug('Request has {} whitelisted'.format('been' if request.is_whitelisted_crawler else 'not been'))
+
         return get_response(request)
 
     return middleware
