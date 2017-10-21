@@ -99,18 +99,18 @@ TEMPLATE_VISIBLE_SETTINGS = (
     'RECAPTCHA_SITE_KEY',
 )
 
-THE_MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
-    'logutil.middleware.RequestIdMiddleware',
+    'logutil.middleware.request_id_middleware',
 ]
 
 if DEBUG:
-    THE_MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
-THE_MIDDLEWARE_CLASSES.extend([
-    'security.middleware.ContentSecurityPolicyMiddleware',
+MIDDLEWARE.extend([
+    'security.middleware.content_security_policy_middleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -118,12 +118,10 @@ THE_MIDDLEWARE_CLASSES.extend([
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'seo.middleware.RedirectMiddleware',
-    'seo.middleware.CrawlerMiddleware',
+    'seo.middleware.redirect_middleware',
+    'seo.middleware.crawler_middleware',
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ])
-
-MIDDLEWARE_CLASSES = tuple(THE_MIDDLEWARE_CLASSES)
 
 ROOT_URLCONF = 'configuration.urls'
 WSGI_APPLICATION = 'configuration.wsgi.application'
