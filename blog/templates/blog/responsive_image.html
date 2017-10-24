@@ -1,3 +1,5 @@
-<img class="visible-lg hidden-md hidden-sm hidden-xs img-responsive" src="{{ photo.thumbnail_large.url }}" alt="{{ photo.alt_text }}" />
-<img class="hidden-lg visible-md visible-sm hidden-xs img-responsive" src="{{ photo.thumbnail_medium.url }}" alt="{{ photo.alt_text }}" />
-<img class="hidden-lg hidden-md hidden-sm visible-xs img-responsive" src="{{ photo.thumbnail_small.url }}" alt="{{ photo.alt_text }}" />
+<img class="img-responsive"
+     srcset="{{ photo.thumbnail_small.url }} 300w, {{ photo.thumbnail_medium.url }} 800w, {{ photo.thumbnail_large.url }} 1000w"
+     alt="{{ photo.alt_text }}"
+     width="{{ photo.thumbnail_large.width }}"
+/>
