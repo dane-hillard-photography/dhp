@@ -1,5 +1,8 @@
 <img class="img-responsive"
-     srcset="{{ photo.thumbnail_small.url }} 300w, {{ photo.thumbnail_medium.url }} 800w, {{ photo.thumbnail_large.url }} 1000w"
+     srcset="{{ photo.thumbnail_small.url }} {{ photo.sm_width }}w,
+             {{ photo.thumbnail_medium.url }} {{ photo.m_width }}w,
+             {{ photo.thumbnail_large.url }} {{ photo.l_width }}w"
+     src="{{ photo.thumbnail_large.url }}"
      alt="{{ photo.alt_text }}"
-     width="{{ photo.thumbnail_large.width }}"
+     width="{{ photo.l_width }}"
 />
