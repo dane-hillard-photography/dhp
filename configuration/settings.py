@@ -101,8 +101,6 @@ TEMPLATE_VISIBLE_SETTINGS = (
 
 MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
-    'htmlmin.middleware.MarkRequestMiddleware',
     'logutil.middleware.request_id_middleware',
 ]
 

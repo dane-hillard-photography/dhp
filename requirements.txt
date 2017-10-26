@@ -3,7 +3,6 @@ coverage==4.1
 Django==1.11.6
 django-codemirror-widget==0.4.0
 django-compressor==2.0
-django-htmlmin==0.10.0
 django-webmention==0.0.4
 gunicorn==19.5.0
 mysqlclient==1.3.7
