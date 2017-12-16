@@ -17,7 +17,8 @@ ENVIRONMENT=production
 LOCAL_USERNAME=`whoami`
 REVISION=`git log -n 1 --pretty=format:"%H"`
 
-pipenv run curl https://api.rollbar.com/api/1/deploy/ \
+source .env
+curl https://api.rollbar.com/api/1/deploy/ \
   -F access_token=$DHP_ROLLBAR_ACCESS_TOKEN \
   -F environment=$ENVIRONMENT \
   -F revision=$REVISION \
