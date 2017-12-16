@@ -16,7 +16,7 @@ def post_view(request, slug):
     right_now = datetime.now()
     matching_posts = Post.objects.select_related('feature_image').prefetch_related('related_links').filter(slug=slug)
 
-    if not any([request.user.is_authenticated(), getattr(request, 'is_whitelisted_crawler', False)]):
+    if not any([request.user.is_authenticated, getattr(request, 'is_whitelisted_crawler', False)]):
         matching_posts = [
             post
             for post in matching_posts
