@@ -1,0 +1,26 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+"boto3" = "*"
+coverage = "*"
+Django = "==2.0"
+django-codemirror-widget = "*"
+django_compressor = "*"
+gunicorn = "*"
+mysqlclient = "*"
+Pillow = "*"
+"python3-memcached" = "*"
+requests = "*"
+rollbar = "*"
+sorl-thumbnail = "*"
+
+
+[dev-packages]
+
+django-debug-toolbar = "*"

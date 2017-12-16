@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed
+from django.urls import reverse
 
-from photography.models import Photograph
 from blog.models import Post
 
 

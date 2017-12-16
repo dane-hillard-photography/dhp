@@ -12,6 +12,7 @@ from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_delete
 from django.core.files.move import file_move_safe
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 
 logger = logging.getLogger(__name__)
@@ -56,7 +57,6 @@ class Photograph(models.Model):
         upload_to=SMALL_SUBPATH, blank=True, null=True, height_field='sm_height', width_field='sm_width')
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
         return reverse('photography:photo', kwargs={'photo_id': self.uuid})
 
     def create_thumbnail(self, original_image, new_image, max_size):

@@ -6,15 +6,12 @@ from django.template.loader import render_to_string
 from django.template import RequestContext, Template
 from django.views.decorators.cache import cache_control
 
-from webmention.middleware import include_webmention_information
-
 from blog.models import Post
 
 LOGGER = logging.getLogger(__name__)
 
 
 @cache_control(max_age=3600 * 24)
-@include_webmention_information
 def post_view(request, slug):
     right_now = datetime.now()
     matching_posts = Post.objects.select_related('feature_image').prefetch_related('related_links').filter(slug=slug)

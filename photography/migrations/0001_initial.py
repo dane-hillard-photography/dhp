@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
                 ('thumbnail_medium', models.ImageField(width_field='m_width', upload_to='images/medium', null=True, height_field='m_height', blank=True)),
                 ('thumbnail_small', models.ImageField(width_field='sm_width', upload_to='images/small', null=True, height_field='sm_height', blank=True)),
                 ('thumbnail_square', models.ImageField(width_field='sq_width', upload_to='images/square', null=True, height_field='sq_height', blank=True)),
-                ('user', models.ForeignKey(null=True, blank=True, to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(null=True, blank=True, to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['-published_date'],

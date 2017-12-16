@@ -2,8 +2,8 @@ import re
 import logging
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.http import HttpResponsePermanentRedirect
+from django.urls import reverse
 
 
 LOGGER = logging.getLogger(__name__)
