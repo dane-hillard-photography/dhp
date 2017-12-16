@@ -3,15 +3,13 @@ git pull
 
 pipenv install
 
-pipenv shell
-./manage.py makemigrations thumbnail
-./manage.py migrate
+pipenv run python manage.py makemigrations thumbnail
+pipenv run python manage.py migrate
 
 npm update
 compass clean
 compass compile -e production
-./manage.py collectstatic --noinput --ignore *.sass --ignore *.scss
-exit
+pipenv run python manage.py collectstatic --noinput --ignore *.sass --ignore *.scss
 
 touch configuration/wsgi.py
 
