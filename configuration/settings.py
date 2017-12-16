@@ -134,7 +134,6 @@ THIRD_PARTY_APPS = [
     'django.contrib.humanize',
     'django.contrib.admin',
     'compressor',
-    'webmention',
     'sorl.thumbnail',
 ]
 
@@ -171,7 +170,7 @@ CACHES = {
 CACHE_MIDDLEWARE_SECONDS = 3600
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_NAME.lower()
 
-ADMIN_URL = get_env_var('ADMIN_URL', r'^admin/')
+ADMIN_URL = get_env_var('ADMIN_URL', 'admin/')
 
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.cssmin.CSSMinFilter',

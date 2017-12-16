@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from django.utils import timezone
-from django.core.urlresolvers import reverse
 from django.contrib.sitemaps import Sitemap
+from django.urls import reverse
+from django.utils import timezone
 
 from blog.models import Post
 

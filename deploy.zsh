@@ -1,9 +1,9 @@
-source .virtualenvs/dhp/bin/activate
 cd dhp
 git pull
 
-pip install -q -r requirements.txt
+pipenv install
 
+pipenv shell
 ./manage.py makemigrations thumbnail
 ./manage.py migrate
 
@@ -11,6 +11,7 @@ npm update
 compass clean
 compass compile -e production
 ./manage.py collectstatic --noinput --ignore *.sass --ignore *.scss
+exit
 
 touch configuration/wsgi.py
 

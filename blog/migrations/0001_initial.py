@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 ('go_live_date', models.DateTimeField(null=True, blank=True, verbose_name='Date and time to publish this post', default=datetime.datetime.now)),
                 ('take_down_date', models.DateTimeField(null=True, blank=True, verbose_name='Date and time to unpublish this post')),
                 ('categories', models.ManyToManyField(to='blog.Category', blank=True)),
-                ('feature_image', models.ForeignKey(to='photography.Photograph', null=True, blank=True)),
+                ('feature_image', models.ForeignKey(to='photography.Photograph', null=True, blank=True, on_delete=models.SET_NULL)),
                 ('related_links', models.ManyToManyField(to='blog.Link', blank=True)),
             ],
         ),

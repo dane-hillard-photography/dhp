@@ -6,18 +6,19 @@ python:
   - "3.5"
   - "3.6"
 script:
-  - coverage run --source='.' manage.py test --noinput && coverage report
+  - pipenv run coverage run --source='.' manage.py test --noinput && coverage report
 install:
-  - pip install -r dev-requirements.txt
+  - pip install pipenv
+  - pipenv install --dev
 before_install:
   - rvm install 2.0.0
 before_script:
   - mysql -e 'create database dhp;'
-  - python manage.py migrate
+  - pipenv run python manage.py migrate
   - npm install
   - bundle install
   - compass compile -e production
-  - python manage.py collectstatic --noinput --ignore *.sass
+  - pipenv run python manage.py collectstatic --noinput --ignore *.sass
 notifications:
   slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
   email: false

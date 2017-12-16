@@ -1,12 +1,11 @@
-from django.core.urlresolvers import reverse
 from django.forms import ValidationError
 from django.shortcuts import redirect, render
 from django.template import loader
+from django.urls import reverse
 from django.views import generic
 
 import recaptcha
 from contact.forms import ContactForm
-from contact.mailchimp import MailChimp
 from contact.email import send_email
 
 

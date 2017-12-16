@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from photography.models import Photograph
 
@@ -43,7 +43,9 @@ class Post(models.Model):
     take_down_date = models.DateTimeField('Date and time to unpublish this post', blank=True, null=True)
     categories = models.ManyToManyField(Category, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    feature_image = models.ForeignKey(Photograph, blank=True, null=True, related_name='featured_in')
+    feature_image = models.ForeignKey(
+        Photograph, blank=True, null=True, related_name='featured_in', on_delete=models.SET_NULL
+    )
     related_links = models.ManyToManyField(Link, blank=True)
 
     def __str__(self):
