@@ -3,6 +3,12 @@ from django.http import Http404
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ENVIRONMENT = os.getenv('STAGE', 'dev')
+IS_DEVELOPMENT = ENVIRONMENT == 'dev'
+IS_STAGING = ENVIRONMENT == 'staging'
+IS_PRODUCTION = ENVIRONMENT == 'production'
+IS_CI = os.getenv('CI', False) == 'true'
+
 PROJECT_NAME = 'DHP'
 PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
 
@@ -15,7 +21,7 @@ SITE_NAME = 'Dane Hillard Photography'
 
 SECRET_KEY = get_env_var('SECRET_KEY')
 
-DEBUG = get_env_var('DEBUG', False) == 'TRUE'
+DEBUG = IS_DEVELOPMENT or IS_CI
 
 ADMINS = (
     ('Dane Hillard', 'github@danehillard.com'),
@@ -53,20 +59,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = False
 
-STATIC_ROOT = os.path.join(BASE_DIR, get_env_var('STATIC_ROOT', 'static'))
-STATIC_URL = get_env_var('STATIC_URL', '/static/')
-MEDIA_ROOT = os.path.join(BASE_DIR, get_env_var('MEDIA_ROOT', 'media'))
-MEDIA_URL = get_env_var('MEDIA_URL', '/media/')
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
     os.path.join(BASE_DIR, 'node_modules'),
-)
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 TEMPLATES = [
@@ -133,8 +128,8 @@ THIRD_PARTY_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.admin',
-    'compressor',
     'sorl.thumbnail',
+    'webpack_loader',
 ]
 
 if DEBUG:
@@ -171,17 +166,6 @@ CACHE_MIDDLEWARE_SECONDS = 3600
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_NAME.lower()
 
 ADMIN_URL = get_env_var('ADMIN_URL', 'admin/')
-
-COMPRESS_CSS_FILTERS = (
-    'compressor.filters.cssmin.CSSMinFilter',
-    'compressor.filters.css_default.CssAbsoluteFilter',
-)
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-sass', 'sass {infile} {outfile}'),
-)
-
-COMPRESS_OUTPUT_DIR = ''
 
 AWS_ACCESS_KEY_ID = get_env_var('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_var('AWS_SECRET_ACCESS_KEY')
@@ -266,3 +250,35 @@ SECURE_HSTS_SECONDS = 31536000
 
 RECAPTCHA_SITE_KEY = get_env_var('RECAPTCHA_SITE_KEY')
 RECAPTCHA_SECRET_KEY = get_env_var('RECAPTCHA_SECRET_KEY')
+
+if IS_PRODUCTION or IS_STAGING:
+    STATICFILES_STORAGE = 'configuration.storages.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'configuration.storages.MediaStorage'
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+BUCKET_PREFIX = os.getenv('BUCKET_PREFIX')
+
+MEDIA_BUCKET_NAME = f'{BUCKET_PREFIX}-media-{ENVIRONMENT}'
+MEDIA_DOMAIN = f'media-{ENVIRONMENT}.danehillard.com'
+MEDIA_URL = '/media/' if DEBUG else f'https://{MEDIA_DOMAIN}/'
+
+STATIC_BUCKET_NAME = f'{BUCKET_PREFIX}-static-{ENVIRONMENT}'
+STATIC_DOMAIN = f'static-{ENVIRONMENT}.danehillard.com'
+STATIC_URL = '/static/' if DEBUG else f'https://{STATIC_DOMAIN}/'
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_IS_GZIPPED = True
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}

@@ -1,1 +1,2 @@
-<script type="text/javascript" src="{{ STATIC_URL }}js/twitter_sdk.js"></script>
+{% load webpack_loader %}
+{% render_bundle 'twitterSdk' 'js' %}

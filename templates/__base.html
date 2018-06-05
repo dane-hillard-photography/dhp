@@ -1,5 +1,5 @@
 {% load staticfiles %}
-{% load compress %}
+{% load webpack_loader %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,11 +37,9 @@
 
         <title>{% block title %}Dane Hillard Photography{% endblock title %}</title>
 
-        {% compress css %}
-            {% block css %}
-            <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}">
-            {% endblock css %}
-        {% endcompress %}
+        {% block css %}
+        {% render_bundle 'main' 'css' %}
+        {% endblock css %}
         <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
         <link rel="publisher" href="https://plus.google.com/+DaneHillard">
         <link rel="author" href="/humans.txt">
@@ -69,7 +67,6 @@
             </footer>
         </div>
 
-        {% compress js %}
         {% block js %}
             {% block disqus_js %}
             <script type="text/javascript">
@@ -79,7 +76,6 @@
             <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
         {% endblock js %}
-        {% endcompress %}
 
         {% block final %}
         {% endblock final %}

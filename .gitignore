@@ -14,3 +14,4 @@ assets/css/*.css
 .coverage
 node_modules/
 .env
+assets/dist/
