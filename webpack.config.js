@@ -1,7 +1,3 @@
-/* global require */
-/* global module */
-/* global __dirname */
-
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
@@ -36,6 +32,10 @@ module.exports = {
                     use: ['css-loader', 'sass-loader'],
                     fallback: 'style-loader'
                 })
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf)$/,
+                loader: 'file-loader'
             },
             {
                 test: /\.js$/,
