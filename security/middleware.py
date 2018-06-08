@@ -14,16 +14,19 @@ SCRIPT_SOURCES = [
     'disqus.com',
     '*.google.com',
     '*.gstatic.com',
+    '*.danehillard.com',
 ]
 
 STYLE_SOURCES = [
     '*.disquscdn.com',
     'fonts.googleapis.com',
     'optimize.google.com',
+    '*.danehillard.com',
 ]
 
 FONT_SOURCES = [
     'fonts.gstatic.com',
+    '*.danehillard.com',
 ]
 
 FRAME_SOURCES = [
@@ -41,6 +44,7 @@ IMAGE_SOURCES = [
     'www.facebook.com',
     'www.google-analytics.com',
     'optimize.google.com',
+    '*.danehillard.com',
 ]
 
 CONTENT_SECURITY_POLICY = {

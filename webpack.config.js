@@ -12,7 +12,12 @@ module.exports = {
         googleAnalyticsTrackingFlicker: path.resolve('assets', 'js', 'google_analytics_tracking_flicker.js'),
         portfolio: path.resolve('assets', 'js', 'portfolio.js'),
         twitterSdk: path.resolve('assets', 'js', 'twitter_sdk.js'),
-        main: path.resolve('assets', 'js', 'site.js')
+        main: path.resolve('assets', 'js', 'index.js')
+    },
+    resolve: {
+        alias: {
+            jquery: 'jquery/src/jquery'
+        }
     },
     output: {
         path: path.resolve('assets', 'dist'),

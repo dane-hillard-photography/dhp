@@ -7,8 +7,10 @@ from botocore.exceptions import ClientError
 
 
 def send_email(source='', to_addresses=None, reply_addresses=None, subject='', body='', email_format='html'):
-    session = Session(aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                      aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+    session = Session(
+        aws_access_key_id=settings.EMAIL_AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.EMAIL_AWS_SECRET_ACCESS_KEY
+    )
     client = session.client('ses', region_name='us-east-1')
 
     to_addresses = to_addresses or []
