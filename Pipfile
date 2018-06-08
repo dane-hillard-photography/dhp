@@ -9,7 +9,7 @@ python_version = "3.6"
 [packages]
 "boto3" = "*"
 coverage = "*"
-Django = "==2.0"
+django = "~=2.0.4"
 django-codemirror-widget = "*"
 gunicorn = "*"
 mysqlclient = "*"

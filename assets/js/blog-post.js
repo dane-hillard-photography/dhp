@@ -1,5 +1,6 @@
 /* global ga */
-/* global $ */
+
+import $ from 'jquery/src/jquery';
 
 $(function () {
     'use strict';

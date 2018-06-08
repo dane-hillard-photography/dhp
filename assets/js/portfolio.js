@@ -1,5 +1,7 @@
-/* global lightbox */
-/* global $ */
+import $ from 'jquery/src/jquery';
+import lightbox from 'lightbox2/src/js/lightbox';
+import Masonry from 'masonry-layout/masonry';
+import ImagesLoaded from 'imagesloaded/imagesloaded';
 
 $(function(){
     'use strict';
@@ -8,14 +10,15 @@ $(function(){
         'wrapAround': true
     });
 
-    var $grid = $('.grid').masonry({
+    var grid = new Masonry('.grid', {
         itemSelector: '.grid-item',
         columnWidth: 300
     });
 
-    $('.grid').imagesLoaded().progress(function(imageLoad, image) {
+    var imageWaiter = new ImagesLoaded('.grid');
+    imageWaiter.on('progress', function(imageLoad, image) {
         var $theImage = $(image.img).parents('.grid-item');
         $theImage.removeClass('hidden');
-        $grid.masonry('appended', $theImage);
+        grid.appended($theImage);
     });
 });

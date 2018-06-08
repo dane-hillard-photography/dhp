@@ -14,11 +14,6 @@ module.exports = {
         twitterSdk: path.resolve('assets', 'js', 'twitter_sdk.js'),
         main: path.resolve('assets', 'js', 'index.js')
     },
-    resolve: {
-        alias: {
-            jquery: 'jquery/src/jquery'
-        }
-    },
     output: {
         path: path.resolve('assets', 'dist'),
         filename: '[name]-bundle-[hash:6].js'
