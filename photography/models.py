@@ -4,6 +4,7 @@ from tempfile import NamedTemporaryFile
 
 from PIL import Image as PImage
 
+from django.core.files.storage import default_storage
 from django.db import models
 from django.conf import settings
 from django.core.files import File
@@ -47,14 +48,35 @@ class Photograph(models.Model):
     sm_height = models.IntegerField(blank=True, null=True)
     sm_width = models.IntegerField(blank=True, null=True)
 
-    image = models.ImageField(upload_to=get_file_path, height_field='height', width_field='width')
+    image = models.ImageField(
+        upload_to=get_file_path,
+        height_field='height',
+        width_field='width'
+    )
 
     thumbnail_large = models.ImageField(
-        upload_to=LARGE_SUBPATH, blank=True, null=True, height_field='l_height', width_field='l_width')
+        upload_to=LARGE_SUBPATH,
+        blank=True,
+        null=True,
+        height_field='l_height',
+        width_field='l_width'
+    )
+
     thumbnail_medium = models.ImageField(
-        upload_to=MEDIUM_SUBPATH, blank=True, null=True, height_field='m_height', width_field='m_width')
+        upload_to=MEDIUM_SUBPATH,
+        blank=True,
+        null=True,
+        height_field='m_height',
+        width_field='m_width'
+    )
+
     thumbnail_small = models.ImageField(
-        upload_to=SMALL_SUBPATH, blank=True, null=True, height_field='sm_height', width_field='sm_width')
+        upload_to=SMALL_SUBPATH,
+        blank=True,
+        null=True,
+        height_field='sm_height',
+        width_field='sm_width'
+    )
 
     def get_absolute_url(self):
         return reverse('photography:photo', kwargs={'photo_id': self.uuid})
@@ -91,7 +113,7 @@ class Photograph(models.Model):
         self.clean()
         super(Photograph, self).save(*args, **kwargs)
 
-        image = PImage.open(os.path.join(settings.MEDIA_ROOT, self.image.name))
+        image = PImage.open(default_storage.open(os.path.join(settings.MEDIA_ROOT, self.image.name)))
         existing_filepath = None
         new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
 
