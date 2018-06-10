@@ -187,13 +187,13 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'default',
-            'level': 'DEBUG' if DEBUG else 'INFO',
+            'level': 'DEBUG' if DEBUG or IS_STAGING else 'INFO',
         },
     },
     'loggers': {
         app: {
             'handlers': ['console'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
+            'level': 'DEBUG' if DEBUG or IS_STAGING else 'INFO',
         } for app in MY_APPS
     },
 }
@@ -219,7 +219,7 @@ CODEMIRROR_THEME = 'blackboard'
 
 ROLLBAR = {
     'access_token': get_env_var('ROLLBAR_ACCESS_TOKEN'),
-    'environment': 'development' if DEBUG else 'production',
+    'environment': ENVIRONMENT,
     'root': BASE_DIR,
     'exception_level_filters': [
         (Http404, 'ignored'),
