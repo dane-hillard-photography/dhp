@@ -11,7 +11,6 @@ from django.core.files import File
 from django.contrib.auth.models import User
 from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_delete
-from django.core.files.move import file_move_safe
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -30,7 +29,24 @@ def generate_uuid():
 
 
 def get_file_path(instance, filename):
-    return os.path.join(ORIG_SUBPATH, filename)
+    return os.path.join(ORIG_SUBPATH, instance.filename)
+
+
+def create_thumbnail(original_image, new_image, new_image_filename, max_size):
+    width, height = original_image.size
+    ratio_divisor = height if height > width else width
+    ratio = float(max_size) / ratio_divisor
+
+    original_image.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
+    tf = NamedTemporaryFile()
+    original_image.save(tf.name, original_image.format, quality=100)
+    new_image.save(new_image_filename, File(open(tf.name, 'rb')), save=False)
+    tf.close()
+
+
+def clean_up_thumbnails(filename):
+    for size in (LARGE_SUBPATH, MEDIUM_SUBPATH, SMALL_SUBPATH):
+        default_storage.delete(os.path.join(settings.MEDIA_ROOT, size, filename))
 
 
 class Photograph(models.Model):
@@ -81,43 +97,55 @@ class Photograph(models.Model):
     def get_absolute_url(self):
         return reverse('photography:photo', kwargs={'photo_id': self.uuid})
 
-    def create_thumbnail(self, original_image, new_image, max_size):
-        width, height = original_image.size
-        ratio_divisor = height if height > width else width
-        ratio = float(max_size) / ratio_divisor
-
-        original_image.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
-        tf = NamedTemporaryFile()
-        original_image.save(tf.name, original_image.format, quality=100)
-        new_image.save(self.image.name, File(open(tf.name, 'rb')), save=False)
-        tf.close()
-
     def clean(self):
         super(Photograph, self).clean()
 
-        existing_filename = None
-        upload_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
+        try:
+            photo_using_this_filename = Photograph.objects.get(filename=self.filename)
+        except Photograph.DoesNotExist:
+            pass
+        else:
+            if photo_using_this_filename and photo_using_this_filename.pk != self.pk:
+                raise ValidationError({
+                    'filename': 'Another photo is using this filename already. Please choose another!'
+                })
 
-        if self.pk:
-            existing_filename = Photograph.objects.get(pk=self.pk).filename
-
-        if self.pk is None or (self.filename and self.filename != existing_filename):
-            if default_storage.exists(upload_path):
-                raise ValidationError({'filename': 'A photo with this filename already exists!'})
-
-        if existing_filename and not self.filename:
-            raise ValidationError({'filename': 'Don\'t orphan an otherwise happy photo!'})
+        if self.pk and not self.filename:
+            raise ValidationError({
+                'filename': 'Every photo must have a filename.'
+            })
 
     def save(self, *args, **kwargs):
         self.clean()
-        self.image.name = self.filename
+        create_thumbnails = True
+        current_file_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
+
+        if self.pk:
+            previously_set_filename = Photograph.objects.get(pk=self.pk).filename
+            previously_set_file_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, previously_set_filename)
+
+            if self.filename != previously_set_filename:
+                previous_file_contents = default_storage.open(previously_set_file_path).read()
+
+                moved_file = default_storage.open(os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename), 'wb')
+                moved_file.write(previous_file_contents)
+                moved_file.close()
+
+                clean_up_thumbnails(previously_set_filename)
+                default_storage.delete(previously_set_file_path)
+            else:
+                create_thumbnails = False
+
+        self.image.name = current_file_path
+
         super(Photograph, self).save(*args, **kwargs)
 
-        image = PImage.open(default_storage.open(os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)))
+        image = PImage.open(default_storage.open(current_file_path))
 
-        self.create_thumbnail(image, self.thumbnail_large, 1200)
-        self.create_thumbnail(image, self.thumbnail_medium, 800)
-        self.create_thumbnail(image, self.thumbnail_small, 300)
+        if create_thumbnails:
+            create_thumbnail(image, self.thumbnail_large, self.filename, 1200)
+            create_thumbnail(image, self.thumbnail_medium, self.filename, 800)
+            create_thumbnail(image, self.thumbnail_small, self.filename, 300)
 
         super(Photograph, self).save(*args, **kwargs)
 
