@@ -226,7 +226,7 @@ ROLLBAR = {
     ]
 }
 
-DISQUS_DOMAIN = 'danehillard-dev' if DEBUG else 'danehillard'
+DISQUS_DOMAIN = 'danehillard' if IS_PRODUCTION else 'danehillard-dev'
 
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
