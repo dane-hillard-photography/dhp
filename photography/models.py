@@ -14,7 +14,7 @@ from django.db.models.signals import post_delete
 from django.core.files.move import file_move_safe
 from django.core.exceptions import ValidationError
 from django.urls import reverse
-
+from django.utils.safestring import mark_safe
 
 logger = logging.getLogger(__name__)
 
@@ -94,44 +94,30 @@ class Photograph(models.Model):
 
     def clean(self):
         super(Photograph, self).clean()
-        new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
-        existing_filepath = None
+
         existing_filename = None
+        upload_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
 
         if self.pk:
-            existing_photo = Photograph.objects.get(pk=self.pk)
-            existing_filepath = existing_photo.image.path
-            existing_filename = existing_photo.filename
+            existing_filename = Photograph.objects.get(pk=self.pk).filename
 
-        if self.pk is None or (self.filename and new_filepath != existing_filepath):
-            if os.path.isfile(new_filepath):
+        if self.pk is None or (self.filename and self.filename != existing_filename):
+            if default_storage.exists(upload_path):
                 raise ValidationError({'filename': 'A photo with this filename already exists!'})
+
         if existing_filename and not self.filename:
             raise ValidationError({'filename': 'Don\'t orphan an otherwise happy photo!'})
 
     def save(self, *args, **kwargs):
         self.clean()
+        self.image.name = self.filename
         super(Photograph, self).save(*args, **kwargs)
 
-        image = PImage.open(default_storage.open(os.path.join(settings.MEDIA_ROOT, self.image.name)))
-        existing_filepath = None
-        new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
-
-        if self.pk:
-            existing_photo = Photograph.objects.get(pk=self.pk)
-            existing_filepath = existing_photo.image.path
+        image = PImage.open(default_storage.open(os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)))
 
         self.create_thumbnail(image, self.thumbnail_large, 1200)
         self.create_thumbnail(image, self.thumbnail_medium, 800)
         self.create_thumbnail(image, self.thumbnail_small, 300)
-
-        for img in [self.image, self.thumbnail_large, self.thumbnail_medium, self.thumbnail_small]:
-            if self.filename and new_filepath != existing_filepath:
-                file_move_safe(
-                    img.path,
-                    os.path.join(os.path.dirname(img.path), self.filename)
-                )
-                img.name = os.path.join(os.path.dirname(img.name), self.filename)
 
         super(Photograph, self).save(*args, **kwargs)
 
@@ -140,11 +126,10 @@ class Photograph(models.Model):
 
     def admin_thumbnail(self):
         if self.image:
-            return '<img src="{url}" height="100" />'.format(url=self.thumbnail_small.url)
+            return mark_safe('<img src="{url}" height="100" />'.format(url=self.thumbnail_small.url))
         else:
             return 'No image available'
     admin_thumbnail.short_description = 'Thumbnail'
-    admin_thumbnail.allow_tags = True
 
     def __str__(self):
         return '{} ({}x{})'.format(self.alt_text, self.width, self.height)
