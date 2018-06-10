@@ -1,5 +1,8 @@
+import logging
 import os
+
 from django.http import Http404
+from django.utils.log import DEFAULT_LOGGING
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -149,21 +152,6 @@ MY_APPS = [
 
 INSTALLED_APPS = THIRD_PARTY_APPS + MY_APPS
 
-cache_backend = 'django.core.cache.backends.memcached.MemcachedCache'
-
-if DEBUG:
-    cache_backend = 'django.core.cache.backends.dummy.DummyCache'
-
-CACHES = {
-    'default': {
-        'BACKEND': cache_backend,
-        'LOCATION': get_env_var('MEMCACHED_ENDPOINT', '127.0.0.1:11211'),
-    }
-}
-
-CACHE_MIDDLEWARE_SECONDS = 3600
-CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_NAME.lower()
-
 ADMIN_URL = get_env_var('ADMIN_URL', 'admin/')
 
 EMAIL_AWS_ACCESS_KEY_ID = get_env_var('AWS_ACCESS_KEY_ID')
@@ -175,28 +163,40 @@ MAILCHIMP_LIST_ID = get_env_var('MAILCHIMP_LIST_ID')
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 
-LOGGING = {
+LOGGING_CONFIG = None
+LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+LOGGERS = {
+    '': {
+        'level': 'WARNING',
+        'handlers': ['console'],
+    },
+    'django.server': DEFAULT_LOGGING['loggers']['django.server']
+}
+LOGGERS.update({
+    app: {
+        'level': LOG_LEVEL,
+        'handlers': ['console'],
+        'propagate': False,
+    } for app in MY_APPS
+})
+logging.config.dictConfig({
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'default': {
-            'format': "%(asctime)s|%(levelname)s|%(name)s|%(message)s",
+        'console': {
+            'format': '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s',
         },
+        'django.server': DEFAULT_LOGGING['formatters']['django.server']
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'default',
-            'level': 'DEBUG' if DEBUG or IS_STAGING else 'INFO',
+            'formatter': 'console',
         },
+        'django.server': DEFAULT_LOGGING['handlers']['django.server']
     },
-    'loggers': {
-        app: {
-            'handlers': ['console'],
-            'level': 'DEBUG' if DEBUG or IS_STAGING else 'INFO',
-        } for app in MY_APPS
-    },
-}
+    'loggers': LOGGERS,
+})
 
 WHITELISTED_CRAWLERS = {
     'facebook': [
@@ -237,7 +237,6 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.sql.SQLPanel',
     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
     'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
     'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
     'debug_toolbar.panels.redirects.RedirectsPanel',

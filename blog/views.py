@@ -4,14 +4,12 @@ from datetime import datetime
 from django.http import HttpResponse, Http404
 from django.template.loader import render_to_string
 from django.template import RequestContext, Template
-from django.views.decorators.cache import cache_control
 
 from blog.models import Post
 
 LOGGER = logging.getLogger(__name__)
 
 
-@cache_control(max_age=3600 * 24)
 def post_view(request, slug):
     right_now = datetime.now()
     matching_posts = Post.objects.select_related('feature_image').prefetch_related('related_links').filter(slug=slug)

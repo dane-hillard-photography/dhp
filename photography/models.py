@@ -1,5 +1,6 @@
 import os
 import logging
+from io import BytesIO
 from tempfile import NamedTemporaryFile
 
 from PIL import Image as PImage
@@ -15,7 +16,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 IMAGE_SUBPATH = 'images'
 ORIG_SUBPATH = os.path.join(IMAGE_SUBPATH, 'uncropped')
@@ -125,13 +126,18 @@ class Photograph(models.Model):
             previously_set_file_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, previously_set_filename)
 
             if self.filename != previously_set_filename:
-                previous_file_contents = default_storage.open(previously_set_file_path).read()
+                LOGGER.info(f'Getting contents from {previously_set_filename}')
+                previous_file = default_storage.open(previously_set_file_path)
 
-                moved_file = default_storage.open(os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename), 'wb')
-                moved_file.write(previous_file_contents)
-                moved_file.close()
+                LOGGER.info(f'Writing contents to {current_file_path}')
+                self.image.save(current_file_path, previous_file, save=False)
 
+                previous_file.close()
+
+                LOGGER.info('Deleting existing thumbnails')
                 clean_up_thumbnails(previously_set_filename)
+
+                LOGGER.info('Deleting previous original image')
                 default_storage.delete(previously_set_file_path)
             else:
                 create_thumbnails = False
@@ -140,9 +146,11 @@ class Photograph(models.Model):
 
         super(Photograph, self).save(*args, **kwargs)
 
+        LOGGER.info(f'Reading {self.filename} for thumbnailing...')
         image = PImage.open(default_storage.open(current_file_path))
 
         if create_thumbnails:
+            LOGGER.info('Creating thumbnails')
             create_thumbnail(image, self.thumbnail_large, self.filename, 1200)
             create_thumbnail(image, self.thumbnail_medium, self.filename, 800)
             create_thumbnail(image, self.thumbnail_small, self.filename, 300)
