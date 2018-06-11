@@ -11,7 +11,6 @@ before_script:
   - pipenv run python manage.py migrate
   - npm install
   - npm run build
-  - pipenv run python manage.py collectstatic --noinput --ignore *.sass
 notifications:
   slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
   email: false
