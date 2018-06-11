@@ -2,8 +2,6 @@ language: python
 dist: precise
 cache: pip
 python:
-  - "3.4"
-  - "3.5"
   - "3.6"
 script:
   - pipenv run coverage run --source='.' manage.py test --noinput && coverage report
@@ -16,8 +14,7 @@ before_script:
   - mysql -e 'create database dhp;'
   - pipenv run python manage.py migrate
   - npm install
-  - bundle install
-  - compass compile -e production
+  - npm run build
   - pipenv run python manage.py collectstatic --noinput --ignore *.sass
 notifications:
   slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
