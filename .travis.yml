@@ -1,24 +1,16 @@
 language: python
-dist: precise
-cache: pip
 python:
-  - "3.4"
-  - "3.5"
   - "3.6"
 script:
   - pipenv run coverage run --source='.' manage.py test --noinput && coverage report
 install:
   - pip install pipenv
   - pipenv install --dev
-before_install:
-  - rvm install 2.0.0
 before_script:
   - mysql -e 'create database dhp;'
   - pipenv run python manage.py migrate
   - npm install
-  - bundle install
-  - compass compile -e production
-  - pipenv run python manage.py collectstatic --noinput --ignore *.sass
+  - npm run build
 notifications:
   slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
   email: false

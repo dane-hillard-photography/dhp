@@ -1,12 +1,41 @@
 {
   "name": "dhp",
   "version": "1.0.0",
-  "dependencies": {
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "bootstrap-sass": "^3.3.7",
     "codemirror": "^5.31.0",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
     "imagesloaded": "^4.1.2",
     "jquery": "^3.2.1",
     "lightbox2": "^2.9.0",
-    "masonry-layout": "^4.2.0"
+    "masonry-layout": "^4.2.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^3.11.0",
+    "webpack-bundle-tracker": "^0.2.1"
+  },
+  "dependencies": {
+    "npm": "^6.0.0"
+  },
+  "scripts": {
+    "clean": "rm -rf assets/dist",
+
+    "prebuild": "npm run clean",
+    "build": "webpack",
+    "build:prod": "NODE_ENV=production npm run build -- -p --progress",
+
+    "prestart": "npm run clean",
+    "start": "webpack --watch"
   }
 }

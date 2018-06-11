@@ -1,21 +1,22 @@
 import os
 import logging
+from io import BytesIO
 from tempfile import NamedTemporaryFile
 
 from PIL import Image as PImage
 
+from django.core.files.storage import default_storage
 from django.db import models
 from django.conf import settings
 from django.core.files import File
 from django.contrib.auth.models import User
 from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_delete
-from django.core.files.move import file_move_safe
 from django.core.exceptions import ValidationError
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
-
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 IMAGE_SUBPATH = 'images'
 ORIG_SUBPATH = os.path.join(IMAGE_SUBPATH, 'uncropped')
@@ -29,7 +30,24 @@ def generate_uuid():
 
 
 def get_file_path(instance, filename):
-    return os.path.join(ORIG_SUBPATH, filename)
+    return os.path.join(ORIG_SUBPATH, instance.filename)
+
+
+def create_thumbnail(original_image, new_image, new_image_filename, max_size):
+    width, height = original_image.size
+    ratio_divisor = height if height > width else width
+    ratio = float(max_size) / ratio_divisor
+
+    original_image.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
+    tf = NamedTemporaryFile()
+    original_image.save(tf.name, original_image.format, quality=100)
+    new_image.save(new_image_filename, File(open(tf.name, 'rb')), save=False)
+    tf.close()
+
+
+def clean_up_thumbnails(filename):
+    for size in (LARGE_SUBPATH, MEDIUM_SUBPATH, SMALL_SUBPATH):
+        default_storage.delete(os.path.join(settings.MEDIA_ROOT, size, filename))
 
 
 class Photograph(models.Model):
@@ -47,69 +65,95 @@ class Photograph(models.Model):
     sm_height = models.IntegerField(blank=True, null=True)
     sm_width = models.IntegerField(blank=True, null=True)
 
-    image = models.ImageField(upload_to=get_file_path, height_field='height', width_field='width')
+    image = models.ImageField(
+        upload_to=get_file_path,
+        height_field='height',
+        width_field='width'
+    )
 
     thumbnail_large = models.ImageField(
-        upload_to=LARGE_SUBPATH, blank=True, null=True, height_field='l_height', width_field='l_width')
+        upload_to=LARGE_SUBPATH,
+        blank=True,
+        null=True,
+        height_field='l_height',
+        width_field='l_width'
+    )
+
     thumbnail_medium = models.ImageField(
-        upload_to=MEDIUM_SUBPATH, blank=True, null=True, height_field='m_height', width_field='m_width')
+        upload_to=MEDIUM_SUBPATH,
+        blank=True,
+        null=True,
+        height_field='m_height',
+        width_field='m_width'
+    )
+
     thumbnail_small = models.ImageField(
-        upload_to=SMALL_SUBPATH, blank=True, null=True, height_field='sm_height', width_field='sm_width')
+        upload_to=SMALL_SUBPATH,
+        blank=True,
+        null=True,
+        height_field='sm_height',
+        width_field='sm_width'
+    )
 
     def get_absolute_url(self):
         return reverse('photography:photo', kwargs={'photo_id': self.uuid})
 
-    def create_thumbnail(self, original_image, new_image, max_size):
-        width, height = original_image.size
-        ratio_divisor = height if height > width else width
-        ratio = float(max_size) / ratio_divisor
-
-        original_image.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
-        tf = NamedTemporaryFile()
-        original_image.save(tf.name, original_image.format, quality=100)
-        new_image.save(self.image.name, File(open(tf.name, 'rb')), save=False)
-        tf.close()
-
     def clean(self):
         super(Photograph, self).clean()
-        new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
-        existing_filepath = None
-        existing_filename = None
 
-        if self.pk:
-            existing_photo = Photograph.objects.get(pk=self.pk)
-            existing_filepath = existing_photo.image.path
-            existing_filename = existing_photo.filename
+        try:
+            photo_using_this_filename = Photograph.objects.get(filename=self.filename)
+        except Photograph.DoesNotExist:
+            pass
+        else:
+            if photo_using_this_filename and photo_using_this_filename.pk != self.pk:
+                raise ValidationError({
+                    'filename': 'Another photo is using this filename already. Please choose another!'
+                })
 
-        if self.pk is None or (self.filename and new_filepath != existing_filepath):
-            if os.path.isfile(new_filepath):
-                raise ValidationError({'filename': 'A photo with this filename already exists!'})
-        if existing_filename and not self.filename:
-            raise ValidationError({'filename': 'Don\'t orphan an otherwise happy photo!'})
+        if self.pk and not self.filename:
+            raise ValidationError({
+                'filename': 'Every photo must have a filename.'
+            })
 
     def save(self, *args, **kwargs):
         self.clean()
-        super(Photograph, self).save(*args, **kwargs)
-
-        image = PImage.open(os.path.join(settings.MEDIA_ROOT, self.image.name))
-        existing_filepath = None
-        new_filepath = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
+        create_thumbnails = True
+        current_file_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, self.filename)
 
         if self.pk:
-            existing_photo = Photograph.objects.get(pk=self.pk)
-            existing_filepath = existing_photo.image.path
+            previously_set_filename = Photograph.objects.get(pk=self.pk).filename
+            previously_set_file_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, previously_set_filename)
 
-        self.create_thumbnail(image, self.thumbnail_large, 1200)
-        self.create_thumbnail(image, self.thumbnail_medium, 800)
-        self.create_thumbnail(image, self.thumbnail_small, 300)
+            if self.filename != previously_set_filename:
+                LOGGER.info(f'Getting contents from {previously_set_filename}')
+                previous_file = default_storage.open(previously_set_file_path)
 
-        for img in [self.image, self.thumbnail_large, self.thumbnail_medium, self.thumbnail_small]:
-            if self.filename and new_filepath != existing_filepath:
-                file_move_safe(
-                    img.path,
-                    os.path.join(os.path.dirname(img.path), self.filename)
-                )
-                img.name = os.path.join(os.path.dirname(img.name), self.filename)
+                LOGGER.info(f'Writing contents to {current_file_path}')
+                self.image.save(current_file_path, previous_file, save=False)
+
+                previous_file.close()
+
+                LOGGER.info('Deleting existing thumbnails')
+                clean_up_thumbnails(previously_set_filename)
+
+                LOGGER.info('Deleting previous original image')
+                default_storage.delete(previously_set_file_path)
+            else:
+                create_thumbnails = False
+
+        self.image.name = current_file_path
+
+        super(Photograph, self).save(*args, **kwargs)
+
+        LOGGER.info(f'Reading {self.filename} for thumbnailing...')
+        image = PImage.open(default_storage.open(current_file_path))
+
+        if create_thumbnails:
+            LOGGER.info('Creating thumbnails')
+            create_thumbnail(image, self.thumbnail_large, self.filename, 1200)
+            create_thumbnail(image, self.thumbnail_medium, self.filename, 800)
+            create_thumbnail(image, self.thumbnail_small, self.filename, 300)
 
         super(Photograph, self).save(*args, **kwargs)
 
@@ -118,11 +162,10 @@ class Photograph(models.Model):
 
     def admin_thumbnail(self):
         if self.image:
-            return '<img src="{url}" height="100" />'.format(url=self.thumbnail_small.url)
+            return mark_safe('<img src="{url}" height="100" />'.format(url=self.thumbnail_small.url))
         else:
             return 'No image available'
     admin_thumbnail.short_description = 'Thumbnail'
-    admin_thumbnail.allow_tags = True
 
     def __str__(self):
         return '{} ({}x{})'.format(self.alt_text, self.width, self.height)

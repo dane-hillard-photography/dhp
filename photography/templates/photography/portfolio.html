@@ -1,15 +1,11 @@
 {% extends '__base.html' %}
 
 {% load static %}
+{% load webpack_loader %}
 
 {% block title %}Portfolio | {{ block.super }}{% endblock %}
 {% block og_title %}Portfolio | {{ block.super }}{% endblock %}
 {% block description %}Photography Portfolio for Dane Hillard Photography{% endblock %}
-
-{% block css %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'lightbox2/dist/css/lightbox.min.css' %}" />
-{% endblock %}
 
 {% block content %}
 <h1 class="text-center">Portfolio</h1>
@@ -27,8 +23,5 @@
 
 {% block js %}
 {{ block.super }}
-<script type="text/javascript" src="{% static 'imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'masonry-layout/dist/masonry.pkgd.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'lightbox2/dist/js/lightbox.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/portfolio.js' %}"></script>
+{% render_bundle 'portfolio' 'js' %}
 {% endblock %}
