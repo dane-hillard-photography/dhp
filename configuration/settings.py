@@ -12,6 +12,8 @@ IS_STAGING = ENVIRONMENT == 'staging'
 IS_PRODUCTION = ENVIRONMENT == 'production'
 IS_CI = os.getenv('CI', False) == 'true'
 
+PREPEND_WWW = IS_PRODUCTION
+
 PROJECT_NAME = 'DHP'
 PROJECT_VARIABLE_PATTERN = '_'.join((PROJECT_NAME, '{}'))
 
