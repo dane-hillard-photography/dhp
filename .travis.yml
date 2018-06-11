@@ -8,8 +8,6 @@ script:
 install:
   - pip install pipenv
   - pipenv install --dev
-before_install:
-  - rvm install 2.0.0
 before_script:
   - mysql -e 'create database dhp;'
   - pipenv run python manage.py migrate
