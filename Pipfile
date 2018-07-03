@@ -7,20 +7,19 @@ name = "pypi"
 python_version = "3.6"
 
 [packages]
-"boto3" = "*"
+boto3 = "*"
 coverage = "*"
 django = "~=2.0.4"
 django-codemirror-widget = "*"
 gunicorn = "*"
-mysqlclient = "*"
 Pillow = "*"
-"python3-memcached" = "*"
 requests = "*"
 rollbar = "*"
 sorl-thumbnail = "*"
 zappa = "*"
 django-storages = "*"
 django-webpack-loader = "*"
+mysql-connector-python = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
