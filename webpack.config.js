@@ -8,8 +8,6 @@ module.exports = {
     entry: {
         blogPost: path.resolve('assets', 'js', 'blog-post.js'),
         facebookSdk: path.resolve('assets', 'js', 'fb_sdk.js'),
-        googleAnalyticsTracking: path.resolve('assets', 'js', 'google_analytics_tracking.js'),
-        googleAnalyticsTrackingFlicker: path.resolve('assets', 'js', 'google_analytics_tracking_flicker.js'),
         portfolio: path.resolve('assets', 'js', 'portfolio.js'),
         twitterSdk: path.resolve('assets', 'js', 'twitter_sdk.js'),
         main: path.resolve('assets', 'js', 'index.js')
