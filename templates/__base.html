@@ -14,6 +14,18 @@
         <link rel="preconnect" href="static-staging.danehillard.com">
         {% endif %}
 
+        {% block disqus_preconnect %}
+        <link rel="preconnect" href="//disqus.com">
+        <link rel="preconnect" href="//c.disquscdn.com">
+        <link rel="preconnect" href="//referrer.disqus.com">
+        <link rel="preconnect" href="//danehillard.disqus.com">
+        {% endblock %}
+
+        {% block ga_preconnect %}
+        <link rel="preconnect" href="//www.google-analytics.com">
+        <link rel="preconnect" href="//stats.g.doubleclick.net">
+        {% endblock %}
+
         {% block google_analytics %}
             {% if request.META.HTTP_HOST == 'www.danehillard.com' %}
                 <script type="text/javascript" src="{% static 'js/google_analytics_tracking_flicker.js' %}"></script>
