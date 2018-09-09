@@ -47,6 +47,10 @@ IMAGE_SOURCES = [
     '*.danehillard.com',
 ]
 
+PREFETCH_SOURCES = [
+    'fonts.googleapis.com',
+]
+
 CONTENT_SECURITY_POLICY = {
     'default-src': "'self'",
     'script-src': "'self' {} 'unsafe-inline'".format(' '.join(SCRIPT_SOURCES)),
@@ -54,6 +58,7 @@ CONTENT_SECURITY_POLICY = {
     'font-src': "'self' {}".format(' '.join(FONT_SOURCES)),
     'frame-src': "'self' {}".format(' '.join(FRAME_SOURCES)),
     'img-src': "'self' data: {}".format(' '.join(IMAGE_SOURCES)),
+    'prefetch-src': "'self' {}".format(' '.join(PREFETCH_SOURCES)),
 }
 
 if not settings.DEBUG:
