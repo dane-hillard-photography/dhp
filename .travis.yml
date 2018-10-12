@@ -9,7 +9,7 @@ install:
 before_script:
   - mysql -e 'create database dhp;'
   - pipenv run python manage.py migrate
-  - npm install
+  - npm ci
   - npm run build
 services:
   - mysql
