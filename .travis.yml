@@ -1,6 +1,10 @@
 language: python
 python:
   - "3.6"
+services:
+  - mysql
+env:
+  - PIPENV_IGNORE_VIRTUALENVS=1
 script:
   - pipenv run coverage run --source='.' manage.py test --noinput && coverage report
 install:
