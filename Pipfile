@@ -9,7 +9,7 @@ python_version = "3.6"
 [packages]
 boto3 = "*"
 coverage = "*"
-django = "~=2.0.4"
+django = "~=2.1.2"
 django-codemirror-widget = "*"
 gunicorn = "*"
 Pillow = "*"
