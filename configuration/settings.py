@@ -256,6 +256,7 @@ if IS_PRODUCTION or IS_STAGING:
     DEFAULT_FILE_STORAGE = 'configuration.storages.MediaStorage'
 else:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 BUCKET_PREFIX = os.getenv('BUCKET_PREFIX')
 
