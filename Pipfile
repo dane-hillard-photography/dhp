@@ -19,7 +19,7 @@ sorl-thumbnail = "*"
 zappa = "*"
 django-storages = "*"
 django-webpack-loader = "*"
-mysql-connector-python = "*"
+mysqlclient = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

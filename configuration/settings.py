@@ -36,16 +36,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': get_env_var('DATABASE_NAME'),
         'USER': get_env_var('DATABASE_USER'),
         'PASSWORD': get_env_var('DATABASE_PASSWORD'),
         'HOST': get_env_var('DATABASE_HOST', 'localhost'),
         'PORT': get_env_var('DATABASE_PORT', 3306),
         'CONN_MAX_AGE': 300,
-        'OPTIONS': {
-            'use_pure': True,
-        },
     }
 }
 

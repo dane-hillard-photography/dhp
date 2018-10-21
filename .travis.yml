@@ -6,14 +6,15 @@ services:
 env:
   - PIPENV_IGNORE_VIRTUALENVS=1
 script:
-  - pipenv run coverage run --source='.' manage.py test --noinput && coverage report
+  - pipenv run coverage run --source='.' manage.py test --noinput
+  - pipenv run coverage report
 install:
   - pip install pipenv
   - pipenv install --dev
 before_script:
   - mysql -e 'create database dhp;'
   - pipenv run python manage.py migrate
-  - npm ci
+  - npm install
   - npm run build
 services:
   - mysql
