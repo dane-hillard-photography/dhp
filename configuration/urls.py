@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.sitemaps.views import sitemap
 from django.conf import settings
 from django.urls import path
@@ -26,8 +26,8 @@ urlpatterns = [
     url(r'^', include('photography.urls')),
     url(r'^about/', include('about.urls')),
     url(r'^contact/', include('contact.urls')),
-    url(r'^login/', login, {'template_name': 'home/login.html'}, name='login'),
-    url(r'^logout/', logout, name='logout'),
+    url(r'^login/', LoginView.as_view(template_name='home/login.html'), name='login'),
+    url(r'^logout/', LogoutView.as_view(), name='logout'),
     url(r'^robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     url(r'^humans.txt', TemplateView.as_view(template_name='humans.txt', content_type='text/plain')),
     url(r'^sitemap\.xml', sitemap, {'sitemaps': sitemaps}),
