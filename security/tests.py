@@ -26,3 +26,11 @@ class SecurityMiddlewareTestCase(TestCase):
             response = content_security_policy_middleware(mock_get_response)(request)
 
         self.assertTrue(response.has_header('Content-Security-Policy'))
+
+    def test_upgrade_insecure_requests_when_not_debug(self):
+        request = mock.Mock()
+
+        with self.settings(DEBUG=False):
+            response = content_security_policy_middleware(mock_get_response)(request)
+
+        self.assertIn('upgrade-insecure-requests', response['Content-Security-Policy'])

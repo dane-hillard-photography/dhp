@@ -64,6 +64,7 @@ CONTENT_SECURITY_POLICY = {
 if not settings.DEBUG:
     CONTENT_SECURITY_POLICY['upgrade-insecure-requests'] = ''
 
+
 def content_security_policy_middleware(get_response):
 
     def middleware(request):
