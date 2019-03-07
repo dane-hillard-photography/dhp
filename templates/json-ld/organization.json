@@ -10,18 +10,10 @@
     "width": 500
   },
   "sameAs" : [
-            "http://www.facebook.com/danehillard",
-            "http://instagram.com/danehillard",
-            "http://plus.google.com/+DaneHillard",
-            "http://www.twitter.com/danehillard",
-            "http://www.pinterest.com/danehillard"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Nickels Arcade Suite 210",
-    "addressLocality": "Ann Arbor",
-    "addressRegion": "Michigan",
-    "addressCountry": "USA",
-    "postalCode": "48104"
-  }
+    "http://www.facebook.com/danehillard",
+    "http://instagram.com/danehillard",
+    "http://plus.google.com/+DaneHillard",
+    "http://www.twitter.com/danehillard",
+    "http://www.pinterest.com/danehillard"
+  ]
 }
