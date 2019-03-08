@@ -18,7 +18,7 @@
     "jquery": "^3.2.1",
     "lightbox2": "^2.9.0",
     "masonry-layout": "^4.2.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.11.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.19.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
