@@ -1,4 +1,4 @@
-import $ from 'jquery/src/jquery';
+import { $ } from 'jquery';
 import lightbox from 'lightbox2/src/js/lightbox';
 import Masonry from 'masonry-layout/masonry';
 import ImagesLoaded from 'imagesloaded/imagesloaded';
