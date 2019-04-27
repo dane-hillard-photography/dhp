@@ -2,7 +2,6 @@ from unittest import mock
 
 from django.http import HttpResponse
 from django.test import TestCase
-from django.conf import settings
 
 from security.middleware import content_security_policy_middleware
 
