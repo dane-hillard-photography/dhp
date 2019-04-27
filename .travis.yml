@@ -6,8 +6,7 @@ services:
 env:
   - PIPENV_IGNORE_VIRTUALENVS=1
 script:
-  - pipenv run coverage run --source='.' manage.py test --noinput
-  - pipenv run coverage report
+  - pipenv run pytest --cov
 install:
   - pip install pipenv
   - pipenv install --dev

@@ -23,3 +23,6 @@ mysqlclient = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-cov = "*"

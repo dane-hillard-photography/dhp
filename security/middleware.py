@@ -1,5 +1,8 @@
 from django.conf import settings
 
+DEFAULT_SOURCES = [
+    'fonts.googleapis.com',
+]
 
 SCRIPT_SOURCES = [
     'ajax.googleapis.com',
@@ -9,6 +12,7 @@ SCRIPT_SOURCES = [
     'danehillard-dev.disqus.com',
     'log.pinterest.com',
     'platform.instagram.com',
+    'www.instagram.com',
     'www.google-analytics.com',
     '*.disquscdn.com',
     'disqus.com',
@@ -52,27 +56,25 @@ PREFETCH_SOURCES = [
 ]
 
 CONTENT_SECURITY_POLICY = {
-    'default-src': "'self'",
-    'script-src': "'self' {} 'unsafe-inline'".format(' '.join(SCRIPT_SOURCES)),
-    'style-src': "'self' {} 'unsafe-inline'".format(' '.join(STYLE_SOURCES)),
-    'font-src': "'self' {}".format(' '.join(FONT_SOURCES)),
-    'frame-src': "'self' {}".format(' '.join(FRAME_SOURCES)),
-    'img-src': "'self' data: {}".format(' '.join(IMAGE_SOURCES)),
-    'prefetch-src': "'self' {}".format(' '.join(PREFETCH_SOURCES)),
+    'default-src': f"'self' {' '.join(DEFAULT_SOURCES)}",
+    'script-src': f"'self' {' '.join(SCRIPT_SOURCES)} 'unsafe-inline'",
+    'style-src': f"'self' {' '.join(STYLE_SOURCES)} 'unsafe-inline'",
+    'font-src': f"'self' {' '.join(FONT_SOURCES)}",
+    'frame-src': f"'self' {' '.join(FRAME_SOURCES)}",
+    'img-src': f"'self' data: {' '.join(IMAGE_SOURCES)}",
+    'prefetch-src': f"'self' {' '.join(PREFETCH_SOURCES)}",
 }
-
-if not settings.DEBUG:
-    CONTENT_SECURITY_POLICY['upgrade-insecure-requests'] = ''
 
 
 def content_security_policy_middleware(get_response):
 
     def middleware(request):
+        if not settings.DEBUG:
+            CONTENT_SECURITY_POLICY['upgrade-insecure-requests'] = ''
         response = get_response(request)
-        csp_header = 'Content-Security-Policy{report_only}'.format(
-            report_only='-Report-Only' if getattr(settings, 'CSP_REPORT_ONLY', False) else ''
-        )
-        response[csp_header] = '; '.join('{} {}'.format(key, value) for key, value in CONTENT_SECURITY_POLICY.items())
+        report_or_not = '-Report-Only' if getattr(settings, 'CSP_REPORT_ONLY', False) else ''
+        csp_header = f'Content-Security-Policy{report_or_not}'
+        response[csp_header] = '; '.join(f'{key} {value}' for key, value in CONTENT_SECURITY_POLICY.items())
         return response
 
     return middleware
