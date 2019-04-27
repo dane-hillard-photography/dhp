@@ -30,9 +30,7 @@
   },
   "scripts": {
     "clean": "rm -rf assets/dist",
-    "pretest": "coverage erase",
-    "test": "coverage run manage.py test",
-    "posttest": "coverage report",
+    "test": "pytest --cov",
     "prebuild": "npm run clean",
     "build": "webpack",
     "build:prod": "NODE_ENV=production npm run build -- -p --progress",
