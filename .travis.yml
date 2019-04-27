@@ -6,7 +6,7 @@ services:
 env:
   - PIPENV_IGNORE_VIRTUALENVS=1
 script:
-  - pytest --cov
+  - pipenv run pytest --cov
 install:
   - pip install pipenv
   - pipenv install --dev
