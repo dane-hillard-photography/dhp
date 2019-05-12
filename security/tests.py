@@ -1,7 +1,6 @@
 from unittest import mock
 
 from django.http import HttpResponse
-from django.test import TestCase
 
 from security.middleware import content_security_policy_middleware
 
@@ -10,27 +9,29 @@ def mock_get_response(request):
     return HttpResponse()
 
 
-class SecurityMiddlewareTestCase(TestCase):
-    def test_content_security_policy_middleware_when_report_only(self):
-        request = mock.Mock()
+def test_content_security_policy_middleware_when_report_only(settings):
+    settings.CSP_REPORT_ONLY = True
 
-        with self.settings(CSP_REPORT_ONLY=True):
-            response = content_security_policy_middleware(mock_get_response)(request)
+    request = mock.Mock()
 
-        self.assertTrue(response.has_header('Content-Security-Policy-Report-Only'))
+    response = content_security_policy_middleware(mock_get_response)(request)
 
-    def test_content_security_policy_middleware_when_enforced(self):
-        request = mock.Mock()
+    assert response.has_header('Content-Security-Policy-Report-Only')
 
-        with self.settings(CSP_REPORT_ONLY=False):
-            response = content_security_policy_middleware(mock_get_response)(request)
+def test_content_security_policy_middleware_when_enforced(settings):
+    settings.CSP_REPORT_ONLY = False
 
-        self.assertTrue(response.has_header('Content-Security-Policy'))
+    request = mock.Mock()
 
-    def test_upgrade_insecure_requests_when_not_debug(self):
-        request = mock.Mock()
+    response = content_security_policy_middleware(mock_get_response)(request)
 
-        with self.settings(DEBUG=False):
-            response = content_security_policy_middleware(mock_get_response)(request)
+    assert response.has_header('Content-Security-Policy')
 
-        self.assertIn('upgrade-insecure-requests', response['Content-Security-Policy'])
+def test_upgrade_insecure_requests_when_not_debug(settings):
+    settings.DEBUG = False
+
+    request = mock.Mock()
+
+    response = content_security_policy_middleware(mock_get_response)(request)
+
+    assert 'upgrade-insecure-requests' in response['Content-Security-Policy']

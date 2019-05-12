@@ -1,7 +1,6 @@
-from django.test import TestCase
+import pytest
 
-
-class PortfolioTestCase(TestCase):
-    def test_get_context_data(self):
-        response = self.client.get('/portfolio')
-        self.assertIn('photos', response.context)
+@pytest.mark.django_db
+def test_get_context_data(client):
+    response = client.get('/portfolio')
+    assert 'photos' in response.context
