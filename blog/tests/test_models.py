@@ -1,6 +1,5 @@
 import datetime
 
-from unittest import TestCase
 from unittest.mock import patch
 
 from blog.models import Link, Category, Tag, Post
@@ -10,28 +9,28 @@ def mock_now():
     return datetime.datetime(2016, 1, 1, 0, 0, 0, 0)
 
 
-class LinkTestCase(TestCase):
+class TestLink:
 
     def test_str(self):
         link = Link(title='foo', url='http://foo.com')
-        self.assertEqual('foo', str(link))
+        assert str(link) == 'foo'
 
 
-class CategoryTestCase(TestCase):
+class TestCategory:
 
     def test_str(self):
         category = Category(name='foo')
-        self.assertEqual('foo', str(category))
+        assert str(category) == 'foo'
 
 
-class TagTestCase(TestCase):
+class TestTag:
 
     def test_str(self):
         tag = Tag(name='foo')
-        self.assertEqual('foo', str(tag))
+        assert str(tag) == 'foo'
 
 
-class PostTestCase(TestCase):
+class TestPost:
 
     def test_str(self):
         post = Post(
@@ -40,13 +39,13 @@ class PostTestCase(TestCase):
             body='the body',
         )
 
-        self.assertEqual('foo', str(post))
+        assert str(post) == 'foo'
 
     @patch('blog.models.datetime')
     def test_get_now(self, mock_datetime):
         expected = mock_datetime.datetime(2016, 1, 1, 0, 0, 0, 0)
         mock_datetime.now.return_value = expected
-        self.assertEqual(expected, Post.get_now())
+        assert Post.get_now() == expected
 
     @patch('blog.models.Post.get_now', side_effect=mock_now)
     def test_published_when_published(self, now):
@@ -59,7 +58,7 @@ class PostTestCase(TestCase):
             go_live_date=go_live_date
         )
 
-        self.assertTrue(post.published())
+        assert post.published()
 
     @patch('blog.models.Post.get_now', side_effect=mock_now)
     def test_published_when_not_published(self, now):
@@ -72,4 +71,4 @@ class PostTestCase(TestCase):
             go_live_date=go_live_date
         )
 
-        self.assertFalse(post.published())
+        assert not post.published()
