@@ -90,6 +90,7 @@
         </div>
 
         {% block js %}
+            {% render_bundle 'main' 'js' %}
             {% block disqus_js %}
             <script type="text/javascript">
                 {% include 'disqus.js' %}
