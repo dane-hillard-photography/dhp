@@ -2,6 +2,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     context: __dirname,
@@ -48,6 +49,12 @@ module.exports = {
             uglifyOptions: {
                 warnings: false
             }
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jquery: "jquery",
+            "window.jQuery": "jquery",
+            jQuery:"jquery"
         }),
         new ExtractTextPlugin('[name]-[hash:6].css'),
         new BundleTracker({filename: './webpack-stats.json'})
