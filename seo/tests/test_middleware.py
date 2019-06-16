@@ -39,58 +39,33 @@ class TestRedirectMiddleware:
 
 
 class TestCrawlerMiddleware:
-    def test_is_google_crawler_when_google_crawler(self, crawler_middleware):
-        user_agent = 'Googlebot'
-        assert middleware.is_google_crawler(user_agent)
-        user_agent = 'Googlebot/2.1'
-        assert middleware.is_google_crawler(user_agent)
+    @pytest.mark.parametrize('user_agent,test_func', [
+        ('Googlebot', middleware.is_google_crawler),
+        ('Googlebot/2.1', middleware.is_google_crawler),
+        ('facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)', middleware.is_facebook_crawler),
+        ('facebookexternalhit/1.1', middleware.is_facebook_crawler),
+        ('Facebot', middleware.is_facebook_crawler),
+        ('Twitterbot', middleware.is_twitter_crawler),
+        ('Twitterbot/1.0', middleware.is_twitter_crawler),
+    ])
+    def test_returns_true_for_correct_crawler(self, user_agent, test_func):
+        assert test_func(user_agent)
 
-    def test_is_google_crawler_when_not_google_crawler(self):
-        user_agent = 'foo'
-        assert not middleware.is_google_crawler(user_agent)
+    @pytest.mark.parametrize('test_func', [
+        middleware.is_google_crawler,
+        middleware.is_facebook_crawler,
+        middleware.is_twitter_crawler,
+    ])
+    def test_returns_false_for_unknown_crawler(self, test_func):
+        assert not test_func('foo')
 
-    def test_is_facebook_crawler_when_facebook_crawler(self):
-        user_agent = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)'
-        assert middleware.is_facebook_crawler(user_agent)
-        user_agent = 'facebookexternalhit/1.1'
-        assert middleware.is_facebook_crawler(user_agent)
-        user_agent = 'Facebot'
-        assert middleware.is_facebook_crawler(user_agent)
-
-    def test_is_facebook_crawler_when_not_facebook_crawler(self):
-        user_agent = 'foo'
-        assert not middleware.is_facebook_crawler(user_agent)
-
-    def test_is_twitter_crawler_when_google_crawler(self):
-        user_agent = 'Twitterbot'
-        assert middleware.is_twitter_crawler(user_agent)
-        user_agent = 'Twitterbot/1.0'
-        assert middleware.is_twitter_crawler(user_agent)
-
-    def test_is_twitter_crawler_when_not_twitter_crawler(self):
-        user_agent = 'foo'
-        assert not middleware.is_twitter_crawler(user_agent)
-
-    @patch('seo.middleware.is_google_crawler')
-    def test_middleware_when_is_google_crawler(self, is_google_crawler, crawler_middleware):
-        is_google_crawler.return_value = True
-
-        request = Mock()
-        crawler_middleware(request)
-        assert request.is_whitelisted_crawler
-
-    @patch('seo.middleware.is_facebook_crawler')
-    def test_middleware_when_is_google_crawler(self, is_facebook_crawler, crawler_middleware):
-        is_facebook_crawler.return_value = True
-
-        request = Mock()
-        crawler_middleware(request)
-        assert request.is_whitelisted_crawler
-
-    @patch('seo.middleware.is_twitter_crawler')
-    def test_middleware_when_is_google_crawler(self, is_twitter_crawler, crawler_middleware):
-        is_twitter_crawler.return_value = True
-
+    @pytest.mark.parametrize('middleware_name', [
+        'is_google_crawler',
+        'is_facebook_crawler',
+        'is_twitter_crawler',
+    ])
+    def test_middleware_whitelists_crawler(self, middleware_name, crawler_middleware, monkeypatch):
+        monkeypatch.setattr(middleware, middleware_name, lambda user_agent: True)
         request = Mock()
         crawler_middleware(request)
         assert request.is_whitelisted_crawler
