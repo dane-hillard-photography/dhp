@@ -43,7 +43,7 @@ class TestPost:
 
     @patch('blog.models.datetime')
     def test_get_now(self, mock_datetime):
-        expected = mock_datetime.datetime(2016, 1, 1, 0, 0, 0, 0)
+        expected = mock_now()
         mock_datetime.now.return_value = expected
         assert Post.get_now() == expected
 
