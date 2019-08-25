@@ -40,7 +40,7 @@ DATABASES = {
         'NAME': get_env_var('DATABASE_NAME'),
         'USER': get_env_var('DATABASE_USER'),
         'PASSWORD': get_env_var('DATABASE_PASSWORD'),
-        'HOST': get_env_var('DATABASE_HOST', 'localhost'),
+        'HOST': get_env_var('DATABASE_HOST', '127.0.0.1'),
         'PORT': get_env_var('DATABASE_PORT', 3306),
         'CONN_MAX_AGE': 300,
     }
