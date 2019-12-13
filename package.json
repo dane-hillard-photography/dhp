@@ -26,7 +26,7 @@
     "webpack-bundle-tracker": "^0.2.1"
   },
   "dependencies": {
-    "npm": "^6.9.0"
+    "npm": "^6.13.4"
   },
   "scripts": {
     "clean": "rm -rf assets/dist",
