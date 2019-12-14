@@ -10,25 +10,20 @@ python:
 services:
   - mysql
 
-# Testing stage
 install:
   - pip install poetry
   - poetry install
-script:
-  - mysql -e 'create database dhp;'
-  - poetry run python manage.py migrate
-  - npm ci
-  - npm run build
-  - poetry run pytest --cov
 
-stages:
-  - lint
-  - test
-
-# Other stages
 jobs:
   include:
     - stage: lint
       script:
         - poetry run black --check .
         - poetry run flake8 .
+    - stage: test
+      script:
+        - mysql -e 'create database dhp;'
+        - poetry run python manage.py migrate
+        - npm ci
+        - npm run build
+        - poetry run pytest --cov
