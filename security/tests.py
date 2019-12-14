@@ -16,7 +16,8 @@ def test_content_security_policy_middleware_when_report_only(settings):
 
     response = content_security_policy_middleware(mock_get_response)(request)
 
-    assert response.has_header('Content-Security-Policy-Report-Only')
+    assert response.has_header("Content-Security-Policy-Report-Only")
+
 
 def test_content_security_policy_middleware_when_enforced(settings):
     settings.CSP_REPORT_ONLY = False
@@ -25,7 +26,8 @@ def test_content_security_policy_middleware_when_enforced(settings):
 
     response = content_security_policy_middleware(mock_get_response)(request)
 
-    assert response.has_header('Content-Security-Policy')
+    assert response.has_header("Content-Security-Policy")
+
 
 def test_upgrade_insecure_requests_when_not_debug(settings):
     settings.DEBUG = False
@@ -34,4 +36,4 @@ def test_upgrade_insecure_requests_when_not_debug(settings):
 
     response = content_security_policy_middleware(mock_get_response)(request)
 
-    assert 'upgrade-insecure-requests' in response['Content-Security-Policy']
+    assert "upgrade-insecure-requests" in response["Content-Security-Policy"]

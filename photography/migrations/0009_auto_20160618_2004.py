@@ -8,16 +8,10 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('photography', '0008_photograph_in_portfolio'),
+        ("photography", "0008_photograph_in_portfolio"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='photograph',
-            name='sq_height',
-        ),
-        migrations.RemoveField(
-            model_name='photograph',
-            name='sq_width',
-        ),
+        migrations.RemoveField(model_name="photograph", name="sq_height",),
+        migrations.RemoveField(model_name="photograph", name="sq_width",),
     ]

@@ -8,7 +8,7 @@ from blog.models import Post
 
 
 class SiteSitemap(Sitemap):
-    changefreq = 'monthly'
+    changefreq = "monthly"
     priority = 0.5
 
     def __init__(self, names):
@@ -26,7 +26,7 @@ class SiteSitemap(Sitemap):
 
 
 class PostSitemap(Sitemap):
-    changefreq = 'monthly'
+    changefreq = "monthly"
     priority = 1.0
 
     def items(self):
@@ -38,4 +38,4 @@ class PostSitemap(Sitemap):
         return obj.date_modified
 
     def location(self, obj):
-        return reverse('blog:post', kwargs={'slug': obj.slug})
+        return reverse("blog:post", kwargs={"slug": obj.slug})

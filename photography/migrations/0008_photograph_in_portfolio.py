@@ -8,13 +8,9 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('photography', '0007_remove_photograph_uuid'),
+        ("photography", "0007_remove_photograph_uuid"),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='photograph',
-            name='in_portfolio',
-            field=models.BooleanField(default=False),
-        ),
+        migrations.AddField(model_name="photograph", name="in_portfolio", field=models.BooleanField(default=False),),
     ]

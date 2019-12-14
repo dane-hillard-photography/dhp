@@ -7,13 +7,11 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0001_initial'),
+        ("blog", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='meta_description',
-            field=models.CharField(max_length=150, blank=True),
+            model_name="post", name="meta_description", field=models.CharField(max_length=150, blank=True),
         ),
     ]

@@ -7,13 +7,19 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0007_remove_post_images'),
+        ("blog", "0007_remove_post_images"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='feature_image',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='featured_in', to='photography.Photograph'),
+            model_name="post",
+            name="feature_image",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="featured_in",
+                to="photography.Photograph",
+            ),
         ),
     ]

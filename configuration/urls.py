@@ -15,35 +15,36 @@ admin.site.site_header = settings.SITE_NAME
 admin.site.site_title = settings.SITE_NAME
 
 sitemaps = {
-    'pages': SiteSitemap(['home:home', 'contact:contact', 'about:about', 'about:pricing', 'photography:portfolio']),
-    'posts': PostSitemap,
+    "pages": SiteSitemap(["home:home", "contact:contact", "about:about", "about:pricing", "photography:portfolio"]),
+    "posts": PostSitemap,
 }
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    url(r'^', include('home.urls')),
-    url(r'^', include('blog.urls')),
-    url(r'^', include('photography.urls')),
-    url(r'^about/', include('about.urls')),
-    url(r'^contact/', include('contact.urls')),
-    url(r'^login/', LoginView.as_view(template_name='home/login.html'), name='login'),
-    url(r'^logout/', LogoutView.as_view(), name='logout'),
-    url(r'^robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
-    url(r'^humans.txt', TemplateView.as_view(template_name='humans.txt', content_type='text/plain')),
-    url(r'^sitemap\.xml', sitemap, {'sitemaps': sitemaps}),
-    url(r'^feed/', LatestPostsFeed(), name='feed'),
-    url(r'^branding/', include('branding.urls')),
+    url(r"^", include("home.urls")),
+    url(r"^", include("blog.urls")),
+    url(r"^", include("photography.urls")),
+    url(r"^about/", include("about.urls")),
+    url(r"^contact/", include("contact.urls")),
+    url(r"^login/", LoginView.as_view(template_name="home/login.html"), name="login"),
+    url(r"^logout/", LogoutView.as_view(), name="logout"),
+    url(r"^robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    url(r"^humans.txt", TemplateView.as_view(template_name="humans.txt", content_type="text/plain")),
+    url(r"^sitemap\.xml", sitemap, {"sitemaps": sitemaps}),
+    url(r"^feed/", LatestPostsFeed(), name="feed"),
+    url(r"^branding/", include("branding.urls")),
 ]
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^404/$', TemplateView.as_view(template_name='404.html'), name='not_found'),
-        url(r'^500/$', TemplateView.as_view(template_name='500.html'), name='server_error'),
+        url(r"^404/$", TemplateView.as_view(template_name="404.html"), name="not_found"),
+        url(r"^500/$", TemplateView.as_view(template_name="500.html"), name="server_error"),
     ]
 
     import debug_toolbar
+
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        url(r"^__debug__/", include(debug_toolbar.urls)),
     ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('photography', '0004_remove_photograph_thumbnail_square'),
+        ("photography", "0004_remove_photograph_thumbnail_square"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='photograph',
-            name='filename',
+            model_name="photograph",
+            name="filename",
             field=models.CharField(default=None, max_length=100),
             preserve_default=False,
         ),

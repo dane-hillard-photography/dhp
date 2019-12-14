@@ -1,22 +1,29 @@
-language: python
-python:
-  - "3.6"
-services:
-  - mysql
-env:
-  - PIPENV_IGNORE_VIRTUALENVS=1
-script:
-  - pipenv run pytest --cov
-install:
-  - pip install pipenv
-  - pipenv install --dev
-before_script:
-  - mysql -e 'create database dhp;'
-  - pipenv run python manage.py migrate
-  - npm install
-  - npm run build
-services:
-  - mysql
 notifications:
   slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
   email: false
+
+language: python
+cache: pip
+python:
+  - "3.6"
+
+services:
+  - mysql
+
+install:
+  - pip install poetry
+  - poetry install
+
+jobs:
+  include:
+    - stage: lint
+      script:
+        - poetry run black --check .
+        - poetry run flake8 .
+    - stage: test
+      script:
+        - mysql -e 'create database dhp;'
+        - poetry run python manage.py migrate
+        - npm ci
+        - npm run build
+        - poetry run pytest --cov

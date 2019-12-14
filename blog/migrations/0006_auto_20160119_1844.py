@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0005_auto_20160119_1843'),
+        ("blog", "0005_auto_20160119_1843"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='go_live_date',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='Date and time to publish this post'),
+            model_name="post",
+            name="go_live_date",
+            field=models.DateTimeField(blank=True, null=True, verbose_name="Date and time to publish this post"),
         ),
     ]
