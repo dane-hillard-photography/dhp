@@ -14,12 +14,11 @@ services:
 install:
   - pip install poetry
   - poetry install
-before_script:
+script:
   - mysql -e 'create database dhp;'
   - poetry run python manage.py migrate
   - npm ci
   - npm run build
-script:
   - poetry run pytest --cov
 
 stages:
