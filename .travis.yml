@@ -10,10 +10,6 @@ python:
 services:
   - mysql
 
-stages:
-  - lint
-  - test
-
 # Testing stage
 install:
   - pip install poetry
@@ -25,6 +21,10 @@ before_script:
   - npm run build
 script:
   - poetry run pytest --cov
+
+stages:
+  - lint
+  - test
 
 # Other stages
 jobs:
