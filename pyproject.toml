@@ -26,6 +26,7 @@ pytest = "*"
 pytest-django = "*"
 pytest-cov = "*"
 black = "^19.10b0"
+flake8 = "^3.7.9"
 
 [tool.black]
 line_length = 120

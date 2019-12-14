@@ -1,7 +1,5 @@
 from unittest.mock import Mock
 
-from django.test import override_settings
-
 from context_processors import template_visible_settings
 
 

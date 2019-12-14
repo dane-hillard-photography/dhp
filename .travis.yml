@@ -1,10 +1,20 @@
+notifications:
+  slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
+  email: false
+
 language: python
+cache: pip
 python:
   - "3.6"
+
 services:
   - mysql
-script:
-  - poetry run pytest --cov
+
+stages:
+  - lint
+  - test
+
+# Testing stage
 install:
   - pip install poetry
   - poetry install
@@ -13,8 +23,13 @@ before_script:
   - poetry run python manage.py migrate
   - npm ci
   - npm run build
-services:
-  - mysql
-notifications:
-  slack: danehillard:ALNjxErNTEvNklCPFUNTw4Dz
-  email: false
+script:
+  - poetry run pytest --cov
+
+# Other stages
+jobs:
+  include:
+    - stage: lint
+      script:
+        - poetry run black --check .
+        - poetry run flake8 .
