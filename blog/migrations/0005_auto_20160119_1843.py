@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0004_auto_20160119_1842'),
+        ("blog", "0004_auto_20160119_1842"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='images',
-            field=models.ManyToManyField(blank=True, related_name='used_in', to='photography.Photograph'),
+            model_name="post",
+            name="images",
+            field=models.ManyToManyField(blank=True, related_name="used_in", to="photography.Photograph"),
         ),
     ]

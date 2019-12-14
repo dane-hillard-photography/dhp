@@ -10,7 +10,7 @@ class PostAdminForm(forms.ModelForm):
     class Meta:
         model = Post
         widgets = {
-            'body': CodeMirrorTextarea(),
-            'meta_description': Textarea(),
+            "body": CodeMirrorTextarea(),
+            "meta_description": Textarea(),
         }
         exclude = []

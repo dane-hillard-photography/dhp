@@ -8,24 +8,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('photography', '0001_initial'),
+        ("photography", "0001_initial"),
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='photograph',
-            options={},
-        ),
-        migrations.RemoveField(
-            model_name='photograph',
-            name='public',
-        ),
-        migrations.RemoveField(
-            model_name='photograph',
-            name='published_date',
-        ),
-        migrations.RemoveField(
-            model_name='photograph',
-            name='user',
-        ),
+        migrations.AlterModelOptions(name="photograph", options={},),
+        migrations.RemoveField(model_name="photograph", name="public",),
+        migrations.RemoveField(model_name="photograph", name="published_date",),
+        migrations.RemoveField(model_name="photograph", name="user",),
     ]

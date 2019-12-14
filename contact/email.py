@@ -6,12 +6,11 @@ from boto3.session import Session
 from botocore.exceptions import ClientError
 
 
-def send_email(source='', to_addresses=None, reply_addresses=None, subject='', body='', email_format='html'):
+def send_email(source="", to_addresses=None, reply_addresses=None, subject="", body="", email_format="html"):
     session = Session(
-        aws_access_key_id=settings.EMAIL_AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.EMAIL_AWS_SECRET_ACCESS_KEY
+        aws_access_key_id=settings.EMAIL_AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.EMAIL_AWS_SECRET_ACCESS_KEY
     )
-    client = session.client('ses', region_name='us-east-1')
+    client = session.client("ses", region_name="us-east-1")
 
     to_addresses = to_addresses or []
     reply_addresses = reply_addresses or []
@@ -19,21 +18,13 @@ def send_email(source='', to_addresses=None, reply_addresses=None, subject='', b
     try:
         client.send_email(
             Source=source,
-            Destination={
-                'ToAddresses': to_addresses,
-            },
+            Destination={"ToAddresses": to_addresses,},
             Message={
-                'Subject': {
-                    'Data': subject,
-                },
-                'Body': {
-                    'Html' if email_format == 'html' else 'Text': {
-                        'Data': body
-                    }
-                }
+                "Subject": {"Data": subject,},
+                "Body": {"Html" if email_format == "html" else "Text": {"Data": body}},
             },
             ReplyToAddresses=reply_addresses,
         )
     except ClientError as e:
-        logging.error('There was a problem sending email from {} to {}'.format(source, to_addresses))
+        logging.error("There was a problem sending email from {} to {}".format(source, to_addresses))
         raise e

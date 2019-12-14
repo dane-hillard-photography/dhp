@@ -18,11 +18,11 @@ from django.utils.safestring import mark_safe
 
 LOGGER = logging.getLogger(__name__)
 
-IMAGE_SUBPATH = 'images'
-ORIG_SUBPATH = os.path.join(IMAGE_SUBPATH, 'uncropped')
-LARGE_SUBPATH = os.path.join(IMAGE_SUBPATH, 'large')
-MEDIUM_SUBPATH = os.path.join(IMAGE_SUBPATH, 'medium')
-SMALL_SUBPATH = os.path.join(IMAGE_SUBPATH, 'small')
+IMAGE_SUBPATH = "images"
+ORIG_SUBPATH = os.path.join(IMAGE_SUBPATH, "uncropped")
+LARGE_SUBPATH = os.path.join(IMAGE_SUBPATH, "large")
+MEDIUM_SUBPATH = os.path.join(IMAGE_SUBPATH, "medium")
+SMALL_SUBPATH = os.path.join(IMAGE_SUBPATH, "small")
 
 
 def generate_uuid():
@@ -41,7 +41,7 @@ def create_thumbnail(original_image, new_image, new_image_filename, max_size):
     original_image.thumbnail((int(width * ratio), int(height * ratio)), PImage.ANTIALIAS)
     tf = NamedTemporaryFile()
     original_image.save(tf.name, original_image.format, quality=100)
-    new_image.save(new_image_filename, File(open(tf.name, 'rb')), save=False)
+    new_image.save(new_image_filename, File(open(tf.name, "rb")), save=False)
     tf.close()
 
 
@@ -65,38 +65,22 @@ class Photograph(models.Model):
     sm_height = models.IntegerField(blank=True, null=True)
     sm_width = models.IntegerField(blank=True, null=True)
 
-    image = models.ImageField(
-        upload_to=get_file_path,
-        height_field='height',
-        width_field='width'
-    )
+    image = models.ImageField(upload_to=get_file_path, height_field="height", width_field="width")
 
     thumbnail_large = models.ImageField(
-        upload_to=LARGE_SUBPATH,
-        blank=True,
-        null=True,
-        height_field='l_height',
-        width_field='l_width'
+        upload_to=LARGE_SUBPATH, blank=True, null=True, height_field="l_height", width_field="l_width"
     )
 
     thumbnail_medium = models.ImageField(
-        upload_to=MEDIUM_SUBPATH,
-        blank=True,
-        null=True,
-        height_field='m_height',
-        width_field='m_width'
+        upload_to=MEDIUM_SUBPATH, blank=True, null=True, height_field="m_height", width_field="m_width"
     )
 
     thumbnail_small = models.ImageField(
-        upload_to=SMALL_SUBPATH,
-        blank=True,
-        null=True,
-        height_field='sm_height',
-        width_field='sm_width'
+        upload_to=SMALL_SUBPATH, blank=True, null=True, height_field="sm_height", width_field="sm_width"
     )
 
     def get_absolute_url(self):
-        return reverse('photography:photo', kwargs={'photo_id': self.uuid})
+        return reverse("photography:photo", kwargs={"photo_id": self.uuid})
 
     def clean(self):
         super(Photograph, self).clean()
@@ -107,14 +91,12 @@ class Photograph(models.Model):
             pass
         else:
             if photo_using_this_filename and photo_using_this_filename.pk != self.pk:
-                raise ValidationError({
-                    'filename': 'Another photo is using this filename already. Please choose another!'
-                })
+                raise ValidationError(
+                    {"filename": "Another photo is using this filename already. Please choose another!"}
+                )
 
         if self.pk and not self.filename:
-            raise ValidationError({
-                'filename': 'Every photo must have a filename.'
-            })
+            raise ValidationError({"filename": "Every photo must have a filename."})
 
     def save(self, *args, **kwargs):
         self.clean()
@@ -126,18 +108,18 @@ class Photograph(models.Model):
             previously_set_file_path = os.path.join(settings.MEDIA_ROOT, ORIG_SUBPATH, previously_set_filename)
 
             if self.filename != previously_set_filename:
-                LOGGER.info(f'Getting contents from {previously_set_filename}')
+                LOGGER.info(f"Getting contents from {previously_set_filename}")
                 previous_file = default_storage.open(previously_set_file_path)
 
-                LOGGER.info(f'Writing contents to {current_file_path}')
+                LOGGER.info(f"Writing contents to {current_file_path}")
                 self.image.save(current_file_path, previous_file, save=False)
 
                 previous_file.close()
 
-                LOGGER.info('Deleting existing thumbnails')
+                LOGGER.info("Deleting existing thumbnails")
                 clean_up_thumbnails(previously_set_filename)
 
-                LOGGER.info('Deleting previous original image')
+                LOGGER.info("Deleting previous original image")
                 default_storage.delete(previously_set_file_path)
             else:
                 create_thumbnails = False
@@ -146,11 +128,11 @@ class Photograph(models.Model):
 
         super(Photograph, self).save(*args, **kwargs)
 
-        LOGGER.info(f'Reading {self.filename} for thumbnailing...')
+        LOGGER.info(f"Reading {self.filename} for thumbnailing...")
         image = PImage.open(default_storage.open(current_file_path))
 
         if create_thumbnails:
-            LOGGER.info('Creating thumbnails')
+            LOGGER.info("Creating thumbnails")
             create_thumbnail(image, self.thumbnail_large, self.filename, 1200)
             create_thumbnail(image, self.thumbnail_medium, self.filename, 800)
             create_thumbnail(image, self.thumbnail_small, self.filename, 300)
@@ -158,17 +140,18 @@ class Photograph(models.Model):
         super(Photograph, self).save(*args, **kwargs)
 
     def size(self):
-        return '{width}x{height}'.format(width=self.width, height=self.height)
+        return "{width}x{height}".format(width=self.width, height=self.height)
 
     def admin_thumbnail(self):
         if self.image:
             return mark_safe('<img src="{url}" height="100" />'.format(url=self.thumbnail_small.url))
         else:
-            return 'No image available'
-    admin_thumbnail.short_description = 'Thumbnail'
+            return "No image available"
+
+    admin_thumbnail.short_description = "Thumbnail"
 
     def __str__(self):
-        return '{} ({}x{})'.format(self.alt_text, self.width, self.height)
+        return "{} ({}x{})".format(self.alt_text, self.width, self.height)
 
 
 @receiver(post_delete, sender=Photograph)

@@ -3,17 +3,15 @@ python:
   - "3.6"
 services:
   - mysql
-env:
-  - PIPENV_IGNORE_VIRTUALENVS=1
 script:
-  - pipenv run pytest --cov
+  - poetry run pytest --cov
 install:
-  - pip install pipenv
-  - pipenv install --dev
+  - pip install poetry
+  - poetry install --dev
 before_script:
   - mysql -e 'create database dhp;'
-  - pipenv run python manage.py migrate
-  - npm install
+  - poetry run python manage.py migrate
+  - npm ci
   - npm run build
 services:
   - mysql

@@ -18,7 +18,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     class Meta:
-        verbose_name_plural = 'categories'
+        verbose_name_plural = "categories"
 
     def __str__(self):
         return self.name
@@ -39,12 +39,12 @@ class Post(models.Model):
     meta_description = models.CharField(max_length=150, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    go_live_date = models.DateTimeField('Date and time to publish this post', blank=True, null=True)
-    take_down_date = models.DateTimeField('Date and time to unpublish this post', blank=True, null=True)
+    go_live_date = models.DateTimeField("Date and time to publish this post", blank=True, null=True)
+    take_down_date = models.DateTimeField("Date and time to unpublish this post", blank=True, null=True)
     categories = models.ManyToManyField(Category, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     feature_image = models.ForeignKey(
-        Photograph, blank=True, null=True, related_name='featured_in', on_delete=models.SET_NULL
+        Photograph, blank=True, null=True, related_name="featured_in", on_delete=models.SET_NULL
     )
     related_links = models.ManyToManyField(Link, blank=True)
 
@@ -56,15 +56,18 @@ class Post(models.Model):
         return datetime.now()
 
     def get_absolute_url(self):
-        return reverse('blog:post', kwargs={'slug': self.slug})
+        return reverse("blog:post", kwargs={"slug": self.slug})
 
     def published(self):
         right_now = self.get_now()
         print(right_now)
         print(self.go_live_date)
-        if (self.go_live_date and self.go_live_date <= right_now) and (not self.take_down_date or right_now < self.take_down_date):
+        if (self.go_live_date and self.go_live_date <= right_now) and (
+            not self.take_down_date or right_now < self.take_down_date
+        ):
             return True
         return False
+
     published.boolean = True
 
     @classmethod
@@ -75,12 +78,12 @@ class Post(models.Model):
     def get_previous_posts(self):
         all_live_posts = self.get_live_posts()
         cutoff_date = self.go_live_date or self.get_now()
-        return all_live_posts.filter(go_live_date__lt=cutoff_date).order_by('-go_live_date')
+        return all_live_posts.filter(go_live_date__lt=cutoff_date).order_by("-go_live_date")
 
     def get_following_posts(self):
         all_live_posts = self.get_live_posts()
         cutoff_date = self.go_live_date or self.get_now()
-        return all_live_posts.filter(go_live_date__gt=cutoff_date).order_by('go_live_date')
+        return all_live_posts.filter(go_live_date__gt=cutoff_date).order_by("go_live_date")
 
     def get_previous_post(self):
         previous_posts = self.get_previous_posts()

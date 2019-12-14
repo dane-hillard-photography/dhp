@@ -8,12 +8,9 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('photography', '0006_auto_20160118_2040'),
+        ("photography", "0006_auto_20160118_2040"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='photograph',
-            name='uuid',
-        ),
+        migrations.RemoveField(model_name="photograph", name="uuid",),
     ]
