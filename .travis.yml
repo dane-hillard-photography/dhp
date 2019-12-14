@@ -7,7 +7,7 @@ script:
   - poetry run pytest --cov
 install:
   - pip install poetry
-  - poetry install --dev
+  - poetry install
 before_script:
   - mysql -e 'create database dhp;'
   - poetry run python manage.py migrate
