@@ -5,7 +5,7 @@ notifications:
 language: python
 cache: pip
 python:
-  - "3.6"
+  - "3.8"
 
 services:
   - mysql
