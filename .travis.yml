@@ -6,6 +6,8 @@ language: python
 cache: pip
 python:
   - "3.8"
+node_js:
+  - 12
 
 services:
   - mysql
