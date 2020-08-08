@@ -1,11 +1,12 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
     context: __dirname,
+    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     entry: {
         blogPost: path.resolve('assets', 'js', 'blog-post.js'),
         facebookSdk: path.resolve('assets', 'js', 'fb_sdk.js'),
@@ -27,10 +28,13 @@ module.exports = {
             },
             {
                 test: /\.s?css$/,
-                use: ExtractTextPlugin.extract({
-                    use: ['css-loader', 'sass-loader'],
-                    fallback: 'style-loader'
-                })
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    'css-loader',
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf)$/,
@@ -51,12 +55,12 @@ module.exports = {
             }
         }),
         new webpack.ProvidePlugin({
-            $: "jquery",
-            jquery: "jquery",
-            "window.jQuery": "jquery",
-            jQuery:"jquery"
+            $: 'jquery',
+            jquery: 'jquery',
+            'window.jQuery': 'jquery',
+            jQuery:'jquery'
         }),
-        new ExtractTextPlugin('[name]-[hash:6].css'),
+        new MiniCssExtractPlugin('[name]-[hash:6].css'),
         new BundleTracker({filename: './webpack-stats.json'})
     ]
 };
