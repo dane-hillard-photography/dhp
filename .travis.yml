@@ -5,10 +5,14 @@ notifications:
 language: python
 cache: pip
 python:
-  - "3.6"
+  - "3.8"
 
 services:
   - mysql
+
+before_install:
+  - nvm install v12
+  - nvm use v12
 
 install:
   - pip install poetry
