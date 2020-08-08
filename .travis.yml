@@ -13,6 +13,7 @@ services:
   - mysql
 
 install:
+  - node -v
   - pip install poetry
   - poetry install
 
