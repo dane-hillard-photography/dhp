@@ -1,3 +1,5 @@
+node_modules/
+assets/dist/
 webpack.config.js
 assets/js/google_analytics_tracking.js
 assets/js/google_analytics_tracking_flicker.js
