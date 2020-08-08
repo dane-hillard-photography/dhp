@@ -1,12 +1,22 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
     context: __dirname,
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+    optimization: {
+        minimize: process.env.NODE_ENV === 'production',
+        minimizer: [
+            new TerserPlugin({
+                test: /\.js($|\?)/i
+            }),
+            new OptimizeCssPlugin()
+        ]
+    },
     entry: {
         blogPost: path.resolve('assets', 'js', 'blog-post.js'),
         facebookSdk: path.resolve('assets', 'js', 'fb_sdk.js'),
@@ -47,13 +57,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new UglifyJsPlugin({
-            test: /\.js($|\?)/i,
-            sourceMap: true,
-            uglifyOptions: {
-                warnings: false
-            }
-        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jquery: 'jquery',
