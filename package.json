@@ -32,16 +32,16 @@
   },
   "scripts": {
     "clean": "rm -rf assets/dist",
-    "test": "pytest --cov",
+    "test": "poetry run pytest --cov",
     "prebuild": "npm run clean",
     "build": "webpack",
     "build:prod": "NODE_ENV=production npm run build -- -p --progress",
     "prestart": "npm run clean",
     "start": "webpack --watch",
     "predeploy": "npm run build:prod && npm run test",
-    "deploy:update": "zappa update $npm_config_stage",
-    "deploy:migrate": "zappa manage $npm_config_stage migrate",
-    "deploy:collectstatic": "zappa manage $npm_config_stage 'collectstatic --noinput --ignore *.scss'",
+    "deploy:update": "poetry run zappa update $npm_config_stage",
+    "deploy:migrate": "poetry run zappa manage $npm_config_stage migrate",
+    "deploy:collectstatic": "poetry run zappa manage $npm_config_stage 'collectstatic --noinput --ignore *.scss'",
     "deploy": "npm run deploy:update && npm run deploy:migrate && npm run deploy:collectstatic"
   }
 }
