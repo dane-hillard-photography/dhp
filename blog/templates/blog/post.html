@@ -2,6 +2,7 @@
 {% extends '__base.html' %}
 {% load snippets %}
 {% load static %}
+{% load webpack_loader %}
 
 {% block title %}{{ post.title }}{% if post.subtitle %} | {{ post.subtitle }}{% endif %} | {{ block.super }}{% endblock %}
 {% block description %}{{ post.meta_description|default:"A blog post on Dane Hillard Photography" }}{% endblock %}
@@ -87,7 +88,7 @@
 {% block js %}
     {{ block.super }}
     {% if request.META.HTTP_HOST == 'www.danehillard.com' %}
-    <script type="text/javascript" src="{% static 'js/blog-post.js' %}"></script>
+        {% render_bundle 'blogPost' 'js' %}
     {% endif %}
 {% endblock js %}
 {% endverbatim %}
