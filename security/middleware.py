@@ -1,63 +1,60 @@
 from django.conf import settings
 
-DEFAULT_SOURCES = [
-    "fonts.googleapis.com",
-]
-
 SCRIPT_SOURCES = [
-    "ajax.googleapis.com",
-    "assets.pinterest.com",
-    "connect.facebook.net",
-    "danehillard.disqus.com",
-    "danehillard-dev.disqus.com",
-    "log.pinterest.com",
-    "platform.instagram.com",
-    "www.instagram.com",
-    "www.google-analytics.com",
-    "*.disquscdn.com",
-    "disqus.com",
-    "*.google.com",
-    "*.gstatic.com",
     "*.danehillard.com",
+    "*.disqus.com",
+    "*.disquscdn.com",
+    "*.facebook.net",
+    "*.google.com",
+    "*.googleapis.com",
+    "*.google-analytics.com",
+    "*.gstatic.com",
+    "*.instagram.com",
+    "*.pinterest.com",
 ]
 
 STYLE_SOURCES = [
-    "*.disquscdn.com",
-    "fonts.googleapis.com",
-    "optimize.google.com",
     "*.danehillard.com",
+    "*.disquscdn.com",
+    "*.google.com",
+    "*.googleapis.com",
 ]
 
 FONT_SOURCES = [
-    "fonts.gstatic.com",
+    "*.gstatic.com",
     "*.danehillard.com",
 ]
 
 FRAME_SOURCES = [
     "disqus.com",
-    "staticxx.facebook.com",
-    "www.facebook.com",
-    "www.instagram.com",
+    "*.disqus.com",
+    "*.facebook.com",
     "*.google.com",
+    "*.instagram.com",
 ]
 
 IMAGE_SOURCES = [
-    "*.disquscdn.com",
-    "referrer.disqus.com",
-    "stats.g.doubleclick.net",
-    "www.facebook.com",
-    "www.google-analytics.com",
-    "optimize.google.com",
     "*.danehillard.com",
+    "*.disqus.com",
+    "*.disquscdn.com",
+    "*.doubleclick.net",
+    "*.facebook.com",
+    "*.google-analytics.com",
+    "*.google.com",
+    "*.pinterest.com",
 ]
 
 PREFETCH_SOURCES = [
-    "fonts.googleapis.com",
+    "disqus.com",
+    "*.disquscdn.com",
+    "*.doubleclick.net",
+    "*.googleapis.com",
+    "*.google-analytics.com",
+    "*.gstatic.com",
 ]
 
 CONTENT_SECURITY_POLICY = {
-    "default-src": f"'self' {' '.join(DEFAULT_SOURCES)}",
-    "script-src": f"'self' {' '.join(SCRIPT_SOURCES)} 'unsafe-inline'",
+    "script-src": f"'self' {' '.join(SCRIPT_SOURCES)} 'unsafe-inline' 'unsafe-eval'",
     "style-src": f"'self' {' '.join(STYLE_SOURCES)} 'unsafe-inline'",
     "font-src": f"'self' {' '.join(FONT_SOURCES)}",
     "frame-src": f"'self' {' '.join(FRAME_SOURCES)}",
