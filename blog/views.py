@@ -23,9 +23,6 @@ def post_view(request, slug):
 
     try:
         post = matching_posts[0]
-        LOGGER.info(right_now)
-        LOGGER.info(post.take_down_date)
-        LOGGER.info(post.go_live_date)
     except IndexError:
         raise Http404('Post "{}" does not exist'.format(slug))
 
