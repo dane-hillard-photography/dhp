@@ -16,7 +16,7 @@ def post_view(request, slug):
 
     if not any([request.user.is_authenticated, getattr(request, "is_whitelisted_crawler", False)]):
         matching_posts = [
-            post for post in matching_posts if not post.take_down_date or post.take_down_date <= right_now
+            post for post in matching_posts if not post.take_down_date or post.take_down_date >= right_now
         ]
 
         matching_posts = [post for post in matching_posts if not post.go_live_date or post.go_live_date <= right_now]
