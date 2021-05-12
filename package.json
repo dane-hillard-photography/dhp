@@ -8,7 +8,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "bootstrap-sass": "^3.4.1",
-    "codemirror": "^5.56.0",
+    "codemirror": "^5.58.2",
     "css-loader": "^4.2.1",
     "eslint": "^7.6.0",
     "eslint-loader": "^4.0.2",
