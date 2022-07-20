@@ -8,7 +8,7 @@ authors = ["daneah <github@danehillard.com"]
 python = "^3.6.5"
 boto3 = "*"
 coverage = {version="*", extras=["toml"]}
-django = "2.1.15"
+django = "2.2.28"
 django-codemirror-widget = "*"
 gunicorn = "*"
 Pillow = "*"
