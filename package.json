@@ -28,7 +28,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "npm": "^11.4.2"
+    "npm": "^11.7.0"
   },
   "scripts": {
     "clean": "rm -rf assets/dist",
